@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{3151E104-CEB5-40FA-B40C-6A1C9AB6ED03}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>vlog_data_model</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="api\vlog_dm_declaration.hpp" />
+    <ClInclude Include="api\vlog_dm_declared.hpp" />
+    <ClInclude Include="api\vlog_dm_design_unit.hpp" />
+    <ClInclude Include="api\vlog_dm_net_type.hpp" />
+    <ClInclude Include="api\vlog_dm_port_directrion.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_declared_factory.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_design_unit_factory.hpp" />
+    <ClInclude Include="api\vlog_dm_dimension.hpp" />
+    <ClInclude Include="api\vlog_dm_dimensional.hpp" />
+    <ClInclude Include="api\vlog_dm_dimension_visitor.hpp" />
+    <ClInclude Include="api\vlog_dm_expression.hpp" />
+    <ClInclude Include="api\vlog_dm_expression_range.hpp" />
+    <ClInclude Include="api\vlog_dm_expression_visitor.hpp" />
+    <ClInclude Include="api\vlog_dm_fwd.hpp" />
+    <ClInclude Include="api\vlog_dm_iaccessor.hpp" />
+    <ClInclude Include="api\vlog_dm_integral_based_literal.hpp" />
+    <ClInclude Include="api\vlog_dm_located.hpp" />
+    <ClInclude Include="api\vlog_dm_location.hpp" />
+    <ClInclude Include="api\vlog_dm_named.hpp" />
+    <ClInclude Include="api\vlog_dm_number_literal.hpp" />
+    <ClInclude Include="api\vlog_dm_packed_dimension.hpp" />
+    <ClInclude Include="api\vlog_dm_part_select_range.hpp" />
+    <ClInclude Include="api\vlog_dm_port.hpp" />
+    <ClInclude Include="api\vlog_dm_port_declaration.hpp" />
+    <ClInclude Include="api\vlog_dm_primary_literal.hpp" />
+    <ClInclude Include="api\vlog_dm_range.hpp" />
+    <ClInclude Include="api\vlog_dm_range_visitor.hpp" />
+    <ClInclude Include="api\vlog_dm_unpacked_dimension.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_declaration.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_declaration_factory.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_items_factory.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_declared_factory_impl.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_design_unit_factory_impl.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_items_factory_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_base_expression_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_declaration_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_dimensional_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_dimension_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_located_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_accessor.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_named_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_port_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_port_declaration_impl.hpp" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="sources\model\vlog_dm_declared_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_named_located_impl.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_declarations_factory_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_design_unit_impl.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\model\factory\vlog_dm_declared_factory_impl.cpp" />
+    <ClCompile Include="sources\model\factory\vlog_dm_design_unit_factory_impl.cpp" />
+    <ClCompile Include="sources\model\factory\vlog_dm_items_factory_impl.cpp" />
+    <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
+    <ClCompile Include="sources\model\vlog_dm_port_impl.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="sources\model\factory\vlog_dm_declarations_factory_impl.cpp" />
+    <ClCompile Include="sources\model\vlog_dm_design_unit_impl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\tools\tools.vcxproj">
+      <Project>{f011d9a7-3a94-45e0-9b6f-96d5ea3b1c0a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
