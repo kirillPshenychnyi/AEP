@@ -1,43 +1,40 @@
-#ifndef __VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
-#define __VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
+#ifndef __VLOG_DM_WRITABLE_DECLARATIONS_CONTAINER_HPP__
+#define __VLOG_DM_WRITABLE_DECLARATIONS_CONTAINER_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
-
-/***************************************************************************/
-
-namespace VlogDM
-{
-	struct Location;
-}
+#include "vlog_data_model\api\vlog_dm_design_unit.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
+
+	struct Declaration;
+
 namespace Writable {
 
 /***************************************************************************/
 
-	struct DesignUnit;
-
-/***************************************************************************/
-
-struct DesignUnitFactory
-	:	public boost::noncopyable
+template< typename _BaseClass >
+struct DeclarationsContainer
+	:	public _BaseClass
 {
 
 /***************************************************************************/
 
-	virtual ~DesignUnitFactory() {}
-
-	virtual std::unique_ptr< DesignUnit > newDesignUnit( 
-			std::string const & _name
-		,	Location const & _location 
-	) const = 0;
+	virtual void addDeclaration( 
+			std::unique_ptr< VlogDM::Declaration > _declContainer 
+	) = 0;
 
 /***************************************************************************/
 
+};
+
+/***************************************************************************/
+
+struct DesignUnit
+	:	public DeclarationsContainer< VlogDM::DesignUnit >
+{ 
 };
 
 /***************************************************************************/
@@ -47,5 +44,5 @@ struct DesignUnitFactory
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
+#endif // !__VLOG_DM_WRITABLE_DECLARATIONS_CONTAINER_HPP__S
 

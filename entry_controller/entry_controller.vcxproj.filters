@@ -39,7 +39,7 @@
     <ClInclude Include="vlog_import\ec_vlog_design_unit_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vlog_import\ec_vlog_dm_port_importer.hpp">
+    <ClInclude Include="vlog_import\ec_vlog_port_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,13 +56,13 @@
     <ClCompile Include="ANTLRGenerated\Verilog2001Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vlog_import\en_vlog_design_unit_importer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vlog_import\ec_vlog_base_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vlog_import\ec_vlog_dm_port_importer.cpp">
+    <ClCompile Include="vlog_import\ec_vlog_design_unit_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vlog_import\ec_vlog_port_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

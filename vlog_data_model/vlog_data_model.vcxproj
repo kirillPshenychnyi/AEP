@@ -136,10 +136,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\vlog_dm_declaration.hpp" />
+    <ClInclude Include="api\vlog_dm_declarations_container.hpp" />
     <ClInclude Include="api\vlog_dm_declared.hpp" />
     <ClInclude Include="api\vlog_dm_design_unit.hpp" />
     <ClInclude Include="api\vlog_dm_net_type.hpp" />
     <ClInclude Include="api\vlog_dm_port_directrion.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_declarations_container.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_declarations_container_impl.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declared_factory.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_design_unit_factory.hpp" />
     <ClInclude Include="api\vlog_dm_dimension.hpp" />
@@ -165,9 +168,11 @@
     <ClInclude Include="api\vlog_dm_unpacked_dimension.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declaration.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declaration_factory.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_expression_factory.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_items_factory.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_declared_factory_impl.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_design_unit_factory_impl.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_expression_factory_impl.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_items_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_base_expression_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_declaration_impl.hpp" />
@@ -178,6 +183,7 @@
     <ClInclude Include="sources\model\vlog_dm_named_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_port_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_port_declaration_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_primary_literal_impl.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="sources\model\vlog_dm_declared_impl.hpp" />
@@ -188,6 +194,7 @@
   <ItemGroup>
     <ClCompile Include="sources\model\factory\vlog_dm_declared_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_design_unit_factory_impl.cpp" />
+    <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_items_factory_impl.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
     <ClCompile Include="sources\model\vlog_dm_port_impl.cpp" />

@@ -159,7 +159,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="vlog_import\ec_vlog_base_importer.hpp" />
     <ClInclude Include="vlog_import\ec_vlog_design_unit_importer.hpp" />
-    <ClInclude Include="vlog_import\ec_vlog_dm_port_importer.hpp" />
+    <ClInclude Include="vlog_import\ec_vlog_port_importer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ANTLRGenerated\Verilog2001Lexer.cpp" />
@@ -172,8 +172,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="vlog_import\ec_vlog_base_importer.cpp" />
-    <ClCompile Include="vlog_import\ec_vlog_dm_port_importer.cpp" />
-    <ClCompile Include="vlog_import\en_vlog_design_unit_importer.cpp" />
+    <ClCompile Include="vlog_import\ec_vlog_port_importer.cpp" />
+    <ClCompile Include="vlog_import\ec_vlog_design_unit_importer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\parsers\antlr\Cpp\runtime\antlr4cpp-vs2015.vcxproj">

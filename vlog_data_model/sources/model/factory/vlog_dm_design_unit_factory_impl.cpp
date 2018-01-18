@@ -11,10 +11,13 @@ namespace VlogDM
 
 /***************************************************************************/
 
-std::unique_ptr<DesignUnit> 
-DesignUnitFactoryImpl::newDesignUnit( std::string const & _name, Location const & _location )
+std::unique_ptr< Writable::DesignUnit > 
+DesignUnitFactoryImpl::newDesignUnit( 
+		std::string const & _name
+	,	Location const & _location 
+	) const
 {
-	return std::make_unique<DesignUnitImpl>( _name, _location );
+	return std::make_unique< DesignUnitImpl >( _name, _location );
 }
 
 /***************************************************************************/

@@ -1,40 +1,30 @@
-#ifndef __VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
-#define __VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
+#ifndef __VLOG_DM_EXPRESSION_FACTORY_IMPL_HPP__
+#define __VLOG_DM_EXPRESSION_FACTORY_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
-
-/***************************************************************************/
-
-namespace VlogDM
-{
-	struct Location;
-}
+#include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-namespace Writable {
 
 /***************************************************************************/
 
-	struct DesignUnit;
-
-/***************************************************************************/
-
-struct DesignUnitFactory
-	:	public boost::noncopyable
+class ExpressionFactoryImpl
+	:	public Writable::ExpressionFactory
 {
 
 /***************************************************************************/
 
-	virtual ~DesignUnitFactory() {}
+public:
 
-	virtual std::unique_ptr< DesignUnit > newDesignUnit( 
-			std::string const & _name
-		,	Location const & _location 
-	) const = 0;
+/***************************************************************************/
+
+	std::unique_ptr< PrimaryLiteral > newPrimaryLiteral(
+			Location const& _location 
+		,	double _value
+	) const override;
 
 /***************************************************************************/
 
@@ -43,9 +33,7 @@ struct DesignUnitFactory
 /***************************************************************************/
 
 }
-}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_DESIGN_UNIT_FACTORY_HPP__
-
+#endif // !__VLOG_DM_EXPRESSION_FACTORY_IMPL_HPP__

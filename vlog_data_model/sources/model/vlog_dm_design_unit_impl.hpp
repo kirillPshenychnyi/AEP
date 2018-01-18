@@ -4,9 +4,10 @@
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_design_unit.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_named_located_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_declarations_container_impl.hpp"
 
 /***************************************************************************/
 
@@ -16,13 +17,13 @@ namespace VlogDM
 /***************************************************************************/
 
 class DesignUnitImpl
-	:	public NamedLocatedImpl< DesignUnit >
+	:	public NamedLocatedImpl< DeclarationsContainerImpl< Writable::DesignUnit > >
 {
 
 /***************************************************************************/
 
 	typedef
-		NamedLocatedImpl< DesignUnit >
+		NamedLocatedImpl< DeclarationsContainerImpl< Writable::DesignUnit > >
 		BaseClass;
 
 /***************************************************************************/

@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_declarations_container.hpp"
 #include "vlog_data_model\api\vlog_dm_named.hpp"
 
 /***************************************************************************/
@@ -13,13 +13,11 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct DesignUnit
-	:	public Located
+	:	public DeclarationsContainer
 	,	public Named
 {
 
 /***************************************************************************/
-
-
 
 /***************************************************************************/
 

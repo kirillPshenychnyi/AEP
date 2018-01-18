@@ -7,6 +7,9 @@
 
 #include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
 
+#include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
+
+#include <boost\function\function_base.hpp>
 #include <vector>
 
 /***************************************************************************/
@@ -15,9 +18,8 @@ namespace VlogDM
 {
 	namespace Writable
 	{
-		struct PortDeclaration;
+		struct DesignUnit;
 	}
-	
 }
 
 /***************************************************************************/
@@ -40,7 +42,7 @@ class PortImporter
 	typedef
 		std::vector< PortDeclarationPtr >
 		ExtractedDeclarations;
-
+	
 /***************************************************************************/
 
 	struct PortDeclarationInfoExtractror;
@@ -51,7 +53,10 @@ public:
 
 /***************************************************************************/
 
-	PortImporter( VlogDM::IAccessor & _accessor );
+	PortImporter( 
+			VlogDM::IAccessor & _accessor
+		,	VlogDM::Writable::DesignUnit & _targetUnit 
+	);
 
 	void importPorts( const Verilog2001Parser::List_of_portsContext & _ctx );
 	
@@ -65,6 +70,12 @@ private:
 
 	template< typename _PortListContext >
 	void importPorts( const _PortListContext & _list );
+
+	template< typename _PortDeclarationContext >
+	void importPorts( 
+			_PortDeclarationContext &
+		,	VlogDM::PortDirection::Direction _direction 
+	);
 
 /***************************************************************************/
 
@@ -87,6 +98,8 @@ private:
 /***************************************************************************/
 
 	ExtractedDeclarations m_extractedDeclarations;
+
+	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 /***************************************************************************/
 

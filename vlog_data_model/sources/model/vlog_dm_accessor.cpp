@@ -6,6 +6,7 @@
 #include "sources\model\factory\vlog_dm_declarations_factory_impl.hpp"
 #include "sources\model\factory\vlog_dm_declared_factory_impl.hpp"
 #include "sources\model\factory\vlog_dm_items_factory_impl.hpp"
+#include "sources\model\factory\vlog_dm_expression_factory_impl.hpp"
 
 /***************************************************************************/
 
@@ -49,7 +50,21 @@ Accessor::getDeclaredFactory()
 Writable::ItemsFactory const &
 Accessor::getItemsFactory()
 {
+	if( !m_itemsFactory )
+		m_itemsFactory.reset( getFactory< ItemsFactoryImpl >().release() );
+
 	return *m_itemsFactory;
+}
+
+/***************************************************************************/
+
+Writable::ExpressionFactory const & 
+Accessor::getExpressionFactory()
+{
+	if( !m_expressionFactory )
+		m_expressionFactory.reset( getFactory< ExpressionFactoryImpl >().release() );
+
+	return *m_expressionFactory;
 }
 
 /***************************************************************************/

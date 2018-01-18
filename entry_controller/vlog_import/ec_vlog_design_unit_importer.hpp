@@ -4,6 +4,9 @@
 /***************************************************************************/
 
 #include "entry_controller\vlog_import\ec_vlog_base_importer.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
+
+#include <vector>
 
 /***************************************************************************/
 
@@ -31,6 +34,10 @@ public:
 	antlrcpp::Any visitList_of_ports( Verilog2001Parser::List_of_portsContext *ctx ) override;
 
 	antlrcpp::Any visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext  *ctx ) override;
+
+/***************************************************************************/
+
+	std::vector< std::unique_ptr< VlogDM::Writable::DesignUnit > > m_units;
 
 /***************************************************************************/
 

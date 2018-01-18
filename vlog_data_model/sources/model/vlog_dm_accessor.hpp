@@ -4,10 +4,12 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
+
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declaration_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_design_unit_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 
 /***************************************************************************/
 
@@ -34,6 +36,8 @@ public:
 
 	Writable::ItemsFactory const& getItemsFactory() override;
 
+	Writable::ExpressionFactory const& getExpressionFactory() override;
+
 /***************************************************************************/
 
 private:
@@ -52,6 +56,8 @@ private:
 	std::unique_ptr< Writable::DeclaredFactory > m_declaredFactory;
 
 	std::unique_ptr< Writable::ItemsFactory > m_itemsFactory;
+
+	std::unique_ptr< Writable::ExpressionFactory > m_expressionFactory;
 
 /***************************************************************************/
 

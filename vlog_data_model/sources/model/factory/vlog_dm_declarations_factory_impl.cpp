@@ -14,7 +14,7 @@ namespace VlogDM
 std::unique_ptr< Writable::PortDeclaration > 
 DeclarationsFactoryImpl::newPortDeclaration( Location const & _location ) const
 {
-	return std::unique_ptr<Writable::PortDeclaration>( new PortDeclarationImpl( _location ) );
+	return std::unique_ptr< Writable::PortDeclaration >( new PortDeclarationImpl( _location ) );
 }
 
 /***************************************************************************/

@@ -1,6 +1,8 @@
 #ifndef __VLOG_DM_DESIGN_UNIT_FACTORY_IMPL_HPP__
 #define __VLOG_DM_DESIGN_UNIT_FACTORY_IMPL_HPP__
 
+/***************************************************************************/
+
 #include "vlog_data_model\ih\writable\vlog_dm_design_unit_factory.hpp"
 
 /***************************************************************************/
@@ -22,10 +24,10 @@ public:
 
 	DesignUnitFactoryImpl() {}
 
-	virtual std::unique_ptr< DesignUnit > newDesignUnit( 
+	virtual std::unique_ptr< Writable::DesignUnit > newDesignUnit( 
 			std::string const & _name
 		,	Location const & _location 
-	) override;
+	) const override;
 
 /***************************************************************************/
 
