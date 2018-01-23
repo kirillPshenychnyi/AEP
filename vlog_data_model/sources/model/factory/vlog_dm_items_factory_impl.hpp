@@ -26,7 +26,7 @@ public:
 		,	std::unique_ptr< Range > _range
 	) const override;
 
-	std::unique_ptr< Range > newExpressionRange( 
+	std::unique_ptr< Range > newPartSelectRange( 
 			Location const& _location
 		,	std::unique_ptr< Expression > _lhs
 		,	std::unique_ptr< Expression > _rhs

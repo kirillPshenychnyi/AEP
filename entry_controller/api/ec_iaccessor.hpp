@@ -1,33 +1,23 @@
-#ifndef __VLOG_DM_RANGE_VISITOR_HPP__
-#define __VLOG_DM_RANGE_VISITOR_HPP__
+#ifndef __EC_IACCESSOR_HPP__
+#define __EC_IACCESSOR_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace EntryController {
+
+/***************************************************************************/
+
+struct IAccessor
+	:	public boost::noncopyable
 {
 
 /***************************************************************************/
 
-	struct ExpressionRange;
-	struct PartSelectRange;
-
-/***************************************************************************/
-
-struct RangeVisitor
-	:	public boost::noncopyble
-{
-
-/***************************************************************************/
-
-	virtual ~RangeVisitor(){}
-
-	virtual void visit( ExpressionRange const & _range ) = 0;
-
-	virtual void visit( PartSelectRange const & _range ) = 0;
+	virtual void importVerilog( std::string const& _code ) = 0;
 
 /***************************************************************************/
 
@@ -39,4 +29,4 @@ struct RangeVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_RANGE_VISITOR_HPP__
+#endif // !__EC_IACCESSOR_HPP__

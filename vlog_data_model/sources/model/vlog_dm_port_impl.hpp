@@ -43,6 +43,7 @@ public:
 		,	Location const & _location
 		,	std::unique_ptr< Dimension > _dimension
 		,	PortDirection::Direction _direction
+		,	NetType::Type _type
 	);
 
 /***************************************************************************/
@@ -53,6 +54,10 @@ public:
 
 	PortDirection::Direction getDirection() const override;
 
+	NetType::Type getNetType() const override;
+
+	void accept( DeclaredVisitor& _visitor ) const override;
+
 /***************************************************************************/
 
 private:
@@ -60,6 +65,7 @@ private:
 /***************************************************************************/
 
 	const PortDirection::Direction m_direction;
+	const NetType::Type m_type;
 
 /***************************************************************************/
 
@@ -69,9 +75,18 @@ private:
 
 inline
 PortDirection::Direction 
-VlogDM::PortImpl::getDirection() const
+PortImpl::getDirection() const
 {
 	return m_direction;
+}
+
+/***************************************************************************/
+
+inline
+NetType::Type 
+PortImpl::getNetType() const
+{
+	return m_type;
 }
 
 /***************************************************************************/

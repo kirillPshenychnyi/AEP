@@ -23,7 +23,7 @@ public:
 
 	std::unique_ptr< PrimaryLiteral > newPrimaryLiteral(
 			Location const& _location 
-		,	double _value
+		,	std::string const& _value
 	) const override;
 
 /***************************************************************************/

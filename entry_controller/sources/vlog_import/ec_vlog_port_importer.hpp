@@ -3,13 +3,12 @@
 
 /***************************************************************************/
 
-#include "entry_controller\vlog_import\ec_vlog_base_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
 
 #include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
 
-#include <boost\function\function_base.hpp>
 #include <vector>
 
 /***************************************************************************/
@@ -20,6 +19,8 @@ namespace VlogDM
 	{
 		struct DesignUnit;
 	}
+
+	struct Dimension;
 }
 
 /***************************************************************************/
@@ -75,6 +76,10 @@ private:
 	void importPorts( 
 			_PortDeclarationContext &
 		,	VlogDM::PortDirection::Direction _direction 
+	);
+
+	std::unique_ptr< VlogDM::Dimension > createDimension( 
+			PortDeclarationInfoExtractror const& _extractor 
 	);
 
 /***************************************************************************/

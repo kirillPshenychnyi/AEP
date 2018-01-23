@@ -14,6 +14,35 @@ namespace VlogDM {
 
 /***************************************************************************/
 
+void 
+Accessor::addUnit( std::unique_ptr< DesignUnit > _unit )
+{
+	m_unitsSet.emplace( std::unique_ptr< DesignUnit >( _unit.release() ) );
+}
+
+/***************************************************************************/
+
+boost::optional< DesignUnit const& >
+Accessor::findUnit( std::string const & _unitName ) const
+{
+	auto findIt = m_unitsSet.find( _unitName, DesignUnitHasher(), DesignUnitComparator() );
+
+	return 
+		findIt == m_unitsSet.end()
+	?	boost::optional< DesignUnit const& >()
+	:	**findIt;
+}
+
+/***************************************************************************/
+
+void 
+Accessor::reset()
+{
+	m_unitsSet.clear();
+}
+
+/***************************************************************************/
+
 Writable::DesignUnitFactory const&
 Accessor::getDesignUnitFactory()
 {

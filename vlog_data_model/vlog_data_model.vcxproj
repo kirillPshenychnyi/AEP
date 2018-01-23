@@ -137,10 +137,17 @@
   <ItemGroup>
     <ClInclude Include="api\vlog_dm_declaration.hpp" />
     <ClInclude Include="api\vlog_dm_declarations_container.hpp" />
+    <ClInclude Include="api\vlog_dm_declaration_cast.hpp" />
     <ClInclude Include="api\vlog_dm_declared.hpp" />
     <ClInclude Include="api\vlog_dm_design_unit.hpp" />
+    <ClInclude Include="api\vlog_dm_expression_cast.hpp" />
     <ClInclude Include="api\vlog_dm_net_type.hpp" />
     <ClInclude Include="api\vlog_dm_port_directrion.hpp" />
+    <ClInclude Include="api\vlog_dm_range_cast.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_declaration_visitor.hpp" />
+    <ClInclude Include="api\vlog_dm_declared_cast.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_declared_visitor.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_expression_visitor.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declarations_container.hpp" />
     <ClInclude Include="sources\model\vlog_dm_declarations_container_impl.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declared_factory.hpp" />
@@ -164,7 +171,7 @@
     <ClInclude Include="api\vlog_dm_port_declaration.hpp" />
     <ClInclude Include="api\vlog_dm_primary_literal.hpp" />
     <ClInclude Include="api\vlog_dm_range.hpp" />
-    <ClInclude Include="api\vlog_dm_range_visitor.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_range_visitor.hpp" />
     <ClInclude Include="api\vlog_dm_unpacked_dimension.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declaration.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_declaration_factory.hpp" />
@@ -181,6 +188,7 @@
     <ClInclude Include="sources\model\vlog_dm_located_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_accessor.hpp" />
     <ClInclude Include="sources\model\vlog_dm_named_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_part_select_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_port_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_port_declaration_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_primary_literal_impl.hpp" />
@@ -197,7 +205,9 @@
     <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_items_factory_impl.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
+    <ClCompile Include="sources\model\vlog_dm_part_select_range_impl.cpp" />
     <ClCompile Include="sources\model\vlog_dm_port_impl.cpp" />
+    <ClCompile Include="sources\model\vlog_dm_primary_literal_impl.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -31,14 +31,14 @@ public:
 
 	PrimaryLiteralImpl(
 			Location const & _location
-		,	double _value 
+		,	std::string const& _value 
 	);
 
 /***************************************************************************/
 
-	double getValue() const override;
+	std::string const& getValue() const override;
 	
-	void accept( ExpressionVisitor & _visitor ) override;
+	void accept( ExpressionVisitor & _visitor ) const override;
 
 /***************************************************************************/
 
@@ -46,7 +46,7 @@ private:
 
 /***************************************************************************/
 
-	const double m_value;
+	const std::string m_value;
 
 /***************************************************************************/
 
@@ -54,30 +54,11 @@ private:
 
 /***************************************************************************/
 
-inline 
-PrimaryLiteralImpl::PrimaryLiteralImpl(
-		Location const & _location
-	,	double _value
-	)
-	:	BaseClass( _location )
-	,	m_value( _value )
-{
-}
-
-/***************************************************************************/
-
 inline
-double 
+std::string const&
 PrimaryLiteralImpl::getValue() const
 {
 	return m_value;
-}
-
-/***************************************************************************/
-
-inline
-void PrimaryLiteralImpl::accept( ExpressionVisitor & _visitor )
-{
 }
 
 /***************************************************************************/

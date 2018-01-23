@@ -24,7 +24,7 @@ struct Range
 
 	virtual ~Range() {}
 
-	virtual void accept( RangeVisitor const & _visitor ) const = 0;
+	virtual void accept( RangeVisitor & _visitor ) const = 0;
 
 /***************************************************************************/
 

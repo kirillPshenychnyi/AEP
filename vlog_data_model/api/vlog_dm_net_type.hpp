@@ -21,14 +21,19 @@ struct NetType
 		,	wire
 		,	wand
 		,	wor
+		,	reg
 
 		,	First = supply0
-		,	Last = wor
+		,	Last = reg
 	};
 
 	static Type fromString( const char * const _value )
 	{
-		for( int i = 0; i <= 9; ++i )
+		for( 
+			int i = static_cast< int >( Type::First );
+			i <= static_cast< int >( Type::Last ); 
+			++i 
+		)
 		{
 			Type toCompare = static_cast< Type >( i );
 

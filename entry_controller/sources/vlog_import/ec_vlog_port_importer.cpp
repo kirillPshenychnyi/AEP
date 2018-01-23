@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "entry_controller\vlog_import\ec_vlog_port_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_port_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_net_type.hpp"
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
@@ -35,10 +35,10 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 
 	typedef
 		std::pair< std::string, VlogDM::Location >
-		Port;
+		PortItem;
 
 	typedef
-		std::vector< Port >
+		std::vector< PortItem >
 		Ports;
 
 /***************************************************************************/
@@ -46,8 +46,6 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	PortDeclarationInfoExtractror( VlogDM::IAccessor & _accessor )
 		:	BaseImporter( _accessor )
 		,	m_netType( VlogDM::NetType::Type::wire )
-		,	m_leftBound( 0 )
-		,	m_rightBound( 0 )
 	{
 	}
 
@@ -56,14 +54,21 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	template< typename _TDeclarationContext >
 	void extract( _TDeclarationContext const & _context )
 	{
+		static const std::string regKeyWord = "reg";
+
 		for( auto child : _context.children )
+		{
+			if( child->getText() == regKeyWord )
+				m_netType = VlogDM::NetType::Type::reg;
+
 			child->accept( this );
+		}
 	}
 
 /***************************************************************************/
 
 	antlrcpp::Any 
-	visitNet_type(Verilog2001Parser::Net_typeContext *ctx) override 
+	visitNet_type( Verilog2001Parser::Net_typeContext *ctx ) override 
 	{
 		VlogDM::NetType::Type type = VlogDM::NetType::fromString( ctx->getText().c_str() );
 
@@ -75,18 +80,11 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	antlrcpp::Any
 	visitRange(Verilog2001Parser::RangeContext *ctx) override 
 	{
-		try
-		{
-			m_leftBound = boost::lexical_cast< int >( ctx->children[ 1 ]->getText() );
+		VlogDM::Location const location = createLocation( *ctx );
 
-			m_rightBound = boost::lexical_cast< int > ( ctx->children[ 3 ]->getText() );
+		m_leftBound.emplace( ctx->children[ 1 ]->getText(), location );
 
-		}
-		catch( boost::bad_lexical_cast )
-		{
-			m_leftBound = 0;
-			m_rightBound = 0;
-		}
+		m_rightBound.emplace( ctx->children[ 3 ]->getText(), location );
 
 		return antlrcpp::Any();
 	}
@@ -97,7 +95,17 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	visitList_of_port_identifiers(Verilog2001Parser::List_of_port_identifiersContext *ctx) override 
 	{
 		for( auto child : ctx->children )
-			m_portIds.emplace_back( child->getText(), createLocation( *ctx ) );
+			child->accept( this ); 
+
+		return antlrcpp::Any();
+	}
+
+/***************************************************************************/
+
+	antlrcpp::Any 
+	visitPort_identifier(Verilog2001Parser::Port_identifierContext *ctx) override 
+	{
+		m_portIds.emplace_back( ctx->getText(), createLocation( *ctx ) );
 
 		return antlrcpp::Any();
 	}
@@ -105,12 +113,12 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 /***************************************************************************/
 
 	Ports m_portIds;
-	
+
+	boost::optional< PortItem > m_leftBound;
+
+	boost::optional< PortItem > m_rightBound;
+
 	VlogDM::NetType::Type m_netType;
-
-	int m_leftBound;
-
-	int m_rightBound;
 
 /***************************************************************************/
 
@@ -155,7 +163,6 @@ PortImporter::importPorts( const _PortListContext & _list )
 	for( auto & value : m_extractedDeclarations )
 		m_targetUnit.addDeclaration( std::move( value ) );
 
-	int i = 0;
 }
 
 /***************************************************************************/
@@ -244,45 +251,6 @@ PortImporter::importPorts(
 	Writable::DeclaredFactory const& declaredFactory 
 		=	getVlogDataModel().getDeclaredFactory();
 
-	Writable::ExpressionFactory const& expressionFactory
-		=	getVlogDataModel().getExpressionFactory();
-
-	Writable::ItemsFactory const& itemsFactory
-		=	getVlogDataModel().getItemsFactory();
-
-	auto rangeBoundCreator 
-		=	[ & ]( double _value ) -> std::unique_ptr< PrimaryLiteral >
-			{
-				return
-					std::move(
-						expressionFactory.newPrimaryLiteral(
-								createLocation( _context )
-							,	extractor.m_leftBound
-						)
-					);
-			};
-
-	std::unique_ptr< Dimension > portDimension;
-
-	if(
-			extractor.m_rightBound != 0
-		||	extractor.m_leftBound != 0
-	)
-	{
-		std::unique_ptr< Range > range
-			=	itemsFactory.newExpressionRange(
-						createLocation( _context )
-					,	std::move( rangeBoundCreator( extractor.m_leftBound ) )
-					,	std::move( rangeBoundCreator( extractor.m_rightBound ) )
-				);
-
-		portDimension =
-			std::move(
-					itemsFactory.newPackedDimension( createLocation( _context )
-				,	std::move( range ) )
-			);
-	}
-
 	for( auto const& port : extractor.m_portIds )
 		lastDeclaration.addDeclared(
 			std::move( 
@@ -291,10 +259,64 @@ PortImporter::importPorts(
 					,	port.first
 					,	port.second
 					,	_direction
-					,	std::move( portDimension )
+					,	extractor.m_netType
+					,	std::move( createDimension( extractor ) )
 				)
 			)
 		);
+}
+
+/***************************************************************************/
+
+std::unique_ptr< VlogDM::Dimension > 
+PortImporter::createDimension(
+	PortImporter::PortDeclarationInfoExtractror const& _extractor
+)
+{
+	using namespace VlogDM;
+
+	IAccessor & vlogDm = getVlogDataModel();
+
+	Writable::ExpressionFactory const& expressionFactory
+		=	vlogDm.getExpressionFactory();
+
+	Writable::ItemsFactory const& itemsFactory
+		=	vlogDm.getItemsFactory();
+
+	auto rangeBoundCreator 
+		=	[ & ]( PortDeclarationInfoExtractror::PortItem const& _item ) -> std::unique_ptr< PrimaryLiteral >
+			{
+				return
+					std::move(
+						expressionFactory.newPrimaryLiteral(
+								_item.second
+							,	_item.first
+						)
+					);
+			};
+
+	if(
+			_extractor.m_rightBound.is_initialized()
+		&&	_extractor.m_leftBound.is_initialized()
+	)
+	{
+		std::unique_ptr< Range > range
+			=	itemsFactory.newPartSelectRange(
+						_extractor.m_leftBound->second
+					,	std::move( rangeBoundCreator( *_extractor.m_leftBound ) )
+					,	std::move( rangeBoundCreator( *_extractor.m_rightBound ) )
+				);
+
+		return
+			std::move(
+				itemsFactory.newPackedDimension(
+						_extractor.m_leftBound->second
+					,	std::move( range )
+				)
+			);
+	}
+
+	return std::unique_ptr< VlogDM::Dimension >();
 }
 
 /***************************************************************************/

@@ -27,6 +27,15 @@
     <ClInclude Include="utils\convertors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="base_plugin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collections\tools_collection_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\visitor_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

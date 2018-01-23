@@ -9,7 +9,8 @@
 
 #include "sources\model\vlog_dm_located_impl.hpp"
 
-#include "common_tools\collections\tools_ordered_mapping.hpp"
+#include <boost\unordered_set.hpp>
+#include "common_tools\collections\tools_collection_utils.hpp"
 
 /***************************************************************************/
 
@@ -29,11 +30,15 @@ class DeclarationImpl
 		BaseClass;
 
 	typedef
-		std::shared_ptr< Declared >
-		DeclaredPtr;
+		Tools::Collections::NamedHasher< Declared::Ptr >
+		DeclaredHasher;
 
 	typedef
-		Tools::Collections::OrderedMapping< std::string, std::shared_ptr< Declared > >
+		Tools::Collections::NamedComparator< Declared::Ptr >
+		DeclaredComparator;
+
+	typedef
+		boost::unordered_set< Declared::Ptr, DeclaredHasher, DeclaredComparator >
 		Declareds;
 
 /***************************************************************************/
@@ -46,7 +51,9 @@ public:
 
 /***************************************************************************/
 
-	boost::optional< Declared const & > findDeclared( std::string const & _declared ) const override;
+	boost::optional< Declared const & > findDeclared( 
+			std::string const & _declared 
+	) const override;
 
 	int getDeclaredsCount() const override;
 
@@ -84,12 +91,12 @@ template< typename _Writable >
 boost::optional< Declared const & > 
 DeclarationImpl< _Writable >::findDeclared( std::string const & _declared ) const 
 {
-	auto value = m_declareds.findByKey( _declared );
+	auto value = m_declareds.find( _declared, DeclaredHasher(), DeclaredComparator() );
 
 	return
-		value == m_declareds.asMap().end()
-		?	*value->second
-		:	boost::optional< Declared const & >();
+			value == m_declareds.end()
+		?	boost::optional< Declared const & >()
+		:	**value;
 
 }
 
@@ -108,10 +115,7 @@ template< typename _Writable >
 void 
 DeclarationImpl< _Writable >::addDeclared( std::unique_ptr< Declared > _declared )
 {
-	m_declareds.add(
-			_declared->getName()
-		,	 std::shared_ptr< Declared >( _declared.release() )
-	);
+	m_declareds.insert( std::move( _declared ) );
 }
 
 /***************************************************************************/

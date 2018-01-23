@@ -27,26 +27,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification\bin\vs-2015\x86\Debug DLL;E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification\bin\vs-2015\x86\Debug DLL;E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification\bin\vs-2015\x86\Debug DLL;E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification\bin\vs-2015\x86\Debug DLL;E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,25 +155,27 @@
     <ClInclude Include="ANTLRGenerated\Verilog2001Lexer.h" />
     <ClInclude Include="ANTLRGenerated\Verilog2001Parser.h" />
     <ClInclude Include="ANTLRGenerated\Verilog2001Visitor.h" />
+    <ClInclude Include="api\ec_iaccessor.hpp" />
+    <ClInclude Include="sources\ec_accessor.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="vlog_import\ec_vlog_base_importer.hpp" />
-    <ClInclude Include="vlog_import\ec_vlog_design_unit_importer.hpp" />
-    <ClInclude Include="vlog_import\ec_vlog_port_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_base_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_design_unit_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_port_importer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ANTLRGenerated\Verilog2001Lexer.cpp" />
     <ClCompile Include="ANTLRGenerated\Verilog2001Parser.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="sources\ec_accessor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="vlog_import\ec_vlog_base_importer.cpp" />
-    <ClCompile Include="vlog_import\ec_vlog_port_importer.cpp" />
-    <ClCompile Include="vlog_import\ec_vlog_design_unit_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_base_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_port_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_design_unit_importer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\parsers\antlr\Cpp\runtime\antlr4cpp-vs2015.vcxproj">

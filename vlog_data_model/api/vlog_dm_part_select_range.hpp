@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "api\vlog_dm_range.hpp"
+#include "vlog_data_model\api\vlog_dm_range.hpp"
 
 /***************************************************************************/
 
@@ -16,15 +16,15 @@ struct Expression;
 
 /***************************************************************************/
 
-struct ExpressionRange
+struct PartSelectRange
 	:	public Range
 {
 
 /***************************************************************************/
 
-	virtual Expression const & getRightExpression() const = 0;
+	virtual Expression const & getRightBound() const = 0;
 
-	virtual Expression const & getLeftExpression() const = 0;
+	virtual Expression const & getLeftBound() const = 0;
 
 /***************************************************************************/
 

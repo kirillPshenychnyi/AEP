@@ -16,6 +16,7 @@ DeclaredFactoryImpl::newPort(
 	,	std::string const & _name
 	,	Location const & _location
 	,	PortDirection::Direction _direction
+	,	NetType::Type _type
 	,	std::unique_ptr< Dimension > _dimension 
 ) const
 {	
@@ -26,6 +27,7 @@ DeclaredFactoryImpl::newPort(
 			,	_location
 			,	std::unique_ptr<Dimension>( _dimension.release() )
 			,	_direction
+			,	_type
 		);
 }
 

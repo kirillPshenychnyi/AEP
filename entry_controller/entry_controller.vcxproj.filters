@@ -33,21 +33,24 @@
     <ClInclude Include="ANTLRGenerated\Verilog2001Visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vlog_import\ec_vlog_base_importer.hpp">
+    <ClInclude Include="sources\vlog_import\ec_vlog_base_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vlog_import\ec_vlog_design_unit_importer.hpp">
+    <ClInclude Include="sources\vlog_import\ec_vlog_design_unit_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vlog_import\ec_vlog_port_importer.hpp">
+    <ClInclude Include="sources\vlog_import\ec_vlog_port_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\ec_iaccessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ec_accessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ANTLRGenerated\Verilog2001Lexer.cpp">
@@ -56,13 +59,16 @@
     <ClCompile Include="ANTLRGenerated\Verilog2001Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vlog_import\ec_vlog_base_importer.cpp">
+    <ClCompile Include="sources\vlog_import\ec_vlog_base_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vlog_import\ec_vlog_design_unit_importer.cpp">
+    <ClCompile Include="sources\vlog_import\ec_vlog_design_unit_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vlog_import\ec_vlog_port_importer.cpp">
+    <ClCompile Include="sources\vlog_import\ec_vlog_port_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ec_accessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

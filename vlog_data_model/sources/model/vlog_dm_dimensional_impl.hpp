@@ -3,11 +3,13 @@
 
 /***************************************************************************/
 
-#include "boost\scoped_ptr.hpp"
+#include <boost\scoped_ptr.hpp>
 
-#include "sources\model\vlog_dm_declared_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_declared_impl.hpp"
 
 #include "vlog_data_model\api\vlog_dm_dimension.hpp"
+
+#include "common_tools\utils\convertors.hpp"
 
 /***************************************************************************/
 
@@ -79,7 +81,8 @@ inline
 boost::optional< Dimension const & > 
 DimensionalImpl< _BaseClass >::getDimension() const
 {
-	return boost::none;
+	return 
+		Tools::Convertors::convertPointerToOptional( m_dimension.get() );
 }
 
 /***************************************************************************/

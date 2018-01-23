@@ -18,7 +18,7 @@ struct PrimaryLiteral
 
 /***************************************************************************/
 
-	virtual double getValue() const = 0;
+	virtual std::string const& getValue() const = 0;
 
 /***************************************************************************/
 

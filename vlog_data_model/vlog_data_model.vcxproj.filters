@@ -69,9 +69,6 @@
     <ClInclude Include="api\vlog_dm_part_select_range.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\vlog_dm_range_visitor.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\vlog_dm_expression.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -183,6 +180,33 @@
     <ClInclude Include="sources\model\vlog_dm_declarations_container_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_declaration_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_declaration_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_range_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_declared_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_declared_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_part_select_range_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_expression_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_expression_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_range_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -210,6 +234,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\model\vlog_dm_part_select_range_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\model\vlog_dm_primary_literal_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>		
 #include <cassert>
+#include <boost\unordered_set.hpp>
 
 /***************************************************************************/
 
@@ -154,6 +155,123 @@ private:
 
 /***************************************************************************/
 
+template < 
+		typename _Key
+	,	typename _Hasher = std::hash< _Key >
+	,	typename _Comparator = std::equal_to< _Key >
+	,	typename _KeyKiller = std::identity< _Key >
+	,	typename _ValueKiller = std::identity< _Value >
+	>
+	class OrderedSet
+{
+
+/***************************************************************************/
+
+	typedef
+		std::vector< _Key >
+		Vector;
+
+	typedef
+		boost::unordered_set< _Key, _Value, _Hasher, _Comparator >
+		Set;
+
+	typedef
+		typename Vector::const_iterator
+		iterator;
+
+/***************************************************************************/
+
+public:
+
+/***************************************************************************/
+
+	Set const & asSet() const
+	{
+		return m_set;
+	}
+
+	Vector const & asVector() const
+	{
+		return m_vector;
+	}
+
+/***************************************************************************/
+
+	iterator begin() const
+	{
+		return m_vector.begin();
+	}
+
+	iterator end() const
+	{
+		return m_vector.end();
+	}
+
+/***************************************************************************/
+
+	_Value const & operator [] ( int _idx ) const
+	{
+		assert( _idx >= 0 && _idx < m_vector.size() );
+
+		return m_vector[ _idx ].second();
+	}
+
+/***************************************************************************/
+
+	bool hasKey( _Key const & _key ) const
+	{
+		return m_set.find( _key, _Hasher(), _Comparator() ) != m_set.end();
+	}
+
+/***************************************************************************/
+
+	iterator findByKey( _Key const & _key ) const
+	{
+		return m_set.find( _key );
+	}
+
+/***************************************************************************/
+
+	bool add( _Key const & _key )
+	{
+		return m_set.insert( _key );
+	}
+
+/***************************************************************************/
+
+	void clear()
+	{
+		_KeyKiller keyKiller;
+
+		for( _Key key : m_vector )
+		{
+			keyKiller( value );
+		}
+
+		m_set.clear();
+		m_vector.clear();
+	}
+
+/***************************************************************************/
+
+	int size() const
+	{
+		return m_vector.size();
+	}
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	Vector m_vector;
+
+	Set m_set;
+
+/***************************************************************************/
+
+};
 }
 }
 

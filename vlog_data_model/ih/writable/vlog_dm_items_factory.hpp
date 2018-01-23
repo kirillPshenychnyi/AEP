@@ -36,7 +36,7 @@ struct ItemsFactory
 		,	std::unique_ptr< Range > _range
 	) const = 0;
 	
-	virtual std::unique_ptr< Range > newExpressionRange( 
+	virtual std::unique_ptr< Range > newPartSelectRange( 
 			Location const& _location
 		,	std::unique_ptr< Expression > _lhs
 		,	std::unique_ptr< Expression > _rhs

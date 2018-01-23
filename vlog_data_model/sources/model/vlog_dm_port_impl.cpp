@@ -1,8 +1,8 @@
 #include "stdafx.h"
 
-#include "api\vlog_dm_dimension.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_declared_visitor.hpp"
 
-#include "sources\model\vlog_dm_port_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_port_impl.hpp"
 
 /***************************************************************************/
 
@@ -16,6 +16,7 @@ PortImpl::PortImpl(
 	,	Location const & _location
 	,	std::unique_ptr<Dimension> _dimension
 	,	PortDirection::Direction _direction 
+	,	NetType::Type _type
 	)
 	:	BaseClass( 
 				_declaration
@@ -24,7 +25,16 @@ PortImpl::PortImpl(
 			,	std::move( _dimension )
 		)
 	,	m_direction( _direction )
+	,	m_type( _type )
 {
+}
+
+/***************************************************************************/
+
+void 
+PortImpl::accept( DeclaredVisitor & _visitor ) const
+{
+	_visitor.visit( *this );
 }
 
 /***************************************************************************/

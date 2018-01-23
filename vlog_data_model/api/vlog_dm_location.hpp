@@ -20,7 +20,24 @@ struct Location
 		,	m_endLine( 0 )
 		,	m_endColumn( 0 )
 	{
+	}
 
+	Location( Location const& _location )
+		:	m_file( _location.m_file )
+		,	m_beginLine( _location.m_beginLine )
+		,	m_beginColumn( _location.m_beginColumn )
+		,	m_endLine( 0 )
+		,	m_endColumn( 0 )
+	{
+	}
+
+	Location( Location && _location )
+		:	m_file( _location.m_file )
+		,	m_beginLine( _location.m_beginLine )
+		,	m_beginColumn( _location.m_beginColumn )
+		,	m_endLine( 0 )
+		,	m_endColumn( 0 )
+	{
 	}
 
 /***************************************************************************/

@@ -22,9 +22,15 @@ struct Expression
 
 /***************************************************************************/
 
+	typedef
+		std::unique_ptr< Expression >
+		Ptr;
+
+/***************************************************************************/
+
 	virtual ~Expression() {}
 
-	virtual void accept( ExpressionVisitor & _visitor ) = 0;
+	virtual void accept( ExpressionVisitor & _visitor ) const = 0;
 
 /***************************************************************************/
 

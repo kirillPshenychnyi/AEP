@@ -13,7 +13,7 @@ namespace VlogDM {
 std::unique_ptr< PrimaryLiteral > 
 ExpressionFactoryImpl::newPrimaryLiteral( 
 		Location const & _location
-	,	double _value 
+	,	std::string const& _value
 ) const
 {
 	return std::make_unique< PrimaryLiteralImpl >( _location, _value );

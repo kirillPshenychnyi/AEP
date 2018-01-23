@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
@@ -17,6 +17,8 @@ namespace VlogDM
 		struct ItemsFactory;
 		struct ExpressionFactory;
 	}
+
+	struct DesignUnit;
 }
 
 /***************************************************************************/
@@ -31,8 +33,16 @@ struct IAccessor
 {
 
 /***************************************************************************/
-		
-	virtual ~IAccessor() {}
+
+	virtual boost::optional< DesignUnit const & > findUnit(
+			std::string const& _unitName
+	) const = 0;
+
+	virtual void addUnit( std::unique_ptr< DesignUnit > _unit ) = 0;
+
+	virtual void reset() = 0;
+
+/***************************************************************************/
 
 	virtual Writable::DesignUnitFactory const& getDesignUnitFactory() = 0;
 

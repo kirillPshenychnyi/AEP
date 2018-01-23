@@ -14,6 +14,7 @@ namespace VlogDM
 /***************************************************************************/
 	
 	struct Declared;
+	struct DeclarationVisitor;
 
 /***************************************************************************/
 	
@@ -27,11 +28,12 @@ public:
 
 /***************************************************************************/
 
-	virtual ~Declaration() {}
-
-	virtual boost::optional< Declared const & > findDeclared( std::string const & _declared ) const = 0;
+	virtual boost::optional< Declared const & > 
+		findDeclared( std::string const & _declared ) const = 0;
 
 	virtual int getDeclaredsCount() const = 0;
+
+	virtual void accept( DeclarationVisitor & _visitor ) const = 0;
 
 /***************************************************************************/
 

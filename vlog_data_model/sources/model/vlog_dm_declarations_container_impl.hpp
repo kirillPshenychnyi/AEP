@@ -32,6 +32,14 @@ public:
 
 	void addDeclaration( std::unique_ptr< Declaration > _declaration ) override;
 
+	int getDeclarationsCount() const override;
+
+	Declaration const& getDeclaration( int _idx ) const override;
+
+	boost::optional< Declared const& > findDeclared( 
+			std::string const & _declared 
+	) const override;
+
 /***************************************************************************/
 
 private:
@@ -54,6 +62,40 @@ DeclarationsContainerImpl< _BaseClass >::addDeclaration(
 	)
 {
 	m_declarations.push_back( std::move( _declaration ) );
+}
+
+/***************************************************************************/
+
+template< typename _BaseClass >
+inline 
+int 
+DeclarationsContainerImpl< _BaseClass >::getDeclarationsCount() const
+{
+	return m_declarations.size();
+}
+
+/***************************************************************************/
+
+template< typename _BaseClass >
+inline 
+Declaration const& 
+DeclarationsContainerImpl< _BaseClass >::getDeclaration( int _idx ) const
+{
+	return *m_declarations.at( _idx );
+}
+
+/***************************************************************************/
+
+template< typename _BaseClass >
+inline 
+boost::optional< Declared const& >
+DeclarationsContainerImpl< _BaseClass >::findDeclared( std::string const & _declared ) const
+{
+	for( auto const& declaration : m_declarations )
+		if( auto declared = declaration->findDeclared( _declared ) )
+			return declared;
+
+	return boost::optional< Declared const& >();
 }
 
 /***************************************************************************/

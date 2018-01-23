@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "entry_controller\vlog_import\ec_vlog_base_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
 #include <vector>
@@ -37,7 +37,7 @@ public:
 
 /***************************************************************************/
 
-	std::vector< std::unique_ptr< VlogDM::Writable::DesignUnit > > m_units;
+	std::unique_ptr< VlogDM::Writable::DesignUnit > m_currentUnit;
 
 /***************************************************************************/
 
