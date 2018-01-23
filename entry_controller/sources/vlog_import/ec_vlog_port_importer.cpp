@@ -28,7 +28,8 @@ namespace VlogImport{
 
 /***************************************************************************/
 
-struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
+struct PortImporter::PortDeclarationInfoExtractror 
+	: public BaseImporter
 {
 
 /***************************************************************************/
@@ -56,13 +57,16 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	{
 		static const std::string regKeyWord = "reg";
 
-		for( auto child : _context.children )
-		{
-			if( child->getText() == regKeyWord )
-				m_netType = VlogDM::NetType::Type::reg;
-
-			child->accept( this );
-		}
+		forEachChildContext(
+				_context
+			,	[ & ]( antlr4::tree::ParseTree & _tree )
+				{
+					if( _tree.getText() == regKeyWord )
+						m_netType = VlogDM::NetType::Type::reg;
+		
+					_tree.accept( this );
+				}
+		);
 	}
 
 /***************************************************************************/
@@ -94,9 +98,8 @@ struct PortImporter::PortDeclarationInfoExtractror : public BaseImporter
 	antlrcpp::Any 
 	visitList_of_port_identifiers(Verilog2001Parser::List_of_port_identifiersContext *ctx) override 
 	{
-		for( auto child : ctx->children )
-			child->accept( this ); 
-
+		acceptEachChildContext( *ctx );
+		
 		return antlrcpp::Any();
 	}
 
@@ -138,9 +141,12 @@ PortImporter::PortImporter(
 /***************************************************************************/
 
 void 
-PortImporter::importPorts( const Verilog2001Parser::List_of_portsContext & _ctx )
+PortImporter::importPorts( Verilog2001Parser::Port_declarationContext & _ctx )
 {	
-	importPorts< Verilog2001Parser::List_of_portsContext >( _ctx );
+	_ctx.accept( this );
+
+	for( auto & value : m_extractedDeclarations )
+		m_targetUnit.addDeclaration( std::move( value ) );
 }
 
 /***************************************************************************/
@@ -148,21 +154,10 @@ PortImporter::importPorts( const Verilog2001Parser::List_of_portsContext & _ctx 
 void 
 PortImporter::importPorts( const Verilog2001Parser::List_of_port_declarationsContext & _ctx )
 {
-	importPorts< Verilog2001Parser::List_of_port_declarationsContext >( _ctx );
-}
-
-/***************************************************************************/
-
-template< typename _PortListContext >
-void 
-PortImporter::importPorts( const _PortListContext & _list )
-{
-	for( auto child : _list.children )
-		child->accept( this );
+	acceptEachChildContext( _ctx );
 
 	for( auto & value : m_extractedDeclarations )
 		m_targetUnit.addDeclaration( std::move( value ) );
-
 }
 
 /***************************************************************************/
@@ -176,27 +171,21 @@ PortImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_port_de
 /***************************************************************************/
 
 antlrcpp::Any 
-PortImporter::visitPort( Verilog2001Parser::PortContext * ctx )
-{
-	std::string text = ctx->getText();
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 PortImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
 {
-	for( auto child : ctx->children )
-	{
-		VlogDM::Location location = createLocation( *ctx );
+	forEachChildContext(
+			*ctx
+		,	[ & ]( antlr4::tree::ParseTree & _tree )
+			{
+				VlogDM::Location location = createLocation( *ctx );
 
-		m_extractedDeclarations.emplace_back(
-			std::move( getVlogDataModel().getDeclarationFactory().newPortDeclaration( location ) )
-		);
+				m_extractedDeclarations.emplace_back(
+					std::move( getVlogDataModel().getDeclarationFactory().newPortDeclaration( location ) )
+				);
 
-		child->accept( this );
-	}
+				_tree.accept( this );
+			}
+	);
 
 	return antlrcpp::Any();
 }

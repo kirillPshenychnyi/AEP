@@ -59,7 +59,7 @@ public:
 		,	VlogDM::Writable::DesignUnit & _targetUnit 
 	);
 
-	void importPorts( const Verilog2001Parser::List_of_portsContext & _ctx );
+	void importPorts( Verilog2001Parser::Port_declarationContext & _ctx );
 	
 	void importPorts( const Verilog2001Parser::List_of_port_declarationsContext & _ctx );
 
@@ -68,9 +68,6 @@ public:
 private:
 
 /***************************************************************************/
-
-	template< typename _PortListContext >
-	void importPorts( const _PortListContext & _list );
 
 	template< typename _PortDeclarationContext >
 	void importPorts( 
@@ -85,8 +82,6 @@ private:
 /***************************************************************************/
 
 	antlrcpp::Any visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext *ctx ) override;
-
-	antlrcpp::Any visitPort( Verilog2001Parser::PortContext *ctx ) override;
 
 	antlrcpp::Any visitPort_declaration( Verilog2001Parser::Port_declarationContext *ctx ) override;
 

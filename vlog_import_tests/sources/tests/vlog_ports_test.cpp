@@ -323,4 +323,81 @@ TEST_CASE_METHOD( PortsFixture, "different modules same interface", "[ports]" )
 
 /***************************************************************************/
 
+TEST_CASE_METHOD( PortsFixture, "non-ansi input port declaration", "[ports]" )
+{
+	std::string code =
+		"module unit (a,b);					\n"
+		"	input a,b;						\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+	
+	expectUnit( "unit" )
+		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
+		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
+	.end();
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( PortsFixture, "non-ansi interface", "[ports]" )
+{
+	std::string code =
+		"module unit (a,b);					\n"
+		"	input a;						\n"
+		"	output b;						\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+	
+	expectUnit( "unit" )
+		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
+		.expectPort( PORT_INFO( "b", boost::none, Output, wire ) )
+	.end();
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface", "[ports]" )
+{
+	std::string code =
+		"module unit (a,b);					\n"
+		"	input [3:0] a;					\n"
+		"	output reg [7:0] b;				\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+	
+	expectUnit( "unit" )
+		.expectPort( PORT_INFO( "a", Bounds( "3", "0" ), Input, wire ) )
+		.expectPort( PORT_INFO( "b", Bounds( "7", "0" ), Output, reg ) )
+	.end();
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface couple ports", "[ports]" )
+{
+	std::string code =
+		"module unit (a,b);					\n"
+		"	input [3:0] a, b;				\n"
+		"	output reg [7:0] c, d;			\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+	
+	expectUnit( "unit" )
+		.expectPort( PORT_INFO( "a", Bounds( "3", "0" ), Input, wire ) )
+		.expectPort( PORT_INFO( "b", Bounds( "3", "0" ), Input, wire ) )
+		.expectPort( PORT_INFO( "c", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( PORT_INFO( "d", Bounds( "7", "0" ), Output, reg ) )
+	.end();
+}
+
+/***************************************************************************/
+
 }

@@ -33,8 +33,7 @@ DesingUnitImporter::visitModule_declaration( Verilog2001Parser::Module_declarati
 	m_currentUnit 
 		=	std::move( unitsFactory.newDesignUnit( ctx->children[ 1 ]->getText(), createLocation( *ctx ) ) );
 
-	for( auto child : ctx->children )
-		child->accept( this );
+	acceptEachChildContext( *ctx );
 
 	IAccessor & vlogDm = getVlogDataModel();
 
@@ -46,10 +45,18 @@ DesingUnitImporter::visitModule_declaration( Verilog2001Parser::Module_declarati
 /***************************************************************************/
 
 antlrcpp::Any 
-DesingUnitImporter::visitList_of_ports( Verilog2001Parser::List_of_portsContext *ctx ) 
+DesingUnitImporter::visitModule_item( Verilog2001Parser::Module_itemContext *ctx ) 
 {	
-	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
+	acceptEachChildContext( *ctx );
 
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any DesingUnitImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
+{
+	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
 	portImporter.importPorts( *ctx );
 
 	return antlrcpp::Any();
@@ -59,9 +66,7 @@ DesingUnitImporter::visitList_of_ports( Verilog2001Parser::List_of_portsContext 
 
 antlrcpp::Any
 DesingUnitImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext * ctx )
-{
-	using namespace VlogDM;
-	
+{	
 	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
 	portImporter.importPorts( *ctx );
 

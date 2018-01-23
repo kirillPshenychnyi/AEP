@@ -35,5 +35,31 @@ BaseImporter::createLocation( antlr4::ParserRuleContext & _ctx ) const
 
 /***************************************************************************/
 
+void 
+BaseImporter::acceptEachChildContext( antlr4::ParserRuleContext const& _ctx )
+{
+	forEachChildContext(
+			_ctx
+		,	[ & ]( antlr4::tree::ParseTree & _tree ) 
+			{
+				_tree.accept( this );
+			}
+	);
+}
+
+/***************************************************************************/
+
+void 
+BaseImporter::forEachChildContext( 
+		antlr4::ParserRuleContext const& _ctx
+	,	ContextCallback _callBack 
+)
+{
+	for( auto child : _ctx.children )
+		_callBack( *child );
+}
+
+/***************************************************************************/
+
 }
 }

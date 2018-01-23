@@ -26,6 +26,12 @@ class BaseImporter
 
 /***************************************************************************/
 
+	typedef
+		std::function< void( antlr4::tree::ParseTree & _tree ) >
+		ContextCallback;
+
+/***************************************************************************/
+
 public:
 
 /***************************************************************************/
@@ -35,6 +41,13 @@ public:
 /***************************************************************************/
 
 	const VlogDM::Location createLocation( antlr4::ParserRuleContext & _ctx ) const;
+
+	void acceptEachChildContext( antlr4::ParserRuleContext const& _ctx );
+
+	void forEachChildContext( 
+			antlr4::ParserRuleContext const& _ctx
+		,	ContextCallback _callBack 
+	);
 
 /***************************************************************************/
 
