@@ -5,7 +5,7 @@
 
 #include "api\vlog_dm_port.hpp"
 
-#include "sources\model\vlog_dm_dimensional_impl.hpp"
+#include "sources\model\vlog_dm_dimensional_object_impl.hpp"
 
 /***************************************************************************/
 
@@ -22,13 +22,13 @@ namespace VlogDM
 /***************************************************************************/
 
 class PortImpl
-	:	public DimensionalImpl< Port >
+	:	public DimensionalObjectImpl< Port >
 {
 
 /***************************************************************************/
 
 	typedef
-		DimensionalImpl< Port >
+		DimensionalObjectImpl< Port >
 		BaseClass;
 
 /***************************************************************************/
@@ -39,11 +39,11 @@ public:
 
 	PortImpl( 
 			Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	std::unique_ptr< Dimension > _dimension
 		,	PortDirection::Direction _direction
-		,	NetType::Type _type
 	);
 
 /***************************************************************************/
@@ -54,8 +54,6 @@ public:
 
 	PortDirection::Direction getDirection() const override;
 
-	NetType::Type getNetType() const override;
-
 	void accept( DeclaredVisitor& _visitor ) const override;
 
 /***************************************************************************/
@@ -65,7 +63,6 @@ private:
 /***************************************************************************/
 
 	const PortDirection::Direction m_direction;
-	const NetType::Type m_type;
 
 /***************************************************************************/
 
@@ -78,15 +75,6 @@ PortDirection::Direction
 PortImpl::getDirection() const
 {
 	return m_direction;
-}
-
-/***************************************************************************/
-
-inline
-NetType::Type 
-PortImpl::getNetType() const
-{
-	return m_type;
 }
 
 /***************************************************************************/

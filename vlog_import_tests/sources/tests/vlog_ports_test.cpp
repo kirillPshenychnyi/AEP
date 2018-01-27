@@ -9,19 +9,6 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
-#define PORT_INFO( _name, _bounds, _direction, _netType )		\
-	std::make_tuple(											\
-			_name												\
-		,	_bounds												\
-		,	VlogDM::PortDirection::Direction::_direction		\
-		,	VlogDM::NetType::Type::_netType						\
-	)
-
-#define RANGE( _rightBound, _leftBound )						\
-	std::make_pair( #_rightBound, #_leftBound  )
-
-/***************************************************************************/
-
 TEST_CASE_METHOD( PortsFixture, "simple input port", "[ports]" )
 {
 	std::string code =
@@ -33,9 +20,10 @@ TEST_CASE_METHOD( PortsFixture, "simple input port", "[ports]" )
 	runImport( code );
 
 	expectUnit( "top" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-	.end();
-	
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end();
 }
 
 /***************************************************************************/
@@ -51,10 +39,18 @@ TEST_CASE_METHOD( PortsFixture, "couple input ports", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "c", boost::none, Input, wire ) )
-	.end();
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "b" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "c" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end();
 }
 
 /***************************************************************************/
@@ -70,29 +66,18 @@ TEST_CASE_METHOD( PortsFixture, "couple input ports explicit wire", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "c", boost::none, Input, wire ) )
-	.end();
-}
-
-/***************************************************************************/
-
-TEST_CASE_METHOD( PortsFixture, "explicit input wire ports", "[ports]" )
-{
-	std::string code =
-		"module unit (input wire a, b, c);	\n"
-		"	NOT u1 (a);						\n"
-		"endmodule							\n"
-		;
-
-	runImport( code );
-	
-	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "c", boost::none, Input, wire ) )
-	.end();
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "b" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "c" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end();
 }
 
 /***************************************************************************/
@@ -108,10 +93,18 @@ TEST_CASE_METHOD( PortsFixture, "couple input declarations", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "c", boost::none, Input, wire ) )
-	.end();
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "b" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end()
+		.expectPort( "c" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+		.end();
 }
 
 /***************************************************************************/
@@ -127,8 +120,29 @@ TEST_CASE_METHOD( PortsFixture, "two bit input", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "1", "0" ), Input, wire ) )
-	.end();
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+			.expectBounds( "1", "0" )
+		.end();
+}
+
+TEST_CASE_METHOD( PortsFixture, "two bit input reverse bit order", "[ports]" )
+{
+	std::string code =
+		"module unit (input [0:1] a);		\n"
+		"	NOT u1 (a);						\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+	
+	expectUnit( "unit" )
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+			.expectBounds( "0", "1" )
+		.end();
 }
 
 /***************************************************************************/
@@ -144,10 +158,21 @@ TEST_CASE_METHOD( PortsFixture, "couple multibit inputs", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "1", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "1", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "c", Bounds( "1", "0" ), Input, wire ) )
-	.end();
+		.expectPort( "a" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+			.expectBounds( "1", "0" )
+		.end()
+		.expectPort( "b" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+			.expectBounds( "1", "0" )
+		.end()
+		.expectPort( "c" )
+			.expectDirection( VlogDM::PortDirection::Direction::Input )
+			.expectNetType( VlogDM::NetKind::Kind::wire )
+			.expectBounds( "1", "0" )
+		.end();
 }
 
 /***************************************************************************/
@@ -163,8 +188,15 @@ TEST_CASE_METHOD( PortsFixture, "couple different multibit inputs", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "1", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "3", "0" ), Input, wire ) )
+	.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "1", "0" )
+	.end()
+	.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "3", "0" )
 	.end();
 }
 
@@ -181,8 +213,15 @@ TEST_CASE_METHOD( PortsFixture, "couple different multibit inputs big little end
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "1", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "0", "3" ), Input, wire ) )
+	.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "1", "0" )
+	.end()
+	.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "0", "3" )
 	.end();
 }
 
@@ -199,7 +238,9 @@ TEST_CASE_METHOD( PortsFixture, "simple output", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Output, wire ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
 	.end();
 }
 
@@ -216,7 +257,9 @@ TEST_CASE_METHOD( PortsFixture, "simple reg output", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
 	.end();
 }
 
@@ -233,9 +276,17 @@ TEST_CASE_METHOD( PortsFixture, "couple reg outputs", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Output, reg ) )
-		.expectPort( PORT_INFO( "b", boost::none, Output, reg ) )
-		.expectPort( PORT_INFO( "c", boost::none, Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+	.end()
+		.expectPort( "c" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
 	.end();
 }
 
@@ -252,9 +303,17 @@ TEST_CASE_METHOD( PortsFixture, "different outputs", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Output, reg ) )
-		.expectPort( PORT_INFO( "b", boost::none, Output, wire ) )
-		.expectPort( PORT_INFO( "c", boost::none, Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+	.end()
+		.expectPort( "c" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
 	.end();
 }
 
@@ -271,8 +330,13 @@ TEST_CASE_METHOD( PortsFixture, "simple module interface", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
 	.end();
 }
 
@@ -289,8 +353,15 @@ TEST_CASE_METHOD( PortsFixture, "multibit module interface", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "7", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "7", "0" )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
 	.end();
 }
 
@@ -311,13 +382,27 @@ TEST_CASE_METHOD( PortsFixture, "different modules same interface", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "7", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "7", "0" )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
 	.end();
 
 	expectUnit( "top" )
-		.expectPort( PORT_INFO( "a", Bounds( "7", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "7", "0" )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
 	.end();
 }
 
@@ -334,8 +419,13 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi input port declaration", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Input, wire ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
 	.end();
 }
 
@@ -353,8 +443,13 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi interface", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", boost::none, Input, wire ) )
-		.expectPort( PORT_INFO( "b", boost::none, Output, wire ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
 	.end();
 }
 
@@ -372,8 +467,15 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface", "[ports]" )
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "3", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "3", "0" )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
 	.end();
 }
 
@@ -391,10 +493,25 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface couple ports", "[po
 	runImport( code );
 	
 	expectUnit( "unit" )
-		.expectPort( PORT_INFO( "a", Bounds( "3", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "b", Bounds( "3", "0" ), Input, wire ) )
-		.expectPort( PORT_INFO( "c", Bounds( "7", "0" ), Output, reg ) )
-		.expectPort( PORT_INFO( "d", Bounds( "7", "0" ), Output, reg ) )
+		.expectPort( "a" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "3", "0" )
+	.end()
+		.expectPort( "b" )
+		.expectDirection( VlogDM::PortDirection::Direction::Input )
+		.expectNetType( VlogDM::NetKind::Kind::wire )
+		.expectBounds( "3", "0" )
+	.end()
+	.expectPort( "c" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
+	.end()
+	.expectPort( "d" )
+		.expectDirection( VlogDM::PortDirection::Direction::Output )
+		.expectRegType()
+		.expectBounds( "7", "0" )
 	.end();
 }
 

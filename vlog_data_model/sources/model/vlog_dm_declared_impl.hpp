@@ -3,8 +3,9 @@
 
 /***************************************************************************/
 
-#include "api\vlog_dm_declared.hpp"
-#include "vlog_dm_named_located_impl.hpp"
+#include "vlog_data_model\api\vlog_dm_declared.hpp"
+#include "vlog_data_model\api\vlog_dm_type.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_named_located_impl.hpp"
 
 /***************************************************************************/
 
@@ -32,6 +33,7 @@ public:
 
 	DeclaredImpl(
 			Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 	);
@@ -39,6 +41,8 @@ public:
 /***************************************************************************/
 
 	Declaration const & getDeclaration() const override;
+	
+	Type const & getType() const override;
 
 /***************************************************************************/
 
@@ -47,6 +51,7 @@ private:
 /***************************************************************************/
 
 	Declaration const & m_declaration;
+	std::unique_ptr< Type > m_type;
 
 /***************************************************************************/
 
@@ -66,13 +71,25 @@ DeclaredImpl< _BaseClass >::getDeclaration() const
 
 template< typename _BaseClass >
 inline
+Type const & 
+DeclaredImpl< _BaseClass >::getType() const
+{
+	return *m_type;
+}
+
+/***************************************************************************/
+
+template< typename _BaseClass >
+inline
 DeclaredImpl< _BaseClass >::DeclaredImpl( 
-Declaration const & _declaration
+		Declaration const & _declaration
+	,	std::unique_ptr< Type > _type
 	,	std::string const & _name
 	,	Location const & _location
 )
 	:	BaseClass( _name, _location )
 	,	m_declaration( _declaration )
+	,	m_type( _type.release() )
 {
 }
 

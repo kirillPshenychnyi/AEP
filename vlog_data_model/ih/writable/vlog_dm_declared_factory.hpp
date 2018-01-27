@@ -14,6 +14,7 @@ namespace VlogDM
 {
 	struct Declaration;
 	struct Location;
+	struct Type;
 
 	struct Port;
 	struct Dimension;
@@ -30,14 +31,12 @@ struct DeclaredFactory
 
 /***************************************************************************/
 
-	virtual ~DeclaredFactory() {}
-
 	virtual std::unique_ptr< Port > newPort ( 
 			VlogDM::Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	PortDirection::Direction _direction
-		,	NetType::Type _type
 		,	std::unique_ptr< Dimension > _dimension
 	) const = 0;
 

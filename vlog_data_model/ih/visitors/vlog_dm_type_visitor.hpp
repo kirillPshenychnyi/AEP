@@ -1,42 +1,46 @@
-#ifndef __VLOG_DM_DECLARED_HPP__
-#define __VLOG_DM_DECLARED_HPP__
+#ifndef __VLOG_DM_TYPE_VISITOR_HPP__
+#define __VLOG_DM_TYPE_VISITOR_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
-#include "vlog_data_model\api\vlog_dm_named.hpp"
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace VlogDM {
+
+/***************************************************************************/
+
+struct NetType;
+struct VariableType;
+
+/***************************************************************************/
+
+struct TypeVisitor
+	:	public boost::noncopyable
 {
 
 /***************************************************************************/
 
-struct Declaration;
-struct Type;
-struct DeclaredVisitor;
+	virtual void visit( NetType const & _netType ) = 0;
+
+	virtual void visit( VariableType const & _varType ) = 0;
 
 /***************************************************************************/
+
+};
+
+/***************************************************************************/
+
+struct TypeDefaultVisitor
+	:	public TypeVisitor
+{
+
+/***************************************************************************/
+
+	void visit( NetType const& _port ) override {}
 	
-struct Declared
-	:	public Located
-	,	public Named
-{
-
-/***************************************************************************/
-
-	typedef
-		std::unique_ptr< Declared >
-		Ptr;
-
-/***************************************************************************/
-		
-	virtual Declaration const & getDeclaration() const = 0;
-
-	virtual Type const & getType() const = 0;
-
-	virtual void accept( DeclaredVisitor & _visitor ) const = 0;
+	void visit( VariableType const & _varType ) override {}
 
 /***************************************************************************/
 
@@ -48,4 +52,4 @@ struct Declared
 
 /***************************************************************************/
 
-#endif // __VLOG_DM_DECLARED_HPP__
+#endif // !__VLOG_DM_TYPE_VISITOR_HPP__

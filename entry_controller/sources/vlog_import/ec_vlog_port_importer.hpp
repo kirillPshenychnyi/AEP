@@ -21,6 +21,7 @@ namespace VlogDM
 	}
 
 	struct Dimension;
+	struct Type;
 }
 
 /***************************************************************************/
@@ -76,6 +77,10 @@ private:
 	);
 
 	std::unique_ptr< VlogDM::Dimension > createDimension( 
+			PortDeclarationInfoExtractror const& _extractor 
+	);
+
+	std::unique_ptr< VlogDM::Type > createType( 
 			PortDeclarationInfoExtractror const& _extractor 
 	);
 

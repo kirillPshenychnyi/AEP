@@ -1,34 +1,29 @@
-#ifndef __DECLARED_FACTORY_HPP__
-#define __DECLARED_FACTORY_HPP__
+#ifndef __VLOG_DM_TYPE_HPP__
+#define __VLOG_DM_TYPE_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
+#include <boost\noncopyable.hpp>
+
+#include "vlog_data_model\api\vlog_dm_dimensional.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM { 
+namespace VlogDM {
 
 /***************************************************************************/
 
-class DeclaredFactoryImpl
-	:	public Writable::DeclaredFactory
+struct TypeVisitor;
+
+/***************************************************************************/
+
+struct Type
+	:	Dimensional
 {
 
 /***************************************************************************/
 
-public:
-
-/***************************************************************************/
-
-	virtual std::unique_ptr< Port > newPort ( 
-			Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
-		,	std::string const & _name
-		,	Location const & _location
-		,	PortDirection::Direction _direction
-		,	std::unique_ptr< Dimension > _dimension
-	) const;
+	virtual void accept( TypeVisitor & _visitor ) const = 0;
 
 /***************************************************************************/
 
@@ -40,4 +35,4 @@ public:
 
 /***************************************************************************/
 
-#endif // !__DECLARED_FACTORY_HPP__
+#endif // !__VLOG_DM_TYPE_HPP__

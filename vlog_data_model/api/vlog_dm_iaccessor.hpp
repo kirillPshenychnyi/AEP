@@ -16,6 +16,7 @@ namespace VlogDM
 		struct DeclaredFactory;
 		struct ItemsFactory;
 		struct ExpressionFactory;
+		struct TypeFactory;
 	}
 
 	struct DesignUnit;
@@ -53,6 +54,8 @@ struct IAccessor
 	virtual Writable::ItemsFactory const& getItemsFactory() = 0;
 
 	virtual Writable::ExpressionFactory const& getExpressionFactory() = 0;
+
+	virtual Writable::TypeFactory const& getTypeFactory() = 0;
 
 /***************************************************************************/
 

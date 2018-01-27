@@ -20,6 +20,28 @@ convertPointerToOptional( const _T * const _value )
 
 /***************************************************************************/
 
+template< class _EnumType >
+typename _EnumType::Kind
+toEnumFromString( const char * const _value )
+{
+	for( 
+		int i = static_cast< int >( typename _EnumType::Kind::First );
+		i <= static_cast< int >( typename _EnumType::Kind::Last ); 
+		++i 
+	)
+	{
+		typename _EnumType::Kind toCompare 
+			= static_cast< typename _EnumType::Kind >( i );
+
+		if( !strcmp( _value, _EnumType::toString( toCompare ) ) )
+			return toCompare;
+	}
+
+	return typename _EnumType::Kind::First;;
+}
+
+/***************************************************************************/
+
 }
 }
 

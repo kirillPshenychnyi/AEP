@@ -24,8 +24,6 @@ struct Port
 
 	virtual PortDirection::Direction getDirection() const = 0;
 	
-	virtual NetType::Type getNetType() const = 0;
-
 /***************************************************************************/
 
 };

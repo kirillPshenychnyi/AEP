@@ -3,6 +3,7 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_port_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_net_type.hpp"
+#include "vlog_data_model\api\vlog_dm_variable_type.hpp"
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_port.hpp"
 #include "vlog_data_model\api\vlog_dm_port_declaration.hpp"
@@ -15,6 +16,7 @@
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_type_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
 #include <boost/lexical_cast.hpp>
@@ -46,7 +48,8 @@ struct PortImporter::PortDeclarationInfoExtractror
 
 	PortDeclarationInfoExtractror( VlogDM::IAccessor & _accessor )
 		:	BaseImporter( _accessor )
-		,	m_netType( VlogDM::NetType::Type::wire )
+		,	m_netType( VlogDM::NetKind::Kind::wire )
+		,	m_isReg( false )
 	{
 	}
 
@@ -62,7 +65,7 @@ struct PortImporter::PortDeclarationInfoExtractror
 			,	[ & ]( antlr4::tree::ParseTree & _tree )
 				{
 					if( _tree.getText() == regKeyWord )
-						m_netType = VlogDM::NetType::Type::reg;
+						m_isReg = true;
 		
 					_tree.accept( this );
 				}
@@ -74,7 +77,7 @@ struct PortImporter::PortDeclarationInfoExtractror
 	antlrcpp::Any 
 	visitNet_type( Verilog2001Parser::Net_typeContext *ctx ) override 
 	{
-		VlogDM::NetType::Type type = VlogDM::NetType::fromString( ctx->getText().c_str() );
+		m_netType = VlogDM::NetKind::fromString( ctx->getText().c_str() );
 
 		return antlrcpp::Any();
 	}
@@ -117,11 +120,15 @@ struct PortImporter::PortDeclarationInfoExtractror
 
 	Ports m_portIds;
 
+	std::unique_ptr< VlogDM::Type > m_type;
+
 	boost::optional< PortItem > m_leftBound;
 
 	boost::optional< PortItem > m_rightBound;
 
-	VlogDM::NetType::Type m_netType;
+	VlogDM::NetKind::Kind m_netType;
+
+	bool m_isReg;
 
 /***************************************************************************/
 
@@ -245,14 +252,41 @@ PortImporter::importPorts(
 			std::move( 
 				declaredFactory.newPort(
 						lastDeclaration
+					,	createType( extractor )
 					,	port.first
 					,	port.second
 					,	_direction
-					,	extractor.m_netType
 					,	std::move( createDimension( extractor ) )
 				)
 			)
 		);
+}
+
+/***************************************************************************/
+
+std::unique_ptr< VlogDM::Type > 
+PortImporter::createType(
+	PortDeclarationInfoExtractror const& _extractor
+)
+{
+	using namespace VlogDM;
+
+	IAccessor & vlogDm = getVlogDataModel();
+
+	Writable::TypeFactory const & typeFactory = vlogDm.getTypeFactory();
+
+	 
+	if( _extractor.m_isReg )
+		return typeFactory.newVariableType(
+						VariableKind::Kind::reg
+					,	std::move( createDimension( _extractor ) )
+				);
+		
+	return typeFactory.newNetType( 
+					_extractor.m_netType
+				,	std::move( createDimension( _extractor ) 
+			)
+	);
 }
 
 /***************************************************************************/

@@ -7,6 +7,7 @@
 #include "sources\model\factory\vlog_dm_declared_factory_impl.hpp"
 #include "sources\model\factory\vlog_dm_items_factory_impl.hpp"
 #include "sources\model\factory\vlog_dm_expression_factory_impl.hpp"
+#include "sources\model\factory\vlog_dm_type_factory_impl.hpp"
 
 /***************************************************************************/
 
@@ -94,6 +95,17 @@ Accessor::getExpressionFactory()
 		m_expressionFactory.reset( getFactory< ExpressionFactoryImpl >().release() );
 
 	return *m_expressionFactory;
+}
+
+/***************************************************************************/
+
+Writable::TypeFactory const &
+Accessor::getTypeFactory()
+{
+	if( !m_typeFactory )
+		m_typeFactory.reset( getFactory< TypeFactoryImpl >().release() );
+
+	return *m_typeFactory;
 }
 
 /***************************************************************************/

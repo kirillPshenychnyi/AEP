@@ -1,32 +1,49 @@
-#ifndef __VLOG_IMPORT_BASE_FIXTURE_HPP__
-#define __VLOG_IMPORT_BASE_FIXTURE_HPP__
+#ifndef __VLOG_DM_TYPE_FACTORY_HPP__
+#define __VLOG_DM_TYPE_FACTORY_HPP__
 
 /***************************************************************************/
 
 #include <boost\noncopyable.hpp>
 
-#include "vlog_import_tests\catch.hpp"
+#include "vlog_data_model\api\vlog_dm_net_kind.hpp"
+#include "vlog_data_model\api\vlog_dm_variable_kind.hpp"
 
 /***************************************************************************/
 
-namespace VlogModelImportTests {
+namespace VlogDM {
 
 /***************************************************************************/
 
-class BaseFixture
+struct NetType;
+struct VariableType;
+struct Dimension;
+
+/***************************************************************************/
+
+}
+
+/***************************************************************************/
+
+namespace VlogDM {
+namespace Writable { 
+
+/***************************************************************************/
+
+struct TypeFactory
 	:	public boost::noncopyable
 {
 
 /***************************************************************************/
 
-public:
+	virtual std::unique_ptr< NetType > newNetType(
+			NetKind::Kind _netKind
+		,	std::unique_ptr< Dimension > _dimension
+	) const = 0;
 
-/***************************************************************************/
-
-	void runImport( std::string const & _code );
-
-	template< typename _TSource, typename _TTarget, template < typename > class _TVisitor >
-	static _TTarget const & checkCast( _TSource const& _source );
+	virtual std::unique_ptr< VariableType > newVariableType(
+			VariableKind::Kind _netKind
+		,	std::unique_ptr< Dimension > _dimension
+	) const = 0;
 
 /***************************************************************************/
 
@@ -34,24 +51,9 @@ public:
 
 /***************************************************************************/
 
-template< typename _TSource, typename _TTarget, template < typename > class _TVisitor >
-inline 
-_TTarget const & 
-BaseFixture::checkCast( _TSource const & _source )
-{
-	_TVisitor< _TTarget > caster;
-
-	auto castRes = caster.cast( _source );
-
-	REQUIRE( castRes.is_initialized() );
-
-	return *castRes;
+}
 }
 
 /***************************************************************************/
 
-}
-
-/***************************************************************************/
-
-#endif // !__VLOG_IMPORT_BASE_FIXTURE_HPP__
+#endif // !__VLOG_DM_TYPE_FACTORY_HPP__

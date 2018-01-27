@@ -11,6 +11,7 @@
 #include "vlog_data_model\ih\writable\vlog_dm_design_unit_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_type_factory.hpp"
 
 #include "common_tools\base_plugin.hpp"
 #include "common_tools\collections\tools_collection_utils.hpp"
@@ -78,6 +79,8 @@ public:
 
 	Writable::ExpressionFactory const& getExpressionFactory() override;
 
+	Writable::TypeFactory const& getTypeFactory() override;
+
 /***************************************************************************/
 
 private:
@@ -100,6 +103,8 @@ private:
 	std::unique_ptr< Writable::ItemsFactory > m_itemsFactory;
 
 	std::unique_ptr< Writable::ExpressionFactory > m_expressionFactory;
+
+	std::unique_ptr< Writable::TypeFactory > m_typeFactory;
 
 /***************************************************************************/
 
