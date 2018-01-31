@@ -8,7 +8,7 @@
 #include "entry_controller\sources\ec_accessor.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_design_unit_importer.hpp"
 
-#include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
+#include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 
 /***************************************************************************/
 
@@ -16,11 +16,18 @@ namespace EntryController {
 
 /***************************************************************************/
 
+Accessor::Accessor( const std::shared_ptr< VlogDM::IAccessor > & _vlogDm )
+	:	m_vlogDm( _vlogDm )
+{
+
+}
+
+/***************************************************************************/
+
 void 
 Accessor::importVerilog( std::string const & _code )
 {
-	VlogDM::IAccessor & accessor = VlogDM::Accessor::getInstance();
-	accessor.reset();
+	m_vlogDm->reset();
 
 	antlr4::ANTLRInputStream stream( _code );
 
@@ -32,7 +39,7 @@ Accessor::importVerilog( std::string const & _code )
 
 	antlr4::tree::ParseTree * tree = parser.source_text();
 
-	EntryController::VlogImport::DesingUnitImporter importer( accessor );
+	EntryController::VlogImport::DesingUnitImporter importer( *m_vlogDm );
 
 	tree->accept( &importer );
 }

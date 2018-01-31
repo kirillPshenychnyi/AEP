@@ -47,5 +47,8 @@
     <ClCompile Include="sources\fixtures\vlog_import_ports_fixture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\tests\vlog_inner_declarations_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

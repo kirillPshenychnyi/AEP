@@ -6,13 +6,14 @@
 #include "vlog_data_model\api\vlog_dm_primary_literal.hpp"
 #include "vlog_data_model\api\vlog_dm_net_type.hpp"
 #include "vlog_data_model\api\vlog_dm_variable_type.hpp"
+#include "vlog_data_model\api\vlog_dm_design_unit.hpp"
 
 #include "vlog_data_model\api\vlog_dm_declared_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_range_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_expression_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_type_cast.hpp"
 
-#include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
+#include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 
 #include "vlog_import_tests\sources\fixtures\vlog_import_ports_fixture.hpp"
 
@@ -24,14 +25,18 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
+ContainerBootstrapper BaseFixture::m_bootstrapper;
+
+/***************************************************************************/
+
 PortsFixture &
 PortsFixture::expectUnit( std::string const & _unit )
 {
 	using namespace VlogDM;
 
-	IAccessor const & vlogDM = Accessor::getInstance();
-
-	auto unit = vlogDM.findUnit( _unit );
+	auto vlogDM = m_bootstrapper.m_container->resolve< IAccessor >();
+	
+	auto unit = vlogDM->findUnit( _unit );
 	REQUIRE( unit.is_initialized() );
 
 	m_currentUnit = unit.get_ptr();

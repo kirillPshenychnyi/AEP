@@ -6,10 +6,28 @@
 #include <boost\noncopyable.hpp>
 
 #include "vlog_import_tests\catch.hpp"
+#include "hypodermic\Hypodermic.h"
 
 /***************************************************************************/
 
 namespace VlogModelImportTests {
+
+/***************************************************************************/
+
+struct ContainerBootstrapper
+{
+
+/***************************************************************************/
+
+	ContainerBootstrapper();
+
+/***************************************************************************/
+
+	std::shared_ptr< Hypodermic::Container > m_container;
+
+/***************************************************************************/
+
+};
 
 /***************************************************************************/
 
@@ -27,6 +45,14 @@ public:
 
 	template< typename _TSource, typename _TTarget, template < typename > class _TVisitor >
 	static _TTarget const & checkCast( _TSource const& _source );
+
+/***************************************************************************/
+
+protected:
+
+/***************************************************************************/
+
+	static ContainerBootstrapper m_bootstrapper;
 
 /***************************************************************************/
 

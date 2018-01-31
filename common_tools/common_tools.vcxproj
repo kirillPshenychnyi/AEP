@@ -90,6 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -120,6 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,6 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,7 +155,6 @@
     <ClInclude Include="collections\tools_ordered_mapping.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="base_plugin.hpp" />
     <ClInclude Include="utils\visitor_cast.hpp" />
     <ClInclude Include="utils\convertors.hpp" />
   </ItemGroup>

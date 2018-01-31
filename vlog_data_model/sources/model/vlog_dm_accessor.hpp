@@ -13,7 +13,6 @@
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_type_factory.hpp"
 
-#include "common_tools\base_plugin.hpp"
 #include "common_tools\collections\tools_collection_utils.hpp"
 
 #include <boost\functional\hash\hash.hpp>
@@ -28,7 +27,7 @@ namespace VlogDM
 /***************************************************************************/
 
 class Accessor
-	:	public Tools::BasePlugin< IAccessor, Accessor >
+	:	public IAccessor
 {
 
 /***************************************************************************/
@@ -44,14 +43,6 @@ class Accessor
 	typedef
 		boost::unordered_set< std::unique_ptr< DesignUnit >, DesignUnitHasher, DesignUnitComparator >
 		UnitsSet;
-
-/***************************************************************************/
-
-	friend struct Tools::BasePlugin< IAccessor, Accessor >;
-
-/***************************************************************************/
-
-	Accessor() = default;
 
 /***************************************************************************/
 
