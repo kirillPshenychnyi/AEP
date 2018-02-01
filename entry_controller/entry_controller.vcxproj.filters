@@ -48,6 +48,15 @@
     <ClInclude Include="sources\ec_accessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_module_item_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_net_extractor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_base_net_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,6 +78,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\ec_accessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_module_item_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_net_extractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_base_net_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

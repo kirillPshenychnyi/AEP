@@ -2,6 +2,7 @@
 
 #include "entry_controller\sources\vlog_import\ec_vlog_design_unit_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_port_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_module_item_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
@@ -69,6 +70,18 @@ DesingUnitImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_p
 {	
 	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
 	portImporter.importPorts( *ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+DesingUnitImporter::visitNon_port_module_item( Verilog2001Parser::Non_port_module_itemContext * ctx )
+{
+	ModuleItemImporter itemImporter( getVlogDataModel() );
+
+	itemImporter.importItems( *ctx );
 
 	return antlrcpp::Any();
 }

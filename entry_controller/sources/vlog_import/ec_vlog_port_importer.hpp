@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_base_net_importer.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
 
@@ -13,41 +13,20 @@
 
 /***************************************************************************/
 
-namespace VlogDM
-{
-	namespace Writable
-	{
-		struct DesignUnit;
-	}
-
-	struct Dimension;
-	struct Type;
-}
-
-/***************************************************************************/
-
 namespace EntryController {
 namespace VlogImport {
 
 /***************************************************************************/
 
 class PortImporter
-	:	public BaseImporter
+	:	public BaseNetImporter< VlogDM::Writable::PortDeclaration >
 {
 
 /***************************************************************************/
 
 	typedef
-		std::unique_ptr< VlogDM::Writable::PortDeclaration >
-		PortDeclarationPtr;
-
-	typedef
-		std::vector< PortDeclarationPtr >
-		ExtractedDeclarations;
-	
-/***************************************************************************/
-
-	struct PortDeclarationInfoExtractror;
+		BaseNetImporter< VlogDM::Writable::PortDeclaration >
+		BaseClass;
 
 /***************************************************************************/
 
@@ -76,14 +55,6 @@ private:
 		,	VlogDM::PortDirection::Direction _direction 
 	);
 
-	std::unique_ptr< VlogDM::Dimension > createDimension( 
-			PortDeclarationInfoExtractror const& _extractor 
-	);
-
-	std::unique_ptr< VlogDM::Type > createType( 
-			PortDeclarationInfoExtractror const& _extractor 
-	);
-
 /***************************************************************************/
 
 	antlrcpp::Any visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext *ctx ) override;
@@ -95,16 +66,6 @@ private:
 	antlrcpp::Any visitInput_declaration( Verilog2001Parser::Input_declarationContext *ctx ) override;
 
 	antlrcpp::Any visitOutput_declaration( Verilog2001Parser::Output_declarationContext *ctx ) override;
-
-/***************************************************************************/
-
-private:
-
-/***************************************************************************/
-
-	ExtractedDeclarations m_extractedDeclarations;
-
-	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 /***************************************************************************/
 

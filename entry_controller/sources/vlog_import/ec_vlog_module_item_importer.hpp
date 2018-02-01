@@ -1,12 +1,9 @@
-#ifndef __EC_VLOG_DESIGN_UNIT_IMPORTER_HPP__
-#define __EC_VLOG_DESIGN_UNIT_IMPORTER_HPP__
+#ifndef __EC_VLOG_MODULE_ITEM_IMPORTER_HPP__
+#define __EC_VLOG_MODULE_ITEM_IMPORTER_HPP__
 
 /***************************************************************************/
 
 #include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
-#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
-
-#include <vector>
 
 /***************************************************************************/
 
@@ -15,7 +12,7 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-class DesingUnitImporter
+class ModuleItemImporter
 	:	public BaseImporter
 {
 
@@ -25,23 +22,23 @@ public:
 
 /***************************************************************************/
 
-	DesingUnitImporter( VlogDM::IAccessor & _accessor );
+	ModuleItemImporter( VlogDM::IAccessor & _accessor );
+	
+/***************************************************************************/
+
+	void importItems( Verilog2001Parser::Non_port_module_itemContext & _ctx );
 
 /***************************************************************************/
 
-	antlrcpp::Any visitModule_declaration( Verilog2001Parser::Module_declarationContext *ctx ) override;
-
-	antlrcpp::Any visitModule_item( Verilog2001Parser::Module_itemContext *ctx ) override;
-
-	antlrcpp::Any visitPort_declaration( Verilog2001Parser::Port_declarationContext *ctx ) override;
-
-	antlrcpp::Any visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext  *ctx ) override;
-
-	antlrcpp::Any visitNon_port_module_item( Verilog2001Parser::Non_port_module_itemContext *ctx ) override;
+private:
 
 /***************************************************************************/
 
-	std::unique_ptr< VlogDM::Writable::DesignUnit > m_currentUnit;
+	antlrcpp::Any visitModule_or_generate_item_declaration( 
+			Verilog2001Parser::Module_or_generate_item_declarationContext * ctx 
+	) override;
+
+	antlrcpp::Any visitNet_declaration( Verilog2001Parser::Net_declarationContext * ctx ) override;
 
 /***************************************************************************/
 
@@ -54,4 +51,4 @@ public:
 
 /***************************************************************************/
 
-#endif // !__EC_VLOG_DESIGN_UNIT_IMPORTER_HPP__
+#endif // !__EC_VLOG_MODULE_ITEM_IMPORTER_HPP__

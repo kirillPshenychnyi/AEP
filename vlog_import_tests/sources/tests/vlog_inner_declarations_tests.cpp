@@ -9,11 +9,11 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
-TEST_CASE_METHOD( PortsFixture, "simple inner wire", "[ports]" )
+TEST_CASE_METHOD( PortsFixture, "simple inner wire", "[vars]" )
 {
 	std::string code =
 		"module top (input a);	\n"
-		"	NOT u1 (a);			\n"
+		"	wire c ;			\n"
 		"endmodule				\n"
 		;
 
