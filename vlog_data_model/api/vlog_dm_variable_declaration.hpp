@@ -1,32 +1,22 @@
-#ifndef __VLOG_DM_DECLARATION_FACTORY_HPP__
-#define __VLOG_DM_DECLARATION_FACTORY_HPP__
+#ifndef __VLOG_DM_VARIABLE_DECLARATION_HPP__
+#define __VLOG_DM_VARIABLE_DECLARATION_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
-
-#include <boost\noncopyable.hpp>
+#include "vlog_data_model\api\vlog_dm_declaration.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-namespace Writable {
 
 /***************************************************************************/
 
-struct DeclarationFactory 
-	:	public boost::noncopyable
+struct VariableDeclaration
+	:	public Declaration
 {
 
 /***************************************************************************/
 
-	virtual Writable::PortDeclarationPtr newPortDeclaration( 
-			Location const & _location 
-	) const = 0;
-
-	virtual Writable::VariableDeclarationPtr newVariableDeclaration(
-			Location const & _location 
-	) const = 0;
 
 /***************************************************************************/
 
@@ -35,8 +25,7 @@ struct DeclarationFactory
 /***************************************************************************/
 
 }
-}
 
 /***************************************************************************/
 
-#endif // !_VLOG_DM_DECLARATION_FACTORY_HPP__
+#endif // !__VLOG_DM_VARIABLE_DECLARATION_HPP__

@@ -1,48 +1,53 @@
-#ifndef __VLOG_DM_DECLARATION_VISITOR_HPP__
-#define __VLOG_DM_DECLARATION_VISITOR_HPP__
+#ifndef __VLOG_VARIABLE_IMPORTER_HPP__
+#define __VLOG_VARIABLE_IMPORTER_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "entry_controller\sources\vlog_import\ec_vlog_base_net_importer.hpp"
 
-#include "common_tools\utils\visitor_cast.hpp"
-
-/***************************************************************************/
-
-namespace VlogDM{
+#include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
 
 /***************************************************************************/
 
-struct PortDeclaration;
-struct VariableDeclaration;
+namespace EntryController {
+namespace VlogImport {
 
 /***************************************************************************/
 
-struct DeclarationVisitor
-	:	public boost::noncopyable
+class VariableImporter 
+	:	public BaseNetImporter< VlogDM::Writable::VariableDeclaration >
 {
 
 /***************************************************************************/
 
-	virtual void visit( PortDeclaration const& _port ) = 0;
-
-	virtual void visit( VariableDeclaration const& _var ) = 0;
-
-/***************************************************************************/
-
-};
+	typedef
+		BaseNetImporter< VlogDM::Writable::VariableDeclaration >
+		BaseClass;
 
 /***************************************************************************/
 
-struct DeclarationDefaultVisitor
-	:	public DeclarationVisitor
-{
+public:
 
 /***************************************************************************/
 
-	void visit( PortDeclaration const& _port ) override {}
+	VariableImporter(
+			VlogDM::IAccessor & _accessor
+		,	VlogDM::Writable::DesignUnit & _targetUnit 
+	);
 
-	void visit( VariableDeclaration const& _var ) override {}
+/***************************************************************************/
+
+	void importVars( Verilog2001Parser::Net_declarationContext & _ctx );
+	
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	antlrcpp::Any visitNet_declaration( 
+			Verilog2001Parser::Net_declarationContext * _ctx 
+	) override;
 
 /***************************************************************************/
 
@@ -51,7 +56,8 @@ struct DeclarationDefaultVisitor
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // __VLOG_DM_DECLARATION_VISITOR_HPP__
+#endif // !__VLOG_VARIABLE_IMPORTER_HPP__

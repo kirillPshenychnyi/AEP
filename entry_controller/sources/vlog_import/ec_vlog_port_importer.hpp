@@ -9,8 +9,6 @@
 
 #include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace EntryController {

@@ -1,55 +1,53 @@
-#ifndef __VLOG_DM_WRITABLE_DECLARATION_HPP__
-#define __VLOG_DM_WRITABLE_DECLARATION_HPP__
+#ifndef __VLOG_DM_VARIABLE_DECLARATION_IMPL_HPP__
+#define __VLOG_DM_VARIABLE_DECLARATION_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_port_declaration.hpp"
-#include "vlog_data_model\api\vlog_dm_variable_declaration.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_declaration_visitor.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
+
+#include "vlog_data_model\sources\model\vlog_dm_declaration_impl.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
 
-	struct Declared;
-
-namespace Writable {
-
 /***************************************************************************/
 
-template < typename _BaseClass >
-struct Declaration 
-	:	public _BaseClass
+class VariableDeclarationImpl
+	:	public DeclarationImpl< Writable::VariableDeclaration >
 {
 
 /***************************************************************************/
+
+	typedef
+		DeclarationImpl< Writable::VariableDeclaration >
+		BaseClass;
 	
-	virtual void addDeclared( std::unique_ptr< Declared > _declared ) = 0;
+/***************************************************************************/
+
+public:
 
 /***************************************************************************/
 
-};
+	VariableDeclarationImpl( Location const & _location )
+		:	BaseClass( _location )
+	{
+	}
+	
+	void accept( DeclarationVisitor & _visitor ) const override
+	{
+		_visitor.visit( *this );
+	}
 
 /***************************************************************************/
-
-struct PortDeclaration
-	:	Declaration< VlogDM::PortDeclaration >
-{
-
-};
-
-/***************************************************************************/
-
-struct VariableDeclaration
-	:	Declaration< VlogDM::VariableDeclaration >
-{
 
 };
 
 /***************************************************************************/
 
 }
-}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_WRITABLE_DECLARATION_HPP__
+#endif // !__VLOG_DM_VARIABLE_DECLARATION_IMPL_HPP__

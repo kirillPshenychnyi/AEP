@@ -163,6 +163,8 @@ BaseNetImporter< _Declaration >::createDimension(
 
 template class BaseNetImporter< VlogDM::Writable::PortDeclaration >;
 
+template class BaseNetImporter< VlogDM::Writable::VariableDeclaration >;
+
 /***************************************************************************/
 
 }

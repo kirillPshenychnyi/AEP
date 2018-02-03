@@ -1,51 +1,42 @@
-#ifndef __EC_VLOG_MODULE_ITEM_IMPORTER_HPP__
-#define __EC_VLOG_MODULE_ITEM_IMPORTER_HPP__
+#ifndef __VLOG_DM_VARIABLE_IMPL_HPP__
+#define __VLOG_DM_VARIABLE_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\api\vlog_dm_variable.hpp"
 
-#include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
-
-/***************************************************************************/
-
-namespace EntryController {
-namespace VlogImport {
+#include "vlog_data_model\sources\model\vlog_dm_dimensional_object_impl.hpp"
 
 /***************************************************************************/
 
-class ModuleItemImporter
-	:	public BaseImporter
-{
+namespace VlogDM {
+
+/***************************************************************************/
+
+class VariableImpl
+	:	public DimensionalObjectImpl< Variable >
+{ 
+
+/***************************************************************************/
+
+	typedef
+		DimensionalObjectImpl< Variable >
+		BaseClass;
 
 /***************************************************************************/
 
 public:
 
 /***************************************************************************/
-
-	ModuleItemImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit 
-	);
 	
-/***************************************************************************/
-
-	void importItems( Verilog2001Parser::Non_port_module_itemContext & _ctx );
-
-/***************************************************************************/
-
-private:
-
-/***************************************************************************/
-
-	antlrcpp::Any visitModule_or_generate_item_declaration( 
-		Verilog2001Parser::Module_or_generate_item_declarationContext * ctx 
-	) override;
-
-	antlrcpp::Any visitNet_declaration( 
-		Verilog2001Parser::Net_declarationContext * ctx 
-	) override;
+	VariableImpl( 
+			Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
+		,	std::string const & _name
+		,	Location const & _location
+		,	std::unique_ptr< Dimension > _dimension
+		,	bool _isSigned
+	);
 
 /***************************************************************************/
 
@@ -53,7 +44,17 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::Writable::DesignUnit & m_targetUnit;
+	bool isSigned() const override;
+
+	void accept( DeclaredVisitor& _visitor ) const override;
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	const bool m_isSigned;
 
 /***************************************************************************/
 
@@ -61,9 +62,17 @@ private:
 
 /***************************************************************************/
 
-}
+inline
+bool
+VariableImpl::isSigned() const
+{
+	return m_isSigned;
 }
 
 /***************************************************************************/
 
-#endif // !__EC_VLOG_MODULE_ITEM_IMPORTER_HPP__
+}
+
+/***************************************************************************/
+
+#endif // !__VLOG_DM_VARIABLE_IMPL_HPP__

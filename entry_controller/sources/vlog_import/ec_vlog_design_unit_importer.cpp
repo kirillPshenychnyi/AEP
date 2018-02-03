@@ -79,7 +79,7 @@ DesingUnitImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_p
 antlrcpp::Any 
 DesingUnitImporter::visitNon_port_module_item( Verilog2001Parser::Non_port_module_itemContext * ctx )
 {
-	ModuleItemImporter itemImporter( getVlogDataModel() );
+	ModuleItemImporter itemImporter( getVlogDataModel(), *m_currentUnit );
 
 	itemImporter.importItems( *ctx );
 

@@ -39,6 +39,8 @@
 
 *.db-shm
 
+*.txt
+
 entry_controller/Debug/
 
 common_tools/Debug/

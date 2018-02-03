@@ -150,13 +150,14 @@
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_base_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_ports_fixture.hpp" />
+    <ClInclude Include="sources\fixtures\vlog_import_test_base_net_fixture.hpp" />
+    <ClInclude Include="sources\fixtures\vlog_import_test_variables_fixture.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\fixtures\vlog_import_base_fixture.cpp" />
-    <ClCompile Include="sources\fixtures\vlog_import_ports_fixture.cpp" />
-    <ClCompile Include="sources\tests\vlog_inner_declarations_tests.cpp" />
+    <ClCompile Include="sources\tests\vlog_variables_tests.cpp" />
     <ClCompile Include="sources\tests\vlog_ports_test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

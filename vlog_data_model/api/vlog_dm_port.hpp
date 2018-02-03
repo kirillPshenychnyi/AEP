@@ -6,7 +6,6 @@
 #include "vlog_data_model\api\vlog_dm_declared.hpp"
 #include "vlog_data_model\api\vlog_dm_dimensional.hpp"
 #include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
-#include "vlog_data_model\api\vlog_dm_net_type.hpp"
 
 /***************************************************************************/
 

@@ -30,6 +30,12 @@
     <ClInclude Include="sources\fixtures\vlog_import_ports_fixture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\fixtures\vlog_import_test_base_net_fixture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\fixtures\vlog_import_test_variables_fixture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -44,10 +50,7 @@
     <ClCompile Include="sources\tests\vlog_ports_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\fixtures\vlog_import_ports_fixture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\tests\vlog_inner_declarations_tests.cpp">
+    <ClCompile Include="sources\tests\vlog_variables_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

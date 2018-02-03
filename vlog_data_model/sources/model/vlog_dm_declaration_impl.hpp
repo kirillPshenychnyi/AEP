@@ -3,14 +3,17 @@
 
 /***************************************************************************/
 
-#include "api\vlog_dm_declaration.hpp"
-#include "api\vlog_dm_declared.hpp"
-#include "api\vlog_dm_location.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
+#include "vlog_data_model\api\vlog_dm_declaration.hpp"
+#include "vlog_data_model\api\vlog_dm_declared.hpp"
+#include "vlog_data_model\api\vlog_dm_location.hpp"
 
 #include "sources\model\vlog_dm_located_impl.hpp"
 
-#include <boost\unordered_set.hpp>
 #include "common_tools\collections\tools_collection_utils.hpp"
+
+#include <boost\unordered_set.hpp>
 
 /***************************************************************************/
 
@@ -30,15 +33,15 @@ class DeclarationImpl
 		BaseClass;
 
 	typedef
-		Tools::Collections::NamedHasher< Declared::Ptr >
+		Tools::Collections::NamedHasher< DeclaredPtr >
 		DeclaredHasher;
 
 	typedef
-		Tools::Collections::NamedComparator< Declared::Ptr >
+		Tools::Collections::NamedComparator< DeclaredPtr >
 		DeclaredComparator;
 
 	typedef
-		boost::unordered_set< Declared::Ptr, DeclaredHasher, DeclaredComparator >
+		boost::unordered_set< DeclaredPtr, DeclaredHasher, DeclaredComparator >
 		Declareds;
 
 /***************************************************************************/

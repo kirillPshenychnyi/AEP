@@ -2,24 +2,15 @@
 
 #include "entry_controller\sources\vlog_import\ec_vlog_port_importer.hpp"
 
-#include "entry_controller\sources\vlog_import\ec_vlog_net_extractor.hpp"
-
-#include "vlog_data_model\api\vlog_dm_net_type.hpp"
-#include "vlog_data_model\api\vlog_dm_variable_type.hpp"
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
+#include "vlog_data_model\api\vlog_dm_type.hpp"
 #include "vlog_data_model\api\vlog_dm_port.hpp"
 #include "vlog_data_model\api\vlog_dm_port_declaration.hpp"
 #include "vlog_data_model\api\vlog_dm_dimension.hpp"
-#include "vlog_data_model\api\vlog_dm_primary_literal.hpp"
-#include "vlog_data_model\api\vlog_dm_range.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declaration_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
-#include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
-#include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
-#include "vlog_data_model\ih\writable\vlog_dm_type_factory.hpp"
-#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
 #include <boost/lexical_cast.hpp>
 
@@ -131,12 +122,6 @@ PortImporter::importPorts(
 {
 	using namespace VlogDM;
 
-	NetExtractor extractor( getVlogDataModel() );
-	extractor.extract( _context );
-	
-	Writable::PortDeclaration & lastDeclaration 
-		= *m_extractedDeclarations.back();
-	
 	Writable::DeclaredFactory const& declaredFactory 
 		=	getVlogDataModel().getDeclaredFactory();
 

@@ -3,16 +3,9 @@
 
 /***************************************************************************/
 
-#include "api\vlog_dm_port.hpp"
+#include "vlog_data_model\api\vlog_dm_port.hpp"
 
-#include "sources\model\vlog_dm_dimensional_object_impl.hpp"
-
-/***************************************************************************/
-
-namespace VlogDM
-{
-	struct Dimension;
-}
+#include "vlog_data_model\sources\model\vlog_dm_dimensional_object_impl.hpp"
 
 /***************************************************************************/
 

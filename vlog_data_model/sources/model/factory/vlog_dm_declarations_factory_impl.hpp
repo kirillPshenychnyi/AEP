@@ -21,7 +21,11 @@ public:
 
 /***************************************************************************/
 
-	std::unique_ptr< Writable::PortDeclaration > newPortDeclaration( 
+	Writable::PortDeclarationPtr newPortDeclaration( 
+			Location const & _location 
+	) const override;
+
+	Writable::VariableDeclarationPtr newVariableDeclaration( 
 			Location const & _location 
 	) const override;
 

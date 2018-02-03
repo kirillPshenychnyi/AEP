@@ -25,12 +25,6 @@ struct Declared
 {
 
 /***************************************************************************/
-
-	typedef
-		std::unique_ptr< Declared >
-		Ptr;
-
-/***************************************************************************/
 		
 	virtual Declaration const & getDeclaration() const = 0;
 

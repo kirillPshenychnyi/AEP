@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "vlog_data_model\sources\model\vlog_dm_port_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_variable_impl.hpp"
 
 #include "vlog_data_model\api\vlog_dm_type.hpp"
 
@@ -12,13 +12,13 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-PortImpl::PortImpl( 
-		Declaration const & _declaration
-	,	std::unique_ptr< Type > _type
-	,	std::string const & _name
-	,	Location const & _location
-	,	std::unique_ptr< Dimension > _dimension
-	,	PortDirection::Direction _direction 
+VariableImpl::VariableImpl( 
+			Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
+		,	std::string const & _name
+		,	Location const & _location
+		,	std::unique_ptr< Dimension > _dimension
+		,	bool _isSigned
 	)
 	:	BaseClass( 
 				_declaration
@@ -27,14 +27,13 @@ PortImpl::PortImpl(
 			,	_location
 			,	std::move( _dimension )
 		)
-	,	m_direction( _direction )
-{
-}
+	,	m_isSigned( _isSigned )
+{}
 
 /***************************************************************************/
 
 void 
-PortImpl::accept( DeclaredVisitor & _visitor ) const
+VariableImpl::accept( DeclaredVisitor & _visitor ) const
 {
 	_visitor.visit( *this );
 }

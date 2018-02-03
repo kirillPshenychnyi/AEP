@@ -21,14 +21,23 @@ public:
 
 /***************************************************************************/
 
-	virtual std::unique_ptr< Port > newPort ( 
+	PortPtr newPort ( 
 			Declaration const & _declaration
 		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	PortDirection::Direction _direction
 		,	std::unique_ptr< Dimension > _dimension
-	) const;
+	) const override;
+
+	VariablePtr newVariable ( 
+			VlogDM::Declaration const & _declaration
+		,	std::unique_ptr< Type > _type
+		,	std::string const & _name
+		,	Location const & _location
+		,	bool _isSigned
+		,	std::unique_ptr< Dimension > _dimension
+	) const override;
 
 /***************************************************************************/
 

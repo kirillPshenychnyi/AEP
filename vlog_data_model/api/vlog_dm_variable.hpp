@@ -1,32 +1,26 @@
-#ifndef __VLOG_DM_DECLARATION_FACTORY_HPP__
-#define __VLOG_DM_DECLARATION_FACTORY_HPP__
+#ifndef __VLOG_DM_VARIABLE_HPP__
+#define __VLOG_DM_VARIABLE_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
-
-#include <boost\noncopyable.hpp>
+#include "vlog_data_model\api\vlog_dm_declared.hpp"
+#include "vlog_data_model\api\vlog_dm_dimensional.hpp"
+#include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-namespace Writable {
 
 /***************************************************************************/
 
-struct DeclarationFactory 
-	:	public boost::noncopyable
+struct Variable
+	:	public Declared
+	,	public Dimensional
 {
 
 /***************************************************************************/
 
-	virtual Writable::PortDeclarationPtr newPortDeclaration( 
-			Location const & _location 
-	) const = 0;
-
-	virtual Writable::VariableDeclarationPtr newVariableDeclaration(
-			Location const & _location 
-	) const = 0;
+	virtual bool isSigned() const = 0;
 
 /***************************************************************************/
 
@@ -35,8 +29,7 @@ struct DeclarationFactory
 /***************************************************************************/
 
 }
-}
 
 /***************************************************************************/
 
-#endif // !_VLOG_DM_DECLARATION_FACTORY_HPP__
+#endif // !__VLOG_DM_VARIABLE_HPP__
