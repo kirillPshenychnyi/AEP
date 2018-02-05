@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_DESIGN_UNIT_FACTORY_IMPL_HPP__
-#define __VLOG_DM_DESIGN_UNIT_FACTORY_IMPL_HPP__
+#ifndef __VLOG_DM_MULTIDIMENSIOANAL_RANGE_HPP__
+#define __VLOG_DM_MULTIDIMENSIOANAL_RANGE_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\ih\writable\vlog_dm_design_unit_factory.hpp"
+#include "vlog_data_model\api\vlog_dm_range.hpp"
 
 /***************************************************************************/
 
@@ -11,27 +11,23 @@ namespace VlogDM
 {
 
 /***************************************************************************/
-	
-class DesignUnitFactoryImpl 
-	:	public Writable::DesignUnitFactory
+
+struct MultidimensionalRange
+	:	public Range
 {
 
 /***************************************************************************/
-		
-public:
 
-/***************************************************************************/
+	virtual int getRangesCount() const = 0;
 
-	virtual Writable::DesignUnitPtr newDesignUnit( 
-			std::string const & _name
-		,	Location const & _location 
-	) const override;
+	virtual Range const & getRange( int _idx ) const = 0;
 
 /***************************************************************************/
 
 };
 
 /***************************************************************************/
+
 }
 
-#endif 
+#endif // !__VLOG_DM_MULTIDIMENSIOANAL_RANGE_HPP__

@@ -30,8 +30,8 @@ public:
 
 /***************************************************************************/
 
-	VariableDeclarationImpl( Location const & _location )
-		:	BaseClass( _location )
+	VariableDeclarationImpl( Location const & _location, TypePtr _type )
+		:	BaseClass( _location, std::move( _type ) )
 	{
 	}
 	

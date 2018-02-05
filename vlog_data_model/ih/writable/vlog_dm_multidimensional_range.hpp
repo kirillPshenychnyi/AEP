@@ -1,33 +1,24 @@
-#ifndef __VLOG_DM_DECLARED_HPP__
-#define __VLOG_DM_DECLARED_HPP__
+#ifndef __VLOG_DM_WRITABLE_MULTIDIMENSIONAL_RANGE_HPP__
+#define __VLOG_DM_WRITABLE_MULTIDIMENSIONAL_RANGE_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
-#include "vlog_data_model\api\vlog_dm_named.hpp"
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\api\vlog_dm_multidimensional_range.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace VlogDM {
+namespace Writable {
+
+/***************************************************************************/
+
+struct MultidimensionalRange
+	:	public VlogDM::MultidimensionalRange
 {
 
 /***************************************************************************/
 
-struct DeclaredVisitor;
-
-/***************************************************************************/
-	
-struct Declared
-	:	public Located
-	,	public Named
-{
-
-/***************************************************************************/
-		
-	virtual Declaration const & getDeclaration() const = 0;
-
-	virtual void accept( DeclaredVisitor & _visitor ) const = 0;
+	virtual void addRange( std::unique_ptr< Range > _range ) = 0;
 
 /***************************************************************************/
 
@@ -36,7 +27,8 @@ struct Declared
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // __VLOG_DM_DECLARED_HPP__
+#endif // !__VLOG_DM_WRITABLE_MULTIDIMENSIONAL_RANGE_HPP__

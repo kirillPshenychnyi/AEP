@@ -53,9 +53,12 @@ private:
 		,	VlogDM::PortDirection::Direction _direction 
 	);
 
-/***************************************************************************/
+	VlogDM::Writable::PortDeclarationPtr createDeclaration( 
+			VlogDM::Location const & _location
+		,	VlogDM::TypePtr _type 
+	) override;
 
-	antlrcpp::Any visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext *ctx ) override;
+/***************************************************************************/
 
 	antlrcpp::Any visitPort_declaration( Verilog2001Parser::Port_declarationContext *ctx ) override;
 

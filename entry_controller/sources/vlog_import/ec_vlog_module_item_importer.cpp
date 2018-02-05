@@ -28,6 +28,14 @@ ModuleItemImporter::importItems( Verilog2001Parser::Non_port_module_itemContext 
 
 /***************************************************************************/
 
+void 
+ModuleItemImporter::importItems( Verilog2001Parser::Module_or_generate_itemContext & _ctx )
+{
+	acceptEachChildContext( _ctx );
+}
+
+/***************************************************************************/
+
 antlrcpp::Any 
 ModuleItemImporter::visitModule_or_generate_item_declaration( 
 			Verilog2001Parser::Module_or_generate_item_declarationContext *ctx 
@@ -42,9 +50,26 @@ ModuleItemImporter::visitModule_or_generate_item_declaration(
 antlrcpp::Any 
 ModuleItemImporter::visitNet_declaration( Verilog2001Parser::Net_declarationContext * ctx )
 {
+	return importVar( *ctx );
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+ModuleItemImporter::visitReg_declaration( Verilog2001Parser::Reg_declarationContext * ctx )
+{
+	return importVar( *ctx );
+}
+
+/***************************************************************************/
+
+template< typename _Context >
+antlrcpp::Any
+ModuleItemImporter::importVar( _Context & _ctx )
+{
 	VariableImporter varImporter( getVlogDataModel(), m_targetUnit );
 
-	varImporter.importVars( *ctx );
+	varImporter.importVars( _ctx );
 
 	return antlrcpp::Any();
 }

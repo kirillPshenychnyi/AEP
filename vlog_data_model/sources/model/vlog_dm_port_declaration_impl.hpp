@@ -30,8 +30,8 @@ public:
 
 /***************************************************************************/
 
-	PortDeclarationImpl( Location const & _location )
-		:	BaseClass( _location )
+	PortDeclarationImpl( Location const & _location, TypePtr _type )
+		:	BaseClass( _location, std::move( _type ) )
 	{
 	}
 	

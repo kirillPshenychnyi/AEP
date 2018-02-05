@@ -33,7 +33,6 @@ public:
 
 	DimensionalObjectImpl( 
 			Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	std::unique_ptr< Dimension > _dimension 
@@ -49,12 +48,11 @@ template< typename _BaseClass >
 inline
 DimensionalObjectImpl< _BaseClass >::DimensionalObjectImpl( 
 		Declaration const & _declaration
-	,	std::unique_ptr< Type > _type
 	,	std::string const & _name
 	,	Location const & _location
 	,	std::unique_ptr< Dimension > _dimension 
 	)
-	:	BaseClass( _declaration, std::move( _type ), _name, _location )
+	:	BaseClass( _declaration, _name, _location )
 {
 	setDimension( std::move( _dimension ) );
 }

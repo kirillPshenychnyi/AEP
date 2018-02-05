@@ -1,5 +1,5 @@
-#ifndef __VLOG_DM_PACKED_DIMENSION_HPP__
-#define __VLOG_DM_PACKED_DIMENSION_HPP__
+#ifndef __VLOG_DM_UPACKED_DIMENSION_HPP__
+#define __VLOG_DM_UPACKED_DIMENSION_HPP__
 
 /***************************************************************************/
 
@@ -12,7 +12,7 @@ namespace VlogDM
 
 /***************************************************************************/
 
-struct PackedDimension
+struct UnpackedDimension
 	:	public Dimension
 {
 
@@ -22,4 +22,4 @@ struct PackedDimension
 
 }
 
-#endif // !__VLOG_DM_PACKED_DIMENSION_HPP__
+#endif // !__VLOG_DM_UPACKED_DIMENSION_HPP__

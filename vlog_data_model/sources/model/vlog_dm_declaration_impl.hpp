@@ -3,11 +3,10 @@
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
-
 #include "vlog_data_model\api\vlog_dm_declaration.hpp"
 #include "vlog_data_model\api\vlog_dm_declared.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
+#include "vlog_data_model\api\vlog_dm_type.hpp"
 
 #include "sources\model\vlog_dm_located_impl.hpp"
 
@@ -50,13 +49,15 @@ public:
 
 /***************************************************************************/
 
-	DeclarationImpl( Location const & _location );
+	DeclarationImpl( Location const & _location, TypePtr _type );
 
 /***************************************************************************/
 
 	boost::optional< Declared const & > findDeclared( 
 			std::string const & _declared 
 	) const override;
+
+	Type const & getType() const override;
 
 	int getDeclaredsCount() const override;
 
@@ -66,7 +67,7 @@ protected:
 
 /***************************************************************************/
 
-	void addDeclared( std::unique_ptr< Declared > _declared ) override;
+	void addDeclared( DeclaredPtr _declared ) override;
 
 /***************************************************************************/
 
@@ -76,6 +77,8 @@ private:
 
 	Declareds m_declareds;
 
+	TypePtr m_type;
+
 /***************************************************************************/
 
 };
@@ -83,8 +86,12 @@ private:
 /***************************************************************************/
 
 template< typename _Writable >
-DeclarationImpl< _Writable >::DeclarationImpl( Location const & _location )	
+DeclarationImpl< _Writable >::DeclarationImpl(
+		Location const & _location
+	,	std::unique_ptr< Type > _type
+	)	
 	:	BaseClass( _location )
+	,	m_type( std::move( _type ) )
 {
 }
 
@@ -101,6 +108,15 @@ DeclarationImpl< _Writable >::findDeclared( std::string const & _declared ) cons
 		?	boost::optional< Declared const & >()
 		:	**value;
 
+}
+
+/***************************************************************************/
+
+template< typename _Writable >
+inline Type const & 
+DeclarationImpl< _Writable >::getType() const
+{
+	return *m_type;
 }
 
 /***************************************************************************/

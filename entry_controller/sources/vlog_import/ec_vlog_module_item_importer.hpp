@@ -32,6 +32,8 @@ public:
 /***************************************************************************/
 
 	void importItems( Verilog2001Parser::Non_port_module_itemContext & _ctx );
+	
+	void importItems( Verilog2001Parser::Module_or_generate_itemContext & _ctx );
 
 /***************************************************************************/
 
@@ -46,6 +48,15 @@ private:
 	antlrcpp::Any visitNet_declaration( 
 		Verilog2001Parser::Net_declarationContext * ctx 
 	) override;
+
+	antlrcpp::Any visitReg_declaration( 
+		Verilog2001Parser::Reg_declarationContext * ctx 
+	) override;
+
+/***************************************************************************/
+
+	template< typename _Context >
+	antlrcpp::Any importVar( _Context & _ctx );
 
 /***************************************************************************/
 

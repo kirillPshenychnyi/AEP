@@ -32,7 +32,6 @@ public:
 
 	PortImpl( 
 			Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	std::unique_ptr< Dimension > _dimension

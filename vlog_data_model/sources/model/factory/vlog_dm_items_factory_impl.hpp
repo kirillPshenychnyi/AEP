@@ -21,16 +21,37 @@ public:
 
 /***************************************************************************/
 
-	std::unique_ptr< Dimension > newPackedDimension( 
+	DimensionPtr newPackedDimension( 
 			Location const& _location
-		,	std::unique_ptr< Range > _range
+		,	RangePtr _range
 	) const override;
 
-	std::unique_ptr< Range > newPartSelectRange( 
+	DimensionPtr newUnackedDimension( 
 			Location const& _location
-		,	std::unique_ptr< Expression > _lhs
-		,	std::unique_ptr< Expression > _rhs
+		,	RangePtr _range
 	) const override;
+
+	RangePtr newPartSelectRange( 
+			Location const& _location
+		,	ExpressionPtr _lhs
+		,	ExpressionPtr _rhs
+	) const override;
+
+	Writable::MultidimensionalRangePtr newMultidimensionalRange(
+		Location const& _location
+	) const override;
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	template< typename _Dimension >
+	DimensionPtr newDimension(
+			Location const& _location
+		,	RangePtr _range
+	) const;
 
 /***************************************************************************/
 

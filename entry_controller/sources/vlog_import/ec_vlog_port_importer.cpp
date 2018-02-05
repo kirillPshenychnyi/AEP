@@ -53,14 +53,6 @@ PortImporter::importPorts( const Verilog2001Parser::List_of_port_declarationsCon
 
 /***************************************************************************/
 
-antlrcpp::Any
-PortImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext * ctx )
-{
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
 antlrcpp::Any 
 PortImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
 {
@@ -70,9 +62,9 @@ PortImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext 
 			{
 				VlogDM::Location location = createLocation( *ctx );
 
-				m_extractedDeclarations.emplace_back(
-						getVlogDataModel().getDeclarationFactory().newPortDeclaration( location )
-				);
+				//m_extractedDeclarations.emplace_back(
+				//		getVlogDataModel().getDeclarationFactory().newPortDeclaration( location )
+				//);
 
 				_tree.accept( this );
 			}
@@ -129,7 +121,6 @@ PortImporter::importPorts(
 			_context 
 		,	[ & ]( 
 					Declaration & _declaration
-				,	TypePtr _type
 				,	DimensionPtr _dimension
 				,	NetExtractor::NetItem _portItem
 			)
@@ -137,7 +128,6 @@ PortImporter::importPorts(
 				return
 					declaredFactory.newPort(
 							_declaration
-						,	std::move( _type )
 						,	_portItem.first
 						,	_portItem.second
 						,	_direction
@@ -145,6 +135,21 @@ PortImporter::importPorts(
 					);
 			}
 	);
+}
+
+/***************************************************************************/
+
+VlogDM::Writable::PortDeclarationPtr
+PortImporter::createDeclaration( 
+		VlogDM::Location const & _location
+	,	VlogDM::TypePtr _type 
+	) 
+{
+	return 
+		getVlogDataModel().getDeclarationFactory().newPortDeclaration( 
+				_location
+			,	std::move( _type ) 
+		);
 }
 
 /***************************************************************************/

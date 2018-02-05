@@ -6,11 +6,11 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_net_extractor.hpp"
 
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
 #include "vlog_data_model\ih\writable\vlog_dm_declaration.hpp"
 
 #include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
-
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 #include <boost\function.hpp>
 
@@ -40,7 +40,6 @@ class BaseNetImporter
 		boost::function< 
 			VlogDM::DeclaredPtr( 
 					VlogDM::Declaration &
-				,	VlogDM::TypePtr
 				,	VlogDM::DimensionPtr
 				,	NetExtractor::NetItem 
 			) 
@@ -69,17 +68,10 @@ protected:
 
 /***************************************************************************/
 
-private:
-
-/***************************************************************************/
-
-	VlogDM::DimensionPtr createDimension( 
-			NetExtractor const& _extractor 
-	);
-
-	VlogDM::TypePtr createType( 
-			NetExtractor const& _extractor 
-	);
+	virtual DeclarationPtr createDeclaration( 
+			VlogDM::Location const & _location
+		,	VlogDM::TypePtr _type 
+	) = 0;
 
 /***************************************************************************/
 

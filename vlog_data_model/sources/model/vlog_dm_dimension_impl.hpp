@@ -6,7 +6,10 @@
 #include "common_tools\utils\convertors.hpp"
 
 #include "vlog_data_model\api\vlog_dm_range.hpp"
+
 #include "vlog_data_model\api\vlog_dm_packed_dimension.hpp"
+#include "vlog_data_model\api\vlog_dm_unpacked_dimension.hpp"
+
 #include "vlog_data_model\api\vlog_dm_dimension_visitor.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
@@ -79,6 +82,40 @@ public:
 /***************************************************************************/
 
 	PackedDimensionImpl( 
+			Location const & _location
+		,	std::unique_ptr< Range > _range 
+		)
+		:	BaseClass( _location, std::move( _range ) )
+	{}
+
+	void accept( DimensionVisitor & _visitor ) const override
+	{
+		_visitor.visit( *this );
+	}
+
+/***************************************************************************/
+
+};
+
+/***************************************************************************/
+
+class UnpackedDimensionImpl
+	:	public DimensionBaseImpl< UnpackedDimension >
+{
+
+/***************************************************************************/
+
+	typedef
+		DimensionBaseImpl< UnpackedDimension >
+		BaseClass;
+
+/***************************************************************************/
+
+public:
+
+/***************************************************************************/
+
+	UnpackedDimensionImpl( 
 			Location const & _location
 		,	std::unique_ptr< Range > _range 
 		)

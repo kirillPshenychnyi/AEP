@@ -25,7 +25,9 @@ DesingUnitImporter::DesingUnitImporter( VlogDM::IAccessor & _accessor )
 /***************************************************************************/
 
 antlrcpp::Any
-DesingUnitImporter::visitModule_declaration( Verilog2001Parser::Module_declarationContext * ctx )
+DesingUnitImporter::visitModule_declaration(
+		Verilog2001Parser::Module_declarationContext * ctx 
+	)
 {
 	using namespace VlogDM;
 	
@@ -46,7 +48,9 @@ DesingUnitImporter::visitModule_declaration( Verilog2001Parser::Module_declarati
 /***************************************************************************/
 
 antlrcpp::Any 
-DesingUnitImporter::visitModule_item( Verilog2001Parser::Module_itemContext *ctx ) 
+DesingUnitImporter::visitModule_item(
+		Verilog2001Parser::Module_itemContext *ctx 
+	)	 
 {	
 	acceptEachChildContext( *ctx );
 
@@ -55,7 +59,9 @@ DesingUnitImporter::visitModule_item( Verilog2001Parser::Module_itemContext *ctx
 
 /***************************************************************************/
 
-antlrcpp::Any DesingUnitImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
+antlrcpp::Any DesingUnitImporter::visitPort_declaration(
+		Verilog2001Parser::Port_declarationContext * ctx 
+	)
 {
 	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
 	portImporter.importPorts( *ctx );
@@ -66,7 +72,9 @@ antlrcpp::Any DesingUnitImporter::visitPort_declaration( Verilog2001Parser::Port
 /***************************************************************************/
 
 antlrcpp::Any
-DesingUnitImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_port_declarationsContext * ctx )
+DesingUnitImporter::visitList_of_port_declarations( 
+		Verilog2001Parser::List_of_port_declarationsContext * ctx 
+	)
 {	
 	PortImporter portImporter( getVlogDataModel(), *m_currentUnit );
 	portImporter.importPorts( *ctx );
@@ -77,11 +85,32 @@ DesingUnitImporter::visitList_of_port_declarations( Verilog2001Parser::List_of_p
 /***************************************************************************/
 
 antlrcpp::Any 
-DesingUnitImporter::visitNon_port_module_item( Verilog2001Parser::Non_port_module_itemContext * ctx )
+DesingUnitImporter::visitModule_or_generate_item( 
+		Verilog2001Parser::Module_or_generate_itemContext *ctx
+	)
+{
+	return importItem( *ctx );
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+DesingUnitImporter::visitNon_port_module_item(
+		Verilog2001Parser::Non_port_module_itemContext * ctx 
+	)
+{
+	return importItem( *ctx );
+}
+
+/***************************************************************************/
+
+template< typename _Context >
+antlrcpp::Any 
+DesingUnitImporter::importItem( _Context & _ctx )
 {
 	ModuleItemImporter itemImporter( getVlogDataModel(), *m_currentUnit );
 
-	itemImporter.importItems( *ctx );
+	itemImporter.importItems( _ctx );
 
 	return antlrcpp::Any();
 }

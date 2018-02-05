@@ -25,7 +25,6 @@ struct DeclaredFactory
 
 	virtual PortPtr newPort ( 
 			VlogDM::Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	PortDirection::Direction _direction
@@ -34,7 +33,6 @@ struct DeclaredFactory
 
 	virtual VariablePtr newVariable ( 
 			VlogDM::Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	bool _isSigned

@@ -3,18 +3,9 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-/***************************************************************************/
-
-namespace VlogDM
-{
-	struct Dimension;
-	struct Range;
-	struct Expression;
-	struct ExpressionRange;
-	struct Location;
-}
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
@@ -29,17 +20,24 @@ struct ItemsFactory
 
 /***************************************************************************/
 
-	virtual ~ItemsFactory() {}
+	virtual DimensionPtr newUnackedDimension( 
+			Location const& _location
+		,	std::unique_ptr< Range > _range
+	) const = 0;
 
-	virtual std::unique_ptr< Dimension > newPackedDimension( 
+	virtual	DimensionPtr newPackedDimension( 
 			Location const& _location
 		,	std::unique_ptr< Range > _range
 	) const = 0;
 	
-	virtual std::unique_ptr< Range > newPartSelectRange( 
+	virtual RangePtr newPartSelectRange( 
 			Location const& _location
-		,	std::unique_ptr< Expression > _lhs
-		,	std::unique_ptr< Expression > _rhs
+		,	ExpressionPtr _lhs
+		,	ExpressionPtr _rhs
+	) const = 0;
+
+	virtual MultidimensionalRangePtr newMultidimensionalRange( 
+			Location const& _location
 	) const = 0;
 
 /***************************************************************************/

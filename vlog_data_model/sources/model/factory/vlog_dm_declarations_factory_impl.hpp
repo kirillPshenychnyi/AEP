@@ -23,10 +23,12 @@ public:
 
 	Writable::PortDeclarationPtr newPortDeclaration( 
 			Location const & _location 
+		,	TypePtr  _type
 	) const override;
 
 	Writable::VariableDeclarationPtr newVariableDeclaration( 
 			Location const & _location 
+		,	TypePtr _type
 	) const override;
 
 /***************************************************************************/

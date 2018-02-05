@@ -32,36 +32,38 @@ VariableImporter::VariableImporter(
 void
 VariableImporter::importVars( Verilog2001Parser::Net_declarationContext & _ctx )
 {
-	_ctx.accept( this );
+	importVar( _ctx );
+
+	addDeclarations();
 }
 
 /***************************************************************************/
 
-antlrcpp::Any 
-VariableImporter::visitNet_declaration( 
-		Verilog2001Parser::Net_declarationContext * ctx 
-	)
+void 
+VariableImporter::importVars( Verilog2001Parser::Reg_declarationContext & _ctx )
+{
+	importVar( _ctx );
+
+	addDeclarations();
+}
+
+/***************************************************************************/
+
+template < typename _Context >
+void
+VariableImporter::importVar( _Context & _ctx )
 {
 	using namespace VlogDM;
 
-	Location location = createLocation( *ctx );
-
 	IAccessor & vlog = getVlogDataModel();
-
-	m_extractedDeclarations.emplace_back(
-			vlog.getDeclarationFactory().newVariableDeclaration( 
-				location 
-			)
-	);
 	
 	Writable::DeclaredFactory const& declaredFactory 
 		=	getVlogDataModel().getDeclaredFactory();
 
 	addDeclareds(
-			*ctx
+			_ctx
 		,	[ & ]( 
 					Declaration & _declaration
-				,	TypePtr _type
 				,	DimensionPtr _dimension
 				,	NetExtractor::NetItem _portItem
 			)
@@ -69,7 +71,6 @@ VariableImporter::visitNet_declaration(
 				return 
 					declaredFactory.newVariable(
 							_declaration
-						,	std::move( _type )
 						,	_portItem.first
 						,	_portItem.second
 						,	false
@@ -77,8 +78,21 @@ VariableImporter::visitNet_declaration(
 					);
 			}
 	);
+}
 
-	return antlrcpp::Any();
+/***************************************************************************/
+
+VlogDM::Writable::VariableDeclarationPtr 
+VariableImporter::createDeclaration(
+		VlogDM::Location const & _location
+	,	VlogDM::TypePtr _type
+	)
+{
+	return 
+		getVlogDataModel().getDeclarationFactory().newVariableDeclaration( 
+				_location
+			,	std::move( _type )
+		);
 }
 
 /***************************************************************************/

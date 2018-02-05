@@ -8,6 +8,11 @@ namespace VlogDM
 		struct DesignUnit;
 		struct PortDeclaration;
 		struct VariableDeclaration;
+		struct MultidimensionalRange;
+
+		typedef
+			std::unique_ptr< DesignUnit >
+			DesignUnitPtr;
 
 		typedef
 			std::unique_ptr< PortDeclaration >
@@ -16,6 +21,10 @@ namespace VlogDM
 		typedef
 			std::unique_ptr< VariableDeclaration >
 			VariableDeclarationPtr;
+
+		typedef
+			std::unique_ptr< MultidimensionalRange >
+			MultidimensionalRangePtr;
 	}
 
 	struct DesignUnit;
@@ -26,6 +35,8 @@ namespace VlogDM
 	struct Location;
 	struct Port;
 	struct Variable;
+	struct Range;
+	struct Expression;
 
 	struct DesignUnitFactory;
 
@@ -48,6 +59,14 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< Variable >
 		VariablePtr;
+	
+	typedef
+		std::unique_ptr< Range >
+		RangePtr;
+
+	typedef
+		std::unique_ptr< Expression >
+		ExpressionPtr;
 }
 
 #endif // !__VLOG_DM_FWD_HPP__

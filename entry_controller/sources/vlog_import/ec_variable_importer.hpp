@@ -38,6 +38,8 @@ public:
 /***************************************************************************/
 
 	void importVars( Verilog2001Parser::Net_declarationContext & _ctx );
+
+	void importVars( Verilog2001Parser::Reg_declarationContext & _ctx );
 	
 /***************************************************************************/
 
@@ -45,8 +47,12 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitNet_declaration( 
-			Verilog2001Parser::Net_declarationContext * _ctx 
+	template < typename _Context >
+	void importVar( _Context & _ctx );
+
+	VlogDM::Writable::VariableDeclarationPtr createDeclaration( 
+			VlogDM::Location const & _location
+		,	VlogDM::TypePtr _type 
 	) override;
 
 /***************************************************************************/

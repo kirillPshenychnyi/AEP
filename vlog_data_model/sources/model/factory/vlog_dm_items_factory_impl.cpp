@@ -6,6 +6,7 @@
 
 #include "vlog_data_model\sources\model\vlog_dm_dimension_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_part_select_range_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_multidimensional_range_impl.hpp"
 
 /***************************************************************************/
 
@@ -13,22 +14,45 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-std::unique_ptr<Dimension> 
+DimensionPtr
 ItemsFactoryImpl::newPackedDimension( 
 		Location const & _location
-	,	std::unique_ptr<Range> _range 
+	,	RangePtr _range 
 	) const
 {
-	return std::make_unique< PackedDimensionImpl >( _location, std::move( _range ) );
+	return newDimension< PackedDimensionImpl >( _location, std::move( _range ) );
 }
 
 /***************************************************************************/
 
-std::unique_ptr< Range >
+DimensionPtr
+ItemsFactoryImpl::newUnackedDimension( 
+		Location const& _location
+	,	RangePtr _range
+	) const
+{
+	return newDimension< UnpackedDimensionImpl >( _location, std::move( _range ) );
+}
+
+/***************************************************************************/
+
+template< typename _Dimension >
+DimensionPtr
+ItemsFactoryImpl::newDimension(
+		Location const& _location
+	,	RangePtr _range
+	) const
+{
+	return std::make_unique< _Dimension >( _location, std::move( _range ) );
+}
+
+/***************************************************************************/
+
+RangePtr
 ItemsFactoryImpl::newPartSelectRange( 
 		Location const & _location
-	,	std::unique_ptr< Expression > _lhs
-	,	std::unique_ptr< Expression > _rhs 
+	,	ExpressionPtr _lhs
+	,	ExpressionPtr _rhs 
 	) const
 {
 	return 
@@ -37,6 +61,16 @@ ItemsFactoryImpl::newPartSelectRange(
 			,	std::move( _lhs )
 			,	std::move( _rhs ) 
 		);
+}
+
+/***************************************************************************/
+
+Writable::MultidimensionalRangePtr 
+ItemsFactoryImpl::newMultidimensionalRange(
+		Location const& _location
+	) const
+{
+	return std::make_unique< MultidimensionalRangeImpl >( _location );
 }
 
 /***************************************************************************/

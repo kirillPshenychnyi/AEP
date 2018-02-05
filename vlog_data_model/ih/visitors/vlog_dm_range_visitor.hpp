@@ -14,6 +14,7 @@ namespace VlogDM
 
 	struct ExpressionRange;
 	struct PartSelectRange;
+	struct MultidimensionalRange;
 
 /***************************************************************************/
 
@@ -23,11 +24,11 @@ struct RangeVisitor
 
 /***************************************************************************/
 
-	virtual ~RangeVisitor(){}
-
 	virtual void visit( ExpressionRange const & _range ) = 0;
 
 	virtual void visit( PartSelectRange const & _range ) = 0;
+
+	virtual void visit( MultidimensionalRange const & _range ) = 0;
 
 /***************************************************************************/
 
@@ -44,6 +45,8 @@ struct RangeDefaultVisitor
 	void visit( ExpressionRange const & _range ) override {}
 
 	void visit( PartSelectRange const & _range ) override {}
+
+	void visit( MultidimensionalRange const & _range ) override {}
 
 /***************************************************************************/
 

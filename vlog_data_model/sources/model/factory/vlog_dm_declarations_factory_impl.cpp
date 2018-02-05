@@ -13,17 +13,23 @@ namespace VlogDM
 /***************************************************************************/
 
 Writable::PortDeclarationPtr
-DeclarationsFactoryImpl::newPortDeclaration( Location const & _location ) const
+DeclarationsFactoryImpl::newPortDeclaration( 
+		Location const & _location 
+	,	TypePtr _type
+	) const
 {
-	return std::make_unique< PortDeclarationImpl >( _location );
+	return std::make_unique< PortDeclarationImpl >( _location, std::move( _type ) );
 }
 
 /***************************************************************************/
 
 Writable::VariableDeclarationPtr 
-DeclarationsFactoryImpl::newVariableDeclaration( Location const & _location ) const
+DeclarationsFactoryImpl::newVariableDeclaration( 
+		Location const & _location 
+	,	TypePtr _type
+	) const
 {
-	return std::make_unique< VariableDeclarationImpl >( _location );
+	return std::make_unique< VariableDeclarationImpl >( _location, std::move( _type ) );
 }
 
 /***************************************************************************/

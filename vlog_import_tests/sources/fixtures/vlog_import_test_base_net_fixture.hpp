@@ -19,6 +19,9 @@
 #include "vlog_data_model\api\vlog_dm_range_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_expression_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_type_cast.hpp"
+#include "vlog_data_model\api\vlog_dm_variable.hpp"
+#include "vlog_data_model\api\vlog_dm_port.hpp"
+#include "vlog_data_model\api\vlog_dm_declaration.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 
@@ -44,33 +47,14 @@ class BaseNetFixture
 			,	m_declared( _declared )
 		{}
 
+		NetHelper & expectArrayBounds( std::string const & _left, std::string const & _right )
+		{
+			return checkDimension( m_declared, _left, _right );
+		}
+
 		NetHelper & expectBounds( std::string const & _left, std::string const & _right )
 		{
-			using namespace VlogDM;
-
-			auto checkBound 
-				=	[ this ] ( Expression const & _bound, std::string const & _expected )
-					{
-						PrimaryLiteral const & bound 
-							= checkCast< Expression, PrimaryLiteral, ExpressionCast >( _bound );
-				
-						REQUIRE( bound.getValue() == _expected );
-					};
-
-			auto dimension = m_declared.getType().getDimension();
-
-			REQUIRE( dimension.is_initialized() );
-
-			auto actualRange = dimension->getRange();
-			REQUIRE( actualRange.is_initialized() );
-
-			PartSelectRange const& boundedRange
-					= checkCast< Range, PartSelectRange, RangeCast >( *actualRange );
-
-			checkBound( boundedRange.getLeftBound(), _left );
-			checkBound( boundedRange.getRightBound(), _right );
-
-			return *this;
+			return checkDimension( m_declared.getDeclaration().getType(), _left, _right );
 		}
 
 		NetHelper & expectNetType( VlogDM::NetKind::Kind _kind )
@@ -104,11 +88,46 @@ class BaseNetFixture
 			using namespace VlogDM;
 
 			_TargetType const & type
-				= BaseFixture::checkCast< Type, _TargetType, TypeCast >( m_declared.getType() );
+				=	BaseFixture::checkCast< Type, _TargetType, TypeCast >( 
+							m_declared.getDeclaration().getType() 
+					); 
 
 			REQUIRE( _kind == type.getKind() );
 		}
 		
+		template< typename _Dimensional >
+		NetHelper & checkDimension( 
+				_Dimensional const & _dimensional
+			,	std::string const & _left
+			,	std::string const & _right
+		)
+		{
+			using namespace VlogDM;
+
+			auto checkBound 
+				=	[ this ] ( Expression const & _bound, std::string const & _expected )
+					{
+						PrimaryLiteral const & bound 
+							= checkCast< Expression, PrimaryLiteral, ExpressionCast >( _bound );
+				
+						REQUIRE( bound.getValue() == _expected );
+					};
+			
+			auto dimension = _dimensional.getDimension();
+			REQUIRE( dimension.is_initialized() );
+
+			auto actualRange = dimension->getRange();
+			REQUIRE( actualRange.is_initialized() );
+
+			PartSelectRange const& boundedRange
+					= checkCast< Range, PartSelectRange, RangeCast >( *actualRange );
+
+			checkBound( boundedRange.getLeftBound(), _left );
+			checkBound( boundedRange.getRightBound(), _right );
+
+			return *this;
+		}
+
 		BaseNetFixture< _Declared > & end()
 		{
 			return m_parent;

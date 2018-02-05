@@ -1,11 +1,12 @@
-#ifndef __VLOG_DM_VARIABLE_IMPL_HPP__
-#define __VLOG_DM_VARIABLE_IMPL_HPP__
+#ifndef __VLOG_DM_MULTIDIMENSIONAL_RANGE_IMPL_HPP__
+#define __VLOG_DM_MULTIDIMENSIONAL_RANGE_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_variable.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_multidimensional_range.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 
-#include "vlog_data_model\sources\model\vlog_dm_dimensional_object_impl.hpp"
+#include <vector>
 
 /***************************************************************************/
 
@@ -13,29 +14,41 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-class VariableImpl
-	:	public DimensionalObjectImpl< Variable >
-{ 
+class MultidimensionalRangeImpl
+	:	public LocatedImpl< Writable::MultidimensionalRange >
+{
 
 /***************************************************************************/
 
 	typedef
-		DimensionalObjectImpl< Variable >
+		LocatedImpl< Writable::MultidimensionalRange >
 		BaseClass;
+
+	typedef
+		std::unique_ptr< Range >
+		RangePtr;
+
+	typedef
+		std::vector< RangePtr >
+		Ranges;
 
 /***************************************************************************/
 
 public:
 
 /***************************************************************************/
-	
-	VariableImpl( 
-			Declaration const & _declaration
-		,	std::string const & _name
-		,	Location const & _location
-		,	std::unique_ptr< Dimension > _dimension
-		,	bool _isSigned
-	);
+
+	MultidimensionalRangeImpl( const Location & _location );
+
+/***************************************************************************/
+
+	int getRangesCount() const override;
+
+	Range const& getRange( int _idx ) const override;
+
+	void accept( RangeVisitor & _visitor ) const override;
+
+	void addRange( RangePtr _range ) override;
 
 /***************************************************************************/
 
@@ -43,17 +56,7 @@ private:
 
 /***************************************************************************/
 
-	bool isSigned() const override;
-
-	void accept( DeclaredVisitor& _visitor ) const override;
-
-/***************************************************************************/
-
-private:
-
-/***************************************************************************/
-
-	const bool m_isSigned;
+	Ranges m_ranges;
 
 /***************************************************************************/
 
@@ -61,17 +64,8 @@ private:
 
 /***************************************************************************/
 
-inline
-bool
-VariableImpl::isSigned() const
-{
-	return m_isSigned;
 }
 
 /***************************************************************************/
 
-}
-
-/***************************************************************************/
-
-#endif // !__VLOG_DM_VARIABLE_IMPL_HPP__
+#endif // !__VLOG_DM_MULTIDIMENSIONAL_RANGE_IMPL_HPP__

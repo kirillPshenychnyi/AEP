@@ -16,17 +16,15 @@ namespace VlogDM
 PortPtr
 DeclaredFactoryImpl::newPort( 
 		Declaration const & _declaration
-	,	std::unique_ptr< Type > _type
 	,	std::string const & _name
 	,	Location const & _location
 	,	PortDirection::Direction _direction
-	,	std::unique_ptr< Dimension > _dimension 
+	,	DimensionPtr _dimension 
 	) const
 {	
 	return
 		std::make_unique< PortImpl >(
 				_declaration
-			,	std::move( _type )
 			,	_name
 			,	_location
 			,	std::move( _dimension )
@@ -39,17 +37,15 @@ DeclaredFactoryImpl::newPort(
 VariablePtr
 DeclaredFactoryImpl::newVariable ( 
 		VlogDM::Declaration const & _declaration
-	,	std::unique_ptr< Type > _type
 	,	std::string const & _name
 	,	Location const & _location
 	,	bool _isSigned
-	,	std::unique_ptr< Dimension > _dimension
+	,	DimensionPtr _dimension
 	) const
 {
 	return
 		std::make_unique< VariableImpl >(
 				_declaration
-			,	std::move( _type )
 			,	_name
 			,	_location
 			,	std::move( _dimension )

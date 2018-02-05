@@ -22,10 +22,12 @@ struct DeclarationFactory
 
 	virtual Writable::PortDeclarationPtr newPortDeclaration( 
 			Location const & _location 
+		,	TypePtr _type
 	) const = 0;
 
 	virtual Writable::VariableDeclarationPtr newVariableDeclaration(
 			Location const & _location 
+		,	TypePtr _type
 	) const = 0;
 
 /***************************************************************************/

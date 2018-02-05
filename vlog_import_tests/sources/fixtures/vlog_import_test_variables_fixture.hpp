@@ -5,8 +5,6 @@
 
 #include "vlog_import_tests\sources\fixtures\vlog_import_test_base_net_fixture.hpp"
 
-#include "vlog_data_model\api\vlog_dm_variable.hpp"
-
 /***************************************************************************/
 
 namespace VlogModelImportTests {
@@ -18,6 +16,8 @@ class VariablesFixture
 {
 
 };
+
+/***************************************************************************/
 
 }
 

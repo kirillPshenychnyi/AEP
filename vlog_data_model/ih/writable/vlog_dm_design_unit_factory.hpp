@@ -3,23 +3,14 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-/***************************************************************************/
-
-namespace VlogDM
-{
-	struct Location;
-}
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
 namespace VlogDM {
 namespace Writable {
-
-/***************************************************************************/
-
-	struct DesignUnit;
 
 /***************************************************************************/
 
@@ -29,9 +20,7 @@ struct DesignUnitFactory
 
 /***************************************************************************/
 
-	virtual ~DesignUnitFactory() {}
-
-	virtual std::unique_ptr< DesignUnit > newDesignUnit( 
+	virtual DesignUnitPtr newDesignUnit( 
 			std::string const & _name
 		,	Location const & _location 
 	) const = 0;

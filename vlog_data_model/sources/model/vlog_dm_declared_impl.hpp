@@ -33,7 +33,6 @@ public:
 
 	DeclaredImpl(
 			Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 	);
@@ -42,8 +41,6 @@ public:
 
 	Declaration const & getDeclaration() const override;
 	
-	Type const & getType() const override;
-
 /***************************************************************************/
 
 private:
@@ -51,11 +48,24 @@ private:
 /***************************************************************************/
 
 	Declaration const & m_declaration;
-	std::unique_ptr< Type > m_type;
-
+	
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+template< typename _BaseClass >
+inline
+DeclaredImpl< _BaseClass >::DeclaredImpl( 
+		Declaration const & _declaration
+	,	std::string const & _name
+	,	Location const & _location
+)
+	:	BaseClass( _name, _location )
+	,	m_declaration( _declaration )
+{
+}
 
 /***************************************************************************/
 
@@ -65,32 +75,6 @@ Declaration const &
 DeclaredImpl< _BaseClass >::getDeclaration() const
 {
 	return m_declaration;
-}
-
-/***************************************************************************/
-
-template< typename _BaseClass >
-inline
-Type const & 
-DeclaredImpl< _BaseClass >::getType() const
-{
-	return *m_type;
-}
-
-/***************************************************************************/
-
-template< typename _BaseClass >
-inline
-DeclaredImpl< _BaseClass >::DeclaredImpl( 
-		Declaration const & _declaration
-	,	std::unique_ptr< Type > _type
-	,	std::string const & _name
-	,	Location const & _location
-)
-	:	BaseClass( _name, _location )
-	,	m_declaration( _declaration )
-	,	m_type( _type.release() )
-{
 }
 
 /***************************************************************************/

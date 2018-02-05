@@ -14,7 +14,6 @@ namespace VlogDM {
 
 VariableImpl::VariableImpl( 
 			Declaration const & _declaration
-		,	std::unique_ptr< Type > _type
 		,	std::string const & _name
 		,	Location const & _location
 		,	std::unique_ptr< Dimension > _dimension
@@ -22,7 +21,6 @@ VariableImpl::VariableImpl(
 	)
 	:	BaseClass( 
 				_declaration
-			,	std::move( _type )
 			,	_name
 			,	_location
 			,	std::move( _dimension )
