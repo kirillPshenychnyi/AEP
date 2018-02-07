@@ -52,14 +52,17 @@ BaseNetImporter< _Declaration >::addDeclareds(
 	Writable::DeclaredFactory const& declaredFactory 
 		=	getVlogDataModel().getDeclaredFactory();
 
+	int dimensionIdx = 0;
 	for( auto const& port : extractor.m_netIds )
-		declaration->addDeclared( 
-			_creator( 
+	{
+		declaration->addDeclared(
+			_creator(
 					*declaration
-				,	std::move( extractor.getDimension() )
+				,	extractor.getDimension( dimensionIdx++ )
 				,	port
 			)
 		);
+	}
 
 	m_extractedDeclarations.push_back( std::move( declaration ) );
 }

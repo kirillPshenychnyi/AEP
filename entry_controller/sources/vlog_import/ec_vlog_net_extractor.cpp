@@ -2,6 +2,8 @@
 
 #include "entry_controller\sources\vlog_import\ec_vlog_net_extractor.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_multidimensional_range.hpp"
+
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 #include "vlog_data_model\api\vlog_dm_dimension.hpp"
@@ -49,19 +51,8 @@ NetExtractor::extract( antlr4::ParserRuleContext & _context )
 
 	if( !m_type )
 		initType();
-}
 
-/***************************************************************************/
-
-VlogDM::DimensionPtr 
-NetExtractor::getDimension()
-{
-	const int size = m_dimensions.size();
-	if( size == 0 )
-		return VlogDM::DimensionPtr();
-
-	//if( m_dimensions.size() == 1 )
-		return std::move( m_dimensions.front() );
+	pushDimension();
 }
 
 /***************************************************************************/
@@ -86,16 +77,9 @@ NetExtractor::visitRange( Verilog2001Parser::RangeContext *ctx )
 	initDimension( 
 			NetItem( ctx->children[ 1 ]->getText(), location ) 
 		,	NetItem( ctx->children[ 3 ]->getText(), location )
-		,	std::bind( 
-					&Writable::ItemsFactory::newPackedDimension
-				,	std::ref( getVlogDataModel().getItemsFactory() )
-				,	std::placeholders::_1
-				,	std::placeholders::_2 
-			)
 	);
 
-	if( !m_type )
-		initType();
+	initType();
 
 	return antlrcpp::Any();
 }
@@ -109,17 +93,11 @@ NetExtractor::visitDimension( Verilog2001Parser::DimensionContext *ctx )
 
 	VlogDM::Location const location = createLocation( *ctx );
 
-	initDimension( 
+	m_ranges.emplace_back(
 			NetItem( ctx->children[ 1 ]->getText(), location ) 
 		,	NetItem( ctx->children[ 3 ]->getText(), location )
-		,	std::bind( 
-					&Writable::ItemsFactory::newUnackedDimension
-				,	std::ref( getVlogDataModel().getItemsFactory() )
-				,	std::placeholders::_1
-				,	std::placeholders::_2 
-			)
 	);
-
+	
 	return antlrcpp::Any();
 }
 
@@ -146,7 +124,9 @@ NetExtractor::visitList_of_net_identifiers(
 /***************************************************************************/
 
 antlrcpp::Any
-NetExtractor::visitPort_identifier( Verilog2001Parser::Port_identifierContext *ctx )
+NetExtractor::visitPort_identifier( 
+		Verilog2001Parser::Port_identifierContext *ctx 
+	)
 {
 	return extractId( *ctx );
 }
@@ -186,8 +166,11 @@ NetExtractor::visitListOfIds( antlr4::ParserRuleContext & _context )
 antlrcpp::Any 
 NetExtractor::extractId( antlr4::ParserRuleContext & _context )
 {
-	m_netIds.emplace_back( _context.getText(), createLocation( _context ) );
+	if( !m_netIds.empty() )
+		pushDimension();
 
+	m_netIds.emplace_back( _context.getText(), createLocation( _context ) );
+	
 	return antlrcpp::Any();
 }
 
@@ -202,17 +185,12 @@ NetExtractor::initType()
 
 	Writable::TypeFactory const & typeFactory = vlogDm.getTypeFactory();
 
-	DimensionPtr typeDimension 
-		=	m_dimensions.empty() 
-			?	DimensionPtr() 
-			:	std::move( m_dimensions.front() );  
-
 	if( m_isReg )
 	{
 		m_type.reset(
 			typeFactory.newVariableType( 
 					VariableKind::Kind::reg
-				,	std::move( typeDimension ) 
+				,	std::move( m_typeDimension ) 
 			).release()
 		);
 	}
@@ -221,22 +199,16 @@ NetExtractor::initType()
 		m_type.reset( 
 			typeFactory.newNetType( 
 					m_netType
-				,	std::move( typeDimension ) 
+				,	std::move( m_typeDimension ) 
 			).release() 
 		);
 	}
-
-	m_dimensions.clear();
 }
 
 /***************************************************************************/
 
-void 
-NetExtractor::initDimension( 
-		NetExtractor::NetItem const & _leftBound
-	,	NetExtractor::NetItem const & _rightBound
-	,	RangeCreator _creator 
-	)
+VlogDM::RangePtr 
+NetExtractor::createRange( Range const & _dimension )
 {
 	using namespace VlogDM;
 
@@ -260,16 +232,85 @@ NetExtractor::initDimension(
 					);
 			};
 
-	m_dimensions.emplace_back( 
-		_creator( 
+	return 
+		itemsFactory.newPartSelectRange(
+				_dimension.first.second
+			,	rangeBoundCreator( _dimension.first )
+			,	rangeBoundCreator( _dimension.second )
+		);
+}
+
+/***************************************************************************/
+
+void 
+NetExtractor::initDimension( 
+		NetExtractor::NetItem const & _leftBound
+	,	NetExtractor::NetItem const & _rightBound
+	)
+{
+	using namespace VlogDM;
+	
+	m_typeDimension.reset(
+		getVlogDataModel().getItemsFactory().newPackedDimension( 
 				_leftBound.second
-			,	itemsFactory.newPartSelectRange(
-						_leftBound.second
-					,	rangeBoundCreator( _leftBound )
-					,	rangeBoundCreator( _rightBound )
-				)
-		).release() 
+			,	createRange( Range( _leftBound, _rightBound ) )
+		).release()
 	);
+}
+
+/***************************************************************************/
+
+void
+NetExtractor::pushDimension()
+{
+	using namespace VlogDM;
+
+	if( m_ranges.empty() )
+	{
+		m_dimensions.push_back( VlogDM::DimensionPtr() );
+		return;
+	}
+
+	Writable::ItemsFactory const & itemsFactory
+		=	getVlogDataModel().getItemsFactory();
+
+	if( m_ranges.size() == 1 )
+	{
+		m_dimensions.push_back(
+			itemsFactory.newUnackedDimension(
+					m_ranges.front().first.second
+				,	createRange( m_ranges.front() )
+			)
+		);
+	}
+	else
+	{
+		auto multidimensionalRange
+			= itemsFactory.newMultidimensionalRange( m_ranges.front().first.second );
+
+		for( Range const & range : m_ranges )
+			multidimensionalRange->addRange( createRange( range ) );
+
+		m_dimensions.push_back(
+			itemsFactory.newUnackedDimension(
+				m_ranges.front().first.second
+				, std::move( multidimensionalRange )
+			)
+		);
+	}
+
+	m_ranges.clear();
+}
+
+/***************************************************************************/
+
+VlogDM::DimensionPtr 
+NetExtractor::getDimension( int _idx )
+{
+	if( _idx < m_dimensions.size() )
+		return std::move( m_dimensions[ _idx ] );
+
+	return VlogDM::DimensionPtr();
 }
 
 /***************************************************************************/

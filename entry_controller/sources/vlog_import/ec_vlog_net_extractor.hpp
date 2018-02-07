@@ -10,9 +10,6 @@
 #include "vlog_data_model\api\vlog_dm_dimension.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
-#include <boost\optional.hpp>
-#include <boost\function.hpp>
-
 #include <vector>
 
 /***************************************************************************/
@@ -37,12 +34,16 @@ struct NetExtractor
 		Ports;
 
 	typedef
-		std::vector< VlogDM::DimensionPtr >
-		Dimensions;
+		std::pair< NetItem, NetItem >
+		Range;
 
 	typedef
-		std::function< VlogDM::DimensionPtr( VlogDM::Location, VlogDM::RangePtr ) >
-		RangeCreator;
+		std::vector< Range >
+		Ranges;
+
+	typedef
+		std::vector< VlogDM::DimensionPtr >
+		Dimensions;
 
 /***************************************************************************/
 
@@ -56,7 +57,9 @@ public:
 
 	void extract( antlr4::ParserRuleContext & _context );
 
-	VlogDM::DimensionPtr getDimension();
+	VlogDM::RangePtr createRange( Range const & _dimension );
+
+	VlogDM::DimensionPtr getDimension( int _idx );
 
 /***************************************************************************/
 
@@ -64,11 +67,17 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitNet_type( Verilog2001Parser::Net_typeContext *ctx ) override ;
+	antlrcpp::Any visitNet_type( 
+		Verilog2001Parser::Net_typeContext *ctx 
+	) override;
 
-	antlrcpp::Any visitRange( Verilog2001Parser::RangeContext *ctx ) override;
+	antlrcpp::Any visitRange( 
+		Verilog2001Parser::RangeContext *ctx 
+	) override;
 
-	antlrcpp::Any visitDimension( Verilog2001Parser::DimensionContext *ctx ) override;
+	antlrcpp::Any visitDimension( 
+		Verilog2001Parser::DimensionContext *ctx 
+	) override;
 
 	antlrcpp::Any visitList_of_port_identifiers(
 			Verilog2001Parser::List_of_port_identifiersContext *ctx 
@@ -103,8 +112,9 @@ private:
 	void initDimension(
 			NetExtractor::NetItem const& _leftBound
 		,	NetExtractor::NetItem const& _rightBound
-		,	RangeCreator _creator 
 	);
+
+	void pushDimension();
 
 /***************************************************************************/
 
@@ -114,9 +124,13 @@ public:
 
 	Ports m_netIds;
 
-	std::unique_ptr< VlogDM::Type > m_type;
-	
 	Dimensions m_dimensions;
+
+	Ranges m_ranges;
+
+	VlogDM::TypePtr m_type;
+	
+	VlogDM::DimensionPtr m_typeDimension;
 
 	VlogDM::NetKind::Kind m_netType;
 

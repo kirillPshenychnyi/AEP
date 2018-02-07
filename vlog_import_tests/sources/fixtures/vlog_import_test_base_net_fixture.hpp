@@ -14,6 +14,7 @@
 #include "vlog_data_model\api\vlog_dm_net_type.hpp"
 #include "vlog_data_model\api\vlog_dm_variable_type.hpp"
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"
+#include "vlog_data_model\api\vlog_dm_multidimensional_range.hpp"
 
 #include "vlog_data_model\api\vlog_dm_declared_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_range_cast.hpp"
@@ -33,6 +34,11 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
+#define RANGE( _left, _right ) \
+	std::make_pair( #_left, #_right )
+
+/***************************************************************************/
+
 template< typename _Declared >
 class BaseNetFixture
 	:	public BaseFixture
@@ -42,19 +48,54 @@ class BaseNetFixture
 
 	struct NetHelper
 	{
+		typedef
+			std::pair< std::string, std::string >
+			Range;
+
+		typedef
+			std::vector< Range >
+			MultidimensionalRanges;
+
 		NetHelper( BaseNetFixture< _Declared > & _parent, _Declared const & _declared )
 			:	m_parent( _parent )
 			,	m_declared( _declared )
 		{}
 
-		NetHelper & expectArrayBounds( std::string const & _left, std::string const & _right )
+		NetHelper & expectArrayBounds( Range const & _range )
 		{
-			return checkDimension( m_declared, _left, _right );
+			return checkRange( m_declared, _range );
 		}
 
-		NetHelper & expectBounds( std::string const & _left, std::string const & _right )
+		NetHelper & expectArrayBounds( MultidimensionalRanges _ranges )
 		{
-			return checkDimension( m_declared.getDeclaration().getType(), _left, _right );
+			using namespace VlogDM;
+
+			auto dimension = m_declared.getDimension();
+			REQUIRE( dimension.is_initialized() );
+
+			auto simpleRange = dimension->getRange();
+			REQUIRE( simpleRange.is_initialized() );
+
+			MultidimensionalRange const & multidimRange
+				=	BaseFixture::checkCast< 
+							VlogDM::Range
+						,	MultidimensionalRange
+						,	RangeCast
+					>( *simpleRange );
+
+			const int dimensionsCount = multidimRange.getRangesCount();
+
+			REQUIRE( dimensionsCount == _ranges.size() );
+
+			for( int i = 0; i < dimensionsCount; ++i )
+				checkRange( multidimRange.getRange( i ), _ranges[ i ] );
+
+			return *this;
+		}
+
+		NetHelper & expectBounds( Range const & _range )
+		{
+			return checkRange( m_declared.getDeclaration().getType(), _range );
 		}
 
 		NetHelper & expectNetType( VlogDM::NetKind::Kind _kind )
@@ -91,16 +132,26 @@ class BaseNetFixture
 				=	BaseFixture::checkCast< Type, _TargetType, TypeCast >( 
 							m_declared.getDeclaration().getType() 
 					); 
-
+			
 			REQUIRE( _kind == type.getKind() );
 		}
 		
 		template< typename _Dimensional >
-		NetHelper & checkDimension( 
+		NetHelper & checkRange( 
 				_Dimensional const & _dimensional
-			,	std::string const & _left
-			,	std::string const & _right
+			,	Range const & _range
 		)
+		{
+			auto dimension = _dimensional.getDimension();
+			REQUIRE( dimension.is_initialized() );
+
+			auto actualRange = dimension->getRange();
+			REQUIRE( actualRange.is_initialized() );
+	
+			return checkRange( *actualRange, _range );	
+		}
+
+		NetHelper & checkRange( VlogDM::Range const & _range, Range const & _expected )
 		{
 			using namespace VlogDM;
 
@@ -112,18 +163,12 @@ class BaseNetFixture
 				
 						REQUIRE( bound.getValue() == _expected );
 					};
-			
-			auto dimension = _dimensional.getDimension();
-			REQUIRE( dimension.is_initialized() );
-
-			auto actualRange = dimension->getRange();
-			REQUIRE( actualRange.is_initialized() );
 
 			PartSelectRange const& boundedRange
-					= checkCast< Range, PartSelectRange, RangeCast >( *actualRange );
+					= checkCast< VlogDM::Range, PartSelectRange, RangeCast >( _range );
 
-			checkBound( boundedRange.getLeftBound(), _left );
-			checkBound( boundedRange.getRightBound(), _right );
+			checkBound( boundedRange.getLeftBound(), _expected.first );
+			checkBound( boundedRange.getRightBound(), _expected.second );
 
 			return *this;
 		}
