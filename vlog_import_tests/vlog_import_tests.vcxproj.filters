@@ -53,5 +53,8 @@
     <ClCompile Include="sources\tests\vlog_variables_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\tests\vlog_import_dataflow_process_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
