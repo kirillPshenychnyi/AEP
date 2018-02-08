@@ -9,10 +9,6 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
-ContainerBootstrapper BaseFixture::m_bootstrapper;
-
-/***************************************************************************/
-
 TEST_CASE_METHOD( PortsFixture, "simple input port", "[ports]" )
 {
 	std::string code =

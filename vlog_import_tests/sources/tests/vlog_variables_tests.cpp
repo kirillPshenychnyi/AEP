@@ -339,30 +339,4 @@ TEST_CASE_METHOD( VariablesFixture, "arrays and scalar wihin one declaration", "
 
 /***************************************************************************/
 
-TEST_CASE_METHOD( VariablesFixture, "arrays and scalar wihin one declaration", "[vars]" )
-{
-	std::string code =
-		"module top ();				            \n"
-		"	reg  a, b[7:0][0:3], c[0:10];	    \n"
-		"endmodule					            \n"
-		;
-
-	runImport( code );
-
-	expectUnit( "top" )
-		.expectNet( "a" )
-			.expectRegType()
-		.end()
-		.expectNet( "b" )
-			.expectRegType()
-			.expectArrayBounds( { RANGE( 7, 0 ), RANGE( 0, 3 ) } )
-		.end()
-		.expectNet( "c" )
-			.expectRegType()
-			.expectArrayBounds( RANGE( 0, 10 ) )
-		.end();
-}
-
-/***************************************************************************/
-
 }
