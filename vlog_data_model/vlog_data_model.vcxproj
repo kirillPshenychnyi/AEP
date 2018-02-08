@@ -145,7 +145,9 @@
     <ClInclude Include="api\vlog_dm_net_kind.hpp" />
     <ClInclude Include="api\vlog_dm_net_type.hpp" />
     <ClInclude Include="api\vlog_dm_port_directrion.hpp" />
+    <ClInclude Include="api\vlog_dm_process.hpp" />
     <ClInclude Include="api\vlog_dm_range_cast.hpp" />
+    <ClInclude Include="api\vlog_dm_statement.hpp" />
     <ClInclude Include="api\vlog_dm_type.hpp" />
     <ClInclude Include="api\vlog_dm_type_cast.hpp" />
     <ClInclude Include="api\vlog_dm_unpacked_dimension_impl.hpp" />

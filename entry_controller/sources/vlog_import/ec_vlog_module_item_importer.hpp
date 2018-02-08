@@ -41,6 +41,10 @@ private:
 
 /***************************************************************************/
 
+	antlrcpp::Any visitModule_or_generate_item( 
+		Verilog2001Parser::Module_or_generate_itemContext * ctx 
+	) override;
+
 	antlrcpp::Any visitModule_or_generate_item_declaration( 
 		Verilog2001Parser::Module_or_generate_item_declarationContext * ctx 
 	) override;
@@ -51,6 +55,10 @@ private:
 
 	antlrcpp::Any visitReg_declaration( 
 		Verilog2001Parser::Reg_declarationContext * ctx 
+	) override;
+
+	antlrcpp::Any visitContinuous_assign( 
+		Verilog2001Parser::Continuous_assignContext * ctx 
 	) override;
 
 /***************************************************************************/
