@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
+#ifndef __VLOG_DM_CONTINUOUS_ASSIGNMENT_HPP__
+#define __VLOG_DM_CONTINUOUS_ASSIGNMENT_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_process.hpp"
 
 /***************************************************************************/
 
@@ -11,17 +11,17 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
+struct BinaryOperator;
 
 /***************************************************************************/
 
-struct Process
-	:	public VlogDM::Located
+struct ContinuousAssignment
+	:	public Process
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	virtual BinaryOperator const & getAssignment() const = 0;
 
 /***************************************************************************/
 
@@ -33,4 +33,4 @@ struct Process
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_CONTINUOUS_ASSIGNMENT_HPP__

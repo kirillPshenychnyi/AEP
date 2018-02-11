@@ -22,7 +22,7 @@ public:
 
 /***************************************************************************/
 
-	virtual Writable::DesignUnitPtr newDesignUnit( 
+	Writable::DesignUnitPtr newDesignUnit( 
 			std::string const & _name
 		,	Location const & _location 
 	) const override;

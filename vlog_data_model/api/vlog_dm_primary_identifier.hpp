@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
+#ifndef __VLOG_DM_PRIMARY_IDENTIFIER_HPP__
+#define __VLOG_DM_PRIMARY_IDENTIFIER_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
 
 /***************************************************************************/
 
@@ -11,17 +11,17 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
+struct BaseIdentifier;
 
 /***************************************************************************/
 
-struct Process
-	:	public VlogDM::Located
+struct PrimaryIdentifier
+	:	public Expression
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	virtual BaseIdentifier const & getIdentifier() const = 0;
 
 /***************************************************************************/
 
@@ -33,4 +33,4 @@ struct Process
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_PRIMARY_IDENTIFIER_HPP__

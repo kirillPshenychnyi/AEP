@@ -3,8 +3,12 @@
 
 /***************************************************************************/
 
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
 #include "vlog_data_model\api\vlog_dm_declarations_container.hpp"
 #include "vlog_data_model\api\vlog_dm_named.hpp"
+
+#include <ostream>
 
 /***************************************************************************/
 
@@ -19,9 +23,11 @@ struct DesignUnit
 
 /***************************************************************************/
 
-	typedef
-		std::unique_ptr< DesignUnit >
-		Ptr;
+	virtual int getProcessesCount() const = 0;
+
+	virtual Process const & getProcess( int _idx ) const = 0;
+
+	virtual void regenerateProcesses( std::ostream & _stream ) const = 0;
 
 /***************************************************************************/
 

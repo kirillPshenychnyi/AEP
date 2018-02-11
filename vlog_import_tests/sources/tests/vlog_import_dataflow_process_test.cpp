@@ -13,7 +13,7 @@ TEST_CASE_METHOD( BaseFixture, "simple dataflow process", "[dataflow]" )
 {
 	std::string code =
 		"module top (input a, output b );	\n"
-		"	assign a = b;				 	\n"
+		"	assign a = b;					\n"
 		"endmodule							\n"
 		;
 

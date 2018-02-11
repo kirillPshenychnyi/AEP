@@ -36,9 +36,22 @@ namespace VlogDM
 	struct Port;
 	struct Variable;
 	struct Range;
+	struct Process;
+
+	struct ContinuousAssignment;
+
+	struct BaseIdentifier;
+
 	struct Expression;
+	struct PrimaryLiteral;
+	struct BinaryOperator;
+	struct PrimaryIdentifier;
 
 	struct DesignUnitFactory;
+
+	typedef
+		std::unique_ptr< DesignUnit >
+		DesignUnitPtr;
 
 	typedef
 		std::unique_ptr< Declared >
@@ -67,6 +80,18 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< Expression >
 		ExpressionPtr;
+
+	typedef
+		std::unique_ptr< BaseIdentifier >
+		BaseIdentifierPtr;
+
+	typedef
+		std::unique_ptr< ContinuousAssignment >
+		ContinuousAssignmentPtr;
+
+	typedef
+		std::unique_ptr< Process >
+		ProcessPtr;
 }
 
 #endif // !__VLOG_DM_FWD_HPP__

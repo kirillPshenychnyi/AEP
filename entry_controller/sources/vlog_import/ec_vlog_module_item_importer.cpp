@@ -4,6 +4,8 @@
 
 #include "entry_controller\sources\vlog_import\ec_variable_importer.hpp"
 
+#include "entry_controller\sources\vlog_import\ec_vlog_dataflow_process_importer.hpp"
+
 /***************************************************************************/
 
 namespace EntryController {
@@ -83,11 +85,15 @@ ModuleItemImporter::visitReg_declaration(
 /***************************************************************************/
 
 antlrcpp::Any 
-visitContinuous_assign(
+ModuleItemImporter::visitContinuous_assign(
 		Verilog2001Parser::Continuous_assignContext * ctx
 	)
 {
+	DataflowProcessImporter dataflowImporter( getVlogDataModel(), m_targetUnit );
 
+	dataflowImporter.importProcess( *ctx );
+
+	return antlrcpp::Any();
 }
 
 /***************************************************************************/

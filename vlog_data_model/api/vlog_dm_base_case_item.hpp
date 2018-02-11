@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
+#ifndef __VLOG_DM_BASE_CASE_ITEM_HPP__
+#define __VLOG_DM_BASE_CASE_ITEM_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_statement.hpp"
 
 /***************************************************************************/
 
@@ -11,17 +11,19 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
+struct CaseItemVisitor;
 
 /***************************************************************************/
 
-struct Process
-	:	public VlogDM::Located
+struct BaseCaseItem
+	:	public Statement
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	virtual Statement const & getStatement() = 0;
+
+	virtual void accept( CaseItemVisitor & _visitor ) = 0;
 
 /***************************************************************************/
 
@@ -30,7 +32,6 @@ struct Process
 /***************************************************************************/
 
 }
-
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_BASE_CASE_ITEM_HPP__

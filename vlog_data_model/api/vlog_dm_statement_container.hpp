@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
+#ifndef __VLOG_DM_STATEMENT_CONTAINER_HPP__
+#define __VLOG_DM_STATEMENT_CONTAINER_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
@@ -11,17 +11,20 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
+struct Statement;
 
 /***************************************************************************/
 
-struct Process
-	:	public VlogDM::Located
+struct StatementContainer
+	:	public boost::noncopyable
+
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	virtual Statement const & getStatement() const = 0;
+
+	virtual int getStatementsCount() const = 0;
 
 /***************************************************************************/
 
@@ -33,4 +36,5 @@ struct Process
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_STATEMENT_CONTAINER_HPP__
+

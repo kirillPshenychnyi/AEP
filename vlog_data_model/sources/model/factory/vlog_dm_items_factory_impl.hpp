@@ -41,6 +41,17 @@ public:
 		Location const& _location
 	) const override;
 
+	BaseIdentifierPtr newIdentifier(
+			Location const& _location
+		,	Declared const & _declared
+		,	RangePtr _range
+	) const override;
+
+	ContinuousAssignmentPtr newContinuousAssignment(
+			Location const& _location
+		,	std::unique_ptr< BinaryOperator > _assignment
+	) const override;
+
 /***************************************************************************/
 
 private:

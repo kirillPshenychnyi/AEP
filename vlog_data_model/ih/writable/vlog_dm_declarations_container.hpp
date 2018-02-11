@@ -4,13 +4,11 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-
-	struct Declaration;
-
 namespace Writable {
 
 /***************************************************************************/
@@ -35,6 +33,13 @@ struct DeclarationsContainer
 struct DesignUnit
 	:	public DeclarationsContainer< VlogDM::DesignUnit >
 { 
+
+/***************************************************************************/
+
+	virtual void addProcess( ProcessPtr _process ) = 0;
+
+/***************************************************************************/
+
 };
 
 /***************************************************************************/

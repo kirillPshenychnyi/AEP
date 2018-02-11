@@ -167,6 +167,9 @@
     <ClInclude Include="sources\ec_accessor.hpp" />
     <ClInclude Include="sources\vlog_import\ec_variable_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_vlog_base_net_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_dataflow_process_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_expression_importer.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_identifier_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_vlog_module_item_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_vlog_net_extractor.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -181,6 +184,9 @@
     <ClCompile Include="sources\ec_accessor.cpp" />
     <ClCompile Include="sources\vlog_import\ec_variable_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_vlog_base_net_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_dataflow_process_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_expression_importer.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_identifier_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_vlog_module_item_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_vlog_net_extractor.cpp" />
     <ClCompile Include="stdafx.cpp">

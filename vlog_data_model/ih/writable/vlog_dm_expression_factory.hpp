@@ -3,15 +3,11 @@
 
 /***************************************************************************/
 
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
+#include "vlog_data_model\api\vlog_dm_operator.hpp"
+
 #include <boost\noncopyable.hpp>
-
-/***************************************************************************/
-
-namespace VlogDM 
-{
-	struct Location;
-	struct PrimaryLiteral;
-}
 
 /***************************************************************************/
 
@@ -29,6 +25,16 @@ struct ExpressionFactory
 	virtual std::unique_ptr< PrimaryLiteral > newPrimaryLiteral(
 			Location const& _location 
 		,	std::string const& _value
+	) const = 0;
+
+	virtual std::unique_ptr< BinaryOperator > newBinaryOperator(
+			ExpressionPtr _leftOperand
+		,	ExpressionPtr _rightOperand
+		,	Operator::Enum _operator
+	) const = 0;
+
+	virtual std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
+			BaseIdentifierPtr _id
 	) const = 0;
 
 /***************************************************************************/

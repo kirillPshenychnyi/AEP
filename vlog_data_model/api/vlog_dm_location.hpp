@@ -13,6 +13,15 @@ struct Location
 	
 /***************************************************************************/
 		
+	Location()
+		:	m_file( "" )
+		,	m_beginLine( 0 )
+		,	m_beginColumn( 0 )
+		,	m_endLine( 0 )
+		,	m_endColumn( 0 )
+	{
+	}
+
 	Location( std::string const & _file, int _beginLine, int _beginColumn )
 		:	m_file( _file )
 		,	m_beginLine( _beginLine )
@@ -40,13 +49,24 @@ struct Location
 	{
 	}
 
+	Location& operator = ( const Location & _location )
+	{
+		m_file = _location.m_file;
+		m_beginLine = _location.m_beginLine;
+		m_beginColumn = _location.m_beginColumn;
+		m_endLine = 0;
+		m_endColumn = 0;
+
+		return *this;
+	}
+
 /***************************************************************************/
 
-	const std::string m_file;
-	const int m_beginLine;
-	const int m_beginColumn;
-	const int m_endLine;
-	const int m_endColumn;
+	std::string m_file;
+	int m_beginLine;
+	int m_beginColumn;
+	int m_endLine;
+	int m_endColumn;
 
 /***************************************************************************/
 

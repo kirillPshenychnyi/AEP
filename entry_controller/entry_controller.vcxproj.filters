@@ -60,6 +60,15 @@
     <ClInclude Include="sources\vlog_import\ec_variable_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_dataflow_process_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_expression_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\vlog_import\ec_vlog_identifier_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -93,6 +102,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\vlog_import\ec_variable_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_dataflow_process_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_expression_importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\vlog_import\ec_vlog_identifier_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

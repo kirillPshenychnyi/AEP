@@ -40,6 +40,17 @@ struct ItemsFactory
 			Location const& _location
 	) const = 0;
 
+	virtual BaseIdentifierPtr newIdentifier(
+			Location const& _location
+		,	Declared const & _declared
+		,	RangePtr _range = RangePtr()
+	) const = 0;
+
+	virtual ContinuousAssignmentPtr newContinuousAssignment(
+			Location const& _location
+		,	std::unique_ptr< BinaryOperator > _assignment
+	) const = 0;
+
 /***************************************************************************/
 
 };

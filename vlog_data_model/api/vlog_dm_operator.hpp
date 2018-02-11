@@ -1,9 +1,5 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
-
-/***************************************************************************/
-
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#ifndef __VLOG_DM_OPERATOR_HPP__
+#define __VLOG_DM_OPERATOR_HPP__
 
 /***************************************************************************/
 
@@ -11,17 +7,29 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
-
-/***************************************************************************/
-
-struct Process
-	:	public VlogDM::Located
+struct Operator
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	enum class Enum
+	{
+			Assign
+		
+		,	Plus
+		,	Minus
+		,	Mul
+		,	Div
+		
+		,	And
+		,	Or
+		,	Not
+		,	Xor
+
+		,	LogicAnd
+		,	LogicOr
+		,	LogicXor
+	};
 
 /***************************************************************************/
 
@@ -33,4 +41,4 @@ struct Process
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_OPERATOR_HPP__

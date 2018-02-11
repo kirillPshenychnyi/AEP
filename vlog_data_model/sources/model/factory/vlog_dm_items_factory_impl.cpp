@@ -4,9 +4,11 @@
 
 #include "vlog_data_model\api\vlog_dm_expression.hpp"
 
+#include "vlog_data_model\sources\model\vlog_dm_base_identifier_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_dimension_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_part_select_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_multidimensional_range_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_continuous_assignment_impl.hpp"
 
 /***************************************************************************/
 
@@ -26,10 +28,7 @@ ItemsFactoryImpl::newPackedDimension(
 /***************************************************************************/
 
 DimensionPtr
-ItemsFactoryImpl::newUnackedDimension( 
-		Location const& _location
-	,	RangePtr _range
-	) const
+ItemsFactoryImpl::newUnackedDimension( Location const& _location, RangePtr _range ) const
 {
 	return newDimension< UnpackedDimensionImpl >( _location, std::move( _range ) );
 }
@@ -38,10 +37,7 @@ ItemsFactoryImpl::newUnackedDimension(
 
 template< typename _Dimension >
 DimensionPtr
-ItemsFactoryImpl::newDimension(
-		Location const& _location
-	,	RangePtr _range
-	) const
+ItemsFactoryImpl::newDimension( Location const& _location, RangePtr _range ) const
 {
 	return std::make_unique< _Dimension >( _location, std::move( _range ) );
 }
@@ -72,6 +68,37 @@ ItemsFactoryImpl::newMultidimensionalRange(
 {
 	return std::make_unique< MultidimensionalRangeImpl >( _location );
 }
+
+/***************************************************************************/
+
+BaseIdentifierPtr 
+ItemsFactoryImpl::newIdentifier(
+		Location const& _location
+	,	Declared const & _declared
+	,	RangePtr _range
+	) const
+{
+	if( _range )
+		return std::make_unique< BaseIdentifierImpl< true > >( 
+						_location
+					,	_declared 
+					,	std::move( _range )
+				);
+
+	return std::make_unique< BaseIdentifierImpl< false > >( _location, _declared );
+}
+
+/***************************************************************************/
+
+ContinuousAssignmentPtr
+ItemsFactoryImpl::newContinuousAssignment(
+		Location const& _location
+	,	std::unique_ptr< BinaryOperator > _assignment
+	) const
+{
+	return std::make_unique< ContinuousAssignmentImpl >( _location, std::move( _assignment ) );
+}
+
 
 /***************************************************************************/
 

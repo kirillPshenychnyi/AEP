@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
+
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
@@ -33,11 +34,11 @@ class Accessor
 /***************************************************************************/
 
 	typedef
-		Tools::Collections::NamedHasher< DesignUnit::Ptr >
+		Tools::Collections::NamedHasher< DesignUnitPtr >
 		DesignUnitHasher;
 
 	typedef
-		Tools::Collections::NamedComparator< DesignUnit::Ptr >
+		Tools::Collections::NamedComparator< DesignUnitPtr >
 		DesignUnitComparator;
 
 	typedef

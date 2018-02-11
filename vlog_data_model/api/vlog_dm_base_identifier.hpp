@@ -1,7 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_HPP__
-#define __VLOG_DM_PROCESS_HPP__
+#ifndef __VLOG_DM_BASE_IDENTIFIER_HPP__
+#define __VLOG_DM_BASE_IDENTIFIER_HPP__
 
 /***************************************************************************/
+
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 #include "vlog_data_model\api\vlog_dm_located.hpp"
 
@@ -11,17 +13,17 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ProcessVisitor;
-
-/***************************************************************************/
-
-struct Process
-	:	public VlogDM::Located
+struct BaseIdentifier
+	:	public Located
 {
 
 /***************************************************************************/
 
-	virtual void accept( ProcessVisitor & _visitor ) const = 0;
+	virtual Declared const & getDeclared() const = 0;
+
+	virtual std::string const& getName() const = 0;
+
+	virtual boost::optional< Range const & > getRange() const = 0;
 
 /***************************************************************************/
 
@@ -33,4 +35,4 @@ struct Process
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_HPP__
+#endif // !__VLOG_DM_BASE_IDENTIFIER_HPP__
