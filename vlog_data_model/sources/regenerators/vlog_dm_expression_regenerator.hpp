@@ -1,51 +1,43 @@
-#ifndef __VLOG_DM_EXPRESSION_VISITOR_HPP__
-#define __VLOG_DM_EXPRESSION_VISITOR_HPP__
+#ifndef __VLOG_DM_EXPRESSION_REGENERATOR_HPP__
+#define __VLOG_DM_EXPRESSION_REGENERATOR_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "vlog_data_model\ih\visitors\vlog_dm_expression_visitor.hpp"
+
+#include "vlog_data_model\sources\regenerators\vlog_dm_base_regenerator.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
+namespace Regenerators {
 
 /***************************************************************************/
 
-struct PrimaryLiteral;
-struct PrimaryIdentifier;
-struct BinaryOperator;
-
-/***************************************************************************/
-
-struct ExpressionVisitor
-	:	public boost::noncopyable
+struct ExpressionRegenerator
+	:	public BaseRegenerator
+	,	public ExpressionVisitor
 {
 
 /***************************************************************************/
 
-	virtual void visit( const PrimaryLiteral& _literal ) = 0;
+public:
 
-	virtual void visit( const BinaryOperator& _operator ) = 0;
+/***************************************************************************/
+
+	ExpressionRegenerator( std::ostream & _targetStream );
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	void visit( const PrimaryLiteral& _literal ) override;
+
+	void visit( const BinaryOperator& _operator ) override;
 	 
-	virtual void visit( const PrimaryIdentifier& _id ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct ExpressionDefaultVisitor
-	:	public ExpressionVisitor
-{
-
-/***************************************************************************/
-
-	void visit( const PrimaryLiteral& _literal ) override {}
-
-	void visit( const BinaryOperator& _operator ) override {}
-
-	void visit( const PrimaryIdentifier& _id ) override {}
+	void visit( const PrimaryIdentifier& _id ) override;
 
 /***************************************************************************/
 
@@ -54,7 +46,10 @@ struct ExpressionDefaultVisitor
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_EXPRESSION_VISITOR_HPP__
+#endif // __VLOG_DM_EXPRESSION_REGENERATOR_HPP__
+
+/***************************************************************************/

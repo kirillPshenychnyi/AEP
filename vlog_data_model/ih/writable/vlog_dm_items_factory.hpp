@@ -36,6 +36,8 @@ struct ItemsFactory
 		,	ExpressionPtr _rhs
 	) const = 0;
 
+	virtual RangePtr newExpressionRange( ExpressionPtr _expression ) const = 0;
+
 	virtual MultidimensionalRangePtr newMultidimensionalRange( 
 			Location const& _location
 	) const = 0;

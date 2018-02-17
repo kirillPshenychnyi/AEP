@@ -45,6 +45,10 @@ private:
 		Verilog2001Parser::List_of_net_assignmentsContext * ctx 
 	) override;
 
+	antlrcpp::Any visitNet_assignment(
+		Verilog2001Parser::Net_assignmentContext * ctx 
+	) override;
+
 	antlrcpp::Any visitExpression(
 		Verilog2001Parser::ExpressionContext * ctx	
 	) override;

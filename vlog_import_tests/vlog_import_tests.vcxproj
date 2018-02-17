@@ -149,7 +149,9 @@
   <ItemGroup>
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_base_fixture.hpp" />
+    <ClInclude Include="sources\fixtures\vlog_import_base_module_items_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_ports_fixture.hpp" />
+    <ClInclude Include="sources\fixtures\vlog_import_process_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_test_base_net_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_test_variables_fixture.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -157,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\fixtures\vlog_import_base_fixture.cpp" />
+    <ClCompile Include="sources\fixtures\vlog_import_base_module_items_fixture.cpp" />
+    <ClCompile Include="sources\fixtures\vlog_import_process_fixture.cpp" />
     <ClCompile Include="sources\tests\vlog_import_dataflow_process_test.cpp" />
     <ClCompile Include="sources\tests\vlog_variables_tests.cpp" />
     <ClCompile Include="sources\tests\vlog_ports_test.cpp" />

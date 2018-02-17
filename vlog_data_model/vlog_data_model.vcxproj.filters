@@ -309,6 +309,24 @@
     <ClInclude Include="sources\model\vlog_dm_continuous_assignment_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\regenerators\vlog_dm_base_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\regenerators\vlog_dm_process_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_process_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\regenerators\vlog_dm_expression_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\regenerators\vlog_dm_range_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -351,6 +369,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\model\vlog_dm_multidimensional_range_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\regenerators\vlog_dm_process_regenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\regenerators\vlog_dm_expression_regenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\regenerators\vlog_dm_range_regenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

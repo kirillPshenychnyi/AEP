@@ -27,6 +27,11 @@ struct IAccessor
 	virtual void addUnit( std::unique_ptr< DesignUnit > _unit ) = 0;
 
 	virtual void reset() = 0;
+	
+	virtual void regenerateProcess( 
+			std::ostream & _stream
+		,	Process const & _process 
+	) const = 0;
 
 /***************************************************************************/
 

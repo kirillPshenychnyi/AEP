@@ -1,13 +1,17 @@
 #include "stdafx.h"
 
-#include "sources\model\vlog_dm_accessor.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
 
-#include "sources\model\factory\vlog_dm_design_unit_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_declarations_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_declared_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_items_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_expression_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_type_factory_impl.hpp"
+#include "vlog_data_model\api\vlog_dm_process.hpp"
+
+#include "vlog_data_model\sources\model\factory\vlog_dm_design_unit_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_declarations_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_declared_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_items_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_expression_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_type_factory_impl.hpp"
+
+#include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
 
 /***************************************************************************/
 
@@ -16,9 +20,9 @@ namespace VlogDM {
 /***************************************************************************/
 
 void 
-Accessor::addUnit( std::unique_ptr< DesignUnit > _unit )
+Accessor::addUnit( DesignUnitPtr _unit )
 {
-	m_unitsSet.emplace( std::unique_ptr< DesignUnit >( _unit.release() ) );
+	m_unitsSet.emplace( std::move( _unit ) );
 }
 
 /***************************************************************************/
@@ -40,6 +44,16 @@ void
 Accessor::reset()
 {
 	m_unitsSet.clear();
+}
+
+/***************************************************************************/
+
+void 
+Accessor::regenerateProcess( std::ostream & _stream, Process const & _process ) const
+{
+	Regenerators::ProcessRegenerator regenerator( _stream );
+
+	_process.accept( regenerator );
 }
 
 /***************************************************************************/

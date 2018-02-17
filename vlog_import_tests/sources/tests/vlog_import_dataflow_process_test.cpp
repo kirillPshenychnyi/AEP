@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "vlog_import_tests\catch.hpp"
-#include "vlog_import_tests\sources\fixtures\vlog_import_base_fixture.hpp"
+#include "vlog_import_tests\sources\fixtures\vlog_import_process_fixture.hpp"
 
 /***************************************************************************/
 
@@ -9,7 +9,7 @@ namespace VlogModelImportTests {
 
 /***************************************************************************/
 
-TEST_CASE_METHOD( BaseFixture, "simple dataflow process", "[dataflow]" )
+TEST_CASE_METHOD( ProcessFixture, "simple signal assignment", "[dataflow]" )
 {
 	std::string code =
 		"module top (input a, output b );	\n"
@@ -18,6 +18,89 @@ TEST_CASE_METHOD( BaseFixture, "simple dataflow process", "[dataflow]" )
 		;
 
 	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "simple binary operator assignment", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, output c);	\n"
+		"	assign c = a || b;				\n"
+		"endmodule							\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "some boolean function", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, c, d, output e);	\n"
+		"	assign e = a || b ^ c & d;				\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "boolean function with three operands", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, output c);			\n"
+		"	assign c = a || b ^ c;					\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "complex boolean expression", "[dataflow]" )
+{
+	std::string code =
+		"module top (input [1:0] a, b, c, d, output e);							\n"
+		"	assign c = a[ 0 ] || b[ 1 ] ^ c[ 1 ] && d[ 0 ] || a[ 1 ] && d[ 0 ];	\n"
+		"endmodule																\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "simple bit assignment", "[dataflow]" )
+{
+	std::string code =
+		"module top (input [3:0] a, output c);	\n"
+		"	assign c = a[ 0 ];					\n"
+		"endmodule								\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
 }
 
 /***************************************************************************/

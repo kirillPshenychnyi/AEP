@@ -47,8 +47,20 @@ DataflowProcessImporter::importProcess(
 
 antlrcpp::Any 
 DataflowProcessImporter::visitList_of_net_assignments(
-		Verilog2001Parser::List_of_net_assignmentsContext * ctx
+		Verilog2001Parser::List_of_net_assignmentsContext * _ctx
 	)
+{
+	acceptEachChildContext( *_ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+DataflowProcessImporter::visitNet_assignment(
+	Verilog2001Parser::Net_assignmentContext * ctx
+)
 {
 	using namespace VlogDM;
 
@@ -57,7 +69,8 @@ DataflowProcessImporter::visitList_of_net_assignments(
 
 	IdentifierImporter importer( getVlogDataModel(), m_targetUnit );
 
-	importer.importIds( *ctx );
+	// lhs is first child
+	ctx->children.front()->accept( &importer );
 
 	const int idsCount = importer.getIdsCount();
 
@@ -67,6 +80,9 @@ DataflowProcessImporter::visitList_of_net_assignments(
 			expressionFactory.newPrimaryIdentifier( importer.takeId( 0 ) ).release()
 		);
 	}
+
+	// rhs expression is last child
+	ctx->children.back()->accept( this );
 
 	return antlrcpp::Any();
 }
@@ -87,7 +103,7 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 						,	vlogDm.getExpressionFactory().newBinaryOperator(
 									std::move( m_targetExpression )
 								,	expressionImporter.importExpression( *ctx )
-								,	Operator::Enum::Assign
+								,	Operator::Kind::Assign
 							)
 					);
 

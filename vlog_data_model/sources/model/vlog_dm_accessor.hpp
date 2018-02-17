@@ -51,13 +51,18 @@ public:
 
 /***************************************************************************/
 
-	void addUnit( std::unique_ptr< DesignUnit > _unit ) override;
+	void addUnit( DesignUnitPtr _unit ) override;
 
 	boost::optional< DesignUnit const & > findUnit( 
 			std::string const& _unitName 
 	) const override;
 
 	void reset() override;
+		
+	void regenerateProcess( 
+			std::ostream & _stream
+		,	Process const & _process 
+	) const override;
 
 /***************************************************************************/
 

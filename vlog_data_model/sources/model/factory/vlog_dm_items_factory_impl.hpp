@@ -33,9 +33,11 @@ public:
 
 	RangePtr newPartSelectRange( 
 			Location const& _location
-		,	ExpressionPtr _lhs
-		,	ExpressionPtr _rhs
+		,	ExpressionPtr _leftBound
+		,	ExpressionPtr _rightBound
 	) const override;
+
+	RangePtr newExpressionRange( ExpressionPtr _expression ) const override;
 
 	Writable::MultidimensionalRangePtr newMultidimensionalRange(
 		Location const& _location

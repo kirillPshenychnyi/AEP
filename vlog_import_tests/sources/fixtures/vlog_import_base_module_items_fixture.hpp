@@ -1,51 +1,61 @@
-#ifndef __VLOG_DM_EXPRESSION_VISITOR_HPP__
-#define __VLOG_DM_EXPRESSION_VISITOR_HPP__
+#ifndef __VLOG_IMPORT_BASE_MODULE_ITEMS_FIXTURE_HPP__
+#define __VLOG_IMPORT_BASE_MODULE_ITEMS_FIXTURE_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "vlog_import_tests\sources\fixtures\vlog_import_base_fixture.hpp"
+
+#include <vector>
 
 /***************************************************************************/
 
-namespace VlogDM {
+namespace VlogModelImportTests {
 
 /***************************************************************************/
 
-struct PrimaryLiteral;
-struct PrimaryIdentifier;
-struct BinaryOperator;
+#define LINES( _begin, _end )		\
+	std::make_pair( _begin, _end )
 
 /***************************************************************************/
 
-struct ExpressionVisitor
-	:	public boost::noncopyable
+class BaseModuleItemsFixture
+	:	public BaseFixture
 {
 
 /***************************************************************************/
 
-	virtual void visit( const PrimaryLiteral& _literal ) = 0;
-
-	virtual void visit( const BinaryOperator& _operator ) = 0;
-	 
-	virtual void visit( const PrimaryIdentifier& _id ) = 0;
+public:
 
 /***************************************************************************/
 
-};
+	typedef
+		std::vector< std::string >
+		CodeLines;
+
+	typedef
+		std::pair< int, int >
+		Lines;
 
 /***************************************************************************/
 
-struct ExpressionDefaultVisitor
-	:	public ExpressionVisitor
-{
+public:
 
 /***************************************************************************/
 
-	void visit( const PrimaryLiteral& _literal ) override {}
+	void checkCorrectImport( 
+			std::string const & _actual
+		,	Lines const & _expected 
+	);
 
-	void visit( const BinaryOperator& _operator ) override {}
+	void runImport( std::string const & _code ) override;
 
-	void visit( const PrimaryIdentifier& _id ) override {}
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	CodeLines m_lines;
 
 /***************************************************************************/
 
@@ -57,4 +67,4 @@ struct ExpressionDefaultVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_EXPRESSION_VISITOR_HPP__
+#endif // !__VLOG_IMPORT_BASE_ITEMS_FIXTURE_HPP__

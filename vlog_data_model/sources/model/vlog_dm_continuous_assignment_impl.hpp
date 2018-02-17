@@ -8,6 +8,8 @@
 
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 
+#include "vlog_data_model\ih\visitors\vlog_dm_process_visitor.hpp"
+
 /***************************************************************************/
 
 namespace VlogDM {
@@ -77,7 +79,7 @@ ContinuousAssignmentImpl::getAssignment() const
 void 
 ContinuousAssignmentImpl::accept( ProcessVisitor & _visitor ) const
 {
-
+	_visitor.visit( *this );
 }
 
 /***************************************************************************/

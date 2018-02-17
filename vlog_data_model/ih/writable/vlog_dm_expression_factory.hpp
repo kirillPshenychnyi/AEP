@@ -30,7 +30,7 @@ struct ExpressionFactory
 	virtual std::unique_ptr< BinaryOperator > newBinaryOperator(
 			ExpressionPtr _leftOperand
 		,	ExpressionPtr _rightOperand
-		,	Operator::Enum _operator
+		,	Operator::Kind _operator
 	) const = 0;
 
 	virtual std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(

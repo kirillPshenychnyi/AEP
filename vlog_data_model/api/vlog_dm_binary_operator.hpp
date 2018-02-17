@@ -23,7 +23,7 @@ struct BinaryOperator
 
 	virtual Expression const & getRightOperand() const = 0;
 
-	virtual Operator::Enum getOperator() const = 0;
+	virtual Operator::Kind getOperator() const = 0;
 
 /***************************************************************************/
 

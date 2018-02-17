@@ -22,6 +22,8 @@ ModuleItemImporter::ModuleItemImporter(
 {
 }
 
+/***************************************************************************/
+
 void 
 ModuleItemImporter::importItems( 
 		Verilog2001Parser::Non_port_module_itemContext & _ctx 

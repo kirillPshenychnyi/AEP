@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "entry_controller\sources\vlog_import\ec_vlog_identifier_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_expression_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
@@ -30,9 +31,7 @@ IdentifierImporter::IdentifierImporter(
 /***************************************************************************/
 
 void 
-IdentifierImporter::importIds( 
-		Verilog2001Parser::List_of_net_assignmentsContext & _ctx 
-	)
+IdentifierImporter::importIds(  Verilog2001Parser::Net_assignmentContext & _ctx )
 {
 	acceptEachChildContext( _ctx );
 }
@@ -44,7 +43,7 @@ IdentifierImporter::importId(
 		Verilog2001Parser::Simple_hierarchical_identifierContext & _ctx 
 	)
 {
-	createSimpleId( _ctx );
+	_ctx.children.front()->accept( this );
 }
 
 /***************************************************************************/
@@ -57,15 +56,39 @@ IdentifierImporter::visitNet_lvalue( Verilog2001Parser::Net_lvalueContext * ctx 
 
 /***************************************************************************/
 
+antlrcpp::Any
+IdentifierImporter::visitSimple_hierarchical_branch(
+	Verilog2001Parser::Simple_hierarchical_branchContext * ctx
+)
+{
+	acceptEachChildContext( *ctx );
+	return createSimpleId( *ctx );
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext  * ctx )
+{
+	ExpressionImporter expressionImporter( getVlogDataModel(), m_targetUnit );
+
+	m_range = expressionImporter.importRange( *ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
 antlrcpp::Any 
 IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 {
-	auto declared = m_targetUnit.findDeclared( _ctx.getText() );
-	
+	auto declared = m_targetUnit.findDeclared( _ctx.children.front()->getText() );
+
 	m_extractedIds.push_back(
 		getVlogDataModel().getItemsFactory().newIdentifier( 
 				createLocation( _ctx )
 			,	*declared 
+			,	std::move( m_range )
 		)
 	);
 

@@ -5,6 +5,8 @@
 
 #include <boost\noncopyable.hpp>
 
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
 #include "vlog_import_tests\catch.hpp"
 #include "hypodermic\Hypodermic.h"
 
@@ -41,10 +43,12 @@ public:
 
 /***************************************************************************/
 
-	void runImport( std::string const & _code );
+	virtual void runImport( std::string const & _code );
 
 	template< typename _TSource, typename _TTarget, template < typename > class _TVisitor >
 	static _TTarget const & checkCast( _TSource const& _source );
+
+	VlogDM::IAccessor const & getVlogDm() const;
 
 /***************************************************************************/
 

@@ -1,26 +1,27 @@
-#ifndef __VLOG_DM_EXPRESSION_RANGE_HPP__
-#define __VLOG_DM_EXPRESSION_RANGE_HPP__
+#ifndef __VLOG_DM_PROCESS_VISITOR_HPP__
+#define __VLOG_DM_PROCESS_VISITOR_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_range.hpp"
-
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace VlogDM {
+
+/***************************************************************************/
+
+struct ContinuousAssignment;
+
+/***************************************************************************/
+
+struct ProcessVisitor
+	:	boost::noncopyable
 {
 
 /***************************************************************************/
 
-struct ExpressionRange
-	:	public Range
-{
-
-/***************************************************************************/
-
-	virtual Expression const & getExpression() const = 0;
+	virtual void visit( ContinuousAssignment const & _assign ) = 0;
 
 /***************************************************************************/
 
@@ -30,4 +31,6 @@ struct ExpressionRange
 
 }
 
-#endif // !__VLOG_DM_EXPRESSION_RANGE_HPP__
+/***************************************************************************/
+
+#endif // !__VLOG_DM_PROCESS_VISITOR_HPP__

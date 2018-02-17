@@ -5,6 +5,7 @@
 
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_expression_visitor.hpp"
 
 /***************************************************************************/
 
@@ -32,7 +33,7 @@ public:
 			Location const & _location
 		,	ExpressionPtr _leftOperand
 		,	ExpressionPtr _rightOperand
-		,	Operator::Enum _operator
+		,	Operator::Kind _operator
 	);
 
 /***************************************************************************/
@@ -41,7 +42,7 @@ public:
 
 	Expression const & getRightOperand() const override;
 
-	Operator::Enum getOperator() const override;
+	Operator::Kind getOperator() const override;
 
 	void accept( ExpressionVisitor & _visitor ) const override;
 
@@ -53,7 +54,7 @@ private:
 
 	ExpressionPtr m_leftOperand;
 	ExpressionPtr m_rightOperand;
-	Operator::Enum m_operator;
+	Operator::Kind m_operator;
 
 /***************************************************************************/
 
@@ -66,7 +67,7 @@ BinaryOperatorImpl::BinaryOperatorImpl(
 		Location const & _location
 	,	std::unique_ptr< Expression > _leftOperand
 	,	std::unique_ptr< Expression > _rightOperand
-	,	Operator::Enum _operator
+	,	Operator::Kind _operator
 	)
 	:	BaseClass( _location )
 	,	m_leftOperand( _leftOperand.release() )
@@ -96,7 +97,7 @@ BinaryOperatorImpl::getRightOperand() const
 /***************************************************************************/
 
 inline 
-Operator::Enum
+Operator::Kind
 BinaryOperatorImpl::getOperator() const
 {
 	return m_operator;
@@ -104,10 +105,11 @@ BinaryOperatorImpl::getOperator() const
 
 /***************************************************************************/
 
+inline
 void 
 BinaryOperatorImpl::accept( ExpressionVisitor & _visitor ) const
 {
-	
+	_visitor.visit( *this );
 }
 
 /***************************************************************************/

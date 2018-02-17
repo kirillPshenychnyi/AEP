@@ -4656,8 +4656,8 @@ public:
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> Simple_identifier();
     antlr4::tree::TerminalNode* Simple_identifier(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Decimal_number();
-    antlr4::tree::TerminalNode* Decimal_number(size_t i);
+    std::vector<Range_expressionContext *> range_expression();
+    Range_expressionContext* range_expression(size_t i);
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    

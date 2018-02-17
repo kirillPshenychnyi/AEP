@@ -6,6 +6,7 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_base_identifier.hpp"
+#include "vlog_data_model\api\vlog_dm_range.hpp"
 
 #include <vector>
 
@@ -37,7 +38,7 @@ public:
 		,	VlogDM::Writable::DesignUnit const & _targetUnit
 	);
 
-	void importIds( Verilog2001Parser::List_of_net_assignmentsContext & _ctx );
+	void importIds( Verilog2001Parser::Net_assignmentContext & _ctx );
 
 	void importId( Verilog2001Parser::Simple_hierarchical_identifierContext & _ctx );
 
@@ -53,6 +54,14 @@ private:
 
 	antlrcpp::Any visitNet_lvalue(
 		Verilog2001Parser::Net_lvalueContext * ctx	
+	) override;
+
+	antlrcpp::Any visitSimple_hierarchical_branch(
+		Verilog2001Parser::Simple_hierarchical_branchContext * ctx	
+	) override;
+
+	antlrcpp::Any visitRange_expression( 
+		Verilog2001Parser::Range_expressionContext  * ctx
 	) override;
 
 /***************************************************************************/
@@ -72,6 +81,8 @@ private:
 	ExtractedIds m_extractedIds;
 
 	VlogDM::Writable::DesignUnit const & m_targetUnit;
+
+	VlogDM::RangePtr m_range;
 
 /***************************************************************************/
 

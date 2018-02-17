@@ -5,6 +5,13 @@ namespace VlogDM
 {
 	namespace Writable 
 	{
+		struct DesignUnitFactory;
+		struct DeclarationFactory;
+		struct DeclaredFactory;
+		struct ItemsFactory;
+		struct ExpressionFactory;
+		struct TypeFactory;
+
 		struct DesignUnit;
 		struct PortDeclaration;
 		struct VariableDeclaration;
@@ -26,6 +33,8 @@ namespace VlogDM
 			std::unique_ptr< MultidimensionalRange >
 			MultidimensionalRangePtr;
 	}
+
+	struct IAccessor;
 
 	struct DesignUnit;
 	struct Declaration;
