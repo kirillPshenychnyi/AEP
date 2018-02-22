@@ -46,7 +46,7 @@ PortImporter::importPorts( Verilog2001Parser::Port_declarationContext & _ctx )
 void 
 PortImporter::importPorts( const Verilog2001Parser::List_of_port_declarationsContext & _ctx )
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 
 	addDeclarations();
 }

@@ -42,7 +42,7 @@ DataflowProcessImporter::importProcess(
 	)
 {
 	m_processLocation = createLocation( _ctx );
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -52,7 +52,7 @@ DataflowProcessImporter::visitList_of_net_assignments(
 		Verilog2001Parser::List_of_net_assignmentsContext * _ctx
 	)
 {
-	acceptEachChildContext( *_ctx );
+	visitEachChildContext( *_ctx );
 
 	return antlrcpp::Any();
 }

@@ -33,7 +33,7 @@ IdentifierImporter::IdentifierImporter(
 void 
 IdentifierImporter::importIds(  Verilog2001Parser::Net_assignmentContext & _ctx )
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -51,7 +51,7 @@ IdentifierImporter::importId(
 antlrcpp::Any 
 IdentifierImporter::visitNet_lvalue( Verilog2001Parser::Net_lvalueContext * ctx )
 {	
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	return antlrcpp::Any();
 }
@@ -63,7 +63,7 @@ IdentifierImporter::visitNet_concatenation(
 	Verilog2001Parser::Net_concatenationContext * ctx 
 )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	return antlrcpp::Any();
 }
@@ -75,7 +75,7 @@ IdentifierImporter::visitNet_concatenation_value(
 	Verilog2001Parser::Net_concatenation_valueContext * ctx
 )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	return antlrcpp::Any();
 }
@@ -87,7 +87,7 @@ IdentifierImporter::visitSimple_hierarchical_branch(
 	Verilog2001Parser::Simple_hierarchical_branchContext * ctx
 )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return createSimpleId( *ctx );
 }
 

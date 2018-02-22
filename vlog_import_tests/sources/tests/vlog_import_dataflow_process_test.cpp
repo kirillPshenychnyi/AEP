@@ -313,4 +313,20 @@ TEST_CASE_METHOD( ProcessFixture, "assign concat to concat", "[dataflow]" )
 
 /***************************************************************************/
 
+TEST_CASE_METHOD( ProcessFixture, "assign concat to nested concat", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, output c, d );			\n"
+		"	assign { c, d } = { { a }, b };				\n"
+		"endmodule										\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
 }

@@ -36,7 +36,7 @@ DesingUnitImporter::visitModule_declaration(
 	m_currentUnit 
 		=	std::move( unitsFactory.newDesignUnit( ctx->children[ 1 ]->getText(), createLocation( *ctx ) ) );
 
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	IAccessor & vlogDm = getVlogDataModel();
 
@@ -52,7 +52,7 @@ DesingUnitImporter::visitModule_item(
 		Verilog2001Parser::Module_itemContext *ctx 
 	)	 
 {	
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	return antlrcpp::Any();
 }

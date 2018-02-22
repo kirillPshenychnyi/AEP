@@ -29,7 +29,7 @@ ModuleItemImporter::importItems(
 		Verilog2001Parser::Non_port_module_itemContext & _ctx 
 	)
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -39,7 +39,7 @@ ModuleItemImporter::importItems(
 		Verilog2001Parser::Module_or_generate_itemContext & _ctx 
 	)
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -49,7 +49,7 @@ ModuleItemImporter::visitModule_or_generate_item(
 	Verilog2001Parser::Module_or_generate_itemContext * ctx
 )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return antlrcpp::Any();
 }
 
@@ -60,7 +60,7 @@ ModuleItemImporter::visitModule_or_generate_item_declaration(
 		Verilog2001Parser::Module_or_generate_item_declarationContext *ctx 
 	) 
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return antlrcpp::Any();
 }
 

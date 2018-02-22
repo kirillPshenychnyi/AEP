@@ -41,7 +41,7 @@ ExpressionImporter::importExpression(
 	Verilog2001Parser::ExpressionContext & _expression 
 )
 {
-	acceptEachChildContext( _expression );
+	visitEachChildContext( _expression );
 
 	createExpression();
 
@@ -55,7 +55,7 @@ ExpressionImporter::importRange(
 	Verilog2001Parser::Range_expressionContext & _rangeExpression 
 )
 {
-	acceptEachChildContext( _rangeExpression );
+	visitEachChildContext( _rangeExpression );
 
 	createExpression();
 
@@ -258,7 +258,7 @@ ExpressionImporter::reset()
 antlrcpp::Any 
 ExpressionImporter::visitTerm( Verilog2001Parser::TermContext * ctx )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return antlrcpp::Any();
 }
 
@@ -269,7 +269,7 @@ ExpressionImporter::visitPrimary( Verilog2001Parser::PrimaryContext * ctx )
 {
 	using namespace VlogDM;
 
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 
 	processLastContext();
 
@@ -286,7 +286,7 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 	BinaryOperatoInfo & lastContext = getLastContext();
 
 	if( !Operator::isUnary( lastContext.m_operator ) )
-		acceptEachChildContext( *ctx );
+		visitEachChildContext( *ctx );
 	else 
 	{
 		Writable::ExpressionFactory const & expressionFactory 
