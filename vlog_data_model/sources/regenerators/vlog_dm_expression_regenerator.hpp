@@ -33,11 +33,15 @@ private:
 
 /***************************************************************************/
 
-	void visit( const PrimaryLiteral& _literal ) override;
+	void visit( PrimaryLiteral const& _literal ) override;
 
-	void visit( const BinaryOperator& _operator ) override;
-	 
-	void visit( const PrimaryIdentifier& _id ) override;
+	void visit( BinaryOperator const& _operator ) override;
+	
+	void visit( UnaryOperator const& _operator ) override;
+	
+	void visit( PrimaryIdentifier const& _id ) override;
+
+	void visit( Concatenation const& _concat ) override;
 
 /***************************************************************************/
 

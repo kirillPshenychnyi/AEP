@@ -56,6 +56,14 @@ private:
 		Verilog2001Parser::Net_lvalueContext * ctx	
 	) override;
 
+	antlrcpp::Any visitNet_concatenation(
+		Verilog2001Parser::Net_concatenationContext * ctx
+	) override;
+
+	antlrcpp::Any visitNet_concatenation_value(
+		Verilog2001Parser::Net_concatenation_valueContext * ctx
+	) override;
+
 	antlrcpp::Any visitSimple_hierarchical_branch(
 		Verilog2001Parser::Simple_hierarchical_branchContext * ctx	
 	) override;

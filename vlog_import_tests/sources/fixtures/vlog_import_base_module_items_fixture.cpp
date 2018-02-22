@@ -17,7 +17,7 @@ BaseModuleItemsFixture::checkCorrectImport(
 	,	Lines const & _expected 
 )
 {
-	static boost::format msg( "Import mistmatch\n expected: %1%\n actual: %2%" );
+	static boost::format msg( "Import mistmatch\n expected:\t %1%\n actual:\t %2%" );
 
 	std::string expected;
 

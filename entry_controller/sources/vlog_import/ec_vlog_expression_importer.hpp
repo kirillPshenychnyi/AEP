@@ -24,8 +24,10 @@ class ExpressionImporter
 
 	struct BinaryOperatoInfo
 	{
-		BinaryOperatoInfo()
-			:	m_operator( VlogDM::Operator::Kind::Unknown )
+		BinaryOperatoInfo( 
+			VlogDM::Operator::Kind _operator = VlogDM::Operator::Kind::Unknown
+		)
+		:	m_operator( _operator )
 		{}
 
 		void clear()
@@ -56,6 +58,11 @@ class ExpressionImporter
 			return m_leftOperand && m_rightOperand;
 		}
 
+		bool canConstructUnaryOperator()
+		{
+			return m_leftOperand && VlogDM::Operator::isUnary( m_operator );
+		}
+
 		VlogDM::ExpressionPtr m_leftOperand;
 		VlogDM::ExpressionPtr m_rightOperand;
 		VlogDM::Operator::Kind m_operator;
@@ -71,6 +78,10 @@ class ExpressionImporter
 		std::list < VlogDM::Operator::Kind >
 		Operators;
 
+	typedef
+		std::vector< BinaryOperatoInfo >
+		OperatorContexts;
+
 /***************************************************************************/
 
 public:
@@ -83,7 +94,7 @@ public:
 	);
 
 	VlogDM::ExpressionPtr importExpression( 
-			Verilog2001Parser::ExpressionContext & _expression
+		Verilog2001Parser::ExpressionContext & _expression
 	);
 
 	VlogDM::RangePtr importRange(
@@ -96,9 +107,17 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::ExpressionPtr createExpression();
+	void createExpression();
 
 	VlogDM::ExpressionPtr createBinaryOperator( BinaryOperatoInfo & _info );
+
+	VlogDM::ExpressionPtr createUnaryOperator( BinaryOperatoInfo & _info );
+
+	void processLastContext();
+
+	BinaryOperatoInfo & getLastContext();
+
+	void reset();
 
 /***************************************************************************/
 
@@ -114,12 +133,24 @@ private:
 
 	antlrcpp::Any visitPrimary( Verilog2001Parser::PrimaryContext * ctx ) override;
 
+	antlrcpp::Any visitExpression( 
+		Verilog2001Parser::ExpressionContext * ctx 
+	) override;
+
 	antlrcpp::Any visitBinary_operator( 
 		Verilog2001Parser::Binary_operatorContext * ctx 
 	) override;
 
+	antlrcpp::Any visitUnary_operator(
+		Verilog2001Parser::Unary_operatorContext * ctx
+	) override;
+
 	antlrcpp::Any visitNumber( 
 		Verilog2001Parser::NumberContext * ctx 
+	) override;
+
+	antlrcpp::Any visitConcatenation(
+		Verilog2001Parser::ConcatenationContext * ctx
 	) override;
 
 /***************************************************************************/
@@ -128,11 +159,13 @@ private:
 
 /***************************************************************************/
 
+	OperatorContexts m_contexts;
+
 	Operands m_topNodes;
 
 	Operators m_operators;
 
-	BinaryOperatoInfo m_currentInfo;
+	VlogDM::ExpressionPtr m_result;
 
 	VlogDM::Writable::DesignUnit const & m_targetUnit;
 

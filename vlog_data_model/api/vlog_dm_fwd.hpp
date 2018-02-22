@@ -17,6 +17,8 @@ namespace VlogDM
 		struct VariableDeclaration;
 		struct MultidimensionalRange;
 
+		struct Concatenation;
+
 		typedef
 			std::unique_ptr< DesignUnit >
 			DesignUnitPtr;
@@ -53,8 +55,10 @@ namespace VlogDM
 
 	struct Expression;
 	struct PrimaryLiteral;
+	struct UnaryOperator;
 	struct BinaryOperator;
 	struct PrimaryIdentifier;
+	struct Concatenation;
 
 	struct DesignUnitFactory;
 

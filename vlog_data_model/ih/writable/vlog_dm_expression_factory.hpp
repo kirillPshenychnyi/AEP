@@ -33,8 +33,18 @@ struct ExpressionFactory
 		,	Operator::Kind _operator
 	) const = 0;
 
+	virtual std::unique_ptr< UnaryOperator > newUnaryOperator(
+			ExpressionPtr _operand
+		,	Operator::Kind _operator
+		,	Location const & _location
+	) const = 0;
+
 	virtual std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
 			BaseIdentifierPtr _id
+	) const = 0;
+
+	virtual std::unique_ptr< Writable::Concatenation > newConcatenation(
+		Location const & _location
 	) const = 0;
 
 /***************************************************************************/

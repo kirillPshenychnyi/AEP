@@ -50,8 +50,34 @@ IdentifierImporter::importId(
 
 antlrcpp::Any 
 IdentifierImporter::visitNet_lvalue( Verilog2001Parser::Net_lvalueContext * ctx )
+{	
+	acceptEachChildContext( *ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+IdentifierImporter::visitNet_concatenation( 
+	Verilog2001Parser::Net_concatenationContext * ctx 
+)
 {
-	return createSimpleId( *ctx );
+	acceptEachChildContext( *ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+IdentifierImporter::visitNet_concatenation_value(
+	Verilog2001Parser::Net_concatenation_valueContext * ctx
+)
+{
+	acceptEachChildContext( *ctx );
+
+	return antlrcpp::Any();
 }
 
 /***************************************************************************/

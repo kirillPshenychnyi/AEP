@@ -12,6 +12,8 @@
 
 #include "vlog_data_model\api\vlog_dm_operator.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_concatenation.hpp"
+
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -69,16 +71,29 @@ DataflowProcessImporter::visitNet_assignment(
 
 	IdentifierImporter importer( getVlogDataModel(), m_targetUnit );
 
+	auto primaryIdCreator
+		=	[ & ]( int _idx ) -> ExpressionPtr
+			{
+				return expressionFactory.newPrimaryIdentifier( importer.takeId( _idx ) );
+			};
+
 	// lhs is first child
 	ctx->children.front()->accept( &importer );
-
+	
 	const int idsCount = importer.getIdsCount();
 
 	if( idsCount == 1 )
 	{
-		m_targetExpression.reset(
-			expressionFactory.newPrimaryIdentifier( importer.takeId( 0 ) ).release()
-		);
+		m_targetExpression = primaryIdCreator( 0 );
+	}
+	else
+	{
+		auto concat = expressionFactory.newConcatenation( createLocation( *ctx ) );
+
+		for( int i = 0; i < idsCount; ++i )
+			concat->addExpression( primaryIdCreator( i ) );
+
+		m_targetExpression = std::move( concat );
 	}
 
 	// rhs expression is last child

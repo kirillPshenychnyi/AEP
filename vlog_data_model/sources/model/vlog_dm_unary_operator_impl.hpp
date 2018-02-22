@@ -1,11 +1,14 @@
-#ifndef __VLOG_DM_BINARY_OPERATOR_IMPL_HPP__
-#define __VLOG_DM_BINARY_OPERATOR_IMPL_HPP__
+#ifndef __VLOG_DM_UNARY_OPERATOR_IMPL_HPP__
+#define __VLOG_DM_UNARY_OPERATOR_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
-#include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
+#include "vlog_data_model\api\vlog_dm_unary_operator.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
+
 #include "vlog_data_model\ih\visitors\vlog_dm_expression_visitor.hpp"
+
+#include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 
 /***************************************************************************/
 
@@ -13,14 +16,14 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-class BinaryOperatorImpl
-	:	public LocatedImpl< BinaryOperator >
+class UnaryOperatorImpl
+	:	public LocatedImpl< UnaryOperator >
 {
 
 /***************************************************************************/
 
 	typedef
-		LocatedImpl< BinaryOperator >
+		LocatedImpl< UnaryOperator >
 		BaseClass;
 
 /***************************************************************************/
@@ -29,18 +32,15 @@ public:
 
 /***************************************************************************/
 
-	BinaryOperatorImpl(
-			Location const & _location
-		,	ExpressionPtr _leftOperand
-		,	ExpressionPtr _rightOperand
+	UnaryOperatorImpl( 
+			ExpressionPtr _operand 
 		,	Operator::Kind _operator
+		,	Location const & _location
 	);
 
 /***************************************************************************/
 
-	Expression const & getLeftOperand() const override;
-
-	Expression const & getRightOperand() const override;
+	Expression const & getOperand() const override;
 
 	Operator::Kind getOperator() const override;
 
@@ -52,8 +52,8 @@ private:
 
 /***************************************************************************/
 
-	ExpressionPtr m_leftOperand;
-	ExpressionPtr m_rightOperand;
+	ExpressionPtr m_operand;
+	
 	Operator::Kind m_operator;
 
 /***************************************************************************/
@@ -62,16 +62,14 @@ private:
 
 /***************************************************************************/
 
-inline
-BinaryOperatorImpl::BinaryOperatorImpl(
-		Location const & _location
-	,	std::unique_ptr< Expression > _leftOperand
-	,	std::unique_ptr< Expression > _rightOperand
+inline 
+UnaryOperatorImpl::UnaryOperatorImpl(
+		ExpressionPtr _operand
 	,	Operator::Kind _operator
+	,	Location const & _location
 	)
 	:	BaseClass( _location )
-	,	m_leftOperand( _leftOperand.release() )
-	,	m_rightOperand( _rightOperand.release() )
+	,	m_operand( std::move( _operand ) )
 	,	m_operator( _operator )
 {
 }
@@ -79,39 +77,27 @@ BinaryOperatorImpl::BinaryOperatorImpl(
 /***************************************************************************/
 
 inline
-Expression const &
-BinaryOperatorImpl::getLeftOperand() const
+Expression const & 
+UnaryOperatorImpl::getOperand() const
 {
-	assert( m_leftOperand );
+	assert( m_operand );
 
-	return *m_leftOperand;
+	return *m_operand;
 }
 
 /***************************************************************************/
 
-inline
-Expression const &
-BinaryOperatorImpl::getRightOperand() const
-{
-	assert( m_rightOperand );
-
-	return *m_rightOperand;
-}
-
-/***************************************************************************/
-
-inline 
-Operator::Kind
-BinaryOperatorImpl::getOperator() const
+Operator::Kind 
+UnaryOperatorImpl::getOperator() const
 {
 	return m_operator;
 }
 
 /***************************************************************************/
 
-inline
+inline 
 void 
-BinaryOperatorImpl::accept( ExpressionVisitor & _visitor ) const
+UnaryOperatorImpl::accept( ExpressionVisitor & _visitor ) const
 {
 	_visitor.visit( *this );
 }
@@ -122,4 +108,4 @@ BinaryOperatorImpl::accept( ExpressionVisitor & _visitor ) const
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_BINARY_OPERATOR_IMPL_HPP__
+#endif // !__VLOG_DM_UNARY_OPERATOR_IMPL_HPP__

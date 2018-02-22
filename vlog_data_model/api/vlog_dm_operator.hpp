@@ -22,20 +22,25 @@ struct Operator
 
 		,	Assign
 		
-		,	Plus
-		,	Minus
-		,	Mul
-		,	Div
+		,	Plus		// +
+		,	Minus		// -
+		,	Mul			// *
+		,	Div			// /
 		
-		,	And
-		,	Or
-		,	Not
-		,	Xor
+		,	And			// &
+		,	Or			// |
+		,	Not			// ~
+		,	Xor			// ^
+			
+		,	ReductionAnd	// & 
+		,	ReductionNand	// ~&
+		,	ReductionOr		// | 
+		,	ReductionNor	// ~|
+		,	ReductionXor	// ~^ or ^~
 
-		,	LogicAnd
-		,	LogicOr
-		,	LogicXor
-		,	LogicNot
+		,	LogicAnd	// &&
+		,	LogicOr		// ||
+		,	LogicNot	// !
 
 		,	First = Assign
 		,	Last = LogicNot
@@ -45,6 +50,9 @@ struct Operator
 
 	static Kind fromString( const char * const _value )
 	{
+		if( !strcmp( _value, "~^" ) || !strcmp( _value, "~^" ) )
+			return Kind::ReductionXor;
+
 		return Tools::Convertors::toEnumFromString< Operator >( _value );
 	}
 
@@ -67,8 +75,10 @@ struct Operator
 				return "/";
 
 			case Kind::And:
+			case Kind::ReductionAnd:
 				return "&";
 			case Kind::Or:
+			case Kind::ReductionOr:
 				return "|";
 			case Kind::Not:
 				return "~";
@@ -79,11 +89,13 @@ struct Operator
 				return "&&";
 			case Kind::LogicOr:
 				return "||";
-			case Kind::LogicXor:
-				return "^";
 			case Kind::LogicNot:
 				return "!";
 			
+			case Kind::ReductionNand: return "~&";
+			case Kind::ReductionNor: return "~|";
+			case Kind::ReductionXor: return "~^";
+
 			default:
 				return "";
 		}
@@ -91,7 +103,22 @@ struct Operator
 
 	static bool isUnary( Kind _operator )
 	{
-		return _operator == Kind::Not || _operator == Kind::LogicNot;
+		switch( _operator )
+		{
+			case Kind::Plus:
+			case Kind::Minus:
+			case Kind::Not:
+			case Kind::LogicNot:
+			case Kind::ReductionAnd:
+			case Kind::ReductionNand:
+			case Kind::ReductionOr:
+			case Kind::ReductionNor:
+			case Kind::ReductionXor:
+			case Kind::LogicAnd:
+				return true;
+			default: 
+				return false;
+		}
 	}
 
 /***************************************************************************/

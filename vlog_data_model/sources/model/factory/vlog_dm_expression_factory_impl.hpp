@@ -33,10 +33,20 @@ public:
 		,	ExpressionPtr _rightOperand
 		,	Operator::Kind _operator
 	) const override;
-	
-	std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
-			BaseIdentifierPtr _id
+
+	std::unique_ptr< UnaryOperator > newUnaryOperator(
+			ExpressionPtr _operand
+		,	Operator::Kind _operator
+		,	Location const & _location
 	) const override;
+
+	std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
+		BaseIdentifierPtr _id
+	) const override;
+
+	std::unique_ptr< Writable::Concatenation > newConcatenation(
+		Location const & _location
+	) const;
 
 /***************************************************************************/
 
