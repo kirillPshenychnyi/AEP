@@ -27,6 +27,10 @@ class IdentifierImporter
 		std::vector< VlogDM::BaseIdentifierPtr >
 		ExtractedIds;
 
+	typedef
+		std::vector< VlogDM::RangePtr >
+		Ranges;
+		
 /***************************************************************************/
 
 public:
@@ -77,6 +81,8 @@ private:
 
 	antlrcpp::Any createSimpleId( antlr4::ParserRuleContext & _ctx );
 
+	VlogDM::RangePtr createRange();
+
 /***************************************************************************/
 
 private:
@@ -85,6 +91,8 @@ private:
 
 	ExtractedIds m_extractedIds;
 
+	Ranges m_currentRanges;
+		 
 	VlogDM::RangePtr m_range;
 
 /***************************************************************************/

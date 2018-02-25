@@ -94,10 +94,6 @@ public:
 		Verilog2001Parser::ExpressionContext & _expression
 	);
 
-	VlogDM::RangePtr importRange(
-		Verilog2001Parser::Range_expressionContext & _rangeExpression
-	);
-
 /***************************************************************************/
 
 private:

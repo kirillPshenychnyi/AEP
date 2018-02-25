@@ -269,7 +269,7 @@ TEST_CASE_METHOD( ProcessFixture, "constant slice select", "[dataflow]" )
 {
 	std::string code =
 		"module top (input [4:0] b, output [2:0] c);	\n"
-		"	assign c = b[ 2:0 ];						\n"
+		"	assign c = b[ 2 : 0 ];						\n"
 		"endmodule										\n"
 		;
 
@@ -277,6 +277,75 @@ TEST_CASE_METHOD( ProcessFixture, "constant slice select", "[dataflow]" )
 
 	expectDesignUnit( "top", 1 )
 		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "multidimensional sel expression", "[dataflow]" )
+{
+	std::string code =
+		"module top (input sel, offset, output out );	\n"
+		"	reg [3:0] mem [7:0]	;						\n"
+		"	assign out = mem[ sel ][ offset ];			\n"
+		"endmodule										\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 3, 3 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "assign to output bit", "[dataflow]" )
+{
+	std::string code =
+		"module top (input sel, offset, output [3:0] out );	\n"
+		"	reg [3:0] mem [7:0]	;							\n"
+		"	assign out[ 0 ] = mem[ sel ][ offset ];			\n"
+		"endmodule											\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 3, 3 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "assign to output slice", "[dataflow]" )
+{
+	std::string code =
+		"module top (input sel, offset, output [3:0] out );	\n"
+		"	reg [3:0] mem [7:0]	;							\n"
+		"	assign out[ 2 : 0 ] = mem[ sel ][ 3 : 1 ];		\n"
+		"endmodule											\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 3, 3 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "array assigns", "[dataflow]" )
+{
+	std::string code =
+		"module top (input sel, offset );							\n"
+		"	reg [3:0] mem [7:0]	;									\n"
+		"	wire [3:0] target [3:0];								\n"
+		"	assign target[ sel ][ offset ] = mem[ sel ][ offset ];	\n"
+		"endmodule													\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 4, 4 ) );
 }
 
 /***************************************************************************/

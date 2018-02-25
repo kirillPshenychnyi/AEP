@@ -2,10 +2,12 @@
 
 #include "entry_controller\sources\vlog_import\ec_vlog_identifier_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_expression_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_range_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 #include "vlog_data_model\api\vlog_dm_range.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_multidimensional_range.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 
@@ -90,11 +92,11 @@ IdentifierImporter::visitSimple_hierarchical_branch(
 /***************************************************************************/
 
 antlrcpp::Any 
-IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext  * ctx )
+IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext * ctx )
 {
-	ExpressionImporter expressionImporter( getVlogDataModel() );
+	RangeImporter rangeImporter( getVlogDataModel() );
 
-	m_range = expressionImporter.importRange( *ctx );
+	m_currentRanges.push_back( rangeImporter.importRange( *ctx ) );
 
 	return antlrcpp::Any();
 }
@@ -109,16 +111,46 @@ IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 				_ctx.children.front()->getText() 
 			);
 
+	assert( declared );
+
 	m_extractedIds.push_back(
 		getVlogDataModel().getItemsFactory().newIdentifier( 
 				createLocation( _ctx )
 			,	*declared 
-			,	std::move( m_range )
+			,	createRange()
 		)
 	);
 
+	m_currentRanges.clear();
+
 	return antlrcpp::Any();
 }
+
+/***************************************************************************/
+
+VlogDM::RangePtr 
+IdentifierImporter::createRange()
+{
+	const int rangesCount = m_currentRanges.size();
+
+	if( m_currentRanges.empty() )
+		return VlogDM::RangePtr();
+
+	if( m_currentRanges.size() == 1 )
+		return std::move( m_currentRanges.front() );
+
+	auto multidimRange = 
+		getVlogDataModel().getItemsFactory().newMultidimensionalRange( 
+			m_currentRanges.front()->getLocation()
+		);
+
+	for( auto & range : m_currentRanges )
+		multidimRange->addRange( std::move( range ) );
+
+	m_currentRanges.clear();
+
+	return multidimRange;
+} 
 
 /***************************************************************************/
 

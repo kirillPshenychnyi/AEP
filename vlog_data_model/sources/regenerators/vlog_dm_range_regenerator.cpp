@@ -39,6 +39,17 @@ RangeRegenerator::visit( ExpressionRange const & _range )
 void
 RangeRegenerator::visit( PartSelectRange const & _range )
 {
+	m_targetStream << "[ ";
+
+	ExpressionRegenerator expressionRegenerator( m_targetStream );
+
+	_range.getLeftBound().accept( expressionRegenerator );
+	
+	m_targetStream << " : ";
+
+	_range.getRightBound().accept( expressionRegenerator );
+
+	m_targetStream << " ]";
 }
 
 /***************************************************************************/
@@ -46,6 +57,10 @@ RangeRegenerator::visit( PartSelectRange const & _range )
 void 
 RangeRegenerator::visit( MultidimensionalRange const & _range )
 {
+	const int rangesCount = _range.getRangesCount();
+
+	for( int i = 0; i < rangesCount; ++i )
+		_range.getRange( i ).accept( *this );
 }
 
 /***************************************************************************/

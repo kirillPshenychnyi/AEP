@@ -2006,6 +2006,7 @@ variable_identifier
 // 9.4 Identifier branches
 simple_hierarchical_branch
    : Simple_identifier ('[' range_expression  ']')? ('.' Simple_identifier ('[' range_expression  ']')?)*
+   | Simple_identifier ('[' range_expression  ']')*
    ;
 
 escaped_hierarchical_branch

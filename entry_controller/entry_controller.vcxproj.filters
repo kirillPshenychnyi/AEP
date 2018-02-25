@@ -69,7 +69,7 @@
     <ClInclude Include="sources\vlog_import\ec_vlog_identifier_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sources\vlog_import\ec_range_importer.hpp">
+    <ClInclude Include="sources\vlog_import\ec_vlog_range_importer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,7 +116,7 @@
     <ClCompile Include="sources\vlog_import\ec_vlog_identifier_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\vlog_import\ec_range_importer.cpp">
+    <ClCompile Include="sources\vlog_import\ec_vlog_range_importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

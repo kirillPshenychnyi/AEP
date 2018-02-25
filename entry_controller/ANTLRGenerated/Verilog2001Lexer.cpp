@@ -1,5 +1,5 @@
 
-// Generated from Verilog2001.g4 by ANTLR 4.7
+// Generated from AntlrGenerated/Verilog2001.g4 by ANTLR 4.7
 
 #include "stdafx.h"
 #include "Verilog2001Lexer.h"

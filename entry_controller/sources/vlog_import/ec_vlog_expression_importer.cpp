@@ -11,7 +11,6 @@
 #include "vlog_data_model\api\vlog_dm_primary_literal.hpp"
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_unary_operator.hpp"
-#include "vlog_data_model\api\vlog_dm_range.hpp"
 #include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
@@ -43,23 +42,6 @@ ExpressionImporter::importExpression(
 	createExpression();
 
 	return std::move( m_result );
-}
-
-/***************************************************************************/
-
-VlogDM::RangePtr 
-ExpressionImporter::importRange( 
-	Verilog2001Parser::Range_expressionContext & _rangeExpression 
-)
-{
-	visitEachChildContext( _rangeExpression );
-
-	createExpression();
-
-	return 
-		getVlogDataModel().getItemsFactory().newExpressionRange( 
-			std::move( m_result )
-		);
 }
 
 /***************************************************************************/
@@ -412,9 +394,6 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 	using namespace VlogDM;
 
 	IAccessor & vlogDM = getVlogDataModel();
-
-	auto declared 
-		= getVlogDataModel().getCurrentImportedUnit().findDeclared( ctx->getText() );
 
 	IdentifierImporter idImporter( getVlogDataModel() );
 
