@@ -19,11 +19,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-VariableImporter::VariableImporter(
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit 
-	)
-	:	BaseClass( _accessor, _targetUnit )
+VariableImporter::VariableImporter( VlogDM::IAccessor & _accessor )
+	:	BaseClass( _accessor )
 {
 }
 

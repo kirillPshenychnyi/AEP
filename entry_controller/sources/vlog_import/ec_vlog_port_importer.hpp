@@ -32,10 +32,7 @@ public:
 
 /***************************************************************************/
 
-	PortImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit 
-	);
+	PortImporter( VlogDM::IAccessor & _accessor );
 
 	void importPorts( Verilog2001Parser::Port_declarationContext & _ctx );
 	

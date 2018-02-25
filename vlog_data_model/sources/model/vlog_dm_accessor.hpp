@@ -5,7 +5,7 @@
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 
-#include "vlog_data_model\api\vlog_dm_design_unit.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declaration_factory.hpp"
@@ -34,15 +34,19 @@ class Accessor
 /***************************************************************************/
 
 	typedef
-		Tools::Collections::NamedHasher< DesignUnitPtr >
+		Tools::Collections::NamedHasher< Writable::DesignUnitPtr >
 		DesignUnitHasher;
 
 	typedef
-		Tools::Collections::NamedComparator< DesignUnitPtr >
+		Tools::Collections::NamedComparator< Writable::DesignUnitPtr >
 		DesignUnitComparator;
 
 	typedef
-		boost::unordered_set< std::unique_ptr< DesignUnit >, DesignUnitHasher, DesignUnitComparator >
+		boost::unordered_set< 
+				Writable::DesignUnitPtr
+			,	DesignUnitHasher
+			,	DesignUnitComparator 
+		>
 		UnitsSet;
 
 /***************************************************************************/
@@ -51,11 +55,15 @@ public:
 
 /***************************************************************************/
 
-	void addUnit( DesignUnitPtr _unit ) override;
+	Accessor();
+
+	void addUnit( Writable::DesignUnitPtr _unit ) override;
 
 	boost::optional< DesignUnit const & > findUnit( 
-			std::string const& _unitName 
+		std::string const& _unitName 
 	) const override;
+
+	Writable::DesignUnit & getCurrentImportedUnit() override;
 
 	void reset() override;
 		
@@ -90,6 +98,8 @@ private:
 /***************************************************************************/
 
 	UnitsSet m_unitsSet;
+
+	Writable::DesignUnit * m_currentImportedUnit;
 
 	std::unique_ptr< Writable::DesignUnitFactory > m_designUnitFactory;
 

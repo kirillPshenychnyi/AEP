@@ -19,9 +19,17 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-void 
-Accessor::addUnit( DesignUnitPtr _unit )
+Accessor::Accessor()
+	:	m_currentImportedUnit( nullptr )
 {
+}
+
+/***************************************************************************/
+
+void
+Accessor::addUnit( Writable::DesignUnitPtr _unit )
+{	
+	m_currentImportedUnit = _unit.get();
 	m_unitsSet.emplace( std::move( _unit ) );
 }
 
@@ -40,10 +48,21 @@ Accessor::findUnit( std::string const & _unitName ) const
 
 /***************************************************************************/
 
+Writable::DesignUnit &
+Accessor::getCurrentImportedUnit()
+{
+	assert( m_currentImportedUnit );
+
+	return *m_currentImportedUnit;
+}
+
+/***************************************************************************/
+
 void 
 Accessor::reset()
 {
 	m_unitsSet.clear();
+	m_currentImportedUnit = nullptr;
 }
 
 /***************************************************************************/

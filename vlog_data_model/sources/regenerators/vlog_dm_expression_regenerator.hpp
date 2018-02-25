@@ -43,6 +43,8 @@ private:
 
 	void visit( Concatenation const& _concat ) override;
 
+	void visit( MultipleConcatenation const& _concat ) override;
+
 /***************************************************************************/
 
 };

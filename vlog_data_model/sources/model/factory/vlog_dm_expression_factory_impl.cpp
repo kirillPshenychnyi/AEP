@@ -9,6 +9,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_unary_operator_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_primary_identifier_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_concatenation_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_multiple_concatenation_impl.hpp"
 
 /***************************************************************************/
 
@@ -78,6 +79,23 @@ std::unique_ptr< Writable::Concatenation >
 ExpressionFactoryImpl::newConcatenation( Location const & _location ) const
 {
 	return std::make_unique< ConcatenationImpl >( _location );
+}
+
+/***************************************************************************/
+
+std::unique_ptr< MultipleConcatenation > 
+ExpressionFactoryImpl::newMultipleConcatenation(
+		ExpressionPtr _repeatExpression
+	,	ConcatPtr _concat
+	,	Location const & _location
+) const
+{
+	return
+		std::make_unique< MultipleConcatenationImpl >(
+				std::move( _concat )
+			,	std::move( _repeatExpression )
+			,	_location 
+		);
 }
 
 /***************************************************************************/

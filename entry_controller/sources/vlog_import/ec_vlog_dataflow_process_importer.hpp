@@ -26,10 +26,7 @@ public:
 
 /***************************************************************************/
 
-	DataflowProcessImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit
-	);
+	DataflowProcessImporter( VlogDM::IAccessor & _accessor );
 
 /***************************************************************************/
 
@@ -55,17 +52,11 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::ExpressionPtr getTargetExpression();
-
-/***************************************************************************/
-
 private:
 
 /***************************************************************************/
 
 	VlogDM::Location m_processLocation;
-
-	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 	VlogDM::ExpressionPtr m_targetExpression;
 

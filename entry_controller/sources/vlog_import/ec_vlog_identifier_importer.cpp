@@ -19,12 +19,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-IdentifierImporter::IdentifierImporter( 
-		VlogDM::IAccessor & _accessor
-	,	VlogDM::Writable::DesignUnit const & _targetUnit 
-	)
+IdentifierImporter::IdentifierImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -96,7 +92,7 @@ IdentifierImporter::visitSimple_hierarchical_branch(
 antlrcpp::Any 
 IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext  * ctx )
 {
-	ExpressionImporter expressionImporter( getVlogDataModel(), m_targetUnit );
+	ExpressionImporter expressionImporter( getVlogDataModel() );
 
 	m_range = expressionImporter.importRange( *ctx );
 
@@ -108,7 +104,10 @@ IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionCo
 antlrcpp::Any 
 IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 {
-	auto declared = m_targetUnit.findDeclared( _ctx.children.front()->getText() );
+	auto declared 
+		=	getVlogDataModel().getCurrentImportedUnit().findDeclared( 
+				_ctx.children.front()->getText() 
+			);
 
 	m_extractedIds.push_back(
 		getVlogDataModel().getItemsFactory().newIdentifier( 

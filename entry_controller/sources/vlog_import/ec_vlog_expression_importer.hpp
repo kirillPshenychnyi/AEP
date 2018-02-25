@@ -88,10 +88,7 @@ public:
 
 /***************************************************************************/
 
-	ExpressionImporter( 
-			VlogDM::IAccessor & _vlogDm
-		,	VlogDM::Writable::DesignUnit const & _targetUnit
-	);
+	ExpressionImporter( VlogDM::IAccessor & _vlogDm );
 
 	VlogDM::ExpressionPtr importExpression( 
 		Verilog2001Parser::ExpressionContext & _expression
@@ -112,6 +109,10 @@ private:
 	VlogDM::ExpressionPtr createBinaryOperator( BinaryOperatoInfo & _info );
 
 	VlogDM::ExpressionPtr createUnaryOperator( BinaryOperatoInfo & _info );
+
+	VlogDM::ConcatPtr createConcat(
+		Verilog2001Parser::ConcatenationContext & _concateContext 
+	);
 
 	void processLastContext();
 
@@ -153,6 +154,10 @@ private:
 		Verilog2001Parser::ConcatenationContext * ctx
 	) override;
 
+	antlrcpp::Any visitMultiple_concatenation(
+		Verilog2001Parser::Multiple_concatenationContext *ctx 
+	);
+
 /***************************************************************************/
 
 private:
@@ -166,8 +171,6 @@ private:
 	Operators m_operators;
 
 	VlogDM::ExpressionPtr m_result;
-
-	VlogDM::Writable::DesignUnit const & m_targetUnit;
 
 /***************************************************************************/
 

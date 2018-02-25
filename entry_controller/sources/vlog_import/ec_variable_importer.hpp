@@ -30,10 +30,7 @@ public:
 
 /***************************************************************************/
 
-	VariableImporter(
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit 
-	);
+	VariableImporter( VlogDM::IAccessor & _accessor );
 
 /***************************************************************************/
 

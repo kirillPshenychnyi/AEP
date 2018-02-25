@@ -16,6 +16,7 @@ struct PrimaryIdentifier;
 struct BinaryOperator;
 struct UnaryOperator;
 struct Concatenation;
+struct MultipleConcatenation;
 
 /***************************************************************************/
 
@@ -33,7 +34,9 @@ struct ExpressionVisitor
 
 	virtual void visit( PrimaryIdentifier const & _id ) = 0;
 
-	virtual void visit( Concatenation const & _id ) = 0;
+	virtual void visit( Concatenation const & _concat ) = 0;
+
+	virtual void visit( MultipleConcatenation const & _concat ) = 0;
 
 /***************************************************************************/
 
@@ -56,6 +59,8 @@ struct ExpressionDefaultVisitor
 	void visit( PrimaryIdentifier const& _id ) override {}
 
 	void visit( Concatenation const& _id ) override {}
+
+	void visit( MultipleConcatenation const & _concat ) override {}
 
 /***************************************************************************/
 

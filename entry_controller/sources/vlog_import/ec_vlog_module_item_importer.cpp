@@ -13,12 +13,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-ModuleItemImporter::ModuleItemImporter( 
-		VlogDM::IAccessor & _accessor 
-	,	VlogDM::Writable::DesignUnit & _targetUnit
-	)
+ModuleItemImporter::ModuleItemImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -91,7 +87,7 @@ ModuleItemImporter::visitContinuous_assign(
 		Verilog2001Parser::Continuous_assignContext * ctx
 	)
 {
-	DataflowProcessImporter dataflowImporter( getVlogDataModel(), m_targetUnit );
+	DataflowProcessImporter dataflowImporter( getVlogDataModel() );
 
 	dataflowImporter.importProcess( *ctx );
 
@@ -104,7 +100,7 @@ template< typename _Context >
 antlrcpp::Any
 ModuleItemImporter::importVar( _Context & _ctx )
 {
-	VariableImporter varImporter( getVlogDataModel(), m_targetUnit );
+	VariableImporter varImporter( getVlogDataModel() );
 
 	varImporter.importVars( _ctx );
 

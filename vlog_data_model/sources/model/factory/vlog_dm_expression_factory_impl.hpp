@@ -5,8 +5,6 @@
 
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
-
 /***************************************************************************/
 
 namespace VlogDM {
@@ -46,7 +44,13 @@ public:
 
 	std::unique_ptr< Writable::Concatenation > newConcatenation(
 		Location const & _location
-	) const;
+	) const override;
+
+	std::unique_ptr< MultipleConcatenation > newMultipleConcatenation(
+			ExpressionPtr _repeatExpression
+		,	ConcatPtr _concat
+		,	Location const & _location
+	) const override;
 
 /***************************************************************************/
 

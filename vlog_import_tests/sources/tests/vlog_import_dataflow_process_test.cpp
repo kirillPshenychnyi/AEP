@@ -265,6 +265,22 @@ TEST_CASE_METHOD( ProcessFixture, "port as bit select", "[dataflow]" )
 
 /***************************************************************************/
 
+TEST_CASE_METHOD( ProcessFixture, "constant slice select", "[dataflow]" )
+{
+	std::string code =
+		"module top (input [4:0] b, output [2:0] c);	\n"
+		"	assign c = b[ 2:0 ];						\n"
+		"endmodule										\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
 TEST_CASE_METHOD( ProcessFixture, "assign concat to output", "[dataflow]" )
 {
 	std::string code =
@@ -319,6 +335,70 @@ TEST_CASE_METHOD( ProcessFixture, "assign concat to nested concat", "[dataflow]"
 		"module top (input a, b, output c, d );			\n"
 		"	assign { c, d } = { { a }, b };				\n"
 		"endmodule										\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "assign multiconcat to output", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, output b );	    \n"
+		"	assign b = { 2{ a } };				\n"
+		"endmodule								\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "assign multiconcat with nested expressions to output", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, c, d, output [5:0] e );	\n"
+		"	assign b = { 2{ ( a | c ), d, c } };			\n"
+		"endmodule											\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "multiconcat in concat", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, c, d, output [5:0] e );	\n"
+		"	assign b = { a, b, { 2{ c, d } } };				\n"
+		"endmodule											\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "concat of different literals", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, c, d, output [5:0] e );	\n"
+		"	assign b = { 1'bx, 1'o0, 1'h1 };				\n"
+		"endmodule											\n"
 		;
 
 	runImport( code );

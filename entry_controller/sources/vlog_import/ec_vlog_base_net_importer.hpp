@@ -52,10 +52,7 @@ protected:
 
 /***************************************************************************/
 
-	BaseNetImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit  
-	);
+	BaseNetImporter( VlogDM::IAccessor & _accessor );
 
 /***************************************************************************/
 
@@ -80,8 +77,6 @@ protected:
 /***************************************************************************/
 	
 	ExtractedDeclarations m_extractedDeclarations;
-
-	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 /***************************************************************************/
 

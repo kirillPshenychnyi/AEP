@@ -33,10 +33,7 @@ public:
 
 /***************************************************************************/
 
-	IdentifierImporter( 
-			VlogDM::IAccessor & _accessor 
-		,	VlogDM::Writable::DesignUnit const & _targetUnit
-	);
+	IdentifierImporter( VlogDM::IAccessor & _accessor );
 
 	void importIds( Verilog2001Parser::Net_assignmentContext & _ctx );
 
@@ -87,8 +84,6 @@ private:
 /***************************************************************************/
 
 	ExtractedIds m_extractedIds;
-
-	VlogDM::Writable::DesignUnit const & m_targetUnit;
 
 	VlogDM::RangePtr m_range;
 

@@ -47,6 +47,12 @@ struct ExpressionFactory
 		Location const & _location
 	) const = 0;
 
+	virtual std::unique_ptr< MultipleConcatenation > newMultipleConcatenation(
+			ExpressionPtr _repeatExpression
+		,	ConcatPtr _concat
+		,	Location const & _location
+	) const = 0;
+
 /***************************************************************************/
 
 };

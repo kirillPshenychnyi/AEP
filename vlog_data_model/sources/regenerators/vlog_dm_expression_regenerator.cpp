@@ -10,6 +10,7 @@
 #include "vlog_data_model\api\vlog_dm_base_identifier.hpp"
 #include "vlog_data_model\api\vlog_dm_range.hpp"
 #include "vlog_data_model\api\vlog_dm_concatenation.hpp"
+#include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
 
 /***************************************************************************/
 
@@ -49,9 +50,8 @@ ExpressionRegenerator::visit( const BinaryOperator& _operator )
 
 	_operator.getRightOperand().accept( *this );
 
-		if( !isAssign )
+	if( !isAssign )
 		m_targetStream << " )";
-
 }
 
 /***************************************************************************/
@@ -98,6 +98,19 @@ ExpressionRegenerator::visit( Concatenation const& _concat )
 		if( !isLast )
 			m_targetStream << ", ";
 	}
+
+	m_targetStream << " }";
+}
+
+/***************************************************************************/
+
+void 
+ExpressionRegenerator::visit( MultipleConcatenation const& _concat )
+{
+	m_targetStream << "{ ";
+
+	_concat.getRepeatExpression().accept( *this );
+	_concat.getConcatenation().accept( *this );
 
 	m_targetStream << " }";
 }

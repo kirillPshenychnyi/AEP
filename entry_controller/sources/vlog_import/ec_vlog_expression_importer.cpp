@@ -12,6 +12,7 @@
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_unary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_range.hpp"
+#include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -25,12 +26,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-ExpressionImporter::ExpressionImporter( 
-		VlogDM::IAccessor & _vlogDm 
-	,	VlogDM::Writable::DesignUnit const & _targetUnit
-	)
+ExpressionImporter::ExpressionImporter( VlogDM::IAccessor & _vlogDm )
 	:	BaseImporter( _vlogDm )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -205,6 +202,64 @@ ExpressionImporter::createUnaryOperator( BinaryOperatoInfo & _info )
 
 /***************************************************************************/
 
+VlogDM::ConcatPtr 
+ExpressionImporter::createConcat( Verilog2001Parser::ConcatenationContext & _concateContext )
+{
+	using namespace VlogDM;
+	
+	struct ConcatItemExtractor
+	:	public BaseImporter
+{
+	ConcatItemExtractor( IAccessor & _vlogDm )
+	:	BaseImporter( _vlogDm )
+	,	m_importer( _vlogDm )
+	{}
+		
+	ExpressionPtr extract( antlr4::tree::ParseTree & _tree )
+	{
+		m_importer.reset();
+		m_extractedExpession.reset();
+
+		_tree.accept( this );
+
+		return std::move( m_extractedExpession );
+	}
+
+	antlrcpp::Any visitExpression(
+		Verilog2001Parser::ExpressionContext * ctx
+	) override
+	{	
+		m_extractedExpession 
+			= std::move( m_importer.importExpression( *ctx ) );
+
+		return antlrcpp::Any();
+	}
+		
+		ExpressionImporter m_importer;
+		ExpressionPtr m_extractedExpession;
+	};
+
+	auto concat 
+		=	getVlogDataModel().getExpressionFactory().newConcatenation( 
+				createLocation( _concateContext ) 
+			);
+
+	ConcatItemExtractor extractor( getVlogDataModel() );
+
+	forEachChildContext( 
+			_concateContext
+		,	[ & ]( antlr4::tree::ParseTree & _tree )
+			{
+				if( ExpressionPtr item = extractor.extract( _tree ) )
+					concat->addExpression( std::move( item ) );
+			}
+	);
+
+	return std::move( concat );
+}
+
+/***************************************************************************/
+
 void
 ExpressionImporter::processLastContext()
 {
@@ -292,7 +347,7 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 		Writable::ExpressionFactory const & expressionFactory 
 			=	getVlogDataModel().getExpressionFactory();
 
-		ExpressionImporter expressionImporter( getVlogDataModel(), m_targetUnit );
+		ExpressionImporter expressionImporter( getVlogDataModel() );
 		
 		lastContext.addOperand( expressionImporter.importExpression( *ctx ) );
 	}
@@ -358,9 +413,10 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 
 	IAccessor & vlogDM = getVlogDataModel();
 
-	auto declared = m_targetUnit.findDeclared( ctx->getText() );
+	auto declared 
+		= getVlogDataModel().getCurrentImportedUnit().findDeclared( ctx->getText() );
 
-	IdentifierImporter idImporter( getVlogDataModel(), m_targetUnit );
+	IdentifierImporter idImporter( getVlogDataModel() );
 
 	idImporter.importId( *ctx );
 
@@ -380,58 +436,67 @@ ExpressionImporter::visitConcatenation(
 	Verilog2001Parser::ConcatenationContext * ctx
 ) 
 {
+	m_result = createConcat( *ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+ExpressionImporter::visitMultiple_concatenation( 
+	Verilog2001Parser::Multiple_concatenationContext * ctx 
+)
+{
 	using namespace VlogDM;
 
-	struct ContactItemExtractor
-		:	public BaseImporter
+	struct MultipleConcatItemsExtractor
+		:	public Verilog2001BaseVisitor
 	{
-		ContactItemExtractor( 
-				IAccessor & _vlogDm
-			,	Writable::DesignUnit const & _targetUnit
-		)
-		:	BaseImporter( _vlogDm )
-		,	m_importer( _vlogDm, _targetUnit )
-		{}
-		
-		ExpressionPtr extract( antlr4::tree::ParseTree & _tree )
-		{
-			m_importer.reset();
-			m_extractedExpession.reset();
-
-			_tree.accept( this );
-
-			return std::move( m_extractedExpession );
-		}
-
-		antlrcpp::Any visitExpression(
-			Verilog2001Parser::ExpressionContext * ctx
+		antlrcpp::Any visitConcatenation( 
+			Verilog2001Parser::ConcatenationContext * ctx 
 		) override
-		{	
-			m_extractedExpession 
-				= std::move( m_importer.importExpression( *ctx ) );
+		{
+			m_concatContex = ctx;
+			return antlrcpp::Any();
+		}
+	
+		antlrcpp::Any visitConstant_expression( 
+			Verilog2001Parser::Constant_expressionContext * ctx 
+		) override
+		{
+			m_repeatExpressionContext 
+				=	static_cast< Verilog2001Parser::ExpressionContext * >( 
+						ctx->children[ 0 ] 
+					);
 
 			return antlrcpp::Any();
 		}
-		
-		ExpressionImporter m_importer;
-		ExpressionPtr m_extractedExpession;
+	
+		Verilog2001Parser::ConcatenationContext * m_concatContex;
+		Verilog2001Parser::ExpressionContext * m_repeatExpressionContext;
 	};
 
-	auto concat 
-		= getVlogDataModel().getExpressionFactory().newConcatenation( createLocation( *ctx ) );
-
-	ContactItemExtractor extractor( getVlogDataModel(), m_targetUnit );
+	MultipleConcatItemsExtractor itemsExtractor;
 
 	forEachChildContext( 
 			*ctx
 		,	[ & ]( antlr4::tree::ParseTree & _tree )
 			{
-				if( ExpressionPtr item = extractor.extract( _tree ) )
-					concat->addExpression( std::move( item ) );
+				_tree.accept( &itemsExtractor );
 			}
 	);
 
-	m_result = std::move( concat );
+	assert( itemsExtractor.m_concatContex && itemsExtractor.m_repeatExpressionContext );
+
+	ExpressionImporter importer( getVlogDataModel() );
+
+	m_result = 
+		getVlogDataModel().getExpressionFactory().newMultipleConcatenation(
+				importer.importExpression( *itemsExtractor.m_repeatExpressionContext )
+			,	createConcat( *itemsExtractor.m_concatContex )
+			,	createLocation( *ctx )
+		);
 
 	return antlrcpp::Any();
 }

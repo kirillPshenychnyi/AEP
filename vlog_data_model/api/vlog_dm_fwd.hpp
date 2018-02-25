@@ -59,6 +59,7 @@ namespace VlogDM
 	struct BinaryOperator;
 	struct PrimaryIdentifier;
 	struct Concatenation;
+	struct MultipleConcatenation;
 
 	struct DesignUnitFactory;
 
@@ -93,6 +94,10 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< Expression >
 		ExpressionPtr;
+
+	typedef
+		std::unique_ptr< Concatenation >
+		ConcatPtr;
 
 	typedef
 		std::unique_ptr< BaseIdentifier >

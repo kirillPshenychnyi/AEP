@@ -25,12 +25,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-DataflowProcessImporter::DataflowProcessImporter(
-		VlogDM::IAccessor & _accessor 
-	,	VlogDM::Writable::DesignUnit & _targetUnit
-	)
+DataflowProcessImporter::DataflowProcessImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -69,7 +65,7 @@ DataflowProcessImporter::visitNet_assignment(
 	Writable::ExpressionFactory const & expressionFactory 
 			= getVlogDataModel().getExpressionFactory();
 
-	IdentifierImporter importer( getVlogDataModel(), m_targetUnit );
+	IdentifierImporter importer( getVlogDataModel() );
 
 	auto primaryIdCreator
 		=	[ & ]( int _idx ) -> ExpressionPtr
@@ -111,7 +107,7 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 
 	IAccessor & vlogDm = getVlogDataModel();
 
-	ExpressionImporter expressionImporter( getVlogDataModel(), m_targetUnit );
+	ExpressionImporter expressionImporter( getVlogDataModel() );
 
 	auto process = vlogDm.getItemsFactory().newContinuousAssignment( 
 							m_processLocation 
@@ -122,21 +118,9 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 							)
 					);
 
-	m_targetUnit.addProcess( std::move( process ) );
+	vlogDm.getCurrentImportedUnit().addProcess( std::move( process ) );
 
 	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-VlogDM::ExpressionPtr 
-DataflowProcessImporter::getTargetExpression()
-{
-	using namespace VlogDM;
-
-	IAccessor & vlogDM = getVlogDataModel();
-
-	return VlogDM::ExpressionPtr();
 }
 
 /***************************************************************************/

@@ -23,11 +23,8 @@ namespace VlogImport{
 
 /***************************************************************************/
 
-PortImporter::PortImporter(
-		VlogDM::IAccessor & _accessor
-	,	VlogDM::Writable::DesignUnit & _targetUnit 
-	)
-	:	BaseClass( _accessor, _targetUnit )
+PortImporter::PortImporter( VlogDM::IAccessor & _accessor )
+	:	BaseClass( _accessor )
 {
 }
 

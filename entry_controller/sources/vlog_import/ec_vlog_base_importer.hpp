@@ -11,6 +11,11 @@ namespace VlogDM
 {
 	struct Location;
 	struct IAccessor;
+
+	namespace Writable 
+	{
+		struct DesignUnit;
+	}
 }
 
 /***************************************************************************/
