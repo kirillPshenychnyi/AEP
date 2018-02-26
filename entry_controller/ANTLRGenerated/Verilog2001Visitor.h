@@ -499,6 +499,8 @@ public:
 
     virtual antlrcpp::Any visitExpression(Verilog2001Parser::ExpressionContext *context) = 0;
 
+    virtual antlrcpp::Any visitConditional_operator(Verilog2001Parser::Conditional_operatorContext *context) = 0;
+
     virtual antlrcpp::Any visitTerm(Verilog2001Parser::TermContext *context) = 0;
 
     virtual antlrcpp::Any visitLsb_constant_expression(Verilog2001Parser::Lsb_constant_expressionContext *context) = 0;

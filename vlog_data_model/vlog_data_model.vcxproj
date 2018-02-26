@@ -139,6 +139,7 @@
     <ClInclude Include="api\vlog_dm_base_identifier.hpp" />
     <ClInclude Include="api\vlog_dm_binary_operator.hpp" />
     <ClInclude Include="api\vlog_dm_concatenation.hpp" />
+    <ClInclude Include="api\vlog_dm_conditional_expression.hpp" />
     <ClInclude Include="api\vlog_dm_continuous_assignment.hpp" />
     <ClInclude Include="api\vlog_dm_declaration.hpp" />
     <ClInclude Include="api\vlog_dm_declarations_container.hpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="ih\writable\vlog_dm_type_factory.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_type_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_concatenation_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_unary_operator_impl.hpp" />
@@ -197,7 +199,6 @@
     <ClInclude Include="api\vlog_dm_dimension_visitor.hpp" />
     <ClInclude Include="api\vlog_dm_expression.hpp" />
     <ClInclude Include="api\vlog_dm_expression_range.hpp" />
-    <ClInclude Include="api\vlog_dm_expression_visitor.hpp" />
     <ClInclude Include="api\vlog_dm_fwd.hpp" />
     <ClInclude Include="api\vlog_dm_iaccessor.hpp" />
     <ClInclude Include="api\vlog_dm_integral_based_literal.hpp" />

@@ -22,9 +22,9 @@ class ExpressionImporter
 	:	public BaseImporter
 {
 
-	struct BinaryOperatoInfo
+	struct OperatorInfo
 	{
-		BinaryOperatoInfo( 
+		OperatorInfo( 
 			VlogDM::Operator::Kind _operator = VlogDM::Operator::Kind::Unknown
 		)
 		:	m_operator( _operator )
@@ -79,7 +79,7 @@ class ExpressionImporter
 		Operators;
 
 	typedef
-		std::vector< BinaryOperatoInfo >
+		std::vector< OperatorInfo >
 		OperatorContexts;
 
 /***************************************************************************/
@@ -102,9 +102,11 @@ private:
 
 	void createExpression();
 
-	VlogDM::ExpressionPtr createBinaryOperator( BinaryOperatoInfo & _info );
+	void buildTopBinaryNodes( Operands & _primaryNodes );
 
-	VlogDM::ExpressionPtr createUnaryOperator( BinaryOperatoInfo & _info );
+	VlogDM::ExpressionPtr createBinaryOperator( OperatorInfo & _info );
+
+	VlogDM::ExpressionPtr createUnaryOperator( OperatorInfo & _info );
 
 	VlogDM::ConcatPtr createConcat(
 		Verilog2001Parser::ConcatenationContext & _concateContext 
@@ -112,7 +114,7 @@ private:
 
 	void processLastContext();
 
-	BinaryOperatoInfo & getLastContext();
+	OperatorInfo & getLastContext();
 
 	void reset();
 
@@ -151,8 +153,12 @@ private:
 	) override;
 
 	antlrcpp::Any visitMultiple_concatenation(
-		Verilog2001Parser::Multiple_concatenationContext *ctx 
-	);
+		Verilog2001Parser::Multiple_concatenationContext * ctx 
+	) override;
+
+	antlrcpp::Any visitConditional_operator(
+		Verilog2001Parser::Conditional_operatorContext * ctx
+	) override;
 
 /***************************************************************************/
 

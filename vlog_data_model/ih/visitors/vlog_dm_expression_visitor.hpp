@@ -17,6 +17,7 @@ struct BinaryOperator;
 struct UnaryOperator;
 struct Concatenation;
 struct MultipleConcatenation;
+struct ConditionalExpression;
 
 /***************************************************************************/
 
@@ -37,6 +38,8 @@ struct ExpressionVisitor
 	virtual void visit( Concatenation const & _concat ) = 0;
 
 	virtual void visit( MultipleConcatenation const & _concat ) = 0;
+
+	virtual void visit( ConditionalExpression const & _conditional ) = 0;
 
 /***************************************************************************/
 
@@ -61,6 +64,8 @@ struct ExpressionDefaultVisitor
 	void visit( Concatenation const& _id ) override {}
 
 	void visit( MultipleConcatenation const & _concat ) override {}
+
+	void visit( ConditionalExpression const & _conditional ) override {}
 
 /***************************************************************************/
 

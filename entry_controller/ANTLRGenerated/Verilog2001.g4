@@ -1476,11 +1476,16 @@ constant_range_expression
 dimension_constant_expression
    : constant_expression
    ;
-
+   
 expression
-   : term (binary_operator attribute_instance* term | '?' attribute_instance* expression ':' term)*
+   : term (binary_operator attribute_instance* term)*
+   | conditional_operator
    ;
 
+conditional_operator
+   : term '?' (term | conditional_operator) ':' (term | conditional_operator)
+   ; 
+   
 term
    : unary_operator attribute_instance* primary
    | primary

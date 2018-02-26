@@ -45,6 +45,8 @@ private:
 
 	void visit( MultipleConcatenation const& _concat ) override;
 
+	void visit( ConditionalExpression const & _conditional ) override;
+
 /***************************************************************************/
 
 };

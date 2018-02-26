@@ -12,6 +12,7 @@
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_unary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
+#include "vlog_data_model\api\vlog_dm_conditional_expression.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -61,7 +62,7 @@ ExpressionImporter::createExpression()
 		return;
 	}
 
-	BinaryOperatoInfo & lastContex = getLastContext();
+	OperatorInfo & lastContex = getLastContext();
 
 	if( ExpressionPtr validOperand = lastContex.getValidOperand() )
 	{
@@ -94,38 +95,6 @@ ExpressionImporter::createExpression()
 		return;
 	}
 
-	auto buildTopBinaryNodes
-		=	[ this ]( Operands & _primaryNodes )
-			{
-				BinaryOperatoInfo info( m_operators.front() );
-				Operands binaryNodes;
-
-				m_operators.pop_front();
-				const int topNodesCount = _primaryNodes.size();
-
-				for( int i = 0; i < topNodesCount; ++i )
-				{
-					info.addOperand( std::move( _primaryNodes[ i ] ) );
-
-					if( info.canConstructBinaryOperator() )
-						binaryNodes.push_back( createBinaryOperator( info ) );
-				}
-
-				if( ExpressionPtr lastOperand = info.getValidOperand() )
-				{
-					assert( m_operators.size() == 1 );
-
-					info.addOperand( std::move( binaryNodes.back() ) );
-					info.addOperand( std::move( lastOperand ) );
-					info.m_operator = m_operators.front();
-
-					binaryNodes.pop_back();					
-					binaryNodes.push_back( createBinaryOperator( info ) );
-				}
-
-				_primaryNodes = std::move( binaryNodes );
-			};
-
 	while( true )
 	{
 		buildTopBinaryNodes( m_topNodes );
@@ -140,8 +109,44 @@ ExpressionImporter::createExpression()
 
 /***************************************************************************/
 
+void 
+ExpressionImporter::buildTopBinaryNodes( Operands & _primaryNodes )
+{
+	using namespace VlogDM;
+
+	OperatorInfo info( m_operators.front() );
+	Operands binaryNodes;
+
+	m_operators.pop_front();
+	const int topNodesCount = _primaryNodes.size();
+
+	for( int i = 0; i < topNodesCount; ++i )
+	{
+		info.addOperand( std::move( _primaryNodes[ i ] ) );
+
+		if( info.canConstructBinaryOperator() )
+			binaryNodes.push_back( createBinaryOperator( info ) );
+	}
+
+	if( ExpressionPtr lastOperand = info.getValidOperand() )
+	{
+		assert( m_operators.size() == 1 );
+
+		info.addOperand( std::move( binaryNodes.back() ) );
+		info.addOperand( std::move( lastOperand ) );
+		info.m_operator = m_operators.front();
+
+		binaryNodes.pop_back();					
+		binaryNodes.push_back( createBinaryOperator( info ) );
+	}
+
+	_primaryNodes = std::move( binaryNodes );
+}
+
+/***************************************************************************/
+
 VlogDM::ExpressionPtr 
-ExpressionImporter::createBinaryOperator( BinaryOperatoInfo & _info )
+ExpressionImporter::createBinaryOperator( OperatorInfo & _info )
 {
 	using namespace VlogDM;
 			
@@ -163,7 +168,7 @@ ExpressionImporter::createBinaryOperator( BinaryOperatoInfo & _info )
 /***************************************************************************/
 
 VlogDM::ExpressionPtr 
-ExpressionImporter::createUnaryOperator( BinaryOperatoInfo & _info )
+ExpressionImporter::createUnaryOperator( OperatorInfo & _info )
 {
 	using namespace VlogDM;
 			
@@ -185,7 +190,9 @@ ExpressionImporter::createUnaryOperator( BinaryOperatoInfo & _info )
 /***************************************************************************/
 
 VlogDM::ConcatPtr 
-ExpressionImporter::createConcat( Verilog2001Parser::ConcatenationContext & _concateContext )
+ExpressionImporter::createConcat( 
+	Verilog2001Parser::ConcatenationContext & _concateContext 
+)
 {
 	using namespace VlogDM;
 	
@@ -247,7 +254,7 @@ ExpressionImporter::processLastContext()
 {
 	using namespace VlogDM;
 
-	BinaryOperatoInfo & lastContext = getLastContext();
+	OperatorInfo & lastContext = getLastContext();
 
 	if( lastContext.canConstructBinaryOperator() )
 	{
@@ -270,11 +277,11 @@ ExpressionImporter::processLastContext()
 
 /***************************************************************************/
 
-ExpressionImporter::BinaryOperatoInfo &
+ExpressionImporter::OperatorInfo &
 ExpressionImporter::getLastContext()
 {
 	if( m_contexts.empty() )
-		m_contexts.push_back( BinaryOperatoInfo() );
+		m_contexts.push_back( OperatorInfo() );
 
 	return m_contexts.back();
 }
@@ -320,7 +327,7 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 {
 	using namespace VlogDM;
 
-	BinaryOperatoInfo & lastContext = getLastContext();
+	OperatorInfo & lastContext = getLastContext();
 
 	if( !Operator::isUnary( lastContext.m_operator ) )
 		visitEachChildContext( *ctx );
@@ -346,7 +353,7 @@ ExpressionImporter::visitBinary_operator(
 	Verilog2001Parser::Binary_operatorContext * ctx
 )
 {
-	BinaryOperatoInfo & lastContext = getLastContext();
+	OperatorInfo & lastContext = getLastContext();
 
 	if( lastContext.m_operator != VlogDM::Operator::Kind::Unknown )
 		m_operators.push_back( lastContext.m_operator );
@@ -363,7 +370,7 @@ antlrcpp::Any
 ExpressionImporter::visitUnary_operator( Verilog2001Parser::Unary_operatorContext * ctx )
 {
 	m_contexts.push_back( 
-		BinaryOperatoInfo( VlogDM::Operator::fromString( ctx->getText().c_str() ) ) 
+		OperatorInfo( VlogDM::Operator::fromString( ctx->getText().c_str() ) ) 
 	);
 
 	return antlrcpp::Any();
@@ -475,6 +482,39 @@ ExpressionImporter::visitMultiple_concatenation(
 				importer.importExpression( *itemsExtractor.m_repeatExpressionContext )
 			,	createConcat( *itemsExtractor.m_concatContex )
 			,	createLocation( *ctx )
+		);
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+ExpressionImporter::visitConditional_operator( 
+	Verilog2001Parser::Conditional_operatorContext * ctx 
+)
+{
+	using namespace VlogDM;
+
+	static const int conditionItemPosition = 0;
+	static const int trueBranchItemPosition = 2;
+	static const int falseBranchItemPosition = 4;
+
+	auto importConditionalOperatorItem
+		=	[ & ]( int _idx )
+			{
+				ctx->children[ _idx ]->accept( this );
+				createExpression();	
+
+				return std::move( m_result );
+			};
+
+	m_result = 
+		getVlogDataModel().getExpressionFactory().newConditionalExpression(
+				createLocation( *ctx )
+			,	importConditionalOperatorItem( conditionItemPosition )
+			,	importConditionalOperatorItem( trueBranchItemPosition )
+			,	importConditionalOperatorItem( falseBranchItemPosition )
 		);
 
 	return antlrcpp::Any();

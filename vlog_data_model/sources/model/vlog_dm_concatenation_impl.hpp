@@ -4,7 +4,7 @@
 /***************************************************************************/
 
 #include "vlog_data_model\ih\writable\vlog_dm_concatenation.hpp"
-#include "vlog_data_model\api\vlog_dm_expression_visitor.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_expression_visitor.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 

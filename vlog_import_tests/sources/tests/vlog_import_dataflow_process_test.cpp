@@ -478,4 +478,52 @@ TEST_CASE_METHOD( ProcessFixture, "concat of different literals", "[dataflow]" )
 
 /***************************************************************************/
 
+TEST_CASE_METHOD( ProcessFixture, "mux via ternary", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, sel, output c);	\n"
+		"	assign a = sel ? a : b;					\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "true branch as ternary", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, sel, output c);	\n"
+		"	assign a = sel ? a ? 0 : 1 : b;			\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( ProcessFixture, "both branches as ternary", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, sel, output c);	\n"
+		"	assign a = sel ? a ? 0 : 1 : b ? 1 : 0;	\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 1 )
+		.expectProcess( 0, LINES( 2, 2 ) );
+}
+
+/***************************************************************************/
+
 }

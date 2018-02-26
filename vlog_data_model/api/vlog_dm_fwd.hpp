@@ -60,6 +60,7 @@ namespace VlogDM
 	struct PrimaryIdentifier;
 	struct Concatenation;
 	struct MultipleConcatenation;
+	struct ConditionalExpression;
 
 	struct DesignUnitFactory;
 

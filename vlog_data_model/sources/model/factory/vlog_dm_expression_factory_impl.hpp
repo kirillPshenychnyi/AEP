@@ -52,6 +52,13 @@ public:
 		,	Location const & _location
 	) const override;
 
+	std::unique_ptr< ConditionalExpression > newConditionalExpression(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	ExpressionPtr _trueBranch
+		,	ExpressionPtr _falseBranch
+	) const override;
+
 /***************************************************************************/
 
 };

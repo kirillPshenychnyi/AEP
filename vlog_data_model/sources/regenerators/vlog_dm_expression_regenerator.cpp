@@ -11,6 +11,7 @@
 #include "vlog_data_model\api\vlog_dm_range.hpp"
 #include "vlog_data_model\api\vlog_dm_concatenation.hpp"
 #include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
+#include "vlog_data_model\api\vlog_dm_conditional_expression.hpp"
 
 /***************************************************************************/
 
@@ -113,6 +114,22 @@ ExpressionRegenerator::visit( MultipleConcatenation const& _concat )
 	_concat.getConcatenation().accept( *this );
 
 	m_targetStream << " }";
+}
+
+/***************************************************************************/
+
+void 
+ExpressionRegenerator::visit( ConditionalExpression const & _conditional )
+{
+	_conditional.getCondition().accept( *this );
+
+	m_targetStream << " ? ";
+
+	_conditional.getTrueBranch().accept( *this );
+
+	m_targetStream << " : ";
+
+	_conditional.getFalseBranch().accept( *this );
 }
 
 /***************************************************************************/

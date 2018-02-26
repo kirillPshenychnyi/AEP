@@ -53,6 +53,13 @@ struct ExpressionFactory
 		,	Location const & _location
 	) const = 0;
 
+	virtual std::unique_ptr< ConditionalExpression > newConditionalExpression(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	ExpressionPtr _trueBranch
+		,	ExpressionPtr _falseBranch
+	) const = 0;
+
 /***************************************************************************/
 
 };

@@ -975,6 +975,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitConditional_operator(Verilog2001Parser::Conditional_operatorContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitTerm(Verilog2001Parser::TermContext *ctx) override {
     return visitChildren(ctx);
   }

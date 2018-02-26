@@ -10,6 +10,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_primary_identifier_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_concatenation_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_multiple_concatenation_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_conditional_expression_impl.hpp"
 
 /***************************************************************************/
 
@@ -95,6 +96,25 @@ ExpressionFactoryImpl::newMultipleConcatenation(
 				std::move( _concat )
 			,	std::move( _repeatExpression )
 			,	_location 
+		);
+}
+
+/***************************************************************************/
+
+std::unique_ptr< ConditionalExpression > 
+ExpressionFactoryImpl::newConditionalExpression( 
+		Location const & _location
+	,	ExpressionPtr _condition
+	,	ExpressionPtr _trueBranch
+	,	ExpressionPtr _falseBranch 
+) const
+{
+	return 
+		std::make_unique< ConditionalExpressionImpl >(
+				_location
+			,	std::move( _condition )
+			,	std::move( _trueBranch )
+			,	std::move( _falseBranch )
 		);
 }
 

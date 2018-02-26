@@ -105,9 +105,6 @@
     <ClInclude Include="sources\model\vlog_dm_base_expression_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\vlog_dm_expression_visitor.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\vlog_dm_port_declaration.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -346,6 +343,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_conditional_expression.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,28 +1,27 @@
-#ifndef __VLOG_DM_EXPRESSION_VISITOR_HPP__
-#define __VLOG_DM_EXPRESSION_VISITOR_HPP__
+#ifndef __VLOG_DM_CONDITIONAL_EXPRESSION_HPP__
+#define __VLOG_DM_CONDITIONAL_EXPRESSION_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace VlogDM {
+
+/***************************************************************************/
+
+struct ConditionalExpression
+	:	public Expression
 {
 
 /***************************************************************************/
 
-struct PrimaryLiteral;
+	virtual Expression const & getCondition() const = 0;
 
-/***************************************************************************/
+	virtual Expression const & getTrueBranch() const = 0;
 
-struct ExpressionVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void accept( PrimaryLiteral const & _literal ) const = 0;
+	virtual Expression const & getFalseBranch() const = 0;
 
 /***************************************************************************/
 
@@ -34,4 +33,4 @@ struct ExpressionVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_EXPRESSION_VISITOR_HPP__
+#endif // !__VLOG_DM_CONDITIONAL_EXPRESSION_HPP__
