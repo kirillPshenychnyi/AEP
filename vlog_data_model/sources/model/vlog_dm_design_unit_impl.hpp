@@ -49,8 +49,6 @@ public:
 	Process const & getProcess( int _idx ) const override;
 
 	void addProcess( ProcessPtr _process ) override;
-	
-	void regenerateProcesses( std::ostream & _stream ) const override;
 
 /***************************************************************************/
 

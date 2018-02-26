@@ -165,6 +165,7 @@
     <ClInclude Include="ANTLRGenerated\Verilog2001Visitor.h" />
     <ClInclude Include="api\ec_iaccessor.hpp" />
     <ClInclude Include="sources\ec_accessor.hpp" />
+    <ClInclude Include="sources\vlog_import\ec_vlog_range_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_variable_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_vlog_base_net_importer.hpp" />
     <ClInclude Include="sources\vlog_import\ec_vlog_dataflow_process_importer.hpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="ANTLRGenerated\Verilog2001Lexer.cpp" />
     <ClCompile Include="ANTLRGenerated\Verilog2001Parser.cpp" />
     <ClCompile Include="sources\ec_accessor.cpp" />
+    <ClCompile Include="sources\vlog_import\ec_vlog_range_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_variable_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_vlog_base_net_importer.cpp" />
     <ClCompile Include="sources\vlog_import\ec_vlog_dataflow_process_importer.cpp" />

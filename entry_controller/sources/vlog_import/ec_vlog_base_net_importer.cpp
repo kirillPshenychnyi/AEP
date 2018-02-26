@@ -20,12 +20,8 @@ namespace VlogImport {
 /***************************************************************************/
 
 template< typename _Declaration >
-BaseNetImporter< _Declaration >::BaseNetImporter( 
-		VlogDM::IAccessor & _accessor
-	,	VlogDM::Writable::DesignUnit & _targetUnit 
-	)
+BaseNetImporter< _Declaration >::BaseNetImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -74,7 +70,11 @@ void
 BaseNetImporter< _Declaration >::addDeclarations()
 {
 	for( auto & value : m_extractedDeclarations )
-		m_targetUnit.addDeclaration( std::move( value ) );
+	{
+		getVlogDataModel().getCurrentImportedUnit().addDeclaration(
+			std::move( value )
+		);
+	}
 }
 
 /***************************************************************************/

@@ -1476,11 +1476,16 @@ constant_range_expression
 dimension_constant_expression
    : constant_expression
    ;
-
+   
 expression
-   : term (binary_operator attribute_instance* term | '?' attribute_instance* expression ':' term)*
+   : term (binary_operator attribute_instance* term)*
+   | conditional_operator
    ;
 
+conditional_operator
+   : term '?' (term | conditional_operator) ':' (term | conditional_operator)
+   ; 
+   
 term
    : unary_operator attribute_instance* primary
    | primary
@@ -2005,7 +2010,8 @@ variable_identifier
 
 // 9.4 Identifier branches
 simple_hierarchical_branch
-   : Simple_identifier ('[' Decimal_number ']')? ('.' Simple_identifier ('[' Decimal_number ']')?)*
+   : Simple_identifier ('[' range_expression  ']')? ('.' Simple_identifier ('[' range_expression  ']')?)*
+   | Simple_identifier ('[' range_expression  ']')*
    ;
 
 escaped_hierarchical_branch

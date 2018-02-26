@@ -1,5 +1,5 @@
 
-// Generated from Verilog2001.g4 by ANTLR 4.7
+// Generated from AntlrGenerated/Verilog2001.g4 by ANTLR 4.7
 
 #pragma once
 
@@ -972,6 +972,10 @@ public:
   }
 
   virtual antlrcpp::Any visitExpression(Verilog2001Parser::ExpressionContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitConditional_operator(Verilog2001Parser::Conditional_operatorContext *ctx) override {
     return visitChildren(ctx);
   }
 

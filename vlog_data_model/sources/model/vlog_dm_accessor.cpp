@@ -1,13 +1,17 @@
 #include "stdafx.h"
 
-#include "sources\model\vlog_dm_accessor.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
 
-#include "sources\model\factory\vlog_dm_design_unit_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_declarations_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_declared_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_items_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_expression_factory_impl.hpp"
-#include "sources\model\factory\vlog_dm_type_factory_impl.hpp"
+#include "vlog_data_model\api\vlog_dm_process.hpp"
+
+#include "vlog_data_model\sources\model\factory\vlog_dm_design_unit_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_declarations_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_declared_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_items_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_expression_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_type_factory_impl.hpp"
+
+#include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
 
 /***************************************************************************/
 
@@ -15,10 +19,18 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-void 
-Accessor::addUnit( std::unique_ptr< DesignUnit > _unit )
+Accessor::Accessor()
+	:	m_currentImportedUnit( nullptr )
 {
-	m_unitsSet.emplace( std::unique_ptr< DesignUnit >( _unit.release() ) );
+}
+
+/***************************************************************************/
+
+void
+Accessor::addUnit( Writable::DesignUnitPtr _unit )
+{	
+	m_currentImportedUnit = _unit.get();
+	m_unitsSet.emplace( std::move( _unit ) );
 }
 
 /***************************************************************************/
@@ -36,10 +48,31 @@ Accessor::findUnit( std::string const & _unitName ) const
 
 /***************************************************************************/
 
+Writable::DesignUnit &
+Accessor::getCurrentImportedUnit()
+{
+	assert( m_currentImportedUnit );
+
+	return *m_currentImportedUnit;
+}
+
+/***************************************************************************/
+
 void 
 Accessor::reset()
 {
 	m_unitsSet.clear();
+	m_currentImportedUnit = nullptr;
+}
+
+/***************************************************************************/
+
+void 
+Accessor::regenerateProcess( std::ostream & _stream, Process const & _process ) const
+{
+	Regenerators::ProcessRegenerator regenerator( _stream );
+
+	_process.accept( regenerator );
 }
 
 /***************************************************************************/

@@ -5,10 +5,19 @@ namespace VlogDM
 {
 	namespace Writable 
 	{
+		struct DesignUnitFactory;
+		struct DeclarationFactory;
+		struct DeclaredFactory;
+		struct ItemsFactory;
+		struct ExpressionFactory;
+		struct TypeFactory;
+
 		struct DesignUnit;
 		struct PortDeclaration;
 		struct VariableDeclaration;
 		struct MultidimensionalRange;
+
+		struct Concatenation;
 
 		typedef
 			std::unique_ptr< DesignUnit >
@@ -27,6 +36,8 @@ namespace VlogDM
 			MultidimensionalRangePtr;
 	}
 
+	struct IAccessor;
+
 	struct DesignUnit;
 	struct Declaration;
 	struct Dimension;
@@ -44,8 +55,12 @@ namespace VlogDM
 
 	struct Expression;
 	struct PrimaryLiteral;
+	struct UnaryOperator;
 	struct BinaryOperator;
 	struct PrimaryIdentifier;
+	struct Concatenation;
+	struct MultipleConcatenation;
+	struct ConditionalExpression;
 
 	struct DesignUnitFactory;
 
@@ -80,6 +95,10 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< Expression >
 		ExpressionPtr;
+
+	typedef
+		std::unique_ptr< Concatenation >
+		ConcatPtr;
 
 	typedef
 		std::unique_ptr< BaseIdentifier >

@@ -24,10 +24,7 @@ public:
 
 /***************************************************************************/
 
-	ModuleItemImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit 
-	);
+	ModuleItemImporter( VlogDM::IAccessor & _accessor );
 	
 /***************************************************************************/
 
@@ -65,14 +62,6 @@ private:
 
 	template< typename _Context >
 	antlrcpp::Any importVar( _Context & _ctx );
-
-/***************************************************************************/
-
-private:
-
-/***************************************************************************/
-
-	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 /***************************************************************************/
 

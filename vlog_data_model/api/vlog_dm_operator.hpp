@@ -3,6 +3,10 @@
 
 /***************************************************************************/
 
+#include "common_tools\utils\convertors.hpp"
+
+/***************************************************************************/
+
 namespace VlogDM {
 
 /***************************************************************************/
@@ -12,24 +16,110 @@ struct Operator
 
 /***************************************************************************/
 
-	enum class Enum
+	enum class Kind
 	{
-			Assign
-		
-		,	Plus
-		,	Minus
-		,	Mul
-		,	Div
-		
-		,	And
-		,	Or
-		,	Not
-		,	Xor
+			Unknown
 
-		,	LogicAnd
-		,	LogicOr
-		,	LogicXor
+		,	Assign
+		
+		,	Plus		// +
+		,	Minus		// -
+		,	Mul			// *
+		,	Div			// /
+		
+		,	And			// &
+		,	Or			// |
+		,	Not			// ~
+		,	Xor			// ^
+			
+		,	ReductionAnd	// & 
+		,	ReductionNand	// ~&
+		,	ReductionOr		// | 
+		,	ReductionNor	// ~|
+		,	ReductionXor	// ~^ or ^~
+
+		,	LogicAnd	// &&
+		,	LogicOr		// ||
+		,	LogicNot	// !
+
+		,	First = Assign
+		,	Last = LogicNot
 	};
+
+/***************************************************************************/
+
+	static Kind fromString( const char * const _value )
+	{
+		if( !strcmp( _value, "~^" ) || !strcmp( _value, "~^" ) )
+			return Kind::ReductionXor;
+
+		return Tools::Convertors::toEnumFromString< Operator >( _value );
+	}
+
+/***************************************************************************/
+
+	static const char * const toString( Kind _operator )
+	{
+		switch( _operator )
+		{
+			case Kind::Assign:
+				return "=";
+
+			case Kind::Plus:
+				return "+";
+			case Kind::Minus:
+				return "-";
+			case Kind::Mul:
+				return "*";
+			case Kind::Div:
+				return "/";
+
+			case Kind::And:
+			case Kind::ReductionAnd:
+				return "&";
+			case Kind::Or:
+			case Kind::ReductionOr:
+				return "|";
+			case Kind::Not:
+				return "~";
+			case Kind::Xor:
+				return "^";
+
+			case Kind::LogicAnd:
+				return "&&";
+			case Kind::LogicOr:
+				return "||";
+			case Kind::LogicNot:
+				return "!";
+			
+			case Kind::ReductionNand: return "~&";
+			case Kind::ReductionNor: return "~|";
+			case Kind::ReductionXor: return "~^";
+
+			default:
+				return "";
+		}
+	}
+
+	static bool isUnary( Kind _operator )
+	{
+		switch( _operator )
+		{
+			case Kind::Plus:
+			case Kind::Minus:
+			case Kind::Not:
+			case Kind::LogicNot:
+			case Kind::ReductionAnd:
+			case Kind::ReductionNand:
+			case Kind::ReductionOr:
+			case Kind::ReductionNor:
+			case Kind::ReductionXor:
+			case Kind::LogicAnd:
+				return true;
+			default: 
+				return false;
+		}
+	}
 
 /***************************************************************************/
 

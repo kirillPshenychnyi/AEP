@@ -156,7 +156,7 @@ NetExtractor::visitVariable_identifier(
 antlrcpp::Any
 NetExtractor::visitListOfIds( antlr4::ParserRuleContext & _context )
 {
-	acceptEachChildContext( _context );
+	visitEachChildContext( _context );
 
 	return antlrcpp::Any();
 }

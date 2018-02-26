@@ -13,21 +13,19 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-ModuleItemImporter::ModuleItemImporter( 
-		VlogDM::IAccessor & _accessor 
-	,	VlogDM::Writable::DesignUnit & _targetUnit
-	)
+ModuleItemImporter::ModuleItemImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
+
+/***************************************************************************/
 
 void 
 ModuleItemImporter::importItems( 
 		Verilog2001Parser::Non_port_module_itemContext & _ctx 
 	)
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -37,7 +35,7 @@ ModuleItemImporter::importItems(
 		Verilog2001Parser::Module_or_generate_itemContext & _ctx 
 	)
 {
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
@@ -47,7 +45,7 @@ ModuleItemImporter::visitModule_or_generate_item(
 	Verilog2001Parser::Module_or_generate_itemContext * ctx
 )
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return antlrcpp::Any();
 }
 
@@ -58,7 +56,7 @@ ModuleItemImporter::visitModule_or_generate_item_declaration(
 		Verilog2001Parser::Module_or_generate_item_declarationContext *ctx 
 	) 
 {
-	acceptEachChildContext( *ctx );
+	visitEachChildContext( *ctx );
 	return antlrcpp::Any();
 }
 
@@ -89,7 +87,7 @@ ModuleItemImporter::visitContinuous_assign(
 		Verilog2001Parser::Continuous_assignContext * ctx
 	)
 {
-	DataflowProcessImporter dataflowImporter( getVlogDataModel(), m_targetUnit );
+	DataflowProcessImporter dataflowImporter( getVlogDataModel() );
 
 	dataflowImporter.importProcess( *ctx );
 
@@ -102,7 +100,7 @@ template< typename _Context >
 antlrcpp::Any
 ModuleItemImporter::importVar( _Context & _ctx )
 {
-	VariableImporter varImporter( getVlogDataModel(), m_targetUnit );
+	VariableImporter varImporter( getVlogDataModel() );
 
 	varImporter.importVars( _ctx );
 

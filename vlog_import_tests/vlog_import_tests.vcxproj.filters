@@ -36,6 +36,12 @@
     <ClInclude Include="sources\fixtures\vlog_import_test_variables_fixture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\fixtures\vlog_import_base_module_items_fixture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\fixtures\vlog_import_process_fixture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\tests\vlog_import_dataflow_process_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\fixtures\vlog_import_base_module_items_fixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\fixtures\vlog_import_process_fixture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

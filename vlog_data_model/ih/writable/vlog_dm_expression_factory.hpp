@@ -30,11 +30,34 @@ struct ExpressionFactory
 	virtual std::unique_ptr< BinaryOperator > newBinaryOperator(
 			ExpressionPtr _leftOperand
 		,	ExpressionPtr _rightOperand
-		,	Operator::Enum _operator
+		,	Operator::Kind _operator
+	) const = 0;
+
+	virtual std::unique_ptr< UnaryOperator > newUnaryOperator(
+			ExpressionPtr _operand
+		,	Operator::Kind _operator
+		,	Location const & _location
 	) const = 0;
 
 	virtual std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
 			BaseIdentifierPtr _id
+	) const = 0;
+
+	virtual std::unique_ptr< Writable::Concatenation > newConcatenation(
+		Location const & _location
+	) const = 0;
+
+	virtual std::unique_ptr< MultipleConcatenation > newMultipleConcatenation(
+			ExpressionPtr _repeatExpression
+		,	ConcatPtr _concat
+		,	Location const & _location
+	) const = 0;
+
+	virtual std::unique_ptr< ConditionalExpression > newConditionalExpression(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	ExpressionPtr _trueBranch
+		,	ExpressionPtr _falseBranch
 	) const = 0;
 
 /***************************************************************************/

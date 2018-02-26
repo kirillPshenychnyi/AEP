@@ -35,6 +35,14 @@ ContainerBootstrapper::ContainerBootstrapper()
 
 /***************************************************************************/
 
+VlogDM::IAccessor const & 
+BaseFixture::getVlogDm() const
+{
+	return *m_bootstrapper.m_container->resolve< VlogDM::IAccessor >();
+}
+
+/***************************************************************************/
+
 void 
 BaseFixture::runImport( std::string const & _code )
 {

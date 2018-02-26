@@ -36,7 +36,7 @@ BaseImporter::createLocation( antlr4::ParserRuleContext & _ctx ) const
 /***************************************************************************/
 
 void 
-BaseImporter::acceptEachChildContext( antlr4::ParserRuleContext const& _ctx )
+BaseImporter::visitEachChildContext( antlr4::ParserRuleContext const& _ctx )
 {
 	forEachChildContext(
 			_ctx

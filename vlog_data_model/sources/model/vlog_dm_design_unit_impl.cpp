@@ -38,13 +38,5 @@ DesignUnitImpl::addProcess( ProcessPtr _process )
 
 /***************************************************************************/
 
-void 
-DesignUnitImpl::regenerateProcesses( std::ostream & _stream ) const
-{
-
-}
-
-/***************************************************************************/
-
 }
 

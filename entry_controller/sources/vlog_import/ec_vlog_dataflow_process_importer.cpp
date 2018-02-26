@@ -12,6 +12,8 @@
 
 #include "vlog_data_model\api\vlog_dm_operator.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_concatenation.hpp"
+
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -23,12 +25,8 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-DataflowProcessImporter::DataflowProcessImporter(
-		VlogDM::IAccessor & _accessor 
-	,	VlogDM::Writable::DesignUnit & _targetUnit
-	)
+DataflowProcessImporter::DataflowProcessImporter( VlogDM::IAccessor & _accessor )
 	:	BaseImporter( _accessor )
-	,	m_targetUnit( _targetUnit )
 {
 }
 
@@ -40,33 +38,62 @@ DataflowProcessImporter::importProcess(
 	)
 {
 	m_processLocation = createLocation( _ctx );
-	acceptEachChildContext( _ctx );
+	visitEachChildContext( _ctx );
 }
 
 /***************************************************************************/
 
 antlrcpp::Any 
 DataflowProcessImporter::visitList_of_net_assignments(
-		Verilog2001Parser::List_of_net_assignmentsContext * ctx
+		Verilog2001Parser::List_of_net_assignmentsContext * _ctx
 	)
+{
+	visitEachChildContext( *_ctx );
+
+	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+DataflowProcessImporter::visitNet_assignment(
+	Verilog2001Parser::Net_assignmentContext * ctx
+)
 {
 	using namespace VlogDM;
 
 	Writable::ExpressionFactory const & expressionFactory 
 			= getVlogDataModel().getExpressionFactory();
 
-	IdentifierImporter importer( getVlogDataModel(), m_targetUnit );
+	IdentifierImporter importer( getVlogDataModel() );
 
-	importer.importIds( *ctx );
+	auto primaryIdCreator
+		=	[ & ]( int _idx ) -> ExpressionPtr
+			{
+				return expressionFactory.newPrimaryIdentifier( importer.takeId( _idx ) );
+			};
 
+	// lhs is first child
+	ctx->children.front()->accept( &importer );
+	
 	const int idsCount = importer.getIdsCount();
 
 	if( idsCount == 1 )
 	{
-		m_targetExpression.reset(
-			expressionFactory.newPrimaryIdentifier( importer.takeId( 0 ) ).release()
-		);
+		m_targetExpression = primaryIdCreator( 0 );
 	}
+	else
+	{
+		auto concat = expressionFactory.newConcatenation( createLocation( *ctx ) );
+
+		for( int i = 0; i < idsCount; ++i )
+			concat->addExpression( primaryIdCreator( i ) );
+
+		m_targetExpression = std::move( concat );
+	}
+
+	// rhs expression is last child
+	ctx->children.back()->accept( this );
 
 	return antlrcpp::Any();
 }
@@ -80,32 +107,20 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 
 	IAccessor & vlogDm = getVlogDataModel();
 
-	ExpressionImporter expressionImporter( getVlogDataModel(), m_targetUnit );
+	ExpressionImporter expressionImporter( getVlogDataModel() );
 
 	auto process = vlogDm.getItemsFactory().newContinuousAssignment( 
 							m_processLocation 
 						,	vlogDm.getExpressionFactory().newBinaryOperator(
 									std::move( m_targetExpression )
 								,	expressionImporter.importExpression( *ctx )
-								,	Operator::Enum::Assign
+								,	Operator::Kind::Assign
 							)
 					);
 
-	m_targetUnit.addProcess( std::move( process ) );
+	vlogDm.getCurrentImportedUnit().addProcess( std::move( process ) );
 
 	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-VlogDM::ExpressionPtr 
-DataflowProcessImporter::getTargetExpression()
-{
-	using namespace VlogDM;
-
-	IAccessor & vlogDM = getVlogDataModel();
-
-	return VlogDM::ExpressionPtr();
 }
 
 /***************************************************************************/

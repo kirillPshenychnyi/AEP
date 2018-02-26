@@ -5,8 +5,6 @@
 
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
-
 /***************************************************************************/
 
 namespace VlogDM {
@@ -31,11 +29,34 @@ public:
 	std::unique_ptr< BinaryOperator > newBinaryOperator(
 			ExpressionPtr _leftOperand
 		,	ExpressionPtr _rightOperand
-		,	Operator::Enum _operator
+		,	Operator::Kind _operator
 	) const override;
-	
+
+	std::unique_ptr< UnaryOperator > newUnaryOperator(
+			ExpressionPtr _operand
+		,	Operator::Kind _operator
+		,	Location const & _location
+	) const override;
+
 	std::unique_ptr< PrimaryIdentifier > newPrimaryIdentifier(
-			BaseIdentifierPtr _id
+		BaseIdentifierPtr _id
+	) const override;
+
+	std::unique_ptr< Writable::Concatenation > newConcatenation(
+		Location const & _location
+	) const override;
+
+	std::unique_ptr< MultipleConcatenation > newMultipleConcatenation(
+			ExpressionPtr _repeatExpression
+		,	ConcatPtr _concat
+		,	Location const & _location
+	) const override;
+
+	std::unique_ptr< ConditionalExpression > newConditionalExpression(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	ExpressionPtr _trueBranch
+		,	ExpressionPtr _falseBranch
 	) const override;
 
 /***************************************************************************/

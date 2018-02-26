@@ -1,5 +1,5 @@
 
-// Generated from Verilog2001.g4 by ANTLR 4.7
+// Generated from AntlrGenerated/Verilog2001.g4 by ANTLR 4.7
 
 #pragma once
 
@@ -498,6 +498,8 @@ public:
     virtual antlrcpp::Any visitDimension_constant_expression(Verilog2001Parser::Dimension_constant_expressionContext *context) = 0;
 
     virtual antlrcpp::Any visitExpression(Verilog2001Parser::ExpressionContext *context) = 0;
+
+    virtual antlrcpp::Any visitConditional_operator(Verilog2001Parser::Conditional_operatorContext *context) = 0;
 
     virtual antlrcpp::Any visitTerm(Verilog2001Parser::TermContext *context) = 0;
 

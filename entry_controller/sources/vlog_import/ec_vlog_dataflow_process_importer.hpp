@@ -26,10 +26,7 @@ public:
 
 /***************************************************************************/
 
-	DataflowProcessImporter( 
-			VlogDM::IAccessor & _accessor
-		,	VlogDM::Writable::DesignUnit & _targetUnit
-	);
+	DataflowProcessImporter( VlogDM::IAccessor & _accessor );
 
 /***************************************************************************/
 
@@ -45,13 +42,13 @@ private:
 		Verilog2001Parser::List_of_net_assignmentsContext * ctx 
 	) override;
 
+	antlrcpp::Any visitNet_assignment(
+		Verilog2001Parser::Net_assignmentContext * ctx 
+	) override;
+
 	antlrcpp::Any visitExpression(
 		Verilog2001Parser::ExpressionContext * ctx	
 	) override;
-
-/***************************************************************************/
-
-	VlogDM::ExpressionPtr getTargetExpression();
 
 /***************************************************************************/
 
@@ -60,8 +57,6 @@ private:
 /***************************************************************************/
 
 	VlogDM::Location m_processLocation;
-
-	VlogDM::Writable::DesignUnit & m_targetUnit;
 
 	VlogDM::ExpressionPtr m_targetExpression;
 

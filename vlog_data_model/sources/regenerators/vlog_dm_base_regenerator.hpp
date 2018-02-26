@@ -1,28 +1,35 @@
-#ifndef __VLOG_DM_EXPRESSION_VISITOR_HPP__
-#define __VLOG_DM_EXPRESSION_VISITOR_HPP__
+#ifndef __VLOG_DM_BASE_REGENERATOR_HPP__
+#define __VLOG_DM_BASE_REGENERATOR_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include <ostream>
 
 /***************************************************************************/
 
-namespace VlogDM
+namespace VlogDM {
+namespace Regenerators {
+
+/***************************************************************************/
+
+class BaseRegenerator
 {
 
 /***************************************************************************/
 
-struct PrimaryLiteral;
+protected:
 
 /***************************************************************************/
 
-struct ExpressionVisitor
-	:	public boost::noncopyable
-{
+	BaseRegenerator( std::ostream & _targetStream );
 
 /***************************************************************************/
 
-	virtual void accept( PrimaryLiteral const & _literal ) const = 0;
+protected:
+
+/***************************************************************************/
+
+	std::ostream & m_targetStream; 
 
 /***************************************************************************/
 
@@ -31,7 +38,8 @@ struct ExpressionVisitor
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_EXPRESSION_VISITOR_HPP__
+#endif // !__VLOG_DM_BASE_REGENERATOR_HPP__

@@ -8,8 +8,6 @@
 #include "vlog_data_model\api\vlog_dm_declarations_container.hpp"
 #include "vlog_data_model\api\vlog_dm_named.hpp"
 
-#include <ostream>
-
 /***************************************************************************/
 
 namespace VlogDM {
@@ -26,8 +24,6 @@ struct DesignUnit
 	virtual int getProcessesCount() const = 0;
 
 	virtual Process const & getProcess( int _idx ) const = 0;
-
-	virtual void regenerateProcesses( std::ostream & _stream ) const = 0;
 
 /***************************************************************************/
 

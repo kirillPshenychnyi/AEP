@@ -11,6 +11,11 @@ namespace VlogDM
 {
 	struct Location;
 	struct IAccessor;
+
+	namespace Writable 
+	{
+		struct DesignUnit;
+	}
 }
 
 /***************************************************************************/
@@ -42,7 +47,7 @@ public:
 
 	const VlogDM::Location createLocation( antlr4::ParserRuleContext & _ctx ) const;
 
-	void acceptEachChildContext( antlr4::ParserRuleContext const& _ctx );
+	void visitEachChildContext( antlr4::ParserRuleContext const& _ctx );
 
 	void forEachChildContext( 
 			antlr4::ParserRuleContext const& _ctx

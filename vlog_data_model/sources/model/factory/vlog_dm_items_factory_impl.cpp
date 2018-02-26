@@ -7,6 +7,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_base_identifier_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_dimension_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_part_select_range_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_expression_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_multidimensional_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_continuous_assignment_impl.hpp"
 
@@ -47,16 +48,24 @@ ItemsFactoryImpl::newDimension( Location const& _location, RangePtr _range ) con
 RangePtr
 ItemsFactoryImpl::newPartSelectRange( 
 		Location const & _location
-	,	ExpressionPtr _lhs
-	,	ExpressionPtr _rhs 
-	) const
+	,	ExpressionPtr _leftBound
+	,	ExpressionPtr _rightBound 
+) const
 {
 	return 
 		std::make_unique< PartSelectRangeImpl >( 
 				_location
-			,	std::move( _lhs )
-			,	std::move( _rhs ) 
+			,	std::move( _leftBound )
+			,	std::move( _rightBound ) 
 		);
+}
+
+/***************************************************************************/
+
+RangePtr 
+ItemsFactoryImpl::newExpressionRange( ExpressionPtr _expression ) const
+{
+	return std::make_unique< ExpressionRangeImpl >( std::move( _expression ) );
 }
 
 /***************************************************************************/

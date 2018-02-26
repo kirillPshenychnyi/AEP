@@ -12,6 +12,12 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct PrimaryLiteral;
+struct PrimaryIdentifier;
+struct BinaryOperator;
+struct UnaryOperator;
+struct Concatenation;
+struct MultipleConcatenation;
+struct ConditionalExpression;
 
 /***************************************************************************/
 
@@ -21,7 +27,19 @@ struct ExpressionVisitor
 
 /***************************************************************************/
 
-	virtual void visit( const PrimaryLiteral& _literal ) = 0;
+	virtual void visit( PrimaryLiteral const & _literal ) = 0;
+
+	virtual void visit( BinaryOperator const & _operator ) = 0;
+	
+	virtual void visit( UnaryOperator const & _operator ) = 0;
+
+	virtual void visit( PrimaryIdentifier const & _id ) = 0;
+
+	virtual void visit( Concatenation const & _concat ) = 0;
+
+	virtual void visit( MultipleConcatenation const & _concat ) = 0;
+
+	virtual void visit( ConditionalExpression const & _conditional ) = 0;
 
 /***************************************************************************/
 
@@ -35,7 +53,19 @@ struct ExpressionDefaultVisitor
 
 /***************************************************************************/
 
-	void visit( const PrimaryLiteral& _literal ) override {}
+	void visit( PrimaryLiteral const& _literal ) override {}
+
+	void visit( BinaryOperator const& _operator ) override {}
+
+	void visit( UnaryOperator const& _operator ) override {}
+
+	void visit( PrimaryIdentifier const& _id ) override {}
+
+	void visit( Concatenation const& _id ) override {}
+
+	void visit( MultipleConcatenation const & _concat ) override {}
+
+	void visit( ConditionalExpression const & _conditional ) override {}
 
 /***************************************************************************/
 

@@ -21,12 +21,19 @@ struct IAccessor
 /***************************************************************************/
 
 	virtual boost::optional< DesignUnit const & > findUnit(
-			std::string const& _unitName
+		std::string const& _unitName
 	) const = 0;
 
-	virtual void addUnit( std::unique_ptr< DesignUnit > _unit ) = 0;
+	virtual Writable::DesignUnit & getCurrentImportedUnit() = 0;
+
+	virtual void addUnit( Writable::DesignUnitPtr _unit ) = 0;
 
 	virtual void reset() = 0;
+	
+	virtual void regenerateProcess( 
+			std::ostream & _stream
+		,	Process const & _process 
+	) const = 0;
 
 /***************************************************************************/
 

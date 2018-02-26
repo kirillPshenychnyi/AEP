@@ -1,5 +1,5 @@
 
-// Generated from Verilog2001.g4 by ANTLR 4.7
+// Generated from AntlrGenerated/Verilog2001.g4 by ANTLR 4.7
 
 #pragma once
 
@@ -138,33 +138,33 @@ public:
     RuleGenvar_function_call = 232, RuleBase_expression = 233, RuleConstant_base_expression = 234, 
     RuleConstant_expression = 235, RuleConstant_mintypmax_expression = 236, 
     RuleConstant_range_expression = 237, RuleDimension_constant_expression = 238, 
-    RuleExpression = 239, RuleTerm = 240, RuleLsb_constant_expression = 241, 
-    RuleMintypmax_expression = 242, RuleModule_path_conditional_expression = 243, 
-    RuleModule_path_expression = 244, RuleModule_path_mintypmax_expression = 245, 
-    RuleMsb_constant_expression = 246, RuleRange_expression = 247, RuleWidth_constant_expression = 248, 
-    RuleConstant_primary = 249, RuleModule_path_primary = 250, RulePrimary = 251, 
-    RuleNet_lvalue = 252, RuleVariable_lvalue = 253, RuleUnary_operator = 254, 
-    RuleBinary_operator = 255, RuleUnary_module_path_operator = 256, RuleBinary_module_path_operator = 257, 
-    RuleNumber = 258, RuleTiming_spec = 259, RuleAttribute_instance = 260, 
-    RuleAttr_spec = 261, RuleAttr_name = 262, RuleArrayed_identifier = 263, 
-    RuleBlock_identifier = 264, RuleCell_identifier = 265, RuleConfig_identifier = 266, 
-    RuleEscaped_arrayed_identifier = 267, RuleEscaped_hierarchical_identifier = 268, 
-    RuleEvent_identifier = 269, RuleFunction_identifier = 270, RuleGate_instance_identifier = 271, 
-    RuleGenerate_block_identifier = 272, RuleGenvar_function_identifier = 273, 
-    RuleGenvar_identifier = 274, RuleHierarchical_block_identifier = 275, 
-    RuleHierarchical_event_identifier = 276, RuleHierarchical_function_identifier = 277, 
-    RuleHierarchical_identifier = 278, RuleHierarchical_net_identifier = 279, 
-    RuleHierarchical_variable_identifier = 280, RuleHierarchical_task_identifier = 281, 
-    RuleIdentifier = 282, RuleInout_port_identifier = 283, RuleInput_port_identifier = 284, 
-    RuleInstance_identifier = 285, RuleLibrary_identifier = 286, RuleMemory_identifier = 287, 
-    RuleModule_identifier = 288, RuleModule_instance_identifier = 289, RuleNet_identifier = 290, 
-    RuleOutput_port_identifier = 291, RuleParameter_identifier = 292, RulePort_identifier = 293, 
-    RuleReal_identifier = 294, RuleSimple_arrayed_identifier = 295, RuleSimple_hierarchical_identifier = 296, 
-    RuleSpecparam_identifier = 297, RuleSystem_function_identifier = 298, 
-    RuleSystem_task_identifier = 299, RuleTask_identifier = 300, RuleTerminal_identifier = 301, 
-    RuleText_macro_identifier = 302, RuleTopmodule_identifier = 303, RuleUdp_identifier = 304, 
-    RuleUdp_instance_identifier = 305, RuleVariable_identifier = 306, RuleSimple_hierarchical_branch = 307, 
-    RuleEscaped_hierarchical_branch = 308
+    RuleExpression = 239, RuleConditional_operator = 240, RuleTerm = 241, 
+    RuleLsb_constant_expression = 242, RuleMintypmax_expression = 243, RuleModule_path_conditional_expression = 244, 
+    RuleModule_path_expression = 245, RuleModule_path_mintypmax_expression = 246, 
+    RuleMsb_constant_expression = 247, RuleRange_expression = 248, RuleWidth_constant_expression = 249, 
+    RuleConstant_primary = 250, RuleModule_path_primary = 251, RulePrimary = 252, 
+    RuleNet_lvalue = 253, RuleVariable_lvalue = 254, RuleUnary_operator = 255, 
+    RuleBinary_operator = 256, RuleUnary_module_path_operator = 257, RuleBinary_module_path_operator = 258, 
+    RuleNumber = 259, RuleTiming_spec = 260, RuleAttribute_instance = 261, 
+    RuleAttr_spec = 262, RuleAttr_name = 263, RuleArrayed_identifier = 264, 
+    RuleBlock_identifier = 265, RuleCell_identifier = 266, RuleConfig_identifier = 267, 
+    RuleEscaped_arrayed_identifier = 268, RuleEscaped_hierarchical_identifier = 269, 
+    RuleEvent_identifier = 270, RuleFunction_identifier = 271, RuleGate_instance_identifier = 272, 
+    RuleGenerate_block_identifier = 273, RuleGenvar_function_identifier = 274, 
+    RuleGenvar_identifier = 275, RuleHierarchical_block_identifier = 276, 
+    RuleHierarchical_event_identifier = 277, RuleHierarchical_function_identifier = 278, 
+    RuleHierarchical_identifier = 279, RuleHierarchical_net_identifier = 280, 
+    RuleHierarchical_variable_identifier = 281, RuleHierarchical_task_identifier = 282, 
+    RuleIdentifier = 283, RuleInout_port_identifier = 284, RuleInput_port_identifier = 285, 
+    RuleInstance_identifier = 286, RuleLibrary_identifier = 287, RuleMemory_identifier = 288, 
+    RuleModule_identifier = 289, RuleModule_instance_identifier = 290, RuleNet_identifier = 291, 
+    RuleOutput_port_identifier = 292, RuleParameter_identifier = 293, RulePort_identifier = 294, 
+    RuleReal_identifier = 295, RuleSimple_arrayed_identifier = 296, RuleSimple_hierarchical_identifier = 297, 
+    RuleSpecparam_identifier = 298, RuleSystem_function_identifier = 299, 
+    RuleSystem_task_identifier = 300, RuleTask_identifier = 301, RuleTerminal_identifier = 302, 
+    RuleText_macro_identifier = 303, RuleTopmodule_identifier = 304, RuleUdp_identifier = 305, 
+    RuleUdp_instance_identifier = 306, RuleVariable_identifier = 307, RuleSimple_hierarchical_branch = 308, 
+    RuleEscaped_hierarchical_branch = 309
   };
 
   Verilog2001Parser(antlr4::TokenStream *input);
@@ -417,6 +417,7 @@ public:
   class Constant_range_expressionContext;
   class Dimension_constant_expressionContext;
   class ExpressionContext;
+  class Conditional_operatorContext;
   class TermContext;
   class Lsb_constant_expressionContext;
   class Mintypmax_expressionContext;
@@ -3771,16 +3772,30 @@ public:
     TermContext* term(size_t i);
     std::vector<Binary_operatorContext *> binary_operator();
     Binary_operatorContext* binary_operator(size_t i);
-    std::vector<ExpressionContext *> expression();
-    ExpressionContext* expression(size_t i);
     std::vector<Attribute_instanceContext *> attribute_instance();
     Attribute_instanceContext* attribute_instance(size_t i);
+    Conditional_operatorContext *conditional_operator();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
   };
 
   ExpressionContext* expression();
+
+  class  Conditional_operatorContext : public antlr4::ParserRuleContext {
+  public:
+    Conditional_operatorContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<TermContext *> term();
+    TermContext* term(size_t i);
+    std::vector<Conditional_operatorContext *> conditional_operator();
+    Conditional_operatorContext* conditional_operator(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Conditional_operatorContext* conditional_operator();
 
   class  TermContext : public antlr4::ParserRuleContext {
   public:
@@ -4656,8 +4671,8 @@ public:
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> Simple_identifier();
     antlr4::tree::TerminalNode* Simple_identifier(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Decimal_number();
-    antlr4::tree::TerminalNode* Decimal_number(size_t i);
+    std::vector<Range_expressionContext *> range_expression();
+    Range_expressionContext* range_expression(size_t i);
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
