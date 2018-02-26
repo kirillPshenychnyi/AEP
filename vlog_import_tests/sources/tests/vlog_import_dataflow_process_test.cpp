@@ -526,4 +526,22 @@ TEST_CASE_METHOD( ProcessFixture, "both branches as ternary", "[dataflow]" )
 
 /***************************************************************************/
 
+TEST_CASE_METHOD( ProcessFixture, "couple dataflow processes", "[dataflow]" )
+{
+	std::string code =
+		"module top (input a, b, output c, d);		\n"
+		"	assign c = !a;							\n"
+		"	assign d = ( a ^ b );					\n"
+		"endmodule									\n"
+		;
+
+	runImport( code );
+
+	expectDesignUnit( "top", 2 )
+		.expectProcess( 0, LINES( 2, 2 ) )
+		.expectProcess( 1, LINES( 3, 3 ) );
+}
+
+/***************************************************************************/
+
 }
