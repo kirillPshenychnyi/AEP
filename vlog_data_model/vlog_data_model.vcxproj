@@ -135,6 +135,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api\vlog_dm_blocking_assignment.hpp" />
+    <ClInclude Include="api\vlog_dm_conditional_branch.hpp" />
+    <ClInclude Include="api\vlog_dm_conditional_statement.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_statement_visitor.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_conditional_statement.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_statement_factory.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_statement_factory_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_blocking_assignment_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_conditional_statement_impl.hpp" />
+    <ClInclude Include="api\vlog_dm_sequential_process.hpp" />
     <ClInclude Include="api\vlog_dm_base_case_item.hpp" />
     <ClInclude Include="api\vlog_dm_base_identifier.hpp" />
     <ClInclude Include="api\vlog_dm_binary_operator.hpp" />
@@ -178,9 +188,11 @@
     <ClInclude Include="ih\writable\vlog_dm_type_factory.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_type_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_concatenation_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_conditional_branch_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_sequential_process_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_unary_operator_impl.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_base_regenerator.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_expression_regenerator.hpp" />
@@ -252,6 +264,7 @@
     <ClCompile Include="sources\model\factory\vlog_dm_design_unit_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_items_factory_impl.cpp" />
+    <ClCompile Include="sources\model\factory\vlog_dm_statement_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />

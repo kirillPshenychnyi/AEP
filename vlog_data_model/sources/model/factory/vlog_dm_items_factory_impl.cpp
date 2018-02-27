@@ -10,6 +10,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_expression_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_multidimensional_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_continuous_assignment_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_sequential_process_impl.hpp"
 
 /***************************************************************************/
 
@@ -105,9 +106,27 @@ ItemsFactoryImpl::newContinuousAssignment(
 	,	std::unique_ptr< BinaryOperator > _assignment
 	) const
 {
-	return std::make_unique< ContinuousAssignmentImpl >( _location, std::move( _assignment ) );
+	return 
+		std::make_unique< ContinuousAssignmentImpl >( 
+				_location
+			,	std::move( _assignment ) 
+		);
 }
 
+/***************************************************************************/
+
+SequentialProcessPtr 
+ItemsFactoryImpl::newSequentialProcess( 
+		Location const & _location
+	,	StatementPtr _statement 
+) const
+{
+	return 
+		std::make_unique< SequentialProcessImpl >( 
+				_location
+			,	std::move( _statement ) 
+		);
+}
 
 /***************************************************************************/
 

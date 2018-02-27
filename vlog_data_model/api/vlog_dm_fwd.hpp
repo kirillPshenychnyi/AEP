@@ -18,6 +18,7 @@ namespace VlogDM
 		struct MultidimensionalRange;
 
 		struct Concatenation;
+		struct ConditionalStatement;
 
 		typedef
 			std::unique_ptr< DesignUnit >
@@ -34,6 +35,10 @@ namespace VlogDM
 		typedef
 			std::unique_ptr< MultidimensionalRange >
 			MultidimensionalRangePtr;
+
+		typedef
+			std::unique_ptr< ConditionalStatement >
+			ConditionalStatementPtr;
 	}
 
 	struct IAccessor;
@@ -49,7 +54,12 @@ namespace VlogDM
 	struct Range;
 	struct Process;
 
+	struct Statement;
+	struct ConditionalBranch;
+	struct BlockingAssignment;
+
 	struct ContinuousAssignment;
+	struct SequentialProcess;
 
 	struct BaseIdentifier;
 
@@ -61,7 +71,7 @@ namespace VlogDM
 	struct Concatenation;
 	struct MultipleConcatenation;
 	struct ConditionalExpression;
-
+	
 	struct DesignUnitFactory;
 
 	typedef
@@ -109,8 +119,20 @@ namespace VlogDM
 		ContinuousAssignmentPtr;
 
 	typedef
+		std::unique_ptr< SequentialProcess >
+		SequentialProcessPtr;
+
+	typedef
 		std::unique_ptr< Process >
 		ProcessPtr;
+
+	typedef
+		std::unique_ptr< Statement >
+		StatementPtr;
+
+	typedef
+		std::unique_ptr< ConditionalBranch >
+		ConditionalBranchPtr;
 }
 
 #endif // !__VLOG_DM_FWD_HPP__

@@ -53,6 +53,11 @@ struct ItemsFactory
 		,	std::unique_ptr< BinaryOperator > _assignment
 	) const = 0;
 
+	virtual SequentialProcessPtr newSequentialProcess(
+			Location const& _location
+		,	StatementPtr _statement
+	) const = 0;
+
 /***************************************************************************/
 
 };

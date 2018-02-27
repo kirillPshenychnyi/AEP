@@ -34,5 +34,13 @@ ProcessRegenerator::visit( VlogDM::ContinuousAssignment const & _assing )
 
 /***************************************************************************/
 
+void 
+ProcessRegenerator::visit( SequentialProcess const & _assign )
+{
+
+}
+
+/***************************************************************************/
+
 }
 }

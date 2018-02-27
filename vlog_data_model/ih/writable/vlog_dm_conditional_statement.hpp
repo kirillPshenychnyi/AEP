@@ -1,44 +1,41 @@
-#ifndef __VLOG_DM_PROCESS_REGENERATOR_HPP__
-#define __VLOG_DM_PROCESS_REGENERATOR_HPP__
+#ifndef __VLOG_DM_WRITABLE_CONDITIONAL_STATEMENT_HPP__
+#define __VLOG_DM_WRITABLE_CONDITIONAL_STATEMENT_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\sources\regenerators\vlog_dm_base_regenerator.hpp"
-
-#include "vlog_data_model\ih\visitors\vlog_dm_process_visitor.hpp"
+#include "vlog_data_model\api\vlog_dm_conditional_statement.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-namespace Regenerators {
+namespace Writable {
 
 /***************************************************************************/
 
-class ProcessRegenerator
-	:	public BaseRegenerator
-	,	public ProcessVisitor
+template < typename _TBase, typename _TBranch >
+struct BaseConditionalStatement
+	:	public _TBase
 {
 
 /***************************************************************************/
 
-public:
+	typedef
+		std::unique_ptr< _TBranch >
+		Branch;
 
 /***************************************************************************/
 
-	ProcessRegenerator( std::ostream & _targetStream );
+	virtual void addBranch( Branch _branch ) = 0;
 
 /***************************************************************************/
 
-private:
+};
 
 /***************************************************************************/
 
-	void visit( VlogDM::ContinuousAssignment const & _assing ) override;
-
-	void visit( SequentialProcess const & _assign ) override;
-
-/***************************************************************************/
-
+class ConditionalStatement
+	:	public BaseConditionalStatement< VlogDM::ConditionalStatement, ConditionalBranch > 
+{
 };
 
 /***************************************************************************/
@@ -48,4 +45,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_REGENERATOR_HPP__
+#endif // !__VLOG_DM_WRITABLE_CONDITIONAL_STATEMENT_HPP__

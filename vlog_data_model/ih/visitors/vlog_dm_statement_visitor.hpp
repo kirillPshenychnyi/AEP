@@ -1,9 +1,5 @@
-#ifndef __VLOG_DM_PROCESS_VISITOR_HPP__
-#define __VLOG_DM_PROCESS_VISITOR_HPP__
-
-/***************************************************************************/
-
-#include <boost\noncopyable.hpp>
+#ifndef __VLOG_DM_STATEMENT_VISITOR_HPP__
+#define __VLOG_DM_STATEMENT_VISITOR_HPP__
 
 /***************************************************************************/
 
@@ -11,20 +7,19 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ContinuousAssignment;
-struct SequentialProcess;
+struct ConditionalStatement;
+struct BlockingAssignment;
 
 /***************************************************************************/
 
-struct ProcessVisitor
-	:	boost::noncopyable
+struct StatementVisitor
 {
 
 /***************************************************************************/
 
-	virtual void visit( ContinuousAssignment const & _assign ) = 0;
+	virtual void visit( ConditionalStatement const & _statement ) = 0;
 
-	virtual void visit( SequentialProcess const & _assign ) = 0;
+	virtual void visit( BlockingAssignment const & _assignment ) = 0;
 
 /***************************************************************************/
 
@@ -36,4 +31,4 @@ struct ProcessVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_VISITOR_HPP__
+#endif // !__VLOG_DM_STATEMENT_VISITOR_HPP__

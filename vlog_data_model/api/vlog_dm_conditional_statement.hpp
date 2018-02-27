@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_PROCESS_VISITOR_HPP__
-#define __VLOG_DM_PROCESS_VISITOR_HPP__
+#ifndef __VLOG_DM_CONDITIONAL_STATEMENT_HPP__
+#define __VLOG_DM_CONDITIONAL_STATEMENT_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "vlog_data_model\api\vlog_dm_statement.hpp"
 
 /***************************************************************************/
 
@@ -11,20 +11,19 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ContinuousAssignment;
-struct SequentialProcess;
+struct ConditionalBranch;
 
 /***************************************************************************/
 
-struct ProcessVisitor
-	:	boost::noncopyable
+struct ConditionalStatement
+	:	public Statement
 {
 
 /***************************************************************************/
 
-	virtual void visit( ContinuousAssignment const & _assign ) = 0;
+	virtual int getBranchesCount() const = 0;
 
-	virtual void visit( SequentialProcess const & _assign ) = 0;
+	virtual ConditionalBranch const & getBranch( int _idx ) const = 0;
 
 /***************************************************************************/
 
@@ -36,4 +35,4 @@ struct ProcessVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_VISITOR_HPP__
+#endif // !__VLOG_DM_CONDITIONAL_STATEMENT_HPP__

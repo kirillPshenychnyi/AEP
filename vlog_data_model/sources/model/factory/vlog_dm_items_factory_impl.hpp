@@ -54,6 +54,11 @@ public:
 		,	std::unique_ptr< BinaryOperator > _assignment
 	) const override;
 
+	SequentialProcessPtr newSequentialProcess(
+			Location const& _location
+		,	StatementPtr _statement
+	) const override;
+
 /***************************************************************************/
 
 private:
