@@ -5,6 +5,7 @@ namespace VlogDM
 {
 	namespace Writable 
 	{
+		struct ObjectFactory;
 		struct DesignUnitFactory;
 		struct DeclarationFactory;
 		struct DeclaredFactory;

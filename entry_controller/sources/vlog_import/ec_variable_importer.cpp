@@ -9,6 +9,7 @@
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 #include "vlog_data_model\api\vlog_dm_variable_declaration.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declaration_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declared_factory.hpp"
 
@@ -52,10 +53,8 @@ VariableImporter::importVar( _Context & _ctx )
 {
 	using namespace VlogDM;
 
-	IAccessor & vlog = getVlogDataModel();
-	
 	Writable::DeclaredFactory const& declaredFactory 
-		=	getVlogDataModel().getDeclaredFactory();
+		=	getVlogDataModel().getObjectFactory().getDeclaredFactory();
 
 	addDeclareds(
 			_ctx
@@ -85,8 +84,11 @@ VariableImporter::createDeclaration(
 	,	VlogDM::TypePtr _type
 	)
 {
+	VlogDM::Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
+
 	return 
-		getVlogDataModel().getDeclarationFactory().newVariableDeclaration( 
+		objectFactory.getDeclarationFactory().newVariableDeclaration( 
 				_location
 			,	std::move( _type )
 		);

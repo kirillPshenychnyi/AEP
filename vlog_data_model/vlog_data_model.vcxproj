@@ -140,7 +140,9 @@
     <ClInclude Include="api\vlog_dm_conditional_statement.hpp" />
     <ClInclude Include="ih\visitors\vlog_dm_statement_visitor.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_conditional_statement.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_object_factory.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_statement_factory.hpp" />
+    <ClInclude Include="sources\model\factory\vlog_dm_object_factory_impl.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_statement_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_blocking_assignment_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_conditional_statement_impl.hpp" />
@@ -264,6 +266,7 @@
     <ClCompile Include="sources\model\factory\vlog_dm_design_unit_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_items_factory_impl.cpp" />
+    <ClCompile Include="sources\model\factory\vlog_dm_object_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_statement_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp" />

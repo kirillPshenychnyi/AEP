@@ -14,6 +14,7 @@
 #include "vlog_data_model\api\vlog_dm_multiple_concatenation.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_expression.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
@@ -28,6 +29,7 @@ namespace VlogImport {
 
 ExpressionImporter::ExpressionImporter( VlogDM::IAccessor & _vlogDm )
 	:	BaseImporter( _vlogDm )
+	,	m_expressionFactory( _vlogDm.getObjectFactory().getExpressionFactory() )
 {
 }
 
@@ -70,9 +72,6 @@ ExpressionImporter::createExpression()
 		m_operators.push_back( lastContex.m_operator );
 	}
 
-	Writable::ExpressionFactory const & expressionFactory 
-			= getVlogDataModel().getExpressionFactory();
-
 	if( m_topNodes.size() == 1 )
 	{
 		ExpressionPtr operand = std::move( m_topNodes.front() );
@@ -85,7 +84,7 @@ ExpressionImporter::createExpression()
 			assert( m_operators.size() == 1 );
 
 			m_result = 
-				expressionFactory.newUnaryOperator(
+				m_expressionFactory.newUnaryOperator(
 						std::move( operand )
 					,	m_operators.front()
 					,	location
@@ -150,11 +149,8 @@ ExpressionImporter::createBinaryOperator( OperatorInfo & _info )
 {
 	using namespace VlogDM;
 			
-	Writable::ExpressionFactory const & expressionFactory 
-		=	getVlogDataModel().getExpressionFactory();
-
 	ExpressionPtr binaryOp
-		=	expressionFactory.newBinaryOperator(
+		=	m_expressionFactory.newBinaryOperator(
 					std::move( _info.m_leftOperand )
 				,	std::move( _info.m_rightOperand )
 				,	_info.m_operator
@@ -172,13 +168,10 @@ ExpressionImporter::createUnaryOperator( OperatorInfo & _info )
 {
 	using namespace VlogDM;
 			
-	Writable::ExpressionFactory const & expressionFactory 
-		=	getVlogDataModel().getExpressionFactory();
-
 	Location const & location = _info.m_leftOperand->getLocation();
 
 	ExpressionPtr unaryOp
-		=	expressionFactory.newUnaryOperator(
+		=	m_expressionFactory.newUnaryOperator(
 					_info.getValidOperand()
 				,	_info.m_operator
 				,	location
@@ -229,7 +222,7 @@ ExpressionImporter::createConcat(
 	};
 
 	auto concat 
-		=	getVlogDataModel().getExpressionFactory().newConcatenation( 
+		=	m_expressionFactory.newConcatenation( 
 				createLocation( _concateContext ) 
 			);
 
@@ -333,9 +326,6 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 		visitEachChildContext( *ctx );
 	else 
 	{
-		Writable::ExpressionFactory const & expressionFactory 
-			=	getVlogDataModel().getExpressionFactory();
-
 		ExpressionImporter expressionImporter( getVlogDataModel() );
 		
 		lastContext.addOperand( expressionImporter.importExpression( *ctx ) );
@@ -382,7 +372,7 @@ antlrcpp::Any
 ExpressionImporter::visitNumber( Verilog2001Parser::NumberContext * ctx )
 {
 	getLastContext().addOperand( 
-		getVlogDataModel().getExpressionFactory().newPrimaryLiteral(
+		m_expressionFactory.newPrimaryLiteral(
 				createLocation( *ctx )
 			,	ctx->getText() 
 		) 
@@ -400,14 +390,12 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 {
 	using namespace VlogDM;
 
-	IAccessor & vlogDM = getVlogDataModel();
-
 	IdentifierImporter idImporter( getVlogDataModel() );
 
 	idImporter.importId( *ctx );
 
 	getLastContext().addOperand( 
-			vlogDM.getExpressionFactory().newPrimaryIdentifier( 
+			m_expressionFactory.newPrimaryIdentifier( 
 					idImporter.takeId( 0 )
 			)
 	);
@@ -478,7 +466,7 @@ ExpressionImporter::visitMultiple_concatenation(
 	ExpressionImporter importer( getVlogDataModel() );
 
 	m_result = 
-		getVlogDataModel().getExpressionFactory().newMultipleConcatenation(
+		m_expressionFactory.newMultipleConcatenation(
 				importer.importExpression( *itemsExtractor.m_repeatExpressionContext )
 			,	createConcat( *itemsExtractor.m_concatContex )
 			,	createLocation( *ctx )
@@ -510,7 +498,7 @@ ExpressionImporter::visitConditional_operator(
 			};
 
 	m_result = 
-		getVlogDataModel().getExpressionFactory().newConditionalExpression(
+		m_expressionFactory.newConditionalExpression(
 				createLocation( *ctx )
 			,	importConditionalOperatorItem( conditionItemPosition )
 			,	importConditionalOperatorItem( trueBranchItemPosition )

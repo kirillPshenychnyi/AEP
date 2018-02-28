@@ -172,6 +172,8 @@ private:
 
 	Operators m_operators;
 
+	VlogDM::Writable::ExpressionFactory const & m_expressionFactory;
+
 	VlogDM::ExpressionPtr m_result;
 
 /***************************************************************************/

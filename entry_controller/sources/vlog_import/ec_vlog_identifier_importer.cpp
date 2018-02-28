@@ -12,6 +12,7 @@
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 
 /***************************************************************************/
@@ -113,8 +114,11 @@ IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 
 	assert( declared );
 
+	VlogDM::Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
+
 	m_extractedIds.push_back(
-		getVlogDataModel().getItemsFactory().newIdentifier( 
+		objectFactory.getItemsFactory().newIdentifier( 
 				createLocation( _ctx )
 			,	*declared 
 			,	createRange()
@@ -139,8 +143,11 @@ IdentifierImporter::createRange()
 	if( m_currentRanges.size() == 1 )
 		return std::move( m_currentRanges.front() );
 
+	VlogDM::Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
+
 	auto multidimRange = 
-		getVlogDataModel().getItemsFactory().newMultidimensionalRange( 
+		objectFactory.getItemsFactory().newMultidimensionalRange( 
 			m_currentRanges.front()->getLocation()
 		);
 

@@ -45,9 +45,6 @@ BaseNetImporter< _Declaration >::addDeclareds(
 			,	std::move( extractor.m_type ) 
 			);
 	
-	Writable::DeclaredFactory const& declaredFactory 
-		=	getVlogDataModel().getDeclaredFactory();
-
 	int dimensionIdx = 0;
 	for( auto const& port : extractor.m_netIds )
 	{

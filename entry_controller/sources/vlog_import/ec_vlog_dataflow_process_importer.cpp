@@ -15,6 +15,7 @@
 #include "vlog_data_model\ih\writable\vlog_dm_concatenation.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 
@@ -63,7 +64,7 @@ DataflowProcessImporter::visitNet_assignment(
 	using namespace VlogDM;
 
 	Writable::ExpressionFactory const & expressionFactory 
-			= getVlogDataModel().getExpressionFactory();
+			= getVlogDataModel().getObjectFactory().getExpressionFactory();
 
 	IdentifierImporter importer( getVlogDataModel() );
 
@@ -107,11 +108,13 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 
 	IAccessor & vlogDm = getVlogDataModel();
 
+	Writable::ObjectFactory const & objectFactory = vlogDm.getObjectFactory();
+
 	ExpressionImporter expressionImporter( getVlogDataModel() );
 
-	auto process = vlogDm.getItemsFactory().newContinuousAssignment( 
+	auto process = objectFactory.getItemsFactory().newContinuousAssignment( 
 							m_processLocation 
-						,	vlogDm.getExpressionFactory().newBinaryOperator(
+						,	objectFactory.getExpressionFactory().newBinaryOperator(
 									std::move( m_targetExpression )
 								,	expressionImporter.importExpression( *ctx )
 								,	Operator::Kind::Assign

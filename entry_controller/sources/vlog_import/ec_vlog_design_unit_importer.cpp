@@ -7,6 +7,7 @@
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_design_unit_factory.hpp"
 
 /***************************************************************************/
@@ -32,7 +33,7 @@ DesingUnitImporter::visitModule_declaration(
 	using namespace VlogDM;
 	
 	Writable::DesignUnitFactory const& unitsFactory 
-		= getVlogDataModel().getDesignUnitFactory();
+		= getVlogDataModel().getObjectFactory().getDesignUnitFactory();
 
 	IAccessor & vlogDm = getVlogDataModel();
 

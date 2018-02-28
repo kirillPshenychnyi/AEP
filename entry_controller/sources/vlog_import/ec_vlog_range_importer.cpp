@@ -7,7 +7,9 @@
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_range.hpp"
+
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 
 /***************************************************************************/
 
@@ -33,7 +35,7 @@ RangeImporter::importRange(
 	assert( m_lsbExpression );
 
 	VlogDM::Writable::ItemsFactory const & itemsFactory
-		=	getVlogDataModel().getItemsFactory();
+		=	getVlogDataModel().getObjectFactory().getItemsFactory();
 
 	return 
 		m_msbExpression 

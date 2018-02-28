@@ -13,9 +13,11 @@
 #include "vlog_data_model\api\vlog_dm_range.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_type_factory.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 
 /***************************************************************************/
 
@@ -183,7 +185,8 @@ NetExtractor::initType()
 
 	IAccessor & vlogDm = getVlogDataModel();
 
-	Writable::TypeFactory const & typeFactory = vlogDm.getTypeFactory();
+	Writable::TypeFactory const & typeFactory 
+		= vlogDm.getObjectFactory().getTypeFactory();
 
 	if( m_isReg )
 	{
@@ -212,13 +215,14 @@ NetExtractor::createRange( Range const & _dimension )
 {
 	using namespace VlogDM;
 
-	IAccessor & vlogDm = getVlogDataModel();
+	Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
 
 	Writable::ExpressionFactory const& expressionFactory
-		=	vlogDm.getExpressionFactory();
+		=	objectFactory.getExpressionFactory();
 
 	Writable::ItemsFactory const& itemsFactory
-		=	vlogDm.getItemsFactory();
+		=	objectFactory.getItemsFactory();
 
 	auto rangeBoundCreator 
 		=	[ & ]( NetExtractor::NetItem const& _item )
@@ -250,8 +254,11 @@ NetExtractor::initDimension(
 {
 	using namespace VlogDM;
 	
+	Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
+
 	m_typeDimension.reset(
-		getVlogDataModel().getItemsFactory().newPackedDimension( 
+		objectFactory.getItemsFactory().newPackedDimension( 
 				_leftBound.second
 			,	createRange( Range( _leftBound, _rightBound ) )
 		).release()
@@ -271,8 +278,11 @@ NetExtractor::pushDimension()
 		return;
 	}
 
+	Writable::ObjectFactory const & objectFactory
+		= getVlogDataModel().getObjectFactory();
+
 	Writable::ItemsFactory const & itemsFactory
-		=	getVlogDataModel().getItemsFactory();
+		=	objectFactory.getItemsFactory();
 
 	if( m_ranges.size() == 1 )
 	{

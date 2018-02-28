@@ -35,19 +35,7 @@ struct IAccessor
 		,	Process const & _process 
 	) const = 0;
 
-/***************************************************************************/
-
-	virtual Writable::DesignUnitFactory const& getDesignUnitFactory() = 0;
-
-	virtual Writable::DeclarationFactory const& getDeclarationFactory() = 0;
-
-	virtual Writable::DeclaredFactory const& getDeclaredFactory() = 0;
-
-	virtual Writable::ItemsFactory const& getItemsFactory() = 0;
-
-	virtual Writable::ExpressionFactory const& getExpressionFactory() = 0;
-
-	virtual Writable::TypeFactory const& getTypeFactory() = 0;
+	virtual Writable::ObjectFactory const& getObjectFactory() const = 0;
 
 /***************************************************************************/
 
