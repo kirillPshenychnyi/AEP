@@ -18,6 +18,10 @@ namespace VlogImport {
 
 /***************************************************************************/
 
+class IdentifierImporter;
+
+/***************************************************************************/
+
 class ExpressionImporter
 	:	public BaseImporter
 {
@@ -91,7 +95,13 @@ public:
 	ExpressionImporter( VlogDM::IAccessor & _vlogDm );
 
 	VlogDM::ExpressionPtr importExpression( 
-		Verilog2001Parser::ExpressionContext & _expression
+		Verilog2001Parser::ExpressionContext const & _expression
+	);
+
+	static VlogDM::ExpressionPtr createExpressionFromIds(
+			IdentifierImporter & _importer
+		,	VlogDM::Writable::ExpressionFactory const & _expressionFactory
+		,	VlogDM::Location const & _idLocation	
 	);
 
 /***************************************************************************/

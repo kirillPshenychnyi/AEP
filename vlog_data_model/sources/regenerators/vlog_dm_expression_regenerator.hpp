@@ -25,7 +25,10 @@ public:
 
 /***************************************************************************/
 
-	ExpressionRegenerator( std::ostream & _targetStream );
+	ExpressionRegenerator( 
+			std::ostream & _targetStream 
+		,	bool _withoutParentheses = false
+	);
 
 /***************************************************************************/
 
@@ -46,6 +49,14 @@ private:
 	void visit( MultipleConcatenation const& _concat ) override;
 
 	void visit( ConditionalExpression const & _conditional ) override;
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	const bool m_withoutParentheses;
 
 /***************************************************************************/
 

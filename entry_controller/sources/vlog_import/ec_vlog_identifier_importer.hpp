@@ -39,9 +39,11 @@ public:
 
 	IdentifierImporter( VlogDM::IAccessor & _accessor );
 
-	void importIds( Verilog2001Parser::Net_assignmentContext & _ctx );
+	void importIds( Verilog2001Parser::Net_assignmentContext const & _ctx );
 
-	void importId( Verilog2001Parser::Simple_hierarchical_identifierContext & _ctx );
+	void importIds( Verilog2001Parser::Variable_assignmentContext const & _ctx );
+
+	void importId( Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx );
 
 	VlogDM::BaseIdentifierPtr takeId( int _idx );
 

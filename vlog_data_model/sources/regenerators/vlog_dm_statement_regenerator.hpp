@@ -1,11 +1,10 @@
-#ifndef __VLOG_DM_PROCESS_REGENERATOR_HPP__
-#define __VLOG_DM_PROCESS_REGENERATOR_HPP__
+#ifndef __VLOG_DM_STATEMENT_REGENERATOR_HPP__
+#define __VLOG_DM_STATEMENT_REGENERATOR_HPP__
 
 /***************************************************************************/
 
 #include "vlog_data_model\sources\regenerators\vlog_dm_base_regenerator.hpp"
-
-#include "vlog_data_model\ih\visitors\vlog_dm_process_visitor.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_statement_visitor.hpp"
 
 /***************************************************************************/
 
@@ -14,9 +13,9 @@ namespace Regenerators {
 
 /***************************************************************************/
 
-class ProcessRegenerator
-	:	public BaseRegenerator
-	,	public ProcessVisitor
+class StatementRegenerator
+	:	public StatementVisitor
+	,	public BaseRegenerator
 {
 
 /***************************************************************************/
@@ -25,7 +24,7 @@ public:
 
 /***************************************************************************/
 
-	ProcessRegenerator( std::ostream & _targetStream );
+	StatementRegenerator( std::ostream & _target );
 
 /***************************************************************************/
 
@@ -33,9 +32,9 @@ private:
 
 /***************************************************************************/
 
-	void visit( ContinuousAssignment const & _assing ) override;
+	void visit( ConditionalStatement const & _statement ) override;
 
-	void visit( BehavioralProcess const & _behavioral ) override;
+	void visit( BlockingAssignment const & _assignment ) override;
 
 /***************************************************************************/
 
@@ -48,4 +47,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_REGENERATOR_HPP__
+#endif // !__VLOG_DM_STATEMENT_REGENERATOR_HPP__

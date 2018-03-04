@@ -1,5 +1,5 @@
-#ifndef __VLOG_DM_SEQUENTIAL_PROCESS_HPP__
-#define __VLOG_DM_SEQUENTIAL_PROCESS_HPP__
+#ifndef __VLOG_DM_BEHAVIORAL_PROCESS_PROCESS_HPP__
+#define __VLOG_DM_BEHAVIORAL_PROCESS_PROCESS_HPP__
 
 /***************************************************************************/
 
@@ -12,16 +12,19 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct Statement;
+struct SensitivityList;
 
 /***************************************************************************/
 
-struct SequentialProcess
+struct BehavioralProcess
 	:	public Process
 {
 
 /***************************************************************************/
 
 	virtual Statement const & getStatement () const = 0;
+
+	virtual boost::optional< SensitivityList const & > getSensitivityList() const = 0;
 
 /***************************************************************************/
 
@@ -33,4 +36,4 @@ struct SequentialProcess
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_SEQUENTIAL_PROCESS_HPP__
+#endif // !__VLOG_DM_BEHAVIORAL_PROCESS_PROCESS_HPP__

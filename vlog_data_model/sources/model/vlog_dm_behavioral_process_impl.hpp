@@ -1,5 +1,5 @@
-#ifndef __VLOG_DM_SEQUENTIAL_PROCES__IMPL_HPP__
-#define __VLOG_DM_SEQUENTIAL_PROCES__IMPL_HPP__
+#ifndef __VLOG_DM_BEHAVIORAL_PROCES__IMPL_HPP__
+#define __VLOG_DM_BEHAVIORAL_PROCES__IMPL_HPP__
 
 /***************************************************************************/
 
@@ -7,7 +7,7 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-#include "vlog_data_model\api\vlog_dm_sequential_process.hpp"
+#include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
 #include "vlog_data_model\api\vlog_dm_statement.hpp"
 
 /***************************************************************************/
@@ -16,14 +16,14 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct SequentialProcessImpl
-	:	public LocatedImpl< SequentialProcess >
+struct BehavioralProcessImpl
+	:	public LocatedImpl< BehavioralProcess >
 {
 
 /***************************************************************************/
 
 	typedef
-		LocatedImpl< SequentialProcess >
+		LocatedImpl< BehavioralProcess >
 		BaseClass;
 
 /***************************************************************************/
@@ -32,14 +32,17 @@ public:
 
 /***************************************************************************/
 
-	SequentialProcessImpl(
+	BehavioralProcessImpl(
 			Location const & _location
 		,	StatementPtr _statement
+		,	SensitivityListPtr _timingControl
 	);
 
 /***************************************************************************/
 
 	Statement const & getStatement() const override;
+	
+	boost::optional< SensitivityList const & > getSensitivityList() const override;
 
 	void accept( ProcessVisitor & _visitor ) const override;
 
@@ -50,6 +53,8 @@ private:
 /***************************************************************************/
 
 	StatementPtr m_statement;
+	
+	SensitivityListPtr m_sensitivityList;
 
 /***************************************************************************/
 
@@ -57,19 +62,21 @@ private:
 
 /***************************************************************************/
 
-SequentialProcessImpl::SequentialProcessImpl(
+BehavioralProcessImpl::BehavioralProcessImpl(
 		Location const & _location
 	,	StatementPtr _statement
+	,	SensitivityListPtr _sensitivityList
 	)
 	:	BaseClass( _location )
 	,	m_statement( std::move( _statement ) )
+	,	m_sensitivityList( std::move( _sensitivityList ) )
 {
 }
 
 /***************************************************************************/
 
 Statement const & 
-SequentialProcessImpl::getStatement() const
+BehavioralProcessImpl::getStatement() const
 {
 	assert( m_statement );
 
@@ -78,8 +85,17 @@ SequentialProcessImpl::getStatement() const
 
 /***************************************************************************/
 
+inline 
+boost::optional< SensitivityList const & >
+BehavioralProcessImpl::getSensitivityList() const
+{
+	return Tools::Convertors::convertPointerToOptional( m_sensitivityList.get() );
+}
+
+/***************************************************************************/
+
 void 
-SequentialProcessImpl::accept( ProcessVisitor & _visitor ) const
+BehavioralProcessImpl::accept( ProcessVisitor & _visitor ) const
 {
 	_visitor.visit( *this );
 }
@@ -90,4 +106,4 @@ SequentialProcessImpl::accept( ProcessVisitor & _visitor ) const
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_SEQUENTIAL_PROCES__IMPL_HPP__
+#endif // !__VLOG_DM_BEHAVIORAL_PROCES__IMPL_HPP__

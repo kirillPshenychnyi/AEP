@@ -54,9 +54,14 @@ public:
 		,	std::unique_ptr< BinaryOperator > _assignment
 	) const override;
 
-	SequentialProcessPtr newSequentialProcess(
+	BehavioralProcessPtr newBehavioralProcess(
 			Location const& _location
 		,	StatementPtr _statement
+		,	SensitivityListPtr _sensitivityList
+	) const override;
+
+	Writable::SensitivityListPtr newSensitivityList( 
+		Location const & _location	
 	) const override;
 
 /***************************************************************************/

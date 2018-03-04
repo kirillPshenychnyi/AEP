@@ -12,6 +12,7 @@ namespace VlogDM
 		struct ItemsFactory;
 		struct ExpressionFactory;
 		struct TypeFactory;
+		struct StatementFactory;
 
 		struct DesignUnit;
 		struct PortDeclaration;
@@ -20,6 +21,8 @@ namespace VlogDM
 
 		struct Concatenation;
 		struct ConditionalStatement;
+
+		struct SensitivityList;
 
 		typedef
 			std::unique_ptr< DesignUnit >
@@ -40,6 +43,10 @@ namespace VlogDM
 		typedef
 			std::unique_ptr< ConditionalStatement >
 			ConditionalStatementPtr;
+
+		typedef
+			std::unique_ptr< SensitivityList >
+			SensitivityListPtr;
 	}
 
 	struct IAccessor;
@@ -60,7 +67,7 @@ namespace VlogDM
 	struct BlockingAssignment;
 
 	struct ContinuousAssignment;
-	struct SequentialProcess;
+	struct BehavioralProcess;
 
 	struct BaseIdentifier;
 
@@ -72,7 +79,8 @@ namespace VlogDM
 	struct Concatenation;
 	struct MultipleConcatenation;
 	struct ConditionalExpression;
-	
+	struct SensitivityList;
+
 	struct DesignUnitFactory;
 
 	typedef
@@ -120,8 +128,8 @@ namespace VlogDM
 		ContinuousAssignmentPtr;
 
 	typedef
-		std::unique_ptr< SequentialProcess >
-		SequentialProcessPtr;
+		std::unique_ptr< BehavioralProcess >
+		BehavioralProcessPtr;
 
 	typedef
 		std::unique_ptr< Process >
@@ -134,6 +142,10 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< ConditionalBranch >
 		ConditionalBranchPtr;
+
+	typedef
+		std::unique_ptr< SensitivityList >
+		SensitivityListPtr;
 }
 
 #endif // !__VLOG_DM_FWD_HPP__

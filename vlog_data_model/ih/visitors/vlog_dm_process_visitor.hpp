@@ -12,7 +12,7 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct ContinuousAssignment;
-struct SequentialProcess;
+struct BehavioralProcess;
 
 /***************************************************************************/
 
@@ -24,7 +24,7 @@ struct ProcessVisitor
 
 	virtual void visit( ContinuousAssignment const & _assign ) = 0;
 
-	virtual void visit( SequentialProcess const & _assign ) = 0;
+	virtual void visit( BehavioralProcess const & _assign ) = 0;
 
 /***************************************************************************/
 

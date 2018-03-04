@@ -8,6 +8,7 @@
 #include "vlog_data_model\sources\model\factory\vlog_dm_items_factory_impl.hpp"
 #include "vlog_data_model\sources\model\factory\vlog_dm_expression_factory_impl.hpp"
 #include "vlog_data_model\sources\model\factory\vlog_dm_type_factory_impl.hpp"
+#include "vlog_data_model\sources\model\factory\vlog_dm_statement_factory_impl.hpp"
 
 /***************************************************************************/
 
@@ -22,6 +23,7 @@ ObjectFactoryImpl::ObjectFactoryImpl()
 	,	m_itemsFactory( new ItemsFactoryImpl() )
 	,	m_expressionFactory( new ExpressionFactoryImpl() )
 	,	m_typeFactory( new TypeFactoryImpl() )
+	,	m_statementFactory( new StatementFactoryImpl() )
 {
 }
 
@@ -71,6 +73,14 @@ Writable::TypeFactory const &
 ObjectFactoryImpl::getTypeFactory() const
 {
 	return *m_typeFactory;
+}
+
+/***************************************************************************/
+
+Writable::StatementFactory const &
+ObjectFactoryImpl::getStatementFactory() const
+{
+	return *m_statementFactory;
 }
 
 /***************************************************************************/

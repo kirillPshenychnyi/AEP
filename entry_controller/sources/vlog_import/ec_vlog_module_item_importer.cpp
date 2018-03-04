@@ -5,6 +5,7 @@
 #include "entry_controller\sources\vlog_import\ec_variable_importer.hpp"
 
 #include "entry_controller\sources\vlog_import\ec_vlog_dataflow_process_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_behavioral_process_importer.hpp"
 
 /***************************************************************************/
 
@@ -93,6 +94,21 @@ ModuleItemImporter::visitContinuous_assign(
 
 	return antlrcpp::Any();
 }
+
+/***************************************************************************/
+
+antlrcpp::Any
+ModuleItemImporter::visitAlways_construct(
+	Verilog2001Parser::Always_constructContext * ctx
+)
+{
+	BehavioralProcessImporter processImporter( getVlogDataModel() );
+
+	processImporter.importProcess( *ctx );
+
+	return antlrcpp::Any();
+}
+
 
 /***************************************************************************/
 

@@ -53,9 +53,14 @@ struct ItemsFactory
 		,	std::unique_ptr< BinaryOperator > _assignment
 	) const = 0;
 
-	virtual SequentialProcessPtr newSequentialProcess(
+	virtual BehavioralProcessPtr newBehavioralProcess(
 			Location const& _location
 		,	StatementPtr _statement
+		,	VlogDM::SensitivityListPtr _sensitivityList
+	) const = 0;
+
+	virtual SensitivityListPtr newSensitivityList( 
+		Location const & _location	
 	) const = 0;
 
 /***************************************************************************/

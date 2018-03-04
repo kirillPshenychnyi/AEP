@@ -29,6 +29,8 @@ struct ObjectFactory
 
 	virtual Writable::TypeFactory const& getTypeFactory() const = 0;
 
+	virtual Writable::StatementFactory const& getStatementFactory() const = 0;
+
 /***************************************************************************/
 
 };

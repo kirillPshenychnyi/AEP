@@ -15,12 +15,11 @@ namespace VlogDM {
 /***************************************************************************/
 
 std::unique_ptr< BlockingAssignment > 
-StatementFactoryImpl::newBlockingAssignment(
-		Location const & _location 
-	,	std::unique_ptr< BinaryOperator > _assignment
+StatementFactoryImpl::newBlockingAssignment( 
+	std::unique_ptr< BinaryOperator > _assignment 
 ) const
 {
-	return std::unique_ptr< BlockingAssignment >();
+	return std::make_unique< BlockingAssignmentImpl >( std::move( _assignment ) );
 }
 
 /***************************************************************************/
@@ -28,7 +27,7 @@ StatementFactoryImpl::newBlockingAssignment(
 Writable::ConditionalStatementPtr
 StatementFactoryImpl::newConditionalStatement( Location const & _location ) const
 {
-	return Writable::ConditionalStatementPtr();
+	return std::make_unique< ConditionalStatementImpl >( _location );
 }
 
 /***************************************************************************/
@@ -37,14 +36,12 @@ ConditionalBranchPtr
 StatementFactoryImpl::newConditionalBranch(
 		ExpressionPtr _expression
 	,	StatementPtr _statement
-	,	Location const & _location
 ) const
 {
 	return 
 		std::make_unique< ConditionalBranchImpl >( 
 				std::move( _expression )
 			,	std::move( _statement )
-			,	_location
 		);
 }
 

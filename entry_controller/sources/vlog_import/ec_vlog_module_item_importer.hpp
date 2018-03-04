@@ -58,6 +58,10 @@ private:
 		Verilog2001Parser::Continuous_assignContext * ctx 
 	) override;
 
+	antlrcpp::Any visitAlways_construct(
+		Verilog2001Parser::Always_constructContext * ctx
+	) override;
+
 /***************************************************************************/
 
 	template< typename _Context >

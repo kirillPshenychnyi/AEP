@@ -1,31 +1,25 @@
-#ifndef __VLOG_DM_CONDITIONAL_BRANCH_HPP__
-#define __VLOG_DM_CONDITIONAL_BRANCH_HPP__
+#ifndef __VLOG_DM_WRITABLE_SENSITIVITY_LIST_HPP__
+#define __VLOG_DM_WRITABLE_SENSITIVITY_LIST_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\api\vlog_dm_sensitivity_list.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
+namespace Writable {
 
 /***************************************************************************/
 
-struct Location;
-struct Expression;
-struct Statement;
-
-/***************************************************************************/
-
-struct ConditionalBranch
-	:	public Located
+struct SensitivityList
+	:	public VlogDM::SensitivityList
 {
 
 /***************************************************************************/
 
-	virtual boost::optional< Expression const & > getCondition () const = 0;
-
-	virtual Statement const & getStatement() const = 0;
+	virtual void addExpression( ExpressionPtr _expression ) = 0;
 
 /***************************************************************************/
 
@@ -34,8 +28,8 @@ struct ConditionalBranch
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_CONDITIONAL_BRANCH_HPP__
-
+#endif // !__VLOG_DM_WRITABLE_SENSITIVITY_LIST_HPP__

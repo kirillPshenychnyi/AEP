@@ -20,8 +20,12 @@ namespace Regenerators {
 
 /***************************************************************************/
 
-ExpressionRegenerator::ExpressionRegenerator( std::ostream & _targetStream )
+ExpressionRegenerator::ExpressionRegenerator( 
+		std::ostream & _targetStream 
+	,	bool _withoutParentheses
+	)
 	:	BaseRegenerator( _targetStream )
+	,	m_withoutParentheses( _withoutParentheses )
 {
 }
 
@@ -38,10 +42,11 @@ ExpressionRegenerator::visit( const PrimaryLiteral& _literal )
 void 
 ExpressionRegenerator::visit( const BinaryOperator& _operator )
 {
-	const bool isAssign 
-		= _operator.getOperator() == VlogDM::Operator::Kind::Assign;
+	const bool withParentheses  
+		=	_operator.getOperator() != VlogDM::Operator::Kind::Assign
+		&&	!m_withoutParentheses;
 
-	if( !isAssign )
+	if( withParentheses )
 		m_targetStream << "( ";
 
 	_operator.getLeftOperand().accept( *this );
@@ -51,7 +56,7 @@ ExpressionRegenerator::visit( const BinaryOperator& _operator )
 
 	_operator.getRightOperand().accept( *this );
 
-	if( !isAssign )
+	if( withParentheses )
 		m_targetStream << " )";
 }
 

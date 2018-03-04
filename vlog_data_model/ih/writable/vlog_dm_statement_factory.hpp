@@ -21,8 +21,7 @@ struct StatementFactory
 /***************************************************************************/
 
 	virtual std::unique_ptr< BlockingAssignment > newBlockingAssignment(
-			Location const & _location 
-		,	std::unique_ptr< BinaryOperator > _assignment
+		std::unique_ptr< BinaryOperator > _assignment
 	) const = 0;
 
 	virtual ConditionalStatementPtr newConditionalStatement(
@@ -32,7 +31,6 @@ struct StatementFactory
 	virtual ConditionalBranchPtr newConditionalBranch(
 				ExpressionPtr _expression
 			,	StatementPtr _statement
-			,	Location const & _location
 	) const = 0;
 
 /***************************************************************************/

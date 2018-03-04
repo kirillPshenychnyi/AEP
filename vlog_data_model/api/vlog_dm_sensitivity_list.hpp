@@ -1,5 +1,5 @@
-#ifndef __VLOG_DM_CONDITIONAL_BRANCH_HPP__
-#define __VLOG_DM_CONDITIONAL_BRANCH_HPP__
+#ifndef __VLOG_DM_SENSITIVITY_LIST_HPP__
+#define __VLOG_DM_SENSITIVITY_LIST_HPP__
 
 /***************************************************************************/
 
@@ -11,21 +11,19 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct Location;
 struct Expression;
-struct Statement;
 
 /***************************************************************************/
 
-struct ConditionalBranch
+struct SensitivityList
 	:	public Located
 {
 
 /***************************************************************************/
 
-	virtual boost::optional< Expression const & > getCondition () const = 0;
+	virtual int getExpressionsCount() const = 0;
 
-	virtual Statement const & getStatement() const = 0;
+	virtual VlogDM::Expression const & getExpression( int _idx ) const = 0;
 
 /***************************************************************************/
 
@@ -37,5 +35,4 @@ struct ConditionalBranch
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_CONDITIONAL_BRANCH_HPP__
-
+#endif // !__VLOG_DM_SENSITIVITY_LIST_HPP__

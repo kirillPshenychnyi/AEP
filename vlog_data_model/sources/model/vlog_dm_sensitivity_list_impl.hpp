@@ -1,15 +1,16 @@
-#ifndef __VLOG_DM_CONDITIONAL_BRANCH_IMPL_HPP__
-#define __VLOG_DM_CONDITIONAL_BRANCH_IMPL_HPP__
+#ifndef __VLOG_DM_SENSITIVITY_LIST_IMPL_HPP__
+#define __VLOG_DM_SENSITIVITY_LIST_IMPL_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
-#include "vlog_data_model\api\vlog_dm_statement.hpp"
-#include "vlog_data_model\api\vlog_dm_expression.hpp"
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
-#include "common_tools\utils\convertors.hpp"
+
+#include "vlog_data_model\ih\writable\vlog_dm_sensitivity_list.hpp"
+
+#include <vector>
 
 /***************************************************************************/
 
@@ -17,14 +18,18 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-class ConditionalBranchImpl
-	:	public LocatedImpl< ConditionalBranch >
+class SensitivityListImpl
+	:	public LocatedImpl< Writable::SensitivityList >
 {
 
 /***************************************************************************/
 
 	typedef
-		LocatedImpl< ConditionalBranch >
+		std::vector< ExpressionPtr >
+		ExpressionsList;
+
+	typedef
+		LocatedImpl< Writable::SensitivityList >
 		BaseClass;
 
 /***************************************************************************/
@@ -33,16 +38,15 @@ public:
 
 /***************************************************************************/
 
-	ConditionalBranchImpl(
-			ExpressionPtr _condtion
-		,	StatementPtr _statement
-	);
+	SensitivityListImpl( Location const & _location );
 
 /***************************************************************************/
 
-	boost::optional< Expression const & > getCondition () const override;
+	void addExpression( ExpressionPtr _expression ) override;
 
-	Statement const & getStatement() const override;
+	int getExpressionsCount() const override;
+
+	Expression const & getExpression( int _idx ) const override;
 
 /***************************************************************************/
 
@@ -50,8 +54,7 @@ private:
 
 /***************************************************************************/
 
-	ExpressionPtr m_condition;
-	StatementPtr m_statement;
+	ExpressionsList m_expressions;
 
 /***************************************************************************/
 
@@ -59,31 +62,34 @@ private:
 
 /***************************************************************************/
 
-ConditionalBranchImpl::ConditionalBranchImpl(
-		ExpressionPtr _condition
-	,	StatementPtr _statement
-	)
-	:	BaseClass( _condition ? _condition->getLocation() : _statement->getLocation() )
-	,	m_condition( std::move( _condition ) )
-	,	m_statement( std::move( _statement ) )
-{}
-
-/***************************************************************************/
-
-boost::optional< Expression const& > 
-ConditionalBranchImpl::getCondition() const
+SensitivityListImpl::SensitivityListImpl( Location const & _location )
+	:	BaseClass( _location )
 {
-	return Tools::Convertors::convertPointerToOptional( m_condition.get() );
+
 }
 
 /***************************************************************************/
 
-Statement const & 
-ConditionalBranchImpl::getStatement() const
+void 
+SensitivityListImpl::addExpression( ExpressionPtr _expression )
 {
-	assert( m_statement );
+	m_expressions.push_back( std::move( _expression ) );
+}
 
-	return *m_statement;
+/***************************************************************************/
+
+int 
+SensitivityListImpl::getExpressionsCount() const
+{
+	return m_expressions.size();
+}
+
+/***************************************************************************/
+
+Expression const & 
+SensitivityListImpl::getExpression( int _idx ) const
+{
+	return *m_expressions.at( _idx );
 }
 
 /***************************************************************************/
@@ -92,4 +98,4 @@ ConditionalBranchImpl::getStatement() const
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_CONDITIONAL_BRANCH_IMPL_HPP__
+#endif // !__VLOG_DM_SENSITIVITY_LIST_IMPL_HPP__

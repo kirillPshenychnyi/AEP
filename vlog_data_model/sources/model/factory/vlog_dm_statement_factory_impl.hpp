@@ -18,8 +18,7 @@ class StatementFactoryImpl
 /***************************************************************************/
 
 	std::unique_ptr< BlockingAssignment > newBlockingAssignment(
-			Location const & _location 
-		,	std::unique_ptr< BinaryOperator > _assignment
+		std::unique_ptr< BinaryOperator > _assignment
 	) const override;
 
 	Writable::ConditionalStatementPtr newConditionalStatement(
@@ -29,7 +28,6 @@ class StatementFactoryImpl
 	ConditionalBranchPtr newConditionalBranch(
 			ExpressionPtr _expression
 		,	StatementPtr _statement
-		,	Location const & _location
 	) const override;
 
 /***************************************************************************/

@@ -138,15 +138,17 @@
     <ClInclude Include="api\vlog_dm_blocking_assignment.hpp" />
     <ClInclude Include="api\vlog_dm_conditional_branch.hpp" />
     <ClInclude Include="api\vlog_dm_conditional_statement.hpp" />
+    <ClInclude Include="api\vlog_dm_sensitivity_list.hpp" />
     <ClInclude Include="ih\visitors\vlog_dm_statement_visitor.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_conditional_statement.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_object_factory.hpp" />
+    <ClInclude Include="ih\writable\vlog_dm_sensitivity_list.hpp" />
     <ClInclude Include="ih\writable\vlog_dm_statement_factory.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_object_factory_impl.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_statement_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_blocking_assignment_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_conditional_statement_impl.hpp" />
-    <ClInclude Include="api\vlog_dm_sequential_process.hpp" />
+    <ClInclude Include="api\vlog_dm_behavioral_process.hpp" />
     <ClInclude Include="api\vlog_dm_base_case_item.hpp" />
     <ClInclude Include="api\vlog_dm_base_identifier.hpp" />
     <ClInclude Include="api\vlog_dm_binary_operator.hpp" />
@@ -194,7 +196,8 @@
     <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp" />
-    <ClInclude Include="sources\model\vlog_dm_sequential_process_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_behavioral_process_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_sensitivity_list_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_unary_operator_impl.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_base_regenerator.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_expression_regenerator.hpp" />
@@ -253,6 +256,7 @@
     <ClInclude Include="sources\model\vlog_dm_variable_declaration_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_variable_type_impl.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_range_regenerator.hpp" />
+    <ClInclude Include="sources\regenerators\vlog_dm_statement_regenerator.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="sources\model\vlog_dm_declared_impl.hpp" />
@@ -279,6 +283,7 @@
     <ClCompile Include="sources\regenerators\vlog_dm_expression_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_process_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_range_regenerator.cpp" />
+    <ClCompile Include="sources\regenerators\vlog_dm_statement_regenerator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

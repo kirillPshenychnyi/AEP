@@ -37,14 +37,46 @@ ExpressionImporter::ExpressionImporter( VlogDM::IAccessor & _vlogDm )
 
 VlogDM::ExpressionPtr
 ExpressionImporter::importExpression( 
-	Verilog2001Parser::ExpressionContext & _expression 
+	Verilog2001Parser::ExpressionContext const & _expression 
 )
 {
+	reset();
+
 	visitEachChildContext( _expression );
 
 	createExpression();
 
 	return std::move( m_result );
+}
+
+/***************************************************************************/
+
+VlogDM::ExpressionPtr 
+ExpressionImporter::createExpressionFromIds(
+		IdentifierImporter & _importer 
+	,	VlogDM::Writable::ExpressionFactory const & _expressionFactory
+	,	VlogDM::Location const & _idLocation
+)
+{
+	using namespace VlogDM;
+
+	auto primaryIdCreator
+		=	[ & ]( int _idx ) -> ExpressionPtr
+			{
+				return _expressionFactory.newPrimaryIdentifier( _importer.takeId( _idx ) );
+			};
+	
+	const int idsCount = _importer.getIdsCount();
+
+	if( idsCount == 1 )
+		return primaryIdCreator( 0 );
+
+	auto concat = _expressionFactory.newConcatenation( _idLocation );
+
+	for( int i = 0; i < idsCount; ++i )
+		concat->addExpression( primaryIdCreator( i ) );
+
+	return std::move( concat );	
 }
 
 /***************************************************************************/

@@ -10,7 +10,8 @@
 #include "vlog_data_model\sources\model\vlog_dm_expression_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_multidimensional_range_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_continuous_assignment_impl.hpp"
-#include "vlog_data_model\sources\model\vlog_dm_sequential_process_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_behavioral_process_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_sensitivity_list_impl.hpp"
 
 /***************************************************************************/
 
@@ -115,17 +116,27 @@ ItemsFactoryImpl::newContinuousAssignment(
 
 /***************************************************************************/
 
-SequentialProcessPtr 
-ItemsFactoryImpl::newSequentialProcess( 
+BehavioralProcessPtr 
+ItemsFactoryImpl::newBehavioralProcess( 
 		Location const & _location
 	,	StatementPtr _statement 
+	,	SensitivityListPtr _sensitivityList
 ) const
 {
 	return 
-		std::make_unique< SequentialProcessImpl >( 
+		std::make_unique< BehavioralProcessImpl >( 
 				_location
 			,	std::move( _statement ) 
+			,	std::move( _sensitivityList ) 
 		);
+}
+
+/***************************************************************************/
+
+Writable::SensitivityListPtr 
+ItemsFactoryImpl::newSensitivityList( Location const & _location ) const
+{
+	return std::make_unique< SensitivityListImpl >( _location );
 }
 
 /***************************************************************************/

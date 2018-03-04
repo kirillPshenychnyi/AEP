@@ -351,12 +351,6 @@
     <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\vlog_dm_sequential_process.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\model\vlog_dm_sequential_process_impl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\vlog_dm_conditional_statement.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -391,6 +385,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sources\model\factory\vlog_dm_object_factory_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_behavioral_process.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_behavioral_process_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\regenerators\vlog_dm_statement_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_sensitivity_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\writable\vlog_dm_sensitivity_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_sensitivity_list_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -453,6 +465,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\model\factory\vlog_dm_object_factory_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\regenerators\vlog_dm_statement_regenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

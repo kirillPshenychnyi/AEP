@@ -969,8 +969,8 @@ wait_statement
 
 // 6.6 Conditional statements
 conditional_statement
-   : 'if' '(' expression ')' statement_or_null ('else' statement_or_null)?
-   | if_else_if_statement
+   : if_else_if_statement
+   | 'if' '(' expression ')' statement_or_null ('else' statement_or_null)?
    ;
 
 if_else_if_statement

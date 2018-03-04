@@ -42,8 +42,11 @@ struct Operator
 		,	LogicOr		// ||
 		,	LogicNot	// !
 
+		,	Equal			// ==
+		,	WildcardEqual	// ===
+
 		,	First = Assign
-		,	Last = LogicNot
+		,	Last = WildcardEqual
 	};
 
 /***************************************************************************/
@@ -92,6 +95,12 @@ struct Operator
 			case Kind::LogicNot:
 				return "!";
 			
+			case Kind::Equal:
+				return "==";
+
+			case Kind::WildcardEqual:
+				return "===";
+
 			case Kind::ReductionNand: return "~&";
 			case Kind::ReductionNor: return "~|";
 			case Kind::ReductionXor: return "~^";

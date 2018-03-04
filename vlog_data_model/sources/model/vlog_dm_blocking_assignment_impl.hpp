@@ -35,10 +35,7 @@ public:
 
 /***************************************************************************/
 
-	BlockingAssignmentImpl( 
-			Location const & _location 
-		,	BinaryOperatorPtr _assignment
-	);
+	BlockingAssignmentImpl( BinaryOperatorPtr _assignment );
 
 /***************************************************************************/
 
@@ -60,11 +57,8 @@ private:
 
 /***************************************************************************/
 
-BlockingAssignmentImpl::BlockingAssignmentImpl( 
-		Location const & _location 
-	,	BinaryOperatorPtr _assignment
-	)
-	:	BaseClass( _location )
+BlockingAssignmentImpl::BlockingAssignmentImpl( BinaryOperatorPtr _assignment )
+	:	BaseClass( _assignment->getLocation() )
 	,	m_binaryOperator( std::move( _assignment ) )
 {}
 

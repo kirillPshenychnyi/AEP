@@ -30,7 +30,15 @@ IdentifierImporter::IdentifierImporter( VlogDM::IAccessor & _accessor )
 /***************************************************************************/
 
 void 
-IdentifierImporter::importIds(  Verilog2001Parser::Net_assignmentContext & _ctx )
+IdentifierImporter::importIds( Verilog2001Parser::Net_assignmentContext const & _ctx )
+{
+	visitEachChildContext( _ctx );
+}
+
+/***************************************************************************/
+
+void 
+IdentifierImporter::importIds( Verilog2001Parser::Variable_assignmentContext const & _ctx )
 {
 	visitEachChildContext( _ctx );
 }
@@ -39,7 +47,7 @@ IdentifierImporter::importIds(  Verilog2001Parser::Net_assignmentContext & _ctx 
 
 void 
 IdentifierImporter::importId( 
-		Verilog2001Parser::Simple_hierarchical_identifierContext & _ctx 
+		Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx 
 	)
 {
 	_ctx.children.front()->accept( this );
