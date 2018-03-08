@@ -27,8 +27,8 @@ DesingUnitImporter::DesingUnitImporter( VlogDM::IAccessor & _accessor )
 
 antlrcpp::Any
 DesingUnitImporter::visitModule_declaration(
-		Verilog2001Parser::Module_declarationContext * ctx 
-	)
+	Verilog2001Parser::Module_declarationContext * ctx 
+)
 {
 	using namespace VlogDM;
 	
@@ -44,18 +44,6 @@ DesingUnitImporter::visitModule_declaration(
 		)  
 	);
 
-	visitEachChildContext( *ctx );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-DesingUnitImporter::visitModule_item(
-		Verilog2001Parser::Module_itemContext *ctx 
-	)	 
-{	
 	visitEachChildContext( *ctx );
 
 	return antlrcpp::Any();

@@ -106,26 +106,6 @@ NetExtractor::visitDimension( Verilog2001Parser::DimensionContext *ctx )
 /***************************************************************************/
 
 antlrcpp::Any
-NetExtractor::visitList_of_port_identifiers(
-	Verilog2001Parser::List_of_port_identifiersContext *ctx
-)
-{
-	return visitListOfIds( *ctx );
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-NetExtractor::visitList_of_net_identifiers(
-		Verilog2001Parser::List_of_net_identifiersContext *ctx
-) 
-{
-	return visitListOfIds( *ctx );
-}
-
-/***************************************************************************/
-
-antlrcpp::Any
 NetExtractor::visitPort_identifier( 
 		Verilog2001Parser::Port_identifierContext *ctx 
 	)
@@ -151,16 +131,6 @@ NetExtractor::visitVariable_identifier(
 )
 {
 	return extractId( *ctx );
-}
-
-/***************************************************************************/
-
-antlrcpp::Any
-NetExtractor::visitListOfIds( antlr4::ParserRuleContext & _context )
-{
-	visitEachChildContext( _context );
-
-	return antlrcpp::Any();
 }
 
 /***************************************************************************/

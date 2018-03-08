@@ -38,14 +38,6 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitModule_or_generate_item( 
-		Verilog2001Parser::Module_or_generate_itemContext * ctx 
-	) override;
-
-	antlrcpp::Any visitModule_or_generate_item_declaration( 
-		Verilog2001Parser::Module_or_generate_item_declarationContext * ctx 
-	) override;
-
 	antlrcpp::Any visitNet_declaration( 
 		Verilog2001Parser::Net_declarationContext * ctx 
 	) override;

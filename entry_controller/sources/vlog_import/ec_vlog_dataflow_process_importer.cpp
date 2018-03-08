@@ -44,18 +44,6 @@ DataflowProcessImporter::importProcess(
 /***************************************************************************/
 
 antlrcpp::Any 
-DataflowProcessImporter::visitList_of_net_assignments(
-		Verilog2001Parser::List_of_net_assignmentsContext * _ctx
-	)
-{
-	visitEachChildContext( *_ctx );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 DataflowProcessImporter::visitNet_assignment(
 	Verilog2001Parser::Net_assignmentContext * ctx
 )

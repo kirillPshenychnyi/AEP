@@ -79,14 +79,6 @@ private:
 		Verilog2001Parser::DimensionContext *ctx 
 	) override;
 
-	antlrcpp::Any visitList_of_port_identifiers(
-			Verilog2001Parser::List_of_port_identifiersContext *ctx 
-	) override;
-
-	antlrcpp::Any visitList_of_net_identifiers(
-			Verilog2001Parser::List_of_net_identifiersContext *ctx 
-	) override;
-
 	antlrcpp::Any visitPort_identifier( 
 			Verilog2001Parser::Port_identifierContext *ctx 
 	) override ;
@@ -100,8 +92,6 @@ private:
 	) override;
 
 /***************************************************************************/
-
-	antlrcpp::Any visitListOfIds( antlr4::ParserRuleContext & _context );
 
 	antlrcpp::Any extractId( antlr4::ParserRuleContext & _context );
 

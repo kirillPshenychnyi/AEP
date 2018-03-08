@@ -52,28 +52,6 @@ PortImporter::importPorts( const Verilog2001Parser::List_of_port_declarationsCon
 /***************************************************************************/
 
 antlrcpp::Any 
-PortImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
-{
-	forEachChildContext(
-			*ctx
-		,	[ & ]( antlr4::tree::ParseTree & _tree )
-			{
-				VlogDM::Location location = createLocation( *ctx );
-
-				//m_extractedDeclarations.emplace_back(
-				//		getVlogDataModel().getDeclarationFactory().newPortDeclaration( location )
-				//);
-
-				_tree.accept( this );
-			}
-	);
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 PortImporter::visitInout_declaration( Verilog2001Parser::Inout_declarationContext * ctx )
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Inout );

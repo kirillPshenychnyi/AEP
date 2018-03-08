@@ -33,10 +33,6 @@ public:
 		Verilog2001Parser::Module_declarationContext *ctx 
 	) override;
 
-	antlrcpp::Any visitModule_item( 
-		Verilog2001Parser::Module_itemContext *ctx 
-	) override;
-
 	antlrcpp::Any visitPort_declaration( 
 		Verilog2001Parser::Port_declarationContext *ctx 
 	) override;

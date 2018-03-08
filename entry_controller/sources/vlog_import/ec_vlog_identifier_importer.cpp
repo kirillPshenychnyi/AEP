@@ -30,7 +30,9 @@ IdentifierImporter::IdentifierImporter( VlogDM::IAccessor & _accessor )
 /***************************************************************************/
 
 void 
-IdentifierImporter::importIds( Verilog2001Parser::Net_assignmentContext const & _ctx )
+IdentifierImporter::importIds( 
+	Verilog2001Parser::Net_assignmentContext const & _ctx 
+)
 {
 	visitEachChildContext( _ctx );
 }
@@ -38,7 +40,9 @@ IdentifierImporter::importIds( Verilog2001Parser::Net_assignmentContext const & 
 /***************************************************************************/
 
 void 
-IdentifierImporter::importIds( Verilog2001Parser::Variable_assignmentContext const & _ctx )
+IdentifierImporter::importIds( 
+	Verilog2001Parser::Variable_assignmentContext const & _ctx 
+)
 {
 	visitEachChildContext( _ctx );
 }
@@ -47,44 +51,10 @@ IdentifierImporter::importIds( Verilog2001Parser::Variable_assignmentContext con
 
 void 
 IdentifierImporter::importId( 
-		Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx 
-	)
+	Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx 
+)
 {
 	_ctx.children.front()->accept( this );
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-IdentifierImporter::visitNet_lvalue( Verilog2001Parser::Net_lvalueContext * ctx )
-{	
-	visitEachChildContext( *ctx );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-IdentifierImporter::visitNet_concatenation( 
-	Verilog2001Parser::Net_concatenationContext * ctx 
-)
-{
-	visitEachChildContext( *ctx );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-IdentifierImporter::visitNet_concatenation_value(
-	Verilog2001Parser::Net_concatenation_valueContext * ctx
-)
-{
-	visitEachChildContext( *ctx );
-
-	return antlrcpp::Any();
 }
 
 /***************************************************************************/

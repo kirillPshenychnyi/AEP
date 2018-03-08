@@ -325,15 +325,6 @@ ExpressionImporter::reset()
 /***************************************************************************/
 
 antlrcpp::Any 
-ExpressionImporter::visitTerm( Verilog2001Parser::TermContext * ctx )
-{
-	visitEachChildContext( *ctx );
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 ExpressionImporter::visitPrimary( Verilog2001Parser::PrimaryContext * ctx )
 {
 	using namespace VlogDM;
