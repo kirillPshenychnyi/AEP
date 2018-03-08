@@ -25,6 +25,11 @@ namespace VlogImport {
 
 /***************************************************************************/
 
+#define RETURN_ANY			\
+	return antlrcpp::Any();
+
+/***************************************************************************/
+
 class BaseImporter 
 	:	public Verilog2001BaseVisitor
 {

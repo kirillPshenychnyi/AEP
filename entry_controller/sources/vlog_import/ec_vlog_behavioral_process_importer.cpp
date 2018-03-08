@@ -67,9 +67,8 @@ BehavioralProcessImporter::visitStatement( Verilog2001Parser::StatementContext *
 	int controls = statementImporter.getControlsCount();
 
 	if( controls == 0 )
-		return antlrcpp::Any();
-	
-	
+		RETURN_ANY
+		
 	VlogDM::Writable::SensitivityListPtr sensList
 		=	getVlogDataModel().getObjectFactory().getItemsFactory().newSensitivityList(
 				createLocation( *ctx )
@@ -80,7 +79,7 @@ BehavioralProcessImporter::visitStatement( Verilog2001Parser::StatementContext *
 
 	m_sensitivityList = std::move( sensList );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

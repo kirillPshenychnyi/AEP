@@ -138,8 +138,6 @@ private:
 			Verilog2001Parser::Simple_hierarchical_identifierContext * ctx
 	) override;
 
-	antlrcpp::Any visitTerm( Verilog2001Parser::TermContext * ctx ) override;
-
 	antlrcpp::Any visitPrimary( Verilog2001Parser::PrimaryContext * ctx ) override;
 
 	antlrcpp::Any visitExpression( 

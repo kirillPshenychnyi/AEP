@@ -38,10 +38,6 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitList_of_net_assignments(
-		Verilog2001Parser::List_of_net_assignmentsContext * ctx 
-	) override;
-
 	antlrcpp::Any visitNet_assignment(
 		Verilog2001Parser::Net_assignmentContext * ctx 
 	) override;

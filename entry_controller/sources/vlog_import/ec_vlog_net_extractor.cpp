@@ -64,7 +64,7 @@ NetExtractor::visitNet_type( Verilog2001Parser::Net_typeContext *ctx )
 {
 	m_netType = VlogDM::NetKind::fromString( ctx->getText().c_str() );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -83,7 +83,7 @@ NetExtractor::visitRange( Verilog2001Parser::RangeContext *ctx )
 
 	initType();
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -100,27 +100,7 @@ NetExtractor::visitDimension( Verilog2001Parser::DimensionContext *ctx )
 		,	NetItem( ctx->children[ 3 ]->getText(), location )
 	);
 	
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any
-NetExtractor::visitList_of_port_identifiers(
-	Verilog2001Parser::List_of_port_identifiersContext *ctx
-)
-{
-	return visitListOfIds( *ctx );
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-NetExtractor::visitList_of_net_identifiers(
-		Verilog2001Parser::List_of_net_identifiersContext *ctx
-) 
-{
-	return visitListOfIds( *ctx );
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -155,16 +135,6 @@ NetExtractor::visitVariable_identifier(
 
 /***************************************************************************/
 
-antlrcpp::Any
-NetExtractor::visitListOfIds( antlr4::ParserRuleContext & _context )
-{
-	visitEachChildContext( _context );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
 antlrcpp::Any 
 NetExtractor::extractId( antlr4::ParserRuleContext & _context )
 {
@@ -173,7 +143,7 @@ NetExtractor::extractId( antlr4::ParserRuleContext & _context )
 
 	m_netIds.emplace_back( _context.getText(), createLocation( _context ) );
 	
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

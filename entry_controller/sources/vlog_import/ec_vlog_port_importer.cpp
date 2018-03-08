@@ -52,33 +52,11 @@ PortImporter::importPorts( const Verilog2001Parser::List_of_port_declarationsCon
 /***************************************************************************/
 
 antlrcpp::Any 
-PortImporter::visitPort_declaration( Verilog2001Parser::Port_declarationContext * ctx )
-{
-	forEachChildContext(
-			*ctx
-		,	[ & ]( antlr4::tree::ParseTree & _tree )
-			{
-				VlogDM::Location location = createLocation( *ctx );
-
-				//m_extractedDeclarations.emplace_back(
-				//		getVlogDataModel().getDeclarationFactory().newPortDeclaration( location )
-				//);
-
-				_tree.accept( this );
-			}
-	);
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 PortImporter::visitInout_declaration( Verilog2001Parser::Inout_declarationContext * ctx )
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Inout );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -88,7 +66,7 @@ PortImporter::visitInput_declaration( Verilog2001Parser::Input_declarationContex
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Input );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -98,7 +76,7 @@ PortImporter::visitOutput_declaration( Verilog2001Parser::Output_declarationCont
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Output );
 	
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

@@ -44,18 +44,6 @@ DataflowProcessImporter::importProcess(
 /***************************************************************************/
 
 antlrcpp::Any 
-DataflowProcessImporter::visitList_of_net_assignments(
-		Verilog2001Parser::List_of_net_assignmentsContext * _ctx
-	)
-{
-	visitEachChildContext( *_ctx );
-
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
 DataflowProcessImporter::visitNet_assignment(
 	Verilog2001Parser::Net_assignmentContext * ctx
 )
@@ -77,7 +65,7 @@ DataflowProcessImporter::visitNet_assignment(
 	// rhs expression is last child
 	ctx->children.back()->accept( this );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -104,7 +92,7 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 
 	vlogDm.getCurrentImportedUnit().addProcess( std::move( process ) );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

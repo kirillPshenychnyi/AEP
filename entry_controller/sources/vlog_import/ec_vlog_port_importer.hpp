@@ -57,13 +57,17 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitPort_declaration( Verilog2001Parser::Port_declarationContext *ctx ) override;
-
-	antlrcpp::Any visitInout_declaration( Verilog2001Parser::Inout_declarationContext *ctx ) override;
+	antlrcpp::Any visitInout_declaration( 
+		Verilog2001Parser::Inout_declarationContext *ctx 
+	) override;
 	
-	antlrcpp::Any visitInput_declaration( Verilog2001Parser::Input_declarationContext *ctx ) override;
+	antlrcpp::Any visitInput_declaration( 
+		Verilog2001Parser::Input_declarationContext *ctx 
+	) override;
 
-	antlrcpp::Any visitOutput_declaration( Verilog2001Parser::Output_declarationContext *ctx ) override;
+	antlrcpp::Any visitOutput_declaration( 
+		Verilog2001Parser::Output_declarationContext *ctx 
+	) override;
 
 /***************************************************************************/
 

@@ -27,8 +27,8 @@ DesingUnitImporter::DesingUnitImporter( VlogDM::IAccessor & _accessor )
 
 antlrcpp::Any
 DesingUnitImporter::visitModule_declaration(
-		Verilog2001Parser::Module_declarationContext * ctx 
-	)
+	Verilog2001Parser::Module_declarationContext * ctx 
+)
 {
 	using namespace VlogDM;
 	
@@ -46,19 +46,7 @@ DesingUnitImporter::visitModule_declaration(
 
 	visitEachChildContext( *ctx );
 
-	return antlrcpp::Any();
-}
-
-/***************************************************************************/
-
-antlrcpp::Any 
-DesingUnitImporter::visitModule_item(
-		Verilog2001Parser::Module_itemContext *ctx 
-	)	 
-{	
-	visitEachChildContext( *ctx );
-
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -70,7 +58,7 @@ antlrcpp::Any DesingUnitImporter::visitPort_declaration(
 	PortImporter portImporter( getVlogDataModel() );
 	portImporter.importPorts( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -83,7 +71,7 @@ DesingUnitImporter::visitList_of_port_declarations(
 	PortImporter portImporter( getVlogDataModel() );
 	portImporter.importPorts( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -116,7 +104,7 @@ DesingUnitImporter::importItem( _Context & _ctx )
 
 	itemImporter.importItems( _ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
