@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_SIMPLE_CASE_ITEM_HPP__
-#define __VLOG_DM_SIMPLE_CASE_ITEM_HPP__
+#ifndef __VLOG_DM_CASE_STATEMENT_HPP__
+#define __VLOG_DM_CASE_STATEMENT_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_base_case_item.hpp"
+#include "vlog_data_model\api\vlog_dm_statement.hpp"
 
 /***************************************************************************/
 
@@ -12,18 +12,21 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct Expression;
+struct CaseItem;
 
 /***************************************************************************/
 
-struct CaseItem
-	:	public BaseCaseItem
+struct CaseStatement
+	:	public Statement
 {
 
 /***************************************************************************/
 
-	virtual int getExpressionsCount() = 0;
+	virtual Expression const & getCaseExpression() const = 0;
 
-	virtual Expression getExpression() = 0;
+	virtual int getItemsCount() const = 0;
+
+	virtual CaseItem const & getItem( int _idx ) const = 0;
 
 /***************************************************************************/
 
@@ -35,4 +38,4 @@ struct CaseItem
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_SIMPLE_CASE_ITEM_HPP__
+#endif // !__VLOG_DM_CASE_STATEMENT_HPP__

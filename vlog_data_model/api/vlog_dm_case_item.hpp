@@ -1,24 +1,29 @@
-#ifndef __VLOG_DM_BASE_CASE_ITEM_HPP__
-#define __VLOG_DM_BASE_CASE_ITEM_HPP__
+#ifndef __VLOG_DM_CASE_ITEM_HPP__
+#define __VLOG_DM_CASE_ITEM_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "vlog_data_model\api\vlog_dm_base_case_item.hpp"
 
 /***************************************************************************/
+
 namespace VlogDM {
 
 /***************************************************************************/
 
-struct BaseCaseItem
-	:	public Located
+struct Expression;
+
+/***************************************************************************/
+
+struct CaseItem
+	:	public BaseCaseItem
 {
 
 /***************************************************************************/
 
-	virtual Statement const & getStatement() const = 0;
+	virtual int getExpressionsCount() const = 0;
 
-	virtual bool isDefault() const = 0;
+	virtual Expression const & getExpression( int _idx ) const = 0;
 
 /***************************************************************************/
 
@@ -30,4 +35,4 @@ struct BaseCaseItem
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_BASE_CASE_ITEM_HPP__
+#endif // !__VLOG_DM_CASE_ITEM_HPP__

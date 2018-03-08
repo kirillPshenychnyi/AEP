@@ -64,6 +64,14 @@ public:
 		Location const & _location	
 	) const override;
 
+	Writable::CaseItemPtr newCaseItem(
+		Location const & _location
+	) const override;
+
+	DefaultCaseItemPtr newDefaultCaseItem(
+		Location const & _location
+	) const override;
+
 /***************************************************************************/
 
 private:
