@@ -70,7 +70,7 @@ ModuleItemImporter::visitContinuous_assign(
 
 	dataflowImporter.importProcess( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -84,7 +84,7 @@ ModuleItemImporter::visitAlways_construct(
 
 	processImporter.importProcess( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 
@@ -98,7 +98,7 @@ ModuleItemImporter::importVar( _Context & _ctx )
 
 	varImporter.importVars( _ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

@@ -56,7 +56,7 @@ PortImporter::visitInout_declaration( Verilog2001Parser::Inout_declarationContex
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Inout );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -66,7 +66,7 @@ PortImporter::visitInput_declaration( Verilog2001Parser::Input_declarationContex
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Input );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -76,7 +76,7 @@ PortImporter::visitOutput_declaration( Verilog2001Parser::Output_declarationCont
 {
 	importPorts( *ctx, VlogDM::PortDirection::Direction::Output );
 	
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

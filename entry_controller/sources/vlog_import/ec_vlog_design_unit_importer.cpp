@@ -46,7 +46,7 @@ DesingUnitImporter::visitModule_declaration(
 
 	visitEachChildContext( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -58,7 +58,7 @@ antlrcpp::Any DesingUnitImporter::visitPort_declaration(
 	PortImporter portImporter( getVlogDataModel() );
 	portImporter.importPorts( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -71,7 +71,7 @@ DesingUnitImporter::visitList_of_port_declarations(
 	PortImporter portImporter( getVlogDataModel() );
 	portImporter.importPorts( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -104,7 +104,7 @@ DesingUnitImporter::importItem( _Context & _ctx )
 
 	itemImporter.importItems( _ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

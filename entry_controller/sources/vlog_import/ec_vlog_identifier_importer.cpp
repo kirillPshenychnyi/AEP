@@ -77,7 +77,7 @@ IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionCo
 
 	m_currentRanges.push_back( rangeImporter.importRange( *ctx ) );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -105,7 +105,7 @@ IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 
 	m_currentRanges.clear();
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

@@ -76,7 +76,7 @@ StatementImporter::visitProcedural_timing_control_statement(
 	// second child is null or statement context
 	ctx->children[ 1 ]->accept( this );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -126,7 +126,7 @@ StatementImporter::visitDelay_or_event_control(
 		);
 	}
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -159,7 +159,7 @@ StatementImporter::visitConditional_statement(
 		{
 			m_branchesConditions.push_back( m_expressionImporter.importExpression( *ctx ) );
 
-			return antlrcpp::Any();
+			RETURN_ANY
 		}
 
 		antlrcpp::Any visitStatement( 
@@ -169,7 +169,7 @@ StatementImporter::visitConditional_statement(
 			m_statementImporter.importStatement( *ctx );
 			m_statements.push_back( m_statementImporter.takeStatement() );
 
-			return antlrcpp::Any();
+			RETURN_ANY
 		}
 
 		ExpressionImporter m_expressionImporter;
@@ -214,7 +214,7 @@ StatementImporter::visitConditional_statement(
 
 	m_resultStatement = std::move( conditionalStatement );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -258,7 +258,7 @@ StatementImporter::visitBlocking_assignment(
 				)
 			);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

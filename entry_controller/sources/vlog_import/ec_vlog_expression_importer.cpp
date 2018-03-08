@@ -246,7 +246,7 @@ ExpressionImporter::createConcat(
 		m_extractedExpession 
 			= std::move( m_importer.importExpression( *ctx ) );
 
-		return antlrcpp::Any();
+		RETURN_ANY
 	}
 		
 		ExpressionImporter m_importer;
@@ -333,7 +333,7 @@ ExpressionImporter::visitPrimary( Verilog2001Parser::PrimaryContext * ctx )
 
 	processLastContext();
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -356,7 +356,7 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 
 	processLastContext();
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -374,7 +374,7 @@ ExpressionImporter::visitBinary_operator(
 	lastContext.m_operator
 		= VlogDM::Operator::fromString( ctx->getText().c_str() );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -386,7 +386,7 @@ ExpressionImporter::visitUnary_operator( Verilog2001Parser::Unary_operatorContex
 		OperatorInfo( VlogDM::Operator::fromString( ctx->getText().c_str() ) ) 
 	);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -401,7 +401,7 @@ ExpressionImporter::visitNumber( Verilog2001Parser::NumberContext * ctx )
 		) 
 	);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -423,7 +423,7 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 			)
 	);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -435,7 +435,7 @@ ExpressionImporter::visitConcatenation(
 {
 	m_result = createConcat( *ctx );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -455,7 +455,7 @@ ExpressionImporter::visitMultiple_concatenation(
 		) override
 		{
 			m_concatContex = ctx;
-			return antlrcpp::Any();
+			RETURN_ANY
 		}
 	
 		antlrcpp::Any visitConstant_expression( 
@@ -467,7 +467,7 @@ ExpressionImporter::visitMultiple_concatenation(
 						ctx->children[ 0 ] 
 					);
 
-			return antlrcpp::Any();
+			RETURN_ANY
 		}
 	
 		Verilog2001Parser::ConcatenationContext * m_concatContex;
@@ -495,7 +495,7 @@ ExpressionImporter::visitMultiple_concatenation(
 			,	createLocation( *ctx )
 		);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -528,7 +528,7 @@ ExpressionImporter::visitConditional_operator(
 			,	importConditionalOperatorItem( falseBranchItemPosition )
 		);
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

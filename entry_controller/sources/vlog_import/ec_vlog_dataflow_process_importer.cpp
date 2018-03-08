@@ -65,7 +65,7 @@ DataflowProcessImporter::visitNet_assignment(
 	// rhs expression is last child
 	ctx->children.back()->accept( this );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
@@ -92,7 +92,7 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 
 	vlogDm.getCurrentImportedUnit().addProcess( std::move( process ) );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/

@@ -63,7 +63,7 @@ RangeImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx )
 	else
 		m_msbExpression = std::move( bitSelect );
 
-	return antlrcpp::Any();
+	RETURN_ANY
 }
 
 /***************************************************************************/
