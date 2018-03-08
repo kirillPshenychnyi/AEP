@@ -80,6 +80,7 @@
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,6 +95,7 @@
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,7 +112,7 @@
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,7 +131,7 @@
       <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification\vlog_data_model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
