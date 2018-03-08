@@ -1,5 +1,9 @@
-#ifndef __VLOG_DM_STATEMENT_VISITOR_HPP__
-#define __VLOG_DM_STATEMENT_VISITOR_HPP__
+#ifndef __VLOG_DM_SEQUENTIAL_BLOCK_HPP__
+#define __VLOG_DM_SEQUENTIAL_BLOCK_HPP__
+
+/***************************************************************************/
+
+#include "vlog_data_model\api\vlog_dm_statement.hpp"
 
 /***************************************************************************/
 
@@ -7,22 +11,15 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct ConditionalStatement;
-struct BlockingAssignment;
-struct SequentialBlock;
-
-/***************************************************************************/
-
-struct StatementVisitor
+struct SequentialBlock
+	:	public Statement
 {
 
 /***************************************************************************/
 
-	virtual void visit( ConditionalStatement const & _statement ) = 0;
+	virtual Statement const & getStatement( int _idx ) const = 0;
 
-	virtual void visit( BlockingAssignment const & _assignment ) = 0;
-	
-	virtual void visit( SequentialBlock const & _assignment ) = 0;
+	virtual int getStatementsCount() const = 0;
 
 /***************************************************************************/
 
@@ -34,4 +31,4 @@ struct StatementVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_STATEMENT_VISITOR_HPP__
+#endif // !__VLOG_DM_SEQUENTIAL_BLOCK_HPP__

@@ -33,6 +33,10 @@ struct StatementFactory
 			,	StatementPtr _statement
 	) const = 0;
 
+	virtual std::unique_ptr< SequentialBlock > newSequentialBlock(
+		Location const & _location 
+	) const = 0;
+
 /***************************************************************************/
 
 };

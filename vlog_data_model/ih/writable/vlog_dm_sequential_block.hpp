@@ -1,28 +1,25 @@
-#ifndef __VLOG_DM_STATEMENT_VISITOR_HPP__
-#define __VLOG_DM_STATEMENT_VISITOR_HPP__
+#ifndef __VLOG_DM_WRITABLE_SEQUENTIAL_BLOCK_HPP__
+#define __VLOG_DM_WRITABLE_SEQUENTIAL_BLOCK_HPP__
+
+/***************************************************************************/
+
+#include "vlog_data_model\api\vlog_dm_sequential_block.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
+namespace Writable { 
 
 /***************************************************************************/
 
-struct ConditionalStatement;
-struct BlockingAssignment;
-struct SequentialBlock;
-
-/***************************************************************************/
-
-struct StatementVisitor
+struct SequentialBlock
+	:	public VlogDM::SequentialBlock
 {
 
 /***************************************************************************/
 
-	virtual void visit( ConditionalStatement const & _statement ) = 0;
-
-	virtual void visit( BlockingAssignment const & _assignment ) = 0;
-	
-	virtual void visit( SequentialBlock const & _assignment ) = 0;
+	virtual void addStatement( VlogDM::StatementPtr _stmt ) = 0;
 
 /***************************************************************************/
 
@@ -31,7 +28,8 @@ struct StatementVisitor
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_STATEMENT_VISITOR_HPP__
+#endif // !__VLOG_DM_WRITABLE_SEQUENTIAL_BLOCK_HPP__

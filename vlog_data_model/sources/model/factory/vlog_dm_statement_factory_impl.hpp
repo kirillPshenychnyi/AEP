@@ -30,6 +30,10 @@ class StatementFactoryImpl
 		,	StatementPtr _statement
 	) const override;
 
+	std::unique_ptr< Writable::SequentialBlock > newSequentialBlock(
+		Location const & _location
+	) const override;
+
 /***************************************************************************/
 
 };

@@ -7,6 +7,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_conditional_statement_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_conditional_branch_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_blocking_assignment_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_sequential_block_impl.hpp"
 
 /***************************************************************************/
 
@@ -43,6 +44,14 @@ StatementFactoryImpl::newConditionalBranch(
 				std::move( _expression )
 			,	std::move( _statement )
 		);
+}
+
+/***************************************************************************/
+
+std::unique_ptr< Writable::SequentialBlock > 
+StatementFactoryImpl::newSequentialBlock( Location const & _location ) const
+{
+	return std::make_unique< SequentialBlockImpl >( _location );
 }
 
 /***************************************************************************/

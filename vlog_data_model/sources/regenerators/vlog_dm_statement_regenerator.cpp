@@ -4,6 +4,7 @@
 #include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
+#include "vlog_data_model\api\vlog_dm_sequential_block.hpp"
 
 #include "vlog_data_model\sources\regenerators\vlog_dm_statement_regenerator.hpp"
 #include "vlog_data_model\sources\regenerators\vlog_dm_expression_regenerator.hpp"
@@ -61,6 +62,24 @@ StatementRegenerator::visit( BlockingAssignment const & _assignment )
 	_assignment.getAssignment().accept( expressionRegenerator );
 
 	m_targetStream << ";";
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::visit( SequentialBlock const & _block )
+{
+	m_targetStream << "begin" << std::endl;
+
+	const int nStatements = _block.getStatementsCount();
+
+	for( int i = 0; i < nStatements; ++i )
+	{
+		_block.getStatement( i ).accept( *this );
+		m_targetStream << std::endl;
+	}
+
+	m_targetStream << "end";
 }
 
 /***************************************************************************/

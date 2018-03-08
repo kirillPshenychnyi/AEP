@@ -36,6 +36,8 @@ private:
 
 	void visit( BlockingAssignment const & _assignment ) override;
 
+	void visit( SequentialBlock const & _block ) override;
+
 /***************************************************************************/
 
 };

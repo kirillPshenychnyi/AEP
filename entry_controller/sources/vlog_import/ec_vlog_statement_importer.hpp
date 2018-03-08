@@ -70,6 +70,10 @@ private:
 	 	Verilog2001Parser::Blocking_assignmentContext * ctx 
 	) override;
 
+	antlrcpp::Any visitSeq_block(
+	 	Verilog2001Parser::Seq_blockContext * ctx 
+	) override;
+
 /***************************************************************************/
 
 private:

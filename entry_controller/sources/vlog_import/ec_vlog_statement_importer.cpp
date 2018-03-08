@@ -16,6 +16,7 @@
 #include "vlog_data_model\ih\writable\vlog_dm_items_factory.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_conditional_statement.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_sequential_block.hpp"
 
 /***************************************************************************/
 
@@ -258,6 +259,34 @@ StatementImporter::visitBlocking_assignment(
 			);
 
 	return antlrcpp::Any();
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+StatementImporter::visitSeq_block(
+	Verilog2001Parser::Seq_blockContext * ctx
+)
+{
+	StatementImporter importer( getVlogDataModel() );
+
+	auto seqBlock = m_statementFactory.newSequentialBlock( createLocation( *ctx ) );
+
+	forEachChildContext(
+			*ctx
+		,	[ & ]( antlr4::tree::ParseTree & _tree )
+			{
+				_tree.accept( &importer );
+				importer.getControlsCount();
+
+				if( importer.m_resultStatement )
+					seqBlock->addStatement( importer.takeStatement() );
+			}
+	);
+
+	m_resultStatement = std::move( seqBlock );
+
+	return defaultResult();
 }
 
 /***************************************************************************/

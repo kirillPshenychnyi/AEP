@@ -21,6 +21,7 @@ namespace VlogDM
 
 		struct Concatenation;
 		struct ConditionalStatement;
+		struct SequentialBlock;
 
 		struct SensitivityList;
 
