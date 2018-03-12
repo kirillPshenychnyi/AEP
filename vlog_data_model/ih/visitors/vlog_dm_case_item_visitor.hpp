@@ -1,9 +1,9 @@
-#ifndef __VLOG_DM_BASE_CASE_ITEM_HPP__
-#define __VLOG_DM_BASE_CASE_ITEM_HPP__
+#ifndef __VLOG_DM_CASE_ITEM_VISITOR_HPP__
+#define __VLOG_DM_CASE_ITEM_VISITOR_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\api\vlog_dm_located.hpp"
+#include "boost\noncopyable.hpp"
 
 /***************************************************************************/
 
@@ -11,20 +11,20 @@ namespace VlogDM {
 
 /***************************************************************************/
 
-struct Statement;
-struct CaseItemVisitor;
+struct CaseItem;
+struct DefaultCaseItem;
 
 /***************************************************************************/
 
-struct BaseCaseItem
-	:	public Located
+struct CaseItemVisitor
+	:	public boost::noncopyable
 {
 
 /***************************************************************************/
 
-	virtual Statement const & getStatement() const = 0;
+	virtual void visit( CaseItem const & _caseItem ) = 0;
 
-	virtual void accept( CaseItemVisitor & _itemVisitor ) const = 0;
+	virtual void visit( DefaultCaseItem const & _caseItem ) = 0;
 
 /***************************************************************************/
 
@@ -36,4 +36,4 @@ struct BaseCaseItem
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_BASE_CASE_ITEM_HPP__
+#endif // !__VLOG_DM_CASE_ITEM_VISITOR_HPP__

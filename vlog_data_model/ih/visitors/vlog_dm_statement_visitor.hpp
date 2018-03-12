@@ -3,6 +3,10 @@
 
 /***************************************************************************/
 
+#include <boost\noncopyable.hpp>
+
+/***************************************************************************/
+
 namespace VlogDM {
 
 /***************************************************************************/
@@ -10,10 +14,12 @@ namespace VlogDM {
 struct ConditionalStatement;
 struct BlockingAssignment;
 struct SequentialBlock;
+struct CaseStatement;
 
 /***************************************************************************/
 
 struct StatementVisitor
+	:	public boost::noncopyable
 {
 
 /***************************************************************************/
@@ -23,6 +29,8 @@ struct StatementVisitor
 	virtual void visit( BlockingAssignment const & _assignment ) = 0;
 	
 	virtual void visit( SequentialBlock const & _assignment ) = 0;
+
+	virtual void visit( CaseStatement const & _case ) = 0;
 
 /***************************************************************************/
 

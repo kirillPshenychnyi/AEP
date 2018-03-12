@@ -273,12 +273,6 @@
     <ClInclude Include="api\vlog_dm_statement_container.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\vlog_dm_base_case_item.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="api\vlog_dm_simple_case_item.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\vlog_dm_continuous_assignment.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -412,6 +406,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sources\model\vlog_dm_sequential_block_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_case_statement.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_case_item.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_base_case_item.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_default_case_item.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_case_item_base_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\writable\vlog_dm_case_item.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_case_item_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_default_case_item_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_case_statement_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

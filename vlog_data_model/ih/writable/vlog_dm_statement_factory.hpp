@@ -37,6 +37,11 @@ struct StatementFactory
 		Location const & _location 
 	) const = 0;
 
+	virtual CaseStatementPtr newCaseStatement(
+			Location const & _location 
+		,	ExpressionPtr _expression
+	) const = 0;
+
 /***************************************************************************/
 
 };

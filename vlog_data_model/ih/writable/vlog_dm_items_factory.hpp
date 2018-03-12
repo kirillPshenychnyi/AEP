@@ -63,6 +63,14 @@ struct ItemsFactory
 		Location const & _location	
 	) const = 0;
 
+	virtual CaseItemPtr newCaseItem(
+		Location const & _location
+	) const = 0;
+
+	virtual DefaultCaseItemPtr newDefaultCaseItem(
+		Location const & _location
+	) const = 0;
+
 /***************************************************************************/
 
 };

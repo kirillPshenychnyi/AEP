@@ -23,6 +23,10 @@ namespace VlogDM
 		struct ConditionalStatement;
 		struct SequentialBlock;
 
+		struct CaseStatement;
+		struct CaseItem;
+		struct DefaultCaseItem;
+
 		struct SensitivityList;
 
 		typedef
@@ -48,6 +52,18 @@ namespace VlogDM
 		typedef
 			std::unique_ptr< SensitivityList >
 			SensitivityListPtr;
+
+		typedef
+			std::unique_ptr< CaseItem >
+			CaseItemPtr;
+
+		typedef
+			std::unique_ptr< CaseStatement >
+			CaseStatementPtr;
+
+		typedef
+			std::unique_ptr< DefaultCaseItem >
+			DefaultCaseItemPtr;
 	}
 
 	struct IAccessor;
@@ -83,6 +99,10 @@ namespace VlogDM
 	struct SensitivityList;
 
 	struct DesignUnitFactory;
+
+	struct BaseCaseItem;
+	struct CaseItem;
+	struct DefaultCaseItem;
 
 	typedef
 		std::unique_ptr< DesignUnit >
@@ -147,6 +167,18 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< SensitivityList >
 		SensitivityListPtr;
+
+	typedef
+		std::unique_ptr< BaseCaseItem >
+		BaseCaseItemPtr;
+
+	typedef
+		std::unique_ptr< CaseItem >
+		CaseItemPtr;
+
+	typedef
+		std::unique_ptr< DefaultCaseItem >
+		DefaultCaseItemPtr;
 }
 
 #endif // !__VLOG_DM_FWD_HPP__

@@ -988,15 +988,19 @@ function_if_else_if_statement
 
 // 6.7 Case statements
 case_statement
-   : 'case' '(' expression ')' case_item (case_item)* 'endcase'
+   : 'case' '(' expression ')'  case_item (case_item)* 'endcase'
    | 'casez' '(' expression ')' case_item (case_item)* 'endcase'
    | 'casex' '(' expression ')' case_item (case_item)* 'endcase'
    ;
 
 case_item
    : expression (',' expression)* ':' statement_or_null
-   | 'default' (':')? statement_or_null
+   | default_case_item
    ;
+   
+default_case_item
+   : 'default' ':' statement_or_null
+   ;	
 
 function_case_statement
    : 'case' '(' expression ')' function_case_item (function_case_item)* 'endcase'

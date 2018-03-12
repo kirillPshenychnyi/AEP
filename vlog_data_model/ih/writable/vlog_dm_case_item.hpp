@@ -1,47 +1,52 @@
-#ifndef __VLOG_DM_STATEMENT_REGENERATOR_HPP__
-#define __VLOG_DM_STATEMENT_REGENERATOR_HPP__
+#ifndef __VLOG_DM_WRITABLE_CASE_ITEM_HPP__
+#define __VLOG_DM_WRITABLE_CASE_ITEM_HPP__
 
 /***************************************************************************/
 
-#include "vlog_data_model\sources\regenerators\vlog_dm_base_regenerator.hpp"
-#include "vlog_data_model\ih\visitors\vlog_dm_statement_visitor.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
+#include "vlog_data_model\api\vlog_dm_case_item.hpp"
+#include "vlog_data_model\api\vlog_dm_default_case_item.hpp"
 
 /***************************************************************************/
 
 namespace VlogDM {
-namespace Regenerators {
+namespace Writable {
 
 /***************************************************************************/
 
-class StatementRegenerator
-	:	public StatementVisitor
-	,	public BaseRegenerator
+template< typename _TBase >
+struct BaseCaseItem
+	:	public _TBase
 {
 
 /***************************************************************************/
 
-public:
+	virtual void setStatement( StatementPtr _statement ) = 0;
 
 /***************************************************************************/
 
-	StatementRegenerator( std::ostream & _target );
+};
 
 /***************************************************************************/
 
-private:
+struct CaseItem
+	:	BaseCaseItem< VlogDM::CaseItem >
+{
 
 /***************************************************************************/
 
-	void visit( ConditionalStatement const & _statement ) override;
-
-	void visit( BlockingAssignment const & _assignment ) override;
-
-	void visit( SequentialBlock const & _block ) override;
-
-	void visit( CaseStatement const & _case ) override;
+	virtual void addExpression( ExpressionPtr _expression ) = 0;
 
 /***************************************************************************/
 
+};
+
+/***************************************************************************/
+
+struct DefaultCaseItem
+	:	BaseCaseItem< VlogDM::DefaultCaseItem >
+{
 };
 
 /***************************************************************************/
@@ -51,4 +56,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_STATEMENT_REGENERATOR_HPP__
+#endif // !__VLOG_DM_WRITABLE_CASE_ITEM_HPP__

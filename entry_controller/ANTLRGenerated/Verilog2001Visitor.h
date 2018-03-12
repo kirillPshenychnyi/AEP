@@ -343,6 +343,8 @@ public:
 
     virtual antlrcpp::Any visitCase_item(Verilog2001Parser::Case_itemContext *context) = 0;
 
+    virtual antlrcpp::Any visitDefault_case_item(Verilog2001Parser::Default_case_itemContext *context) = 0;
+
     virtual antlrcpp::Any visitFunction_case_statement(Verilog2001Parser::Function_case_statementContext *context) = 0;
 
     virtual antlrcpp::Any visitFunction_case_item(Verilog2001Parser::Function_case_itemContext *context) = 0;

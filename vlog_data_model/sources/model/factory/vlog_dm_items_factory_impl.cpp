@@ -12,6 +12,8 @@
 #include "vlog_data_model\sources\model\vlog_dm_continuous_assignment_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_behavioral_process_impl.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_sensitivity_list_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_case_item_impl.hpp"
+#include "vlog_data_model\sources\model\vlog_dm_default_case_item_impl.hpp"
 
 /***************************************************************************/
 
@@ -137,6 +139,22 @@ Writable::SensitivityListPtr
 ItemsFactoryImpl::newSensitivityList( Location const & _location ) const
 {
 	return std::make_unique< SensitivityListImpl >( _location );
+}
+
+/***************************************************************************/
+
+Writable::CaseItemPtr 
+ItemsFactoryImpl::newCaseItem( Location const & _location ) const
+{
+	return std::make_unique< CaseItemImpl >( _location );
+}
+
+/***************************************************************************/
+
+Writable::DefaultCaseItemPtr 
+ItemsFactoryImpl::newDefaultCaseItem( Location const & _location ) const
+{
+	return std::make_unique< DefaultCaseItemImpl >( _location );
 }
 
 /***************************************************************************/

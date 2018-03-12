@@ -663,6 +663,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitDefault_case_item(Verilog2001Parser::Default_case_itemContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitFunction_case_statement(Verilog2001Parser::Function_case_statementContext *ctx) override {
     return visitChildren(ctx);
   }
