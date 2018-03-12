@@ -221,53 +221,14 @@ ExpressionImporter::createConcat(
 {
 	using namespace VlogDM;
 	
-	struct ConcatItemExtractor
-	:	public BaseImporter
-{
-	ConcatItemExtractor( IAccessor & _vlogDm )
-	:	BaseImporter( _vlogDm )
-	,	m_importer( _vlogDm )
-	{}
-		
-	ExpressionPtr extract( antlr4::tree::ParseTree & _tree )
-	{
-		m_importer.reset();
-		m_extractedExpession.reset();
-
-		_tree.accept( this );
-
-		return std::move( m_extractedExpession );
-	}
-
-	antlrcpp::Any visitExpression(
-		Verilog2001Parser::ExpressionContext * ctx
-	) override
-	{	
-		m_extractedExpession 
-			= std::move( m_importer.importExpression( *ctx ) );
-
-		RETURN_ANY
-	}
-		
-		ExpressionImporter m_importer;
-		ExpressionPtr m_extractedExpession;
-	};
-
 	auto concat 
 		=	m_expressionFactory.newConcatenation( 
 				createLocation( _concateContext ) 
 			);
 
-	ConcatItemExtractor extractor( getVlogDataModel() );
-
-	forEachChildContext( 
-			_concateContext
-		,	[ & ]( antlr4::tree::ParseTree & _tree )
-			{
-				if( ExpressionPtr item = extractor.extract( _tree ) )
-					concat->addExpression( std::move( item ) );
-			}
-	);
+	ExpressionImporter importer( getVlogDataModel() );
+	for( auto expression : _concateContext.expression() )
+		concat->addExpression( importer.importExpression( *expression ) );
 
 	return std::move( concat );
 }
@@ -447,51 +408,12 @@ ExpressionImporter::visitMultiple_concatenation(
 {
 	using namespace VlogDM;
 
-	struct MultipleConcatItemsExtractor
-		:	public Verilog2001BaseVisitor
-	{
-		antlrcpp::Any visitConcatenation( 
-			Verilog2001Parser::ConcatenationContext * ctx 
-		) override
-		{
-			m_concatContex = ctx;
-			RETURN_ANY
-		}
-	
-		antlrcpp::Any visitConstant_expression( 
-			Verilog2001Parser::Constant_expressionContext * ctx 
-		) override
-		{
-			m_repeatExpressionContext 
-				=	static_cast< Verilog2001Parser::ExpressionContext * >( 
-						ctx->children[ 0 ] 
-					);
-
-			RETURN_ANY
-		}
-	
-		Verilog2001Parser::ConcatenationContext * m_concatContex;
-		Verilog2001Parser::ExpressionContext * m_repeatExpressionContext;
-	};
-
-	MultipleConcatItemsExtractor itemsExtractor;
-
-	forEachChildContext( 
-			*ctx
-		,	[ & ]( antlr4::tree::ParseTree & _tree )
-			{
-				_tree.accept( &itemsExtractor );
-			}
-	);
-
-	assert( itemsExtractor.m_concatContex && itemsExtractor.m_repeatExpressionContext );
-
 	ExpressionImporter importer( getVlogDataModel() );
 
 	m_result = 
 		m_expressionFactory.newMultipleConcatenation(
-				importer.importExpression( *itemsExtractor.m_repeatExpressionContext )
-			,	createConcat( *itemsExtractor.m_concatContex )
+				importer.importExpression( *ctx->constant_expression()->expression() )
+			,	createConcat( *ctx->concatenation() )
 			,	createLocation( *ctx )
 		);
 
@@ -519,7 +441,7 @@ ExpressionImporter::visitConditional_operator(
 
 				return std::move( m_result );
 			};
-
+	
 	m_result = 
 		m_expressionFactory.newConditionalExpression(
 				createLocation( *ctx )

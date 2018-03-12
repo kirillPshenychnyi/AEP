@@ -35,12 +35,12 @@ BehavioralProcessImporter::importProcess(
 {
 	using namespace VlogDM;
 
-	visitEachChildContext( _always );
-
 	IAccessor & vlogDM = getVlogDataModel();
 
 	VlogDM::Writable::ItemsFactory const & itemsFactory 
 		=	vlogDM.getObjectFactory().getItemsFactory();
+
+	importStatement( *_always.statement() );
 
 	assert( m_mainStatement );
 	
@@ -55,31 +55,31 @@ BehavioralProcessImporter::importProcess(
 
 /***************************************************************************/
 
-antlrcpp::Any 
-BehavioralProcessImporter::visitStatement( Verilog2001Parser::StatementContext * ctx )
+void
+BehavioralProcessImporter::importStatement( 
+	Verilog2001Parser::StatementContext & _statement 
+)
 {
 	StatementImporter statementImporter( getVlogDataModel() );
 
-	statementImporter.importStatement( *ctx );
+	statementImporter.importStatement( _statement );
 	
 	m_mainStatement = statementImporter.takeStatement();
 	
 	int controls = statementImporter.getControlsCount();
 
 	if( controls == 0 )
-		RETURN_ANY
+		return;
 		
 	VlogDM::Writable::SensitivityListPtr sensList
 		=	getVlogDataModel().getObjectFactory().getItemsFactory().newSensitivityList(
-				createLocation( *ctx )
+				createLocation( _statement )
 			);
 
 	for( int i = 0; i < controls; ++i )
 		sensList->addExpression( statementImporter.takeTimingControl( i ) );
 
 	m_sensitivityList = std::move( sensList );
-
-	RETURN_ANY
 }
 
 /***************************************************************************/

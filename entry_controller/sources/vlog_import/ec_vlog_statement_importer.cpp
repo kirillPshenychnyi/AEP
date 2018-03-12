@@ -84,11 +84,9 @@ StatementImporter::visitProcedural_timing_control_statement(
 	Verilog2001Parser::Procedural_timing_control_statementContext * ctx
 )
 {
-	// first child is event context
-	ctx->children[ 0 ]->accept( this );
+	ctx->delay_or_event_control()->accept( this );
 
-	// second child is null or statement context
-	ctx->children[ 1 ]->accept( this );
+	ctx->statement_or_null()->accept( this );
 
 	RETURN_ANY
 }
@@ -246,15 +244,10 @@ StatementImporter::visitBlocking_assignment(
 	IdentifierImporter idImporter( getVlogDataModel() );
 
 	// first child is always var assign context
-	idImporter.importIds(
-		static_cast< Verilog2001Parser::Variable_assignmentContext const & >( 
-			*ctx->children[ 0 ] 
-		)
-	);
+	idImporter.importIds( *ctx->variable_lvalue() );
 
 	ExpressionImporter expressionImporter( getVlogDataModel() );
 
-	// third child is always expression
 	m_resultStatement
 		=	m_statementFactory.newBlockingAssignment(
 				expressionFactory.newBinaryOperator(
