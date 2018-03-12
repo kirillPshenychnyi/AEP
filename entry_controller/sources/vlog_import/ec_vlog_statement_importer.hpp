@@ -42,6 +42,8 @@ public:
 
 	void importStatement( Verilog2001Parser::StatementContext & ctx );
 
+	void importStatement( Verilog2001Parser::Statement_or_nullContext & ctx );
+
 	VlogDM::StatementPtr takeStatement();
 
 	VlogDM::ExpressionPtr takeTimingControl( int _idx );
@@ -72,6 +74,10 @@ private:
 
 	antlrcpp::Any visitSeq_block(
 	 	Verilog2001Parser::Seq_blockContext * ctx 
+	) override;
+
+	antlrcpp::Any visitCase_statement(
+		Verilog2001Parser::Case_statementContext * ctx
 	) override;
 
 /***************************************************************************/

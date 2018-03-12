@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_conditional_statement.hpp"
+#include "vlog_data_model\api\vlog_dm_case_statement.hpp"
 
 /***************************************************************************/
 
@@ -13,7 +14,7 @@ namespace Writable {
 /***************************************************************************/
 
 template < typename _TBase, typename _TBranch >
-struct BaseConditionalStatement
+struct BaseBranchStatement
 	:	public _TBase
 {
 
@@ -34,7 +35,14 @@ struct BaseConditionalStatement
 /***************************************************************************/
 
 class ConditionalStatement
-	:	public BaseConditionalStatement< VlogDM::ConditionalStatement, ConditionalBranch > 
+	:	public BaseBranchStatement< VlogDM::ConditionalStatement, ConditionalBranch > 
+{
+};
+
+/***************************************************************************/
+
+class CaseStatement
+	:	public BaseBranchStatement< VlogDM::CaseStatement, VlogDM::BaseCaseItem > 
 {
 };
 

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="api\vlog_dm_base_case_item.hpp" />
     <ClInclude Include="api\vlog_dm_blocking_assignment.hpp" />
+    <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp" />
     <ClInclude Include="sources\model\vlog_dm_case_item_impl.hpp" />
     <ClInclude Include="api\vlog_dm_case_statement.hpp" />
     <ClInclude Include="api\vlog_dm_conditional_branch.hpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="sources\model\factory\vlog_dm_object_factory_impl.hpp" />
     <ClInclude Include="sources\model\factory\vlog_dm_statement_factory_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_blocking_assignment_impl.hpp" />
+    <ClInclude Include="sources\model\vlog_dm_case_statement_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_conditional_statement_impl.hpp" />
     <ClInclude Include="api\vlog_dm_behavioral_process.hpp" />
     <ClInclude Include="api\vlog_dm_base_identifier.hpp" />

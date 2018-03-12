@@ -38,6 +38,8 @@ private:
 
 	void visit( SequentialBlock const & _block ) override;
 
+	void visit( CaseStatement const & _case ) override;
+
 /***************************************************************************/
 
 };

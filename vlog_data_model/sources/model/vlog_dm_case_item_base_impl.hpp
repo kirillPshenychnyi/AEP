@@ -6,6 +6,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 
 #include "vlog_data_model\api\vlog_dm_statement.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_case_item_visitor.hpp"
 
 /***************************************************************************/
 
@@ -37,6 +38,8 @@ protected:
 	void setStatement( StatementPtr _statement ) override;
 
 	Statement const & getStatement() const override;
+
+	void accept( CaseItemVisitor & _item ) const override;
 
 /***************************************************************************/
 
@@ -81,6 +84,16 @@ CaseItemBaseImpl< _TBase >::getStatement() const
 	assert( m_statement );
 
 	return *m_statement;
+}
+
+/***************************************************************************/
+
+template< typename _TBase >
+inline 
+void 
+CaseItemBaseImpl< _TBase >::accept( CaseItemVisitor & _item ) const
+{
+	_item.visit( *this );
 }
 
 /***************************************************************************/

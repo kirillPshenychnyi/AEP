@@ -12,7 +12,7 @@ namespace VlogDM {
 /***************************************************************************/
 
 struct Expression;
-struct CaseItem;
+struct BaseCaseItem;
 
 /***************************************************************************/
 
@@ -26,7 +26,7 @@ struct CaseStatement
 
 	virtual int getItemsCount() const = 0;
 
-	virtual CaseItem const & getItem( int _idx ) const = 0;
+	virtual BaseCaseItem const & getItem( int _idx ) const = 0;
 
 /***************************************************************************/
 

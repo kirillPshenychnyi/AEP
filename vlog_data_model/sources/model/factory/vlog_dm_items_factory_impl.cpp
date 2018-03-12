@@ -151,7 +151,7 @@ ItemsFactoryImpl::newCaseItem( Location const & _location ) const
 
 /***************************************************************************/
 
-DefaultCaseItemPtr 
+Writable::DefaultCaseItemPtr 
 ItemsFactoryImpl::newDefaultCaseItem( Location const & _location ) const
 {
 	return std::make_unique< DefaultCaseItemImpl >( _location );

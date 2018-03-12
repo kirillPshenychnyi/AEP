@@ -432,6 +432,12 @@
     <ClInclude Include="sources\model\vlog_dm_default_case_item_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_case_statement_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

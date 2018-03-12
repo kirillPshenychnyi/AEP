@@ -46,8 +46,6 @@ public:
 
 	int getExpressionsCount() const override;
 
-	bool isDefault() const  override;
-
 /***************************************************************************/
 
 public:
@@ -92,15 +90,6 @@ int
 CaseItemImpl::getExpressionsCount() const
 {
 	return m_expressions.size();
-}
-
-/***************************************************************************/
-
-inline
-bool 
-CaseItemImpl::isDefault() const
-{
-	return false;
 }
 
 /***************************************************************************/

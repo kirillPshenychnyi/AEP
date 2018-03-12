@@ -3,12 +3,14 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_statement_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_expression_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_identifier_importer.hpp"
+#include "entry_controller\sources\vlog_import\ec_vlog_case_item_importer.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
+#include "vlog_data_model\api\vlog_dm_case_item.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -17,6 +19,8 @@
 
 #include "vlog_data_model\ih\writable\vlog_dm_conditional_statement.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_sequential_block.hpp"
+
+#include <vector>
 
 /***************************************************************************/
 
@@ -35,6 +39,16 @@ StatementImporter::StatementImporter( VlogDM::IAccessor & _accessor )
 
 void
 StatementImporter::importStatement( Verilog2001Parser::StatementContext & ctx )
+{
+	visitEachChildContext( ctx );
+}
+
+/***************************************************************************/
+
+void 
+StatementImporter::importStatement( 
+	Verilog2001Parser::Statement_or_nullContext & ctx 
+)
 {
 	visitEachChildContext( ctx );
 }
@@ -249,11 +263,7 @@ StatementImporter::visitBlocking_assignment(
 							,	expressionFactory
 							,	createLocation( *ctx )
 						)
-					,	expressionImporter.importExpression(
-							static_cast< Verilog2001Parser::ExpressionContext const & >( 
-								*ctx->children[ 2 ] 
-							)
-						)
+					,	expressionImporter.importExpression( *ctx->expression() )
 					,	Operator::Kind::Assign
 				)
 			);
@@ -286,7 +296,40 @@ StatementImporter::visitSeq_block(
 
 	m_resultStatement = std::move( seqBlock );
 
-	return defaultResult();
+	RETURN_ANY
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+StatementImporter::visitCase_statement( 
+	Verilog2001Parser::Case_statementContext * ctx 
+)
+{
+	using namespace VlogDM;
+
+	IAccessor & accessor = getVlogDataModel();
+
+	ExpressionImporter expressionImporter( getVlogDataModel() );
+	
+	auto caseStmt
+		=	m_statementFactory.newCaseStatement( 
+					createLocation( *ctx )
+				,	expressionImporter.importExpression( *ctx->expression() )
+			);
+
+	CaseItemImporter itemImporter( getVlogDataModel() );
+
+	auto const & items = ctx->case_item();
+
+	const int itemsSize = items.size();
+
+	for( int i = 0; i < itemsSize; ++i )
+		caseStmt->addBranch( itemImporter.importCaseItem( *items[ i ] ) );
+
+	m_resultStatement = std::move( caseStmt );
+
+	RETURN_ANY
 }
 
 /***************************************************************************/

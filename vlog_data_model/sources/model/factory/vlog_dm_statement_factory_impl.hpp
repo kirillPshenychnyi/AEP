@@ -34,6 +34,11 @@ class StatementFactoryImpl
 		Location const & _location
 	) const override;
 
+	Writable::CaseStatementPtr newCaseStatement(
+			Location const & _location 
+		,	ExpressionPtr _expression
+	) const override;
+
 /***************************************************************************/
 
 };
