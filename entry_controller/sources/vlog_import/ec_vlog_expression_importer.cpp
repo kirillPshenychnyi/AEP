@@ -379,9 +379,9 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 	idImporter.importId( *ctx );
 
 	getLastContext().addOperand( 
-			m_expressionFactory.newPrimaryIdentifier( 
-					idImporter.takeId( 0 )
-			)
+		m_expressionFactory.newPrimaryIdentifier( 
+				idImporter.takeId( 0 )
+		)
 	);
 
 	RETURN_ANY
