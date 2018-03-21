@@ -87,7 +87,6 @@ ModuleItemImporter::visitAlways_construct(
 	RETURN_ANY
 }
 
-
 /***************************************************************************/
 
 template< typename _Context >

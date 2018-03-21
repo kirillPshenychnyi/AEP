@@ -41,7 +41,7 @@ public:
 
 	void importIds( Verilog2001Parser::Net_assignmentContext const & _ctx );
 
-	void importIds( Verilog2001Parser::Variable_assignmentContext const & _ctx );
+	void importIds( Verilog2001Parser::Variable_lvalueContext const & _ctx );
 
 	void importId( Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx );
 

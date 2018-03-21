@@ -41,7 +41,7 @@ IdentifierImporter::importIds(
 
 void 
 IdentifierImporter::importIds( 
-	Verilog2001Parser::Variable_assignmentContext const & _ctx 
+	Verilog2001Parser::Variable_lvalueContext const & _ctx 
 )
 {
 	visitEachChildContext( _ctx );

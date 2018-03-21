@@ -42,9 +42,7 @@ private:
 
 /***************************************************************************/
 
-	antlrcpp::Any visitStatement( 
-		Verilog2001Parser::StatementContext * ctx 
-	) override;
+	void importStatement( Verilog2001Parser::StatementContext & _statement );
 
 /***************************************************************************/
 
