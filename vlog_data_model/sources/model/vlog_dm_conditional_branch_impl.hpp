@@ -40,9 +40,9 @@ public:
 
 /***************************************************************************/
 
-	boost::optional< Expression const & > getCondition () const override;
+	boost::optional< Expression const & > getCondition () const final;
 
-	Statement const & getStatement() const override;
+	Statement const & getStatement() const final;
 
 /***************************************************************************/
 

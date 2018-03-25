@@ -39,13 +39,13 @@ public:
 
 /***************************************************************************/
 
-	Statement const & getStatement( int _idx ) const override;
+	Statement const & getStatement( int _idx ) const final;
 
-	int getStatementsCount() const override;
+	int getStatementsCount() const final;
 
-	void addStatement( VlogDM::StatementPtr _stmt ) override;
+	void addStatement( VlogDM::StatementPtr _stmt ) final;
 
-	void accept( StatementVisitor & _visitor ) const override;
+	void accept( StatementVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

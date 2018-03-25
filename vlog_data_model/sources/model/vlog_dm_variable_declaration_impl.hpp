@@ -35,7 +35,7 @@ public:
 	{
 	}
 	
-	void accept( DeclarationVisitor & _visitor ) const override
+	void accept( DeclarationVisitor & _visitor ) const final
 	{
 		_visitor.visit( *this );
 	}

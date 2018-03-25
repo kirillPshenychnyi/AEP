@@ -34,9 +34,9 @@ public:
 
 	ExpressionRangeImpl( ExpressionPtr _expression );
 
-	Expression const & getExpression() const override;
+	Expression const & getExpression() const final;
 
-	void accept( RangeVisitor & _visitor ) const override;
+	void accept( RangeVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

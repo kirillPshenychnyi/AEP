@@ -23,7 +23,7 @@ class ExpressionImpl
 
 	virtual ~ExpressionImpl() {}
 
-	void accept( ExpressionVisitor const & _visitor ) override const;
+	void accept( ExpressionVisitor const & _visitor ) final const;
 
 /***************************************************************************/
 

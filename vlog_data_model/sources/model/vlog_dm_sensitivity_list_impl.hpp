@@ -42,11 +42,11 @@ public:
 
 /***************************************************************************/
 
-	void addExpression( ExpressionPtr _expression ) override;
+	void addExpression( ExpressionPtr _expression ) final;
 
-	int getExpressionsCount() const override;
+	int getExpressionsCount() const final;
 
-	Expression const & getExpression( int _idx ) const override;
+	Expression const & getExpression( int _idx ) const final;
 
 /***************************************************************************/
 

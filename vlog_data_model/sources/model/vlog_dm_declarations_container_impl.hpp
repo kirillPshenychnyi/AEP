@@ -30,15 +30,15 @@ public:
 
 /***************************************************************************/
 
-	void addDeclaration( std::unique_ptr< Declaration > _declaration ) override;
+	void addDeclaration( std::unique_ptr< Declaration > _declaration ) final;
 
-	int getDeclarationsCount() const override;
+	int getDeclarationsCount() const final;
 
-	Declaration const& getDeclaration( int _idx ) const override;
+	Declaration const& getDeclaration( int _idx ) const final;
 
 	boost::optional< Declared const& > findDeclared( 
 			std::string const & _declared 
-	) const override;
+	) const final;
 
 /***************************************************************************/
 

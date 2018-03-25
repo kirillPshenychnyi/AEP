@@ -35,11 +35,11 @@ protected:
 
 /***************************************************************************/
 
-	void setStatement( StatementPtr _statement ) override;
+	void setStatement( StatementPtr _statement ) final;
 
-	Statement const & getStatement() const override;
+	Statement const & getStatement() const final;
 
-	void accept( CaseItemVisitor & _item ) const override;
+	void accept( CaseItemVisitor & _item ) const final;
 
 /***************************************************************************/
 

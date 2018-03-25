@@ -5,6 +5,8 @@
 
 #include "vlog_data_model\sources\model\vlog_dm_located_impl.hpp"
 
+#include "vlog_data_model\ih\visitors\vlog_dm_range_visitor.hpp"
+
 #include "vlog_data_model\api\vlog_dm_part_select_range.hpp"
 #include "vlog_data_model\api\vlog_dm_expression.hpp"
 
@@ -38,11 +40,11 @@ public:
 
 /***************************************************************************/
 
-	Expression const & getRightBound() const override;
+	Expression const & getRightBound() const final;
 
-	Expression const & getLeftBound() const override;
+	Expression const & getLeftBound() const final;
 
-	void accept( RangeVisitor& _visitor ) const override; 
+	void accept( RangeVisitor& _visitor ) const final; 
 
 /***************************************************************************/
 
@@ -57,6 +59,28 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+PartSelectRangeImpl::PartSelectRangeImpl(
+		Location const& _location
+	,	std::unique_ptr< Expression > _leftBound
+	,	std::unique_ptr< Expression > _rightBound
+)	:	BaseClass( _location )
+	,	m_leftBound( std::move( _leftBound ) )
+	,	m_rightBound( std::move( _rightBound ) )
+{
+}
+
+/***************************************************************************/
+
+inline
+void 
+PartSelectRangeImpl::accept( RangeVisitor & _visitor ) const
+{
+	_visitor.visit( *this );
+}
 
 /***************************************************************************/
 

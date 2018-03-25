@@ -48,15 +48,15 @@ public:
 
 /***************************************************************************/
 
-	Expression const & getCaseExpression() const override;
+	Expression const & getCaseExpression() const final;
 
-	int getItemsCount() const override;
+	int getItemsCount() const final;
 
-	BaseCaseItem const & getItem( int _idx ) const override;
+	BaseCaseItem const & getItem( int _idx ) const final;
 
-	void accept( StatementVisitor & _visitor ) const override;
+	void accept( StatementVisitor & _visitor ) const final;
 
-	void addBranch( BaseCaseItemPtr _item ) override;
+	void addBranch( BaseCaseItemPtr _item ) final;
 
 /***************************************************************************/
 

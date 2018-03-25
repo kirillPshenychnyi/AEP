@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_port.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_declared_visitor.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_dimensional_object_impl.hpp"
 
@@ -44,9 +45,9 @@ public:
 
 /***************************************************************************/
 
-	PortDirection::Direction getDirection() const override;
+	PortDirection::Direction getDirection() const final;
 
-	void accept( DeclaredVisitor& _visitor ) const override;
+	void accept( DeclaredVisitor& _visitor ) const final;
 
 /***************************************************************************/
 
@@ -59,6 +60,35 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+PortImpl::PortImpl( 
+		Declaration const & _declaration
+	,	std::string const & _name
+	,	Location const & _location
+	,	std::unique_ptr< Dimension > _dimension
+	,	PortDirection::Direction _direction 
+	)
+	:	BaseClass( 
+				_declaration
+			,	_name
+			,	_location
+			,	std::move( _dimension )
+		)
+	,	m_direction( _direction )
+{
+}
+
+/***************************************************************************/
+
+inline
+void 
+PortImpl::accept( DeclaredVisitor & _visitor ) const
+{
+	_visitor.visit( *this );
+}
 
 /***************************************************************************/
 

@@ -42,11 +42,11 @@ public:
 
 /***************************************************************************/
 
-	Declared const & getDeclared() const override;
+	Declared const & getDeclared() const final;
 
 	boost::optional< Range const & > getRange() const override;
 
-	std::string const& getName() const override;
+	std::string const& getName() const final;
 
 /***************************************************************************/
 

@@ -36,7 +36,7 @@ public:
 		,	NetKind::Kind _kind
 	);
 
-	void accept( TypeVisitor & _visitor ) const override;
+	void accept( TypeVisitor & _visitor ) const final;
 
 /***************************************************************************/
 
