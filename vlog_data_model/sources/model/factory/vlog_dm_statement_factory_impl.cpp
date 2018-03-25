@@ -61,12 +61,18 @@ Writable::CaseStatementPtr
 StatementFactoryImpl::newCaseStatement( 
 		Location const & _location
 	,	ExpressionPtr _expression 
+	,	CaseKind::Kind _kind
+	,	bool _isParallelCase
+	,	bool _isFullCase
 ) const
 {
 	return 
 		std::make_unique< CaseStatementImpl >( 
 				_location
-			,	std::move( _expression ) 
+			,	std::move( _expression )
+			,	_kind
+			,	_isParallelCase
+			,	_isFullCase
 		) ;
 }
 

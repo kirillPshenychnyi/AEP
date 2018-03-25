@@ -30,6 +30,10 @@ class StatementImporter
 		std::vector< VlogDM::StatementPtr >
 		StatementsVector;
 
+	typedef
+		std::set< std::string >
+		Attributes;
+
 /***************************************************************************/
 
 public:
@@ -80,6 +84,10 @@ private:
 		Verilog2001Parser::Case_statementContext * ctx
 	) override;
 
+	antlrcpp::Any visitAttribute_instance(
+		Verilog2001Parser::Attribute_instanceContext * ctx
+	) override;
+
 /***************************************************************************/
 
 private:
@@ -87,6 +95,8 @@ private:
 /***************************************************************************/
 
 	ExpressionVector m_controls;
+
+	Attributes m_statementAttributes;
 
 	VlogDM::Writable::StatementFactory const & m_statementFactory;
 

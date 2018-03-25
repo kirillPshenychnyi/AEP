@@ -37,6 +37,9 @@ class StatementFactoryImpl
 	Writable::CaseStatementPtr newCaseStatement(
 			Location const & _location 
 		,	ExpressionPtr _expression
+		,	CaseKind::Kind _kind
+		,	bool _isParallelCase
+		,	bool _isFullCase
 	) const override;
 
 /***************************************************************************/

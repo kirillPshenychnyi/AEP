@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="api\vlog_dm_base_case_item.hpp" />
     <ClInclude Include="api\vlog_dm_blocking_assignment.hpp" />
+    <ClInclude Include="api\vlog_dm_case_kind.hpp" />
     <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp" />
     <ClInclude Include="sources\model\vlog_dm_case_item_impl.hpp" />
     <ClInclude Include="api\vlog_dm_case_statement.hpp" />

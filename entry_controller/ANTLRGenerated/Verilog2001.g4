@@ -988,11 +988,19 @@ function_if_else_if_statement
 
 // 6.7 Case statements
 case_statement
-   : 'case' '(' expression ')'  case_item (case_item)* 'endcase'
+   : 'case' '(' expression ')' (synopsys_directive)? case_item (case_item)* 'endcase'
    | 'casez' '(' expression ')' case_item (case_item)* 'endcase'
    | 'casex' '(' expression ')' case_item (case_item)* 'endcase'
    ;
 
+synopsys_directive
+   : '//' 'synopsys' synopsys_parallel_case
+   ;
+
+synopsys_parallel_case 
+   : 'parallel' 'case'
+   ;   
+   
 case_item
    : expression (',' expression)* ':' statement_or_null
    | default_case_item

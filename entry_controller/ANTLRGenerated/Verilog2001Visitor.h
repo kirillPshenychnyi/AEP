@@ -341,6 +341,10 @@ public:
 
     virtual antlrcpp::Any visitCase_statement(Verilog2001Parser::Case_statementContext *context) = 0;
 
+    virtual antlrcpp::Any visitSynopsys_directive(Verilog2001Parser::Synopsys_directiveContext *context) = 0;
+
+    virtual antlrcpp::Any visitSynopsys_parallel_case(Verilog2001Parser::Synopsys_parallel_caseContext *context) = 0;
+
     virtual antlrcpp::Any visitCase_item(Verilog2001Parser::Case_itemContext *context) = 0;
 
     virtual antlrcpp::Any visitDefault_case_item(Verilog2001Parser::Default_case_itemContext *context) = 0;

@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\api\vlog_dm_case_kind.hpp"
 
 #include <boost\noncopyable.hpp>
 
@@ -40,6 +41,9 @@ struct StatementFactory
 	virtual CaseStatementPtr newCaseStatement(
 			Location const & _location 
 		,	ExpressionPtr _expression
+		,	CaseKind::Kind _kind
+		,	bool _isParallelCase
+		,	bool _isFullCase
 	) const = 0;
 
 /***************************************************************************/

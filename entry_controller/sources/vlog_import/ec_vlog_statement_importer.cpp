@@ -301,26 +301,42 @@ StatementImporter::visitCase_statement(
 {
 	using namespace VlogDM;
 
+	static const char * parallelCaseAttr = "parallel_case";
+	static const char * fullCaseAttr = "full_case";
+
 	IAccessor & accessor = getVlogDataModel();
 
 	ExpressionImporter expressionImporter( getVlogDataModel() );
-	
+
 	auto caseStmt
 		=	m_statementFactory.newCaseStatement( 
 					createLocation( *ctx )
 				,	expressionImporter.importExpression( *ctx->expression() )
-			);
+				,	CaseKind::fromString( ctx->children.front()->getText().c_str() )
+				,	m_statementAttributes.find( parallelCaseAttr ) != m_statementAttributes.end()
+				,	m_statementAttributes.find( fullCaseAttr ) != m_statementAttributes.end()
+			
+		);
 
 	CaseItemImporter itemImporter( getVlogDataModel() );
 
-	auto const & items = ctx->case_item();
-
-	const int itemsSize = items.size();
-
-	for( int i = 0; i < itemsSize; ++i )
-		caseStmt->addBranch( itemImporter.importCaseItem( *items[ i ] ) );
+	for( auto item : ctx->case_item() )
+		caseStmt->addBranch( itemImporter.importCaseItem( *item ) );
 
 	m_resultStatement = std::move( caseStmt );
+
+	RETURN_ANY
+}
+
+/***************************************************************************/
+
+antlrcpp::Any
+StatementImporter::visitAttribute_instance( 
+	Verilog2001Parser::Attribute_instanceContext * ctx
+)
+{
+	for( auto attrSpec : ctx->attr_spec() )
+		m_statementAttributes.insert( attrSpec->attr_name()->getText() );
 
 	RETURN_ANY
 }

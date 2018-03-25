@@ -438,6 +438,9 @@
     <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api\vlog_dm_case_kind.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
