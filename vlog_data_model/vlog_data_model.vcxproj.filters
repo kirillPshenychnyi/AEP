@@ -455,12 +455,6 @@
     <ClCompile Include="sources\model\factory\vlog_dm_declarations_factory_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_design_unit_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_port_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sources\model\factory\vlog_dm_declared_factory_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -470,19 +464,7 @@
     <ClCompile Include="sources\model\factory\vlog_dm_expression_factory_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_part_select_range_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_primary_literal_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_variable_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\model\vlog_dm_multidimensional_range_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp">

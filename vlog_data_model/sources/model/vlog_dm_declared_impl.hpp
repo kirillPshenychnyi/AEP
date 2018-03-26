@@ -39,7 +39,7 @@ public:
 
 /***************************************************************************/
 
-	Declaration const & getDeclaration() const override;
+	Declaration const & getDeclaration() const final;
 	
 /***************************************************************************/
 

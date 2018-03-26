@@ -33,7 +33,7 @@ public:
 
 /***************************************************************************/
 
-	typename _Enum::Kind getKind() const override
+	typename _Enum::Kind getKind() const final
 	{
 		return m_kind;
 	}

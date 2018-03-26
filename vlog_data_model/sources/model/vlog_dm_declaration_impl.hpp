@@ -54,12 +54,12 @@ public:
 /***************************************************************************/
 
 	boost::optional< Declared const & > findDeclared( 
-			std::string const & _declared 
-	) const override;
+		std::string const & _declared 
+	) const final;
 
-	Type const & getType() const override;
+	Type const & getType() const final;
 
-	int getDeclaredsCount() const override;
+	int getDeclaredsCount() const final;
 
 /***************************************************************************/
 
@@ -67,7 +67,7 @@ protected:
 
 /***************************************************************************/
 
-	void addDeclared( DeclaredPtr _declared ) override;
+	void addDeclared( DeclaredPtr _declared ) final;
 
 /***************************************************************************/
 

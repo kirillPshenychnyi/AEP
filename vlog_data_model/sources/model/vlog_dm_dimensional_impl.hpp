@@ -22,7 +22,7 @@ class DimensionalImpl
 
 /***************************************************************************/
 
-	boost::optional< Dimension const & > getDimension() const override;
+	boost::optional< Dimension const & > getDimension() const final;
 
 /***************************************************************************/
 

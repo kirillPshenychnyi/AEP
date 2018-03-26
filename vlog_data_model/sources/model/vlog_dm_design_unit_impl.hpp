@@ -44,11 +44,11 @@ public:
 
 /***************************************************************************/
 
-	int getProcessesCount() const override;
+	int getProcessesCount() const final;
 
-	Process const & getProcess( int _idx ) const override;
+	Process const & getProcess( int _idx ) const final;
 
-	void addProcess( ProcessPtr _process ) override;
+	void addProcess( ProcessPtr _process ) final;
 
 /***************************************************************************/
 
@@ -61,6 +61,43 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+DesignUnitImpl::DesignUnitImpl( 
+		std::string const & _name
+	,	Location const & _location )
+	:	BaseClass( _name, _location )
+{
+}
+
+/***************************************************************************/
+
+inline
+int 
+DesignUnitImpl::getProcessesCount() const
+{
+	return m_processes.size();
+}
+
+/***************************************************************************/
+
+inline
+Process const & 
+DesignUnitImpl::getProcess( int _idx ) const
+{
+	return *m_processes[ _idx ];
+}
+
+/***************************************************************************/
+
+inline
+void
+DesignUnitImpl::addProcess( ProcessPtr _process )
+{
+	m_processes.push_back( std::move( _process ) );
+}
 
 /***************************************************************************/
 

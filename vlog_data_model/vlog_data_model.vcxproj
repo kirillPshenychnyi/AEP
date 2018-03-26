@@ -295,11 +295,6 @@
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_multidimensional_range_impl.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_part_select_range_impl.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_port_impl.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_primary_literal_impl.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_variable_impl.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_expression_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_process_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_range_regenerator.cpp" />
@@ -311,7 +306,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="sources\model\factory\vlog_dm_declarations_factory_impl.cpp" />
-    <ClCompile Include="sources\model\vlog_dm_design_unit_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\tools\tools.vcxproj">

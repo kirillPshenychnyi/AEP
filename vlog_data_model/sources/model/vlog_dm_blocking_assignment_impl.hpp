@@ -39,9 +39,9 @@ public:
 
 /***************************************************************************/
 
-	void accept( StatementVisitor & _visitor ) const override;
+	void accept( StatementVisitor & _visitor ) const final;
 
-	BinaryOperator const & getAssignment() const override;
+	BinaryOperator const & getAssignment() const final;
 
 /***************************************************************************/
 

@@ -40,11 +40,11 @@ public:
 
 /***************************************************************************/
 
-	Statement const & getStatement() const override;
+	Statement const & getStatement() const final;
 	
-	boost::optional< SensitivityList const & > getSensitivityList() const override;
+	boost::optional< SensitivityList const & > getSensitivityList() const final;
 
-	void accept( ProcessVisitor & _visitor ) const override;
+	void accept( ProcessVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

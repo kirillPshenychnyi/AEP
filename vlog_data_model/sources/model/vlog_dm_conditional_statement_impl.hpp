@@ -43,13 +43,13 @@ public:
 
 /***************************************************************************/
 
-	int getBranchesCount() const override;
+	int getBranchesCount() const final;
 
-	ConditionalBranch const & getBranch( int _idx ) const override;
+	ConditionalBranch const & getBranch( int _idx ) const final;
 
-	void addBranch( ConditionalBranchPtr _branch ) override;
+	void addBranch( ConditionalBranchPtr _branch ) final;
 
-	void accept( StatementVisitor & _visitor ) const override;
+	void accept( StatementVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

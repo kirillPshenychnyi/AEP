@@ -23,7 +23,7 @@ public:
 		:	m_name( _name )
 	{}
 		
-	std::string const & getName() const override;
+	std::string const & getName() const final;
 
 /***************************************************************************/
 		

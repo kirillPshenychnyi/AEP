@@ -43,9 +43,9 @@ private:
 
 /***************************************************************************/
 
-	bool isSigned() const override;
+	bool isSigned() const final;
 
-	void accept( DeclaredVisitor& _visitor ) const override;
+	void accept( DeclaredVisitor& _visitor ) const final;
 
 /***************************************************************************/
 
@@ -58,6 +58,34 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+VariableImpl::VariableImpl( 
+			Declaration const & _declaration
+		,	std::string const & _name
+		,	Location const & _location
+		,	std::unique_ptr< Dimension > _dimension
+		,	bool _isSigned
+	)
+	:	BaseClass( 
+				_declaration
+			,	_name
+			,	_location
+			,	std::move( _dimension )
+		)
+	,	m_isSigned( _isSigned )
+{}
+
+/***************************************************************************/
+
+inline
+void 
+VariableImpl::accept( DeclaredVisitor & _visitor ) const
+{
+	_visitor.visit( *this );
+}
 
 /***************************************************************************/
 

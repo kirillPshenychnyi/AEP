@@ -38,13 +38,13 @@ public:
 
 /***************************************************************************/
 
-	Expression const & getLeftOperand() const override;
+	Expression const & getLeftOperand() const final;
 
-	Expression const & getRightOperand() const override;
+	Expression const & getRightOperand() const final;
 
-	Operator::Kind getOperator() const override;
+	Operator::Kind getOperator() const final;
 
-	void accept( ExpressionVisitor & _visitor ) const override;
+	void accept( ExpressionVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

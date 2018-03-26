@@ -40,11 +40,11 @@ public:
 
 /***************************************************************************/
 
-	Expression const & getOperand() const override;
+	Expression const & getOperand() const final;
 
-	Operator::Kind getOperator() const override;
+	Operator::Kind getOperator() const final;
 
-	void accept( ExpressionVisitor & _visitor ) const override;
+	void accept( ExpressionVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

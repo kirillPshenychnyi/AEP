@@ -41,11 +41,11 @@ public:
 
 /***************************************************************************/
 
-	Concatenation const & getConcatenation() const override;
+	Concatenation const & getConcatenation() const final;
 	
-	Expression const & getRepeatExpression() const override;
+	Expression const & getRepeatExpression() const final;
 
-	void accept( ExpressionVisitor & _visitor ) const override;
+	void accept( ExpressionVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

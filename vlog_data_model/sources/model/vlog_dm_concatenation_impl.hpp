@@ -38,13 +38,13 @@ public:
 
 	ConcatenationImpl( Location const& _location );
 
-	void addExpression( ExpressionPtr _expressionPtr ) override;
+	void addExpression( ExpressionPtr _expressionPtr ) final;
 	
-	int getExpressionsCount() const override;
+	int getExpressionsCount() const final;
 
-	Expression const & getExpression( int _idx  ) const override;
+	Expression const & getExpression( int _idx  ) const final;
 
-	void accept( ExpressionVisitor & _expressionVisitor ) const override;
+	void accept( ExpressionVisitor & _expressionVisitor ) const final;
 
 /***************************************************************************/
 

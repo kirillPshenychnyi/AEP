@@ -42,13 +42,13 @@ public:
 
 /***************************************************************************/
 
-	int getRangesCount() const override;
+	int getRangesCount() const final;
 
-	Range const& getRange( int _idx ) const override;
+	Range const& getRange( int _idx ) const final;
 
-	void accept( RangeVisitor & _visitor ) const override;
+	void accept( RangeVisitor & _visitor ) const final;
 
-	void addRange( RangePtr _range ) override;
+	void addRange( RangePtr _range ) final;
 
 /***************************************************************************/
 
@@ -61,6 +61,50 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+MultidimensionalRangeImpl::MultidimensionalRangeImpl( const Location & _location )
+	:	BaseClass( _location )
+{
+}
+
+/***************************************************************************/
+
+inline
+int 
+MultidimensionalRangeImpl::getRangesCount() const
+{
+	return m_ranges.size();
+}
+
+/***************************************************************************/
+
+inline
+Range const & 
+MultidimensionalRangeImpl::getRange( int _idx ) const
+{
+	return *m_ranges[ _idx ];
+}
+
+/***************************************************************************/
+
+inline
+void 
+MultidimensionalRangeImpl::accept( RangeVisitor & _visitor ) const
+{
+	_visitor.visit( *this );
+}
+
+/***************************************************************************/
+
+inline
+void 
+MultidimensionalRangeImpl::addRange( RangePtr _range )
+{
+	m_ranges.emplace_back( std::move( _range ) );
+}
 
 /***************************************************************************/
 

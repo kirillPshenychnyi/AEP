@@ -43,9 +43,9 @@ public:
 
 /***************************************************************************/
 
-	BaseIdentifier const & getIdentifier() const override;
+	BaseIdentifier const & getIdentifier() const final;
 
-	void accept( ExpressionVisitor & _visitor ) const override;
+	void accept( ExpressionVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

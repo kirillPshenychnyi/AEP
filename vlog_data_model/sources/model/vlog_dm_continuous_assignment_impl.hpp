@@ -39,9 +39,9 @@ public:
 
 /***************************************************************************/
 
-	BinaryOperator const & getAssignment() const override;
+	BinaryOperator const & getAssignment() const final;
 
-	void accept( ProcessVisitor & _visitor ) const override;
+	void accept( ProcessVisitor & _visitor ) const final;
 
 /***************************************************************************/
 

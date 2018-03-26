@@ -46,7 +46,7 @@ public:
 		,	m_range( _range.release() )
 	{}
 
-	boost::optional< Range const & > getRange() const override
+	boost::optional< Range const & > getRange() const final
 	{
 		return Tools::Convertors::convertPointerToOptional( m_range.get() );
 	}

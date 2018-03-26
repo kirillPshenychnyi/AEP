@@ -41,13 +41,13 @@ public:
 
 /***************************************************************************/
 
-	Expression const & getCondition() const override;
+	Expression const & getCondition() const final;
 
-	Expression const & getTrueBranch() const override;
+	Expression const & getTrueBranch() const final;
 
-	Expression const & getFalseBranch() const override;
+	Expression const & getFalseBranch() const final;
 
-	void accept( ExpressionVisitor & _visitor ) const override;
+	void accept( ExpressionVisitor & _visitor ) const final;
 
 /***************************************************************************/
 
