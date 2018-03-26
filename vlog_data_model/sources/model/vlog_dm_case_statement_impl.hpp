@@ -44,6 +44,9 @@ public:
 	CaseStatementImpl( 
 			Location const & _location
 		,	ExpressionPtr _caseExpression
+		,	CaseKind::Kind _kind
+		,	bool _isParallelCase
+		,	bool _isFullCase
 	);
 
 /***************************************************************************/
@@ -58,6 +61,12 @@ public:
 
 	void addBranch( BaseCaseItemPtr _item ) final;
 
+	bool isParallelCase() const override;
+
+	bool isFullCase() const override;
+	
+	CaseKind::Kind getCaseKind() const override;
+
 /***************************************************************************/
 
 private:
@@ -68,6 +77,11 @@ private:
 
 	ExpressionPtr m_caseExpression;
 
+	const CaseKind::Kind m_kind;
+
+	bool m_isParallelCase;
+	bool m_isFullCase;
+
 /***************************************************************************/
 
 };
@@ -77,9 +91,15 @@ private:
 CaseStatementImpl::CaseStatementImpl(
 		Location const & _location
 	,	ExpressionPtr _caseExpression 
+	,	CaseKind::Kind _kind
+	,	bool _isParallelCase
+	,	bool _isFullCase
 	)
 	:	BaseClass( _location )
 	,	m_caseExpression( std::move( _caseExpression ) )
+	,	m_kind( _kind )
+	,	m_isParallelCase( _isParallelCase )
+	,	m_isFullCase( _isFullCase )
 {
 }
 
@@ -128,6 +148,31 @@ void
 CaseStatementImpl::addBranch( BaseCaseItemPtr _item )
 {
 	m_items.push_back( std::move( _item ) );
+}
+
+/***************************************************************************/
+
+inline 
+bool 
+CaseStatementImpl::isParallelCase() const
+{
+	return m_isParallelCase;
+}
+
+/***************************************************************************/
+
+inline 
+bool 
+CaseStatementImpl::isFullCase() const
+{
+	return m_isFullCase;
+}
+
+inline
+CaseKind::Kind 
+CaseStatementImpl::getCaseKind() const
+{
+	return m_kind;
 }
 
 /***************************************************************************/

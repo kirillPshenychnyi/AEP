@@ -128,8 +128,8 @@ StatementRegenerator::visit( CaseStatement const & _case )
 		StatementRegenerator m_statementRegenerator;
 	};
 
-	m_targetStream << "case( ";
-
+	m_targetStream << CaseKind::toString( _case.getCaseKind() ) << "( ";
+	
 	ExpressionRegenerator expressionRegenerator( m_targetStream );
 
 	_case.getCaseExpression().accept( expressionRegenerator );

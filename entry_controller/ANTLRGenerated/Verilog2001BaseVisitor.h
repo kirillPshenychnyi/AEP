@@ -659,6 +659,14 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitSynopsys_directive(Verilog2001Parser::Synopsys_directiveContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitSynopsys_parallel_case(Verilog2001Parser::Synopsys_parallel_caseContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitCase_item(Verilog2001Parser::Case_itemContext *ctx) override {
     return visitChildren(ctx);
   }
