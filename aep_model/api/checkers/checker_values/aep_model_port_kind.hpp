@@ -1,3 +1,5 @@
+#ifndef __AEP_MODEL_CHECKER_PORT_KIND_HPP__
+#define __AEP_MODEL_CHECKER_PORT_KIND_HPP__
 
 namespace AepModel {
 
@@ -18,7 +20,6 @@ struct OvlCheckerPortKind
 		,	Enable
 		,	Request
 		,	Acknowledge
-
 	};
 
 /*----------------------------------------------------------------------------*/
@@ -51,3 +52,11 @@ struct OvlCheckerPortKind
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+}
+
+/***************************************************************************/
+
+#endif // !__AEP_MODEL_CHECKER_PORT_KIND_HPP__

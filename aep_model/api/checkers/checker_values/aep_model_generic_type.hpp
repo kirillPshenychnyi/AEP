@@ -14,24 +14,24 @@ struct GenericType
 
 	enum class Kind
 	{
-		SeverityLevel
-		, PropertyType
-		, ClockEdge
-		, CoverageLevel
-		, ResetPolarity
-		, GatingType
-		, Msg
+			SeverityLevel
+		,	PropertyType
+		,	ClockEdge
+		,	CoverageLevel
+		,	ResetPolarity
+		,	GatingType
+		,	Msg
 
-		, ValueType
-		, MinCycles
-		, MaxCycles
-		, MinAcknowledgeCycles
-		, MaxAcknowledgeCycles
-		, MaxAcknowledgeLength
-		, RequestDrop
-		, DeassertionCount
-		, Width
-		, Value
+		,	ValueType
+		,	MinCycles
+		,	MaxCycles
+		,	MinAcknowledgeCycles
+		,	MaxAcknowledgeCycles
+		,	MaxAcknowledgeLength
+		,	RequestDrop
+		,	DeassertionCount
+		,	Width
+		,	Value
 	};
 
 /***************************************************************************/

@@ -1,9 +1,5 @@
-#ifndef __AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
-#define __AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
-
-/***************************************************************************/
-
-#include <boost\noncopyable.hpp>
+#ifndef __AEP_MODEL_OVL_CHECKER_IDS_HPP__
+#define __AEP_MODEL_OVL_CHECKER_IDS_HPP__
 
 /***************************************************************************/
 
@@ -11,20 +7,32 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct ReferencedSignalInfo
-	:	public boost::noncopyable
+struct OvlCheckerIds
 {
 
 /***************************************************************************/
 
-	virtual std::string const & getName() const = 0;
-	
-	virtual std::string const & getReferencePattern() const = 0;
-
-	virtual int getWidth() const = 0;
+	enum class Kind
+	{
+			OvlAlways
+		,	OvlOneHot
+	};
 
 /***************************************************************************/
 
+	static const char * const toString( Kind _enum )
+	{
+		switch( _enum )
+		{
+			case Kind::OvlAlways:
+				return "ovl_always";
+			case Kind::OvlOneHot:
+				return "ovl_one_hot";
+
+			default:
+				return "";
+		}
+	}
 };
 
 /***************************************************************************/
@@ -33,4 +41,4 @@ struct ReferencedSignalInfo
 
 /***************************************************************************/
 
-#endif // !__AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
+#endif // !__AEP_MODEL_OVL_CHECKER_IDS_HPP__

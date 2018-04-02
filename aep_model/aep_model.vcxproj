@@ -150,16 +150,33 @@
     <ClInclude Include="api\aep_model_referenced_signal_info.hpp" />
     <ClInclude Include="api\aep_model_inner_signal_info.hpp" />
     <ClInclude Include="api\checkers\checker_values\aep_model_clock_edge.hpp" />
+    <ClInclude Include="api\checkers\checker_values\aep_model_declare_ovl_enum_checker_parameter.hpp" />
+    <ClInclude Include="api\checkers\checker_values\aep_model_ovl_checker_integer_parameter.hpp" />
     <ClInclude Include="api\checkers\checker_values\aep_model_generic_type.hpp" />
     <ClInclude Include="api\checkers\checker_values\aep_model_port_kind.hpp" />
     <ClInclude Include="api\checkers\checker_values\aep_model_reset_polarity.hpp" />
     <ClInclude Include="api\checkers\checker_values\aep_model_severity_level.hpp" />
+    <ClInclude Include="api\checkers\checker_values\aep_model_ovl_checker_string_parameter.hpp" />
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_ids.hpp" />
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker.hpp" />
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_port.hpp" />
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_generic_parameter.hpp" />
     <ClInclude Include="api\contexsts\aep_model_assertion_context.hpp" />
     <ClInclude Include="api\contexsts\aep_model_instance_based_context.hpp" />
+    <ClInclude Include="ih\visitors\aep_model_checker_generic_visitor.hpp" />
+    <ClInclude Include="ih\writable\aep_model_assertion_context.hpp" />
+    <ClInclude Include="model\aep_model_base_checker_parameter_impl.hpp" />
+    <ClInclude Include="model\aep_model_define_ovl_checkers.hpp" />
+    <ClInclude Include="model\aep_model_ovl_checker_base_impl.hpp" />
+    <ClInclude Include="model\aep_model_ovl_checker_port_impl.hpp" />
+    <ClInclude Include="model\aep_model_ovl_enum_checker_parameter_impl.hpp" />
+    <ClInclude Include="model\aep_model_utils.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="model\aep_model_ovl_checker_base_impl.cpp" />
+    <ClCompile Include="model\factory.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

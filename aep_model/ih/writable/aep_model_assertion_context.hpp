@@ -14,6 +14,7 @@ namespace AepModel
 
 struct ReferencedSignalInfo;
 struct InnerSignalInfo;
+struct OvlChecker;
 
 /***************************************************************************/
 
@@ -50,6 +51,10 @@ struct InstanceBasedContext
 	
 	virtual void addInnerSignal( InnerSignalInfo const & _info ) const = 0;
 	
+	virtual void addInstance( std::string const & _path ) const = 0;
+
+	virtual void addChecker( std::unique_ptr< OvlChecker > _checker ); 
+
 /***************************************************************************/
 
 };

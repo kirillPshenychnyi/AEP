@@ -1,9 +1,9 @@
-#ifndef __AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
-#define __AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
+#ifndef __AEP_MODEL_CHECKER_INTEGER_PARAMETER_HPP__
+#define __AEP_MODEL_CHECKER_INTEGER_PARAMETER_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "aep_model\api\checkers\ovl\aep_model_ovl_generic_parameter.hpp"
 
 /***************************************************************************/
 
@@ -11,17 +11,15 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct ReferencedSignalInfo
-	:	public boost::noncopyable
+struct OvlCheckerStringParameter
+	:	public OVlCheckerGenericParameter
 {
 
 /***************************************************************************/
 
-	virtual std::string const & getName() const = 0;
-	
-	virtual std::string const & getReferencePattern() const = 0;
+	virtual std::string const & getValue() const = 0;
 
-	virtual int getWidth() const = 0;
+	virtual void setValue( std::string const & _value ) = 0;
 
 /***************************************************************************/
 
@@ -31,6 +29,4 @@ struct ReferencedSignalInfo
 
 }
 
-/***************************************************************************/
-
-#endif // !__AEP_MODEL_REFERENCED_SIGNAL_INFO_HPP__
+#endif // !__AEP_MODEL_CHECKER_INTEGER_PARAMETER_HPP__

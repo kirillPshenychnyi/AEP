@@ -48,9 +48,60 @@
     <ClInclude Include="api\checkers\checker_values\aep_model_severity_level.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ih\writable\aep_model_assertion_context.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_ids.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_generic_parameter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\aep_model_checker_generic_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_base_checker_parameter_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\checker_values\aep_model_ovl_checker_integer_parameter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\checker_values\aep_model_ovl_checker_string_parameter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\checker_values\aep_model_declare_ovl_enum_checker_parameter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_ovl_enum_checker_parameter_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_ovl_checker_base_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_port.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_ovl_checker_port_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_define_ovl_checkers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\aep_model_ovl_checker_base_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
