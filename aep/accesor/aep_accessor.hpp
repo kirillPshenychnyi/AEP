@@ -1,9 +1,9 @@
-#ifndef __AEP_IACCESSOR_HPP__
-#define __AEP_IACCESSOR_HPP__
+#ifndef __AEP_ACCESSOR_HPP__
+#define __AEP_ACCESSOR_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "aep\api\aep_iaccessor.hpp"
 
 /***************************************************************************/
 
@@ -11,13 +11,13 @@ namespace Aep {
 
 /***************************************************************************/
 
-struct IAccessor
-	:	public boost::noncopyable
+class Accessor
+	:	public IAccessor
 {
 
 /***************************************************************************/
 
-	virtual void runEngine() = 0; 
+	void runEngine( VlogDM::IAccessor const & _vlogDm ) final;
 
 /***************************************************************************/
 
@@ -29,4 +29,4 @@ struct IAccessor
 
 /***************************************************************************/
 
-#endif // !__AEP_IACCESSOR_HPP__
+#endif // !__AEP_ACCESSOR_HPP__

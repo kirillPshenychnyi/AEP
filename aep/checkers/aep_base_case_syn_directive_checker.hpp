@@ -1,46 +1,39 @@
-#ifndef __VLOG_DM_PROCESS_VISITOR_HPP__
-#define __VLOG_DM_PROCESS_VISITOR_HPP__
+#ifndef __AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#define __AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "aep\checkers\aep_base_checker.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM {
+namespace Aep {
 
 /***************************************************************************/
 
-struct ContinuousAssignment;
-struct BehavioralProcess;
-
-/***************************************************************************/
-
-struct ProcessVisitor
-	:	boost::noncopyable
+class BaseCaseSynDirectiveChecker
+	:	public BaseAepChecker
 {
 
 /***************************************************************************/
 
-	virtual void visit( ContinuousAssignment const & _assign ) = 0;
-
-	virtual void visit( BehavioralProcess const & _assign ) = 0;
+public:
 
 /***************************************************************************/
 
-};
+	BaseCaseSynDirectiveChecker( VlogDM::IAccessor const & _accessor );
+
+	void analyze() final;
 
 /***************************************************************************/
 
-struct ProcessDefaultVisitor
-	:	public ProcessVisitor
-{
+private:
 
 /***************************************************************************/
 
-	void visit( ContinuousAssignment const & _assign ) override {}
+	void onProcess( VlogDM::BehavioralProcess const & _process );
 
-	void visit( BehavioralProcess const & _assign ) override {}
+	void onCaseStatement( VlogDM::CaseStatement const & _case );
 
 /***************************************************************************/
 
@@ -52,4 +45,4 @@ struct ProcessDefaultVisitor
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_PROCESS_VISITOR_HPP__
+#endif // !__AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__

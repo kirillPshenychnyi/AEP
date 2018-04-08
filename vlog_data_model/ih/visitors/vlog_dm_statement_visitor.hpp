@@ -38,6 +38,26 @@ struct StatementVisitor
 
 /***************************************************************************/
 
+class StatementDefaultVisitor
+	:	public StatementVisitor
+{
+
+/***************************************************************************/
+
+	void visit( ConditionalStatement const & _statement ) override {}
+
+	void visit( BlockingAssignment const & _assignment ) override {}
+	
+	void visit( SequentialBlock const & _assignment ) override {}
+
+	void visit( CaseStatement const & _case ) override {}
+
+/***************************************************************************/
+
+};
+
+/***************************************************************************/
+
 }
 
 /***************************************************************************/

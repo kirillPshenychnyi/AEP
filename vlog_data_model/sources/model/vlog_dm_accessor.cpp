@@ -78,6 +78,15 @@ Accessor::regenerateProcess( std::ostream & _stream, Process const & _process ) 
 
 /***************************************************************************/
 
+void
+Accessor::forEachDesignUnit( DesignUnitCallback _callBack ) const
+{
+	for( auto const & unit : m_unitsSet )
+		_callBack( *unit );
+}
+
+/***************************************************************************/
+
 Writable::ObjectFactory const&
 Accessor::getObjectFactory() const
 {

@@ -66,6 +66,7 @@ public:
 			GenericType::Kind _type
 	) const final;
 
+
 	void addParameter( std::unique_ptr< OVlCheckerGenericParameter > _parameter  );
 
 	void setPort(

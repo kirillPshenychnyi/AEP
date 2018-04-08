@@ -80,6 +80,7 @@ namespace VlogDM
 	struct Process;
 
 	struct Statement;
+	struct CaseStatement;
 	struct ConditionalBranch;
 	struct BlockingAssignment;
 

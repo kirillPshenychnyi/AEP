@@ -441,6 +441,12 @@
     <ClInclude Include="api\vlog_dm_case_kind.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api\vlog_dm_process_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_statement_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

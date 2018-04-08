@@ -1,5 +1,6 @@
-#ifndef __AEP_OVL_BASE_CONTEXT_HPP__
-#define __AEP_OVL_BASE_CONTEXT_HPP__
+#include "stdafx.h"
+
+#include "aep\accesor\aep_accessor.hpp"
 
 /***************************************************************************/
 
@@ -7,12 +8,11 @@ namespace Aep {
 
 /***************************************************************************/
 
-	
-
-/***************************************************************************/
-
+void
+Accessor::runEngine( VlogDM::IAccessor const & _vlogDm )
+{
 }
 
 /***************************************************************************/
 
-#endif // !__AEP_OVL_BASE_CONTEXT_HPP__
+}
