@@ -23,9 +23,6 @@ class BaseAepChecker
 	template< typename _TProcess >
 	using ProcessCallback = std::function< void( _TProcess const & ) >;
 
-	template< typename _TSequentialStatement >
-	using SequentialStatementCallback = std::function< void( _TSequentialStatement const & ) >;
-
 /***************************************************************************/
 
 protected:
@@ -38,7 +35,7 @@ protected:
 
 	template< typename _ProcessKind >
 	void browseProcesses( ProcessCallback< _ProcessKind > _callback );
-
+	
 	virtual void analyze() = 0;
 
 /***************************************************************************/

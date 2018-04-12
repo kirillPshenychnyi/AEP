@@ -1,23 +1,25 @@
-#ifndef __AEP_IACCESSOR_HPP__
-#define __AEP_IACCESSOR_HPP__
+#ifndef __AEP_MODEL_ACCESSOR_HPP__
+#define __AEP_MODEL_ACCESSOR_HPP__
 
 /***************************************************************************/
+
+#include "aep_model\api\aep_model_fwd.hpp"
 
 #include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
-namespace Aep {
+namespace AepModel {
 
 /***************************************************************************/
 
 struct IAccessor
 	:	public boost::noncopyable
-{
+{ 
 
 /***************************************************************************/
 
-	virtual void runEngine() = 0; 
+	virtual OvlCheckersFactory const& getCheckersFactory() const = 0;
 
 /***************************************************************************/
 
@@ -29,4 +31,4 @@ struct IAccessor
 
 /***************************************************************************/
 
-#endif // !__AEP_IACCESSOR_HPP__
+#endif // !__AEP_MODEL_ACCESSOR_HPP__

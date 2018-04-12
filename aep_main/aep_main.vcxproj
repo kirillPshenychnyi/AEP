@@ -20,33 +20,33 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{40869DE9-1A69-4837-AC6E-C5BA1E1C31DB}</ProjectGuid>
+    <ProjectGuid>{491B4E7C-2E2F-4E41-8C75-E833D8F0D907}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>entrycontroller</RootNamespace>
+    <RootNamespace>aepmain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -89,17 +89,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,17 +103,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,19 +119,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,76 +137,42 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ANTLRGenerated\Verilog2001BaseVisitor.h" />
-    <ClInclude Include="ANTLRGenerated\Verilog2001Lexer.h" />
-    <ClInclude Include="ANTLRGenerated\Verilog2001Parser.h" />
-    <ClInclude Include="ANTLRGenerated\Verilog2001Visitor.h" />
-    <ClInclude Include="api\ec_iaccessor.hpp" />
-    <ClInclude Include="sources\ec_accessor.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_behavioral_process_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_case_item_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_statement_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_range_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_variable_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_base_net_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_dataflow_process_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_expression_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_identifier_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_module_item_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_net_extractor.hpp" />
+    <ClInclude Include="aep_main_container_bootstrapper.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_base_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_design_unit_importer.hpp" />
-    <ClInclude Include="sources\vlog_import\ec_vlog_port_importer.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ANTLRGenerated\Verilog2001Lexer.cpp" />
-    <ClCompile Include="ANTLRGenerated\Verilog2001Parser.cpp" />
-    <ClCompile Include="sources\ec_accessor.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_behavioral_process_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_case_item_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_range_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_variable_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_base_net_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_dataflow_process_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_expression_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_identifier_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_module_item_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_net_extractor.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_statement_importer.cpp" />
+    <ClCompile Include="aep_main.cpp" />
+    <ClCompile Include="aep_main_container_bootstrapper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="sources\vlog_import\ec_vlog_base_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_port_importer.cpp" />
-    <ClCompile Include="sources\vlog_import\ec_vlog_design_unit_importer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\parsers\antlr\Cpp\runtime\antlr4cpp-vs2015.vcxproj">
-      <Project>{a9762991-1b57-4dce-90c0-ee42b96947be}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\aep\aep.vcxproj">
       <Project>{35b1529c-c173-428e-995b-29f43d8ce46c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\aep_model\aep_model.vcxproj">
+      <Project>{85c2fb1c-0882-429d-8843-ee9601446349}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\entry_controller\entry_controller.vcxproj">
+      <Project>{40869de9-1a69-4837-ac6e-c5ba1e1c31db}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Hypodermic\Hypodermic.vcxproj">
+      <Project>{a87df3ac-9a2b-4762-84aa-bf20cae4591c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\vlog_data_model\vlog_data_model.vcxproj">
       <Project>{3151e104-ceb5-40fa-b40c-6a1c9ab6ed03}</Project>

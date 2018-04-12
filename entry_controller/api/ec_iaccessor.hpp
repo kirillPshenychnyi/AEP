@@ -19,6 +19,8 @@ struct IAccessor
 
 	virtual void importVerilog( std::string const& _code ) = 0;
 
+	virtual void runAepAnalysis() = 0;
+
 /***************************************************************************/
 
 };

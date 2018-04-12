@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "aep_model\model\aep_model_ovl_checker_base_impl.hpp"
+#include "aep_model\model\checkers\aep_model_ovl_checker_base_impl.hpp"
 
 #include "common_tools\utils\convertors.hpp"
 
@@ -25,15 +25,14 @@ OvlCheckerImpl::OvlCheckerImpl(
 
 /***************************************************************************/
 
-boost::optional< OVlCheckerGenericParameter& > 
+boost::optional< OvlCheckerGenericParameter& > 
 OvlCheckerImpl::getParameter( GenericType::Kind _type ) const
 {
 	auto value = m_generics.find( _type, GenericParamHasher(), GenericParamComparator() );
-	return boost::optional< OVlCheckerGenericParameter & >();
 	
 	return
 			value == m_generics.end()
-		?	boost::optional< OVlCheckerGenericParameter & >()
+		?	boost::optional< OvlCheckerGenericParameter & >()
 		:	**value;
 }
 
@@ -41,7 +40,7 @@ OvlCheckerImpl::getParameter( GenericType::Kind _type ) const
 
 void 
 OvlCheckerImpl::addParameter( 
-	std::unique_ptr< OVlCheckerGenericParameter > _parameter 
+	std::unique_ptr< OvlCheckerGenericParameter > _parameter 
 )
 {
 	m_generics.insert( std::move( _parameter ) );

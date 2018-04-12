@@ -48,13 +48,13 @@ BaseAepChecker::browseProcesses( ProcessCallback< _ProcessKind > _callBack )
 
 /***************************************************************************/
 
-template<>
+template
 void
-BaseAepChecker::browseProcesses( ProcessCallback< VlogDM::ContinuousAssignment > );
+BaseAepChecker::browseProcesses< VlogDM::ContinuousAssignment >( ProcessCallback< VlogDM::ContinuousAssignment > );
 
-template<>
+template
 void
-BaseAepChecker::browseProcesses( ProcessCallback< VlogDM::BehavioralProcess > );
+BaseAepChecker::browseProcesses< VlogDM::BehavioralProcess >( ProcessCallback< VlogDM::BehavioralProcess > );
 
 /***************************************************************************/
 

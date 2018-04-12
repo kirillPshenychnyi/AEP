@@ -60,9 +60,6 @@
     <ClInclude Include="ih\visitors\aep_model_checker_generic_visitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\aep_model_base_checker_parameter_impl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\checkers\checker_values\aep_model_ovl_checker_integer_parameter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,25 +69,61 @@
     <ClInclude Include="api\checkers\checker_values\aep_model_declare_ovl_enum_checker_parameter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\aep_model_ovl_enum_checker_parameter_impl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="model\aep_model_ovl_checker_base_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_port.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="model\aep_model_ovl_checker_port_impl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="model\aep_model_define_ovl_checkers.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="model\aep_model_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\aep_model_ovl_checker_generic_param_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_one_hot_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ih\visitors\aep_model_checker_generic_non_const_visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\aep_model_ovl_checkers_factory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\aep_model_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\parameters\aep_model_ovl_enum_checker_parameter_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\parameters\aep_model_base_checker_parameter_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\checkers_builders\aep_model_base_checker_builder_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_one_hot_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\aep_model_ovl_checkers_factory_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\aep_model_ovl_checker_base_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\aep_model_ovl_checker_port_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\aep_model_define_ovl_checkers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\accessor\aep_model_accessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\aep_model_iaccessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,7 +134,13 @@
     <ClCompile Include="model\factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="model\aep_model_ovl_checker_base_impl.cpp">
+    <ClCompile Include="model\checkers\aep_model_ovl_checker_base_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\checkers\aep_model_ovl_checkers_factory_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\accessor\aep_model_accessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

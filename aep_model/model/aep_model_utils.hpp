@@ -7,30 +7,21 @@ namespace AepModel {
 
 /*----------------------------------------------------------------------------*/
 
-#define AEP_DEFINE_GENERIC_SETER( NOT_USED1, NOT_USED2, TYPE )			\
-void																	\
-BOOST_PP_CAT( set, BOOST_PP_TUPLE_ELEM(2, 0, TYPE) )(					\
-		BOOST_PP_TUPLE_ELEM(2, 1, TYPE) _value							\
-)																		\
-{																		\
-	setGeneric< 														\
-			BOOST_PP_CAT(BOOST_PP_TUPLE_ELEM(2,0,TYPE), Param)			\
-		,	BOOST_PP_TUPLE_ELEM(2, 1, TYPE) 							\
-		>(																\
-			GenericType::BOOST_PP_TUPLE_ELEM(2,0,TYPE)					\
-		,	_value														\
-	);																	\
-}
+#define AEP_DEFINE_PORT_SETTER( PORT_NAME )					\
+	void set##PORT_NAME( std::string const & _port ) final	\
+	{}
 
-/*----------------------------------------------------------------------------*/
+#define AEP_DEFINE_GENERIC_SETTER( KIND, GENERIC_NAME, VALUE )	\
+	void set##GENERIC_NAME( VALUE _value ) final				\
+	{															\
+		setGeneric< Ovl##KIND##Parameter >(						\
+					GenericType::Kind::GENERIC_NAME				\
+				,	 _value										\
+		);														\
+	}
 
-
-#define AEP_DEFINE_PORT_SETTER( NOT_USED1, NOT_USED2, NAME )		\
-void																\
-BOOST_PP_CAT( set, NAME ) ( std::string const & _value )			\
-{																	\
-	m_checker->setPort( OvlCheckerPortKind::NAME, _value );			\
-}
+#define AEP_DEFINE_ENUM_PARAM_SETTER( GENERIC_NAME )			\
+	AEP_DEFINE_GENERIC_SETTER( GENERIC_NAME, GENERIC_NAME, GENERIC_NAME::Kind )
 
 
 /*----------------------------------------------------------------------------*/

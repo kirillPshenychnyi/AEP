@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\aep_iaccessor.hpp">
-      <Filter>Header Files\api</Filter>
-    </ClInclude>
     <ClInclude Include="checkers\aep_base_checker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,8 +33,17 @@
     <ClInclude Include="utils\aep_utils_statement_query.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="accesor\aep_accessor.hpp">
+    <ClInclude Include="checkers\aep_full_case_syn_directive_checker.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\accessor\aep_accessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\aep_checker_ids.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\aep_iaccessor.hpp">
+      <Filter>Header Files\api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +59,10 @@
     <ClCompile Include="utils\aep_utils_statement_query.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="accesor\aep_accessor.cpp">
+    <ClCompile Include="checkers\aep_full_case_syn_directive_checker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\accessor\aep_accessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

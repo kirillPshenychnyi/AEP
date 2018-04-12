@@ -18,8 +18,8 @@ namespace AepModel {
 /***************************************************************************/
 
 #define AEP_DECLARE_ENUM_PARAMETER( NOT_USED1, NOT_USED2, GENERIC )			\
-	struct BOOST_PP_CAT( GENERIC, Parameter )								\
-		:	public OVlCheckerGenericParameter								\
+	struct BOOST_PP_CAT( Ovl, BOOST_PP_CAT( GENERIC, Parameter ) )			\
+		:	public OvlCheckerGenericParameter								\
 	{																		\
 		virtual GENERIC::Kind getValue() const = 0;							\
 																			\

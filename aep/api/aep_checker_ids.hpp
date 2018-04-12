@@ -1,9 +1,5 @@
-#ifndef __AEP_IACCESSOR_HPP__
-#define __AEP_IACCESSOR_HPP__
-
-/***************************************************************************/
-
-#include <boost\noncopyable.hpp>
+#ifndef __AEP_CHECKER_IDS_HPP__
+#define __AEP_CHECKER_IDS_HPP__
 
 /***************************************************************************/
 
@@ -11,17 +7,18 @@ namespace Aep {
 
 /***************************************************************************/
 
-struct IAccessor
-	:	public boost::noncopyable
+enum class CheckerIds
 {
 
 /***************************************************************************/
 
-	virtual void runEngine() = 0; 
+		ParallelCaseSynDirectiveChecker
+	,	FullCaseSynDirectiveChecker
 
 /***************************************************************************/
 
 };
+
 
 /***************************************************************************/
 
@@ -29,4 +26,4 @@ struct IAccessor
 
 /***************************************************************************/
 
-#endif // !__AEP_IACCESSOR_HPP__
+#endif // !__AEP_CHECKER_IDS_HPP__

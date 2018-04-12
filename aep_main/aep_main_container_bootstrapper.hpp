@@ -1,32 +1,17 @@
-#ifndef __EC_ACCESSOR_HPP__
-#define __EC_ACCESSOR_HPP__
+#ifndef __AEP_MAIN_CONTAINER_BOOTSTRAPPER_HPP__
+#define __AEP_MAIN_CONTAINER_BOOTSTRAPPER_HPP__
 
 /***************************************************************************/
 
-#include "entry_controller\api\ec_iaccessor.hpp"
+#include "hypodermic\Hypodermic.h"
 
 /***************************************************************************/
 
-namespace VlogDM {
-
-struct IAccessor;
-
-}
-
-namespace Aep {
-
-struct IAccessor;
-
-}
+namespace AepMain {
 
 /***************************************************************************/
 
-namespace EntryController {
-
-/***************************************************************************/
-
-class Accessor
-	:	public IAccessor
+class ContainerBootstrapper
 {
 
 /***************************************************************************/
@@ -35,20 +20,9 @@ public:
 
 /***************************************************************************/
 
-	Accessor(
-			const std::shared_ptr< VlogDM::IAccessor > _vlogDm
-		,	const std::shared_ptr< Aep::IAccessor > _aepAccessor
-	);
-
-/***************************************************************************/
-
-public:
-
-/***************************************************************************/
-
-	void importVerilog( std::string const & _code ) final;
-
-	void runAepAnalysis() final;
+	ContainerBootstrapper();
+	
+	Hypodermic::Container & takeContainer();
 
 /***************************************************************************/
 
@@ -56,8 +30,7 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::IAccessor & m_vlogDm;
-	Aep::IAccessor & m_aepAccessor;
+	std::shared_ptr< Hypodermic::Container > m_container;
 
 /***************************************************************************/
 
@@ -65,8 +38,17 @@ private:
 
 /***************************************************************************/
 
+inline
+Hypodermic::Container & 
+ContainerBootstrapper::takeContainer() 
+{
+	return *m_container;
 }
 
 /***************************************************************************/
 
-#endif // !__EC_ACCESSOR_HPP__
+}
+
+/***************************************************************************/
+
+#endif // !__AEP_MAIN_CONTAINER_BOOTSTRAPPER_HPP__

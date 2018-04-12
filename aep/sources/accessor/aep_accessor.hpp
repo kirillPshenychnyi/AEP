@@ -1,27 +1,16 @@
-#ifndef __EC_ACCESSOR_HPP__
-#define __EC_ACCESSOR_HPP__
+#ifndef __AEP_ACCESSOR_HPP__
+#define __AEP_ACCESSOR_HPP__
 
 /***************************************************************************/
 
-#include "entry_controller\api\ec_iaccessor.hpp"
+#include "aep\api\aep_iaccessor.hpp"
+
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "aep_model\api\aep_model_fwd.hpp"
 
 /***************************************************************************/
-
-namespace VlogDM {
-
-struct IAccessor;
-
-}
 
 namespace Aep {
-
-struct IAccessor;
-
-}
-
-/***************************************************************************/
-
-namespace EntryController {
 
 /***************************************************************************/
 
@@ -35,20 +24,12 @@ public:
 
 /***************************************************************************/
 
-	Accessor(
-			const std::shared_ptr< VlogDM::IAccessor > _vlogDm
-		,	const std::shared_ptr< Aep::IAccessor > _aepAccessor
+	Accessor( 
+			std::shared_ptr< VlogDM::IAccessor > _vlogDm
+		,	std::shared_ptr< AepModel::IAccessor > _aepModel
 	);
 
-/***************************************************************************/
-
-public:
-
-/***************************************************************************/
-
-	void importVerilog( std::string const & _code ) final;
-
-	void runAepAnalysis() final;
+	void runEngine() final;
 
 /***************************************************************************/
 
@@ -56,8 +37,9 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::IAccessor & m_vlogDm;
-	Aep::IAccessor & m_aepAccessor;
+	VlogDM::IAccessor const & m_vlogDm;
+
+	AepModel::IAccessor const & m_aepModel;
 
 /***************************************************************************/
 
@@ -69,4 +51,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__EC_ACCESSOR_HPP__
+#endif // !__AEP_ACCESSOR_HPP__

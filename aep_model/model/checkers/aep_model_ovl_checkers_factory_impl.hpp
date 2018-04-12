@@ -1,23 +1,27 @@
-#ifndef __AEP_IACCESSOR_HPP__
-#define __AEP_IACCESSOR_HPP__
+#ifndef __AEP_MODEL_OVL_CHECKERS_FACTORY_IMPL_HPP__
+#define __AEP_MODEL_OVL_CHECKERS_FACTORY_IMPL_HPP__
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "aep_model\api\checkers\aep_model_ovl_checkers_factory.hpp"
 
 /***************************************************************************/
 
-namespace Aep {
+namespace AepModel {
 
 /***************************************************************************/
 
-struct IAccessor
-	:	public boost::noncopyable
+class OvlCheckersFactoryImpl
+	:	public OvlCheckersFactory
 {
 
 /***************************************************************************/
 
-	virtual void runEngine() = 0; 
+	std::unique_ptr< OvlOneHotCheckerBuilder > newOvlOneHotChecker(
+			std::string const & _instanceName
+		,	std::string const & _fileName
+		,	int _suspectLine
+	) final;
 
 /***************************************************************************/
 
@@ -29,4 +33,4 @@ struct IAccessor
 
 /***************************************************************************/
 
-#endif // !__AEP_IACCESSOR_HPP__
+#endif // !__AEP_MODEL_OVL_CHECKERS_FACTORY_IMPL_HPP__

@@ -1,31 +1,19 @@
-#ifndef __EC_ACCESSOR_HPP__
-#define __EC_ACCESSOR_HPP__
+#ifndef __AEP_MODEL_IACCESSOR_HPP__
+#define __AEP_MODEL_IACCESSOR_HPP__
 
 /***************************************************************************/
 
-#include "entry_controller\api\ec_iaccessor.hpp"
+#include "aep_model\api\aep_model_iaccessor.hpp"
+
+#include "aep_model\api\checkers\aep_model_ovl_checkers_factory.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM {
-
-struct IAccessor;
-
-}
-
-namespace Aep {
-
-struct IAccessor;
-
-}
+namespace AepModel {
 
 /***************************************************************************/
 
-namespace EntryController {
-
-/***************************************************************************/
-
-class Accessor
+struct Accessor
 	:	public IAccessor
 {
 
@@ -35,20 +23,9 @@ public:
 
 /***************************************************************************/
 
-	Accessor(
-			const std::shared_ptr< VlogDM::IAccessor > _vlogDm
-		,	const std::shared_ptr< Aep::IAccessor > _aepAccessor
-	);
+	Accessor();
 
-/***************************************************************************/
-
-public:
-
-/***************************************************************************/
-
-	void importVerilog( std::string const & _code ) final;
-
-	void runAepAnalysis() final;
+	OvlCheckersFactory const& getCheckersFactory() const final;
 
 /***************************************************************************/
 
@@ -56,8 +33,7 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::IAccessor & m_vlogDm;
-	Aep::IAccessor & m_aepAccessor;
+	std::unique_ptr< OvlCheckersFactory > m_checkersFactory;
 
 /***************************************************************************/
 
@@ -65,8 +41,19 @@ private:
 
 /***************************************************************************/
 
+inline
+OvlCheckersFactory const& 
+Accessor::getCheckersFactory() const
+{
+	assert( m_checkersFactory );
+
+	return *m_checkersFactory;
 }
 
 /***************************************************************************/
 
-#endif // !__EC_ACCESSOR_HPP__
+}
+
+/***************************************************************************/
+
+#endif // !__AEP_MODEL_IACCESSOR_HPP__

@@ -1,9 +1,9 @@
-#ifndef __AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__
-#define __AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#ifndef __AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#define __AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
 
 /***************************************************************************/
 
-#include "aep\checkers\aep_base_checker.hpp"
+#include "aep\checkers\aep_base_case_syn_directive_checker.hpp"
 
 /***************************************************************************/
 
@@ -11,8 +11,8 @@ namespace Aep {
 
 /***************************************************************************/
 
-class BaseCaseSynDirectiveChecker
-	:	public BaseAepChecker
+class FullCaseSynDirectiveChecker
+	:	public BaseCaseSynDirectiveChecker
 {
 
 /***************************************************************************/
@@ -21,19 +21,11 @@ public:
 
 /***************************************************************************/
 
-	BaseCaseSynDirectiveChecker( VlogDM::IAccessor const & _accessor );
-
-	void analyze() final;
+	FullCaseSynDirectiveChecker( VlogDM::IAccessor const & _vlogDm );
 
 /***************************************************************************/
 
-private:
-
-/***************************************************************************/
-
-	void onProcess( VlogDM::BehavioralProcess const & _process );
-
-	virtual void onCaseStatement( VlogDM::CaseStatement const & _case ) = 0;
+	void onCaseStatement( VlogDM::CaseStatement const & _case );
 
 /***************************************************************************/
 
@@ -45,4 +37,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__AEP_BASE_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#endif // !__AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__

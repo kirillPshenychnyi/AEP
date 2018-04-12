@@ -1,23 +1,29 @@
-#ifndef __AEP_ACCESSOR_HPP__
-#define __AEP_ACCESSOR_HPP__
+#ifndef __AEP_ONE_HOT_CHECKER_BUILDER_HPP__
+#define __AEP_ONE_HOT_CHECKER_BUILDER_HPP__
 
 /***************************************************************************/
 
-#include "aep\api\aep_iaccessor.hpp"
+#include "aep_model\api\checkers\ovl\aep_model_ovl_checker_builder.hpp"
 
 /***************************************************************************/
 
-namespace Aep {
+namespace AepModel {
 
 /***************************************************************************/
 
-class Accessor
-	:	public IAccessor
+struct OvlOneHotCheckerBuilder
+	:	public OvlCheckerBuilder
 {
 
 /***************************************************************************/
 
-	void runEngine( VlogDM::IAccessor const & _vlogDm ) final;
+	virtual void setTestExpression(
+			std::string const & _lhs
+		,	std::string const & _rhs
+		,	int _width
+	) = 0;
+
+	AEP_DECLARE_GENERIC_SETTER( Width, int );
 
 /***************************************************************************/
 
@@ -29,4 +35,4 @@ class Accessor
 
 /***************************************************************************/
 
-#endif // !__AEP_ACCESSOR_HPP__
+#endif // !__AEP_ONE_HOT_CHECKER_BUILDER_HPP__

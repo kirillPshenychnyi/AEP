@@ -18,7 +18,7 @@ namespace AepModel
 
 /***************************************************************************/
 
-struct OVlCheckerGenericParameter;
+struct OvlCheckerGenericParameter;
 struct OvlCheckerPort;
 
 /***************************************************************************/
@@ -30,7 +30,7 @@ struct OvlChecker
 /***************************************************************************/
 
 	typedef
-		std::function< void( OVlCheckerGenericParameter const& ) >
+		std::function< void( OvlCheckerGenericParameter const& ) >
 		GenericParameterCallback;
 
 /***************************************************************************/
@@ -54,16 +54,11 @@ struct OvlChecker
 
 	virtual std::string const & getInstanceName() const = 0;
 
-	virtual boost::optional< OVlCheckerGenericParameter& >
+	virtual boost::optional< OvlCheckerGenericParameter& >
 	getParameter( GenericType::Kind _type ) const = 0;
 
 	virtual boost::optional < OvlCheckerPort & > getPort(
 		OvlCheckerPortKind::Kind _type
-	) const = 0;
-
-	virtual void setPort(
-			OvlCheckerPortKind::Kind _type
-		,	std::string const & _value
 	) const = 0;
 
 	virtual void foreachGeneric( 

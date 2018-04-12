@@ -27,7 +27,7 @@ class OvlCheckerImpl
 
 	typedef
 		boost::unordered_set<
-				OVlCheckerGenericParameter::Ptr
+				OvlCheckerGenericParameter::Ptr
 			,	GenericParamHasher
 			,	GenericParamComparator
 		>
@@ -62,12 +62,12 @@ public:
 
 	OvlCheckerIds::Kind getId() const final;
 
-	boost::optional < OVlCheckerGenericParameter & > getParameter(
+	boost::optional < OvlCheckerGenericParameter & > getParameter(
 			GenericType::Kind _type
 	) const final;
 
 
-	void addParameter( std::unique_ptr< OVlCheckerGenericParameter > _parameter  );
+	void addParameter( std::unique_ptr< OvlCheckerGenericParameter > _parameter  );
 
 	void setPort(
 			OvlCheckerPortKind::Kind _type

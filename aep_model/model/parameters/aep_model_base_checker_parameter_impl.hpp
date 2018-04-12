@@ -8,6 +8,7 @@
 
 #include "aep_model\api\checkers\checker_values\aep_model_generic_type.hpp"
 #include "aep_model\ih\visitors\aep_model_checker_generic_visitor.hpp"
+#include "aep_model\ih\visitors\aep_model_checker_generic_non_const_visitor.hpp"
 
 #include <boost/lexical_cast.hpp>
 
@@ -39,7 +40,12 @@ public:
 		m_value = _value;
 	}
 
-	void accept( OvlCheckerGenericVisitor & _visitor ) const final
+	void accept( OvlCheckerGenericParameterVisitor & _visitor ) const final
+	{
+		_visitor.visit( *this );
+	}
+
+	void accept( OvlCheckerGenericParameterNonConstVisitor & _visitor ) final
 	{
 		_visitor.visit( *this );
 	}
@@ -105,19 +111,19 @@ private:
 /***************************************************************************/
 
 typedef
-	BaseCheckerParameterImpl< OvlCheckerIntegerParameter, int, int >
+	BaseCheckerParameterImpl< OvlIntegerParameter, int, int >
 	IntegerParameterImpl;
 
 /***************************************************************************/
 
 class MsgParameterImpl
-	:	public BaseCheckerParameterImpl< OvlCheckerStringParameter, std::string, std::string const & >
+	:	public BaseCheckerParameterImpl< OvlStringParameter, std::string, std::string const & >
 {
 
 /***************************************************************************/
 
 	typedef
-		BaseCheckerParameterImpl< OvlCheckerStringParameter, std::string, std::string const & >
+		BaseCheckerParameterImpl< OvlStringParameter, std::string, std::string const & >
 		BaseClass;
 
 /***************************************************************************/

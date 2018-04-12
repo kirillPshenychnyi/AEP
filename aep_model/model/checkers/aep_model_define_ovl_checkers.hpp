@@ -3,14 +3,14 @@
 
 /***************************************************************************/
 
-#include "aep_model\model\aep_model_base_checker_parameter_impl.hpp"
-#include "aep_model\model\aep_model_ovl_enum_checker_parameter_impl.hpp"
-#include "aep_model\model\aep_model_ovl_checker_port_impl.hpp"
+#include "aep_model\model\parameters\aep_model_base_checker_parameter_impl.hpp"
+#include "aep_model\model\parameters\aep_model_ovl_enum_checker_parameter_impl.hpp"
+#include "aep_model\model\checkers\aep_model_ovl_checker_port_impl.hpp"
 
-#include "aep_model\model\aep_model_ovl_checker_base_impl.hpp"
+#include "aep_model\model\checkers\aep_model_ovl_checker_base_impl.hpp"
 #include "aep_model\model\aep_model_utils.hpp"
 
-#include <boost/preprocessor/seq/for_each.hpp>
+#include <boost\preprocessor\seq\for_each.hpp>
 
 /***************************************************************************/
 
@@ -20,7 +20,7 @@ namespace AepModel {
 
 #define AEP_ADD_GENERIC(_IDX, _PREFIX, _PARAM_TYPE) 						\
 		addParameter(														\
-			OVlCheckerGenericParameter::Ptr(								\
+			OvlCheckerGenericParameter::Ptr(								\
 				new BOOST_PP_CAT( _PARAM_TYPE, ParameterImpl )()			\
 			)																\
 		);
@@ -37,18 +37,18 @@ namespace AepModel {
 /***************************************************************************/
 
 #define AEP_DEFINE_OVL_CHECKER(CHECKER_NAME, SPECIFIC_GENERICS, SPECIFIC_PORTS)		 	\
-	class Ovl##CHECKER_NAME																\
+	class Ovl##CHECKER_NAME##Checker													\
 		:	public OvlCheckerImpl														\
 	{																					\
 		public:																			\
 																						\
-			Ovl##CHECKER_NAME(															\
+			Ovl##CHECKER_NAME##Checker(													\
 					std::string const & _instanceName									\
 				,	std::string const & _fileName										\
 				,	int _suspectCodeLine												\
 			)																			\
 				:	OvlCheckerImpl( 													\
-							OvlCheckerIds::Kind::CHECKER_NAME							\
+							OvlCheckerIds::Kind::Ovl##CHECKER_NAME						\
 						,	_instanceName												\
 						,	_fileName													\
 						,	_suspectCodeLine											\
@@ -86,7 +86,7 @@ namespace AepModel {
 #define OVL_ALWAYS_PORTS 		\
 	( TestExpression )		
 
-AEP_DEFINE_OVL_CHECKER( OvlAlways, BOOST_PP_SEQ_NIL, OVL_ALWAYS_PORTS )
+AEP_DEFINE_OVL_CHECKER( OneHot, BOOST_PP_SEQ_NIL, OVL_ALWAYS_PORTS )
 
 /***************************************************************************/
 

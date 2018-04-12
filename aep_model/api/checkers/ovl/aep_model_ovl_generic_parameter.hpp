@@ -14,18 +14,19 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct OvlCheckerGenericVisitor;
+struct OvlCheckerGenericParameterVisitor;
+struct OvlCheckerGenericParameterNonConstVisitor;
 
 /***************************************************************************/
 
-struct OVlCheckerGenericParameter
+struct OvlCheckerGenericParameter
 	:	public boost::noncopyable
 {
 
 /***************************************************************************/
 
 	typedef
-		std::unique_ptr< OVlCheckerGenericParameter >
+		std::unique_ptr< OvlCheckerGenericParameter >
 		Ptr;
 
 /***************************************************************************/
@@ -38,7 +39,9 @@ struct OVlCheckerGenericParameter
 	
 	virtual bool isRedefined() const = 0;
 
-	virtual void accept ( OvlCheckerGenericVisitor & _visitor ) const = 0;
+	virtual void accept ( OvlCheckerGenericParameterVisitor & _visitor ) const = 0;
+
+	virtual void accept ( OvlCheckerGenericParameterNonConstVisitor & _visitor ) = 0;
 
 /***************************************************************************/
 
@@ -51,7 +54,7 @@ struct GenericParamHasher
 
 /***************************************************************************/
 
-	std::size_t operator() ( OVlCheckerGenericParameter::Ptr const & _param ) const
+	std::size_t operator() ( OvlCheckerGenericParameter::Ptr const & _param ) const
 	{
 		return boost::hash_value( _param->getKind() );
 	}
@@ -73,15 +76,15 @@ struct GenericParamComparator
 /***************************************************************************/
 
 	bool operator () (
-			OVlCheckerGenericParameter::Ptr const & _first
-		,	OVlCheckerGenericParameter::Ptr const & _second
+			OvlCheckerGenericParameter::Ptr const & _first
+		,	OvlCheckerGenericParameter::Ptr const & _second
 	) const
 	{
 		return _first->getKind() == _second->getKind();
 	}
 
 	bool operator () (
-			 OVlCheckerGenericParameter::Ptr const & _first
+			 OvlCheckerGenericParameter::Ptr const & _first
 		,	 GenericType::Kind _second
 	) const
 	{
@@ -90,7 +93,7 @@ struct GenericParamComparator
 
 	bool operator () (
 			GenericType::Kind _first
-		,	OVlCheckerGenericParameter::Ptr const & _second
+		,	OvlCheckerGenericParameter::Ptr const & _second
 	) const
 	{
 		return _first == _second->getKind();

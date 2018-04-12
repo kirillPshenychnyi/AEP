@@ -28,7 +28,8 @@ BaseCaseSynDirectiveChecker::analyze()
 	browseProcesses< VlogDM::BehavioralProcess >(
 		std::bind( 
 				&BaseCaseSynDirectiveChecker::onProcess
-			,	this, std::placeholders::_1 
+			,	this
+			,	std::placeholders::_1 
 		)
 	);
 }
@@ -46,14 +47,8 @@ BaseCaseSynDirectiveChecker::onProcess( VlogDM::BehavioralProcess const & _proce
 				,	std::placeholders::_1 
 			)
 	);
-}
 
-/***************************************************************************/
-
-void 
-BaseCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _case )
-{
-	
+	caseStmtQuery.query();
 }
 
 /***************************************************************************/

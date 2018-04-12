@@ -1,15 +1,16 @@
-
 #include "stdafx.h"
 
-#include "vlog_import_tests\sources\fixtures\vlog_import_base_fixture.hpp"
+#include "aep_main\aep_main_container_bootstrapper.hpp"
 
 #include "entry_controller\sources\ec_accessor.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
-#include "aep\api\aep_iaccessor.hpp"
+#include "aep_model\model\accessor\aep_model_accessor.hpp"
+
+#include "aep\sources\accessor\aep_accessor.hpp"
 
 /***************************************************************************/
 
-namespace VlogModelImportTests {
+namespace AepMain {
 
 /***************************************************************************/
 
@@ -20,7 +21,27 @@ ContainerBootstrapper::ContainerBootstrapper()
 	builder.registerType< VlogDM::Accessor >()
 		.as< VlogDM::IAccessor >()
 		.singleInstance();
-
+	
+	builder.registerType< AepModel::Accessor >()
+		.as< AepModel::IAccessor >()
+		.singleInstance();
+	
+	builder.registerType< Aep::Accessor >()
+		.as< Aep::IAccessor >()
+		.with< VlogDM::IAccessor>(
+			[ & ]( Hypodermic::ComponentContext & _context )
+			{
+				return _context.resolve< VlogDM::IAccessor >();
+			}
+		)
+		.with< AepModel::IAccessor >(
+			[ & ]( Hypodermic::ComponentContext & _context )
+			{
+				return _context.resolve< AepModel::IAccessor >();
+			}
+		)
+		.singleInstance();
+	
 	builder.registerType< EntryController::Accessor >()
 		.with< VlogDM::IAccessor>(
 			[ & ]( Hypodermic::ComponentContext & _context )
@@ -28,33 +49,16 @@ ContainerBootstrapper::ContainerBootstrapper()
 				return _context.resolve< VlogDM::IAccessor >();
 			}
 		)
-		.with< Aep::IAccessor >(
-			[ & ]( Hypodermic::ComponentContext & _context )
+		.with< Aep::IAccessor>(
+			[ ]( Hypodermic::ComponentContext & _context )
 			{
-				// Not used in dm tests
-				return std::shared_ptr< Aep::IAccessor >();
+				return _context.resolve< Aep::IAccessor >();
 			}
 		)
 		.as< EntryController::IAccessor >()
 		.singleInstance();
 
 	m_container = builder.build();
-}
-
-/***************************************************************************/
-
-VlogDM::IAccessor const & 
-BaseFixture::getVlogDm() const
-{
-	return *m_bootstrapper.m_container->resolve< VlogDM::IAccessor >();
-}
-
-/***************************************************************************/
-
-void 
-BaseFixture::runImport( std::string const & _code )
-{
-	m_bootstrapper.m_container->resolve< EntryController::IAccessor >()->importVerilog( _code );
 }
 
 /***************************************************************************/

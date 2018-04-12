@@ -11,8 +11,8 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct OvlCheckerIntegerParameter
-	:	public OVlCheckerGenericParameter
+struct OvlIntegerParameter
+	:	public OvlCheckerGenericParameter
 {
 
 /***************************************************************************/
