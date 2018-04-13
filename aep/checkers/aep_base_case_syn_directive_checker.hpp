@@ -21,7 +21,7 @@ public:
 
 /***************************************************************************/
 
-	BaseCaseSynDirectiveChecker( VlogDM::IAccessor const & _accessor );
+	BaseCaseSynDirectiveChecker( IAccessor & _accessor );
 
 	void analyze() final;
 

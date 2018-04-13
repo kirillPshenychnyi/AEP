@@ -5,7 +5,6 @@
 
 #include "aep\api\aep_iaccessor.hpp"
 
-#include "vlog_data_model\api\vlog_dm_fwd.hpp"
 #include "aep_model\api\aep_model_fwd.hpp"
 
 /***************************************************************************/
@@ -31,6 +30,10 @@ public:
 
 	void runEngine() final;
 
+	VlogDM::IAccessor const & getVlogDm() const final;
+	
+	AepModel::IAccessor const & getAepModel() const final;
+
 /***************************************************************************/
 
 private:
@@ -44,6 +47,22 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
+inline
+VlogDM::IAccessor const & 
+Accessor::getVlogDm() const
+{
+	return m_vlogDm;
+}
+
+inline 
+AepModel::IAccessor const & 
+Accessor::getAepModel() const
+{
+	return m_aepModel;
+}
 
 /***************************************************************************/
 

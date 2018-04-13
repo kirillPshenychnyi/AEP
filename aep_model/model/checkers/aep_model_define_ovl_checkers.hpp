@@ -86,7 +86,7 @@ namespace AepModel {
 #define OVL_ALWAYS_PORTS 		\
 	( TestExpression )		
 
-AEP_DEFINE_OVL_CHECKER( OneHot, BOOST_PP_SEQ_NIL, OVL_ALWAYS_PORTS )
+AEP_DEFINE_OVL_CHECKER( Always, BOOST_PP_SEQ_NIL, OVL_ALWAYS_PORTS )
 
 /***************************************************************************/
 

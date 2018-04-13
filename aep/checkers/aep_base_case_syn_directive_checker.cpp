@@ -14,8 +14,8 @@ namespace Aep {
 /***************************************************************************/
 
 BaseCaseSynDirectiveChecker::BaseCaseSynDirectiveChecker( 
-		VlogDM::IAccessor const & _accessor 
-	)
+		IAccessor & _accessor 
+)
 	:	BaseAepChecker( _accessor )
 {
 }

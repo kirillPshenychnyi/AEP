@@ -16,7 +16,7 @@ struct OvlResetPolarityParameter;
 struct OvlClockEdgeParameter;
 
 struct OvlCheckersFactory;
-struct OvlOneHotCheckerBuilder;
+struct OvlAlwaysCheckerBuilder;
 
 /***************************************************************************/
 

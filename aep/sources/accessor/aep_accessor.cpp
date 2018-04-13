@@ -23,7 +23,7 @@ Accessor::Accessor(
 void
 Accessor::runEngine()
 {
-	FullCaseSynDirectiveChecker c1( m_vlogDm );
+	FullCaseSynDirectiveChecker c1( *this );
 
 	c1.analyze();
 }

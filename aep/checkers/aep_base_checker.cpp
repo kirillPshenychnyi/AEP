@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "aep\checkers\aep_base_checker.hpp"
+#include "aep\api\aep_iaccessor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
@@ -15,8 +16,8 @@ namespace Aep {
 
 /***************************************************************************/
 
-BaseAepChecker::BaseAepChecker( VlogDM::IAccessor const & _vlogDm )
-	:	m_vlogDm( _vlogDm )
+BaseAepChecker::BaseAepChecker( IAccessor & _accessor )
+	:	m_accessor( _accessor )
 {
 }
 
@@ -30,7 +31,7 @@ BaseAepChecker::browseProcesses( ProcessCallback< _ProcessKind > _callBack )
 
 	ProcessCast< _ProcessKind > processCast;
 
-	m_vlogDm.forEachDesignUnit(
+	m_accessor.getVlogDm().forEachDesignUnit(
 		[ & ]( DesignUnit const & _unit )
 		{
 			const int nProcesses = _unit.getProcessesCount();
@@ -50,11 +51,15 @@ BaseAepChecker::browseProcesses( ProcessCallback< _ProcessKind > _callBack )
 
 template
 void
-BaseAepChecker::browseProcesses< VlogDM::ContinuousAssignment >( ProcessCallback< VlogDM::ContinuousAssignment > );
+BaseAepChecker::browseProcesses< VlogDM::ContinuousAssignment >(
+	ProcessCallback< VlogDM::ContinuousAssignment > 
+);
 
 template
 void
-BaseAepChecker::browseProcesses< VlogDM::BehavioralProcess >( ProcessCallback< VlogDM::BehavioralProcess > );
+BaseAepChecker::browseProcesses< VlogDM::BehavioralProcess >( 
+	ProcessCallback< VlogDM::BehavioralProcess > 
+);
 
 /***************************************************************************/
 

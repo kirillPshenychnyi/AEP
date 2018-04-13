@@ -84,9 +84,6 @@
     <ClInclude Include="api\aep_model_ovl_checker_generic_param_cast.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_one_hot_checker_builder.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ih\visitors\aep_model_checker_generic_non_const_visitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -103,9 +100,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\checkers\checkers_builders\aep_model_base_checker_builder_impl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_one_hot_checker_builder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\checkers\aep_model_ovl_checkers_factory_impl.hpp">
@@ -126,12 +120,15 @@
     <ClInclude Include="api\aep_model_iaccessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_always_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="model\factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="model\checkers\aep_model_ovl_checker_base_impl.cpp">

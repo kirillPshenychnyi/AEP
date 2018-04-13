@@ -17,11 +17,11 @@ class OvlCheckersFactoryImpl
 
 /***************************************************************************/
 
-	std::unique_ptr< OvlOneHotCheckerBuilder > newOvlOneHotChecker(
+	std::unique_ptr< OvlAlwaysCheckerBuilder > newOvlAlwaysChecker(
 			std::string const & _instanceName
 		,	std::string const & _fileName
 		,	int _suspectLine
-	) final;
+	) const final;
 
 /***************************************************************************/
 

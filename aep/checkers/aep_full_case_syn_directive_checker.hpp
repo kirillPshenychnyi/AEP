@@ -21,7 +21,7 @@ public:
 
 /***************************************************************************/
 
-	FullCaseSynDirectiveChecker( VlogDM::IAccessor const & _vlogDm );
+	FullCaseSynDirectiveChecker( IAccessor & _aep );
 
 /***************************************************************************/
 

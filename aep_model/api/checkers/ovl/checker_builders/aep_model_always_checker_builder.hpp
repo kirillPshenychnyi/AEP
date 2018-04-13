@@ -1,5 +1,5 @@
-#ifndef __AEP_ONE_HOT_CHECKER_BUILDER_HPP__
-#define __AEP_ONE_HOT_CHECKER_BUILDER_HPP__
+#ifndef __AEP_ALWAYS_CHECKER_BUILDER_HPP__
+#define __AEP_ALWAYS_CHECKER_BUILDER_HPP__
 
 /***************************************************************************/
 
@@ -11,7 +11,7 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct OvlOneHotCheckerBuilder
+struct OvlAlwaysCheckerBuilder
 	:	public OvlCheckerBuilder
 {
 
@@ -23,8 +23,6 @@ struct OvlOneHotCheckerBuilder
 		,	int _width
 	) = 0;
 
-	AEP_DECLARE_GENERIC_SETTER( Width, int );
-
 /***************************************************************************/
 
 };
@@ -35,4 +33,4 @@ struct OvlOneHotCheckerBuilder
 
 /***************************************************************************/
 
-#endif // !__AEP_ONE_HOT_CHECKER_BUILDER_HPP__
+#endif // !__AEP_ALWAYS_CHECKER_BUILDER_HPP__
