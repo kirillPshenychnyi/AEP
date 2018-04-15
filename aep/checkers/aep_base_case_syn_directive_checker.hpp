@@ -35,6 +35,16 @@ private:
 
 	virtual void onCaseStatement( VlogDM::CaseStatement const & _case ) = 0;
 
+	virtual bool isCheckableCase( VlogDM::CaseStatement const& _case ) const = 0;
+
+/***************************************************************************/
+
+protected:
+
+/***************************************************************************/
+
+	int m_detectedSuspects;
+
 /***************************************************************************/
 
 };

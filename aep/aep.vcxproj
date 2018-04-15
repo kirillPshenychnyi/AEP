@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="checkers\resources\aep_checker_resources.hpp" />
     <ClInclude Include="sources\accessor\aep_accessor.hpp" />
     <ClInclude Include="api\aep_checker_ids.hpp" />
     <ClInclude Include="checkers\aep_base_case_syn_directive_checker.hpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="utils\aep_utils_statement_query.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="checkers\resources\aep_checker_resources.cpp" />
     <ClCompile Include="sources\accessor\aep_accessor.cpp" />
     <ClCompile Include="checkers\aep_base_case_syn_directive_checker.cpp" />
     <ClCompile Include="checkers\aep_base_checker.cpp" />

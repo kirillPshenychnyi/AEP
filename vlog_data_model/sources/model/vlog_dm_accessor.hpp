@@ -67,6 +67,8 @@ public:
 		,	Process const & _process 
 	) const final;
 
+	std::string regenerateExpression( Expression const & _process ) const final;
+
 	void forEachDesignUnit( DesignUnitCallback _callBack ) const final;
 
 /***************************************************************************/

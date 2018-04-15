@@ -17,6 +17,7 @@ BaseCaseSynDirectiveChecker::BaseCaseSynDirectiveChecker(
 		IAccessor & _accessor 
 )
 	:	BaseAepChecker( _accessor )
+	,	m_detectedSuspects( 0 )
 {
 }
 
@@ -43,6 +44,11 @@ BaseCaseSynDirectiveChecker::onProcess( VlogDM::BehavioralProcess const & _proce
 			_process
 		,	std::bind( 
 					&BaseCaseSynDirectiveChecker::onCaseStatement
+				,	this
+				,	std::placeholders::_1 
+			)
+		,	std::bind( 
+					&BaseCaseSynDirectiveChecker::isCheckableCase
 				,	this
 				,	std::placeholders::_1 
 			)

@@ -57,6 +57,8 @@ Accessor::getVlogDm() const
 	return m_vlogDm;
 }
 
+/***************************************************************************/
+
 inline 
 AepModel::IAccessor const & 
 Accessor::getAepModel() const

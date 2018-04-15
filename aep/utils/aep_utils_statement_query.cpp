@@ -6,6 +6,7 @@
 #include "vlog_data_model\api\vlog_dm_sequential_block.hpp"
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_statement.hpp"
+#include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_case_item.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
@@ -21,9 +22,11 @@ template< typename _TTarget >
 StatementQuery< _TTarget >::StatementQuery( 
 		VlogDM::BehavioralProcess const & _process 
 	,	StatementCallback && _callback
+	,	StatementPredicate && _predicate
 	)
 	:	m_process( _process )
 	,	m_callback( _callback )
+	,	m_predicate( _predicate )
 {
 }
 
@@ -41,8 +44,8 @@ StatementQuery< _TTarget >::query()
 template< typename _TTarget >
 void 
 StatementQuery< _TTarget >::visit( VlogDM::SequentialBlock const & _block )
-{
-
+{	
+	_block.accept( *this );
 }
 
 /***************************************************************************/
@@ -70,6 +73,15 @@ void
 StatementQuery< _TTarget >::visit( VlogDM::ConditionalStatement const & _statement )
 {
 	processAsTopStatement( _statement );
+
+	processAsStatementsContainer( 
+			_statement
+		,	_statement.getBranchesCount()
+		,	[ & ]( int _idx ) -> VlogDM::Statement const &
+			{
+				return _statement.getBranch( _idx ).getStatement();
+			}
+	);
 }
 
 /***************************************************************************/
@@ -95,7 +107,10 @@ StatementQuery< _TTarget >::processAsTopStatement(
 	StatementCast< _TTarget > caster;
 
 	if( auto castRes = caster.cast( _statement ) )
-		m_callback( *castRes );
+	{
+		if( m_predicate( *castRes ) )
+			m_callback( *castRes );
+	}
 }
 
 /***************************************************************************/

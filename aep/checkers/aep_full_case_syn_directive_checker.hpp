@@ -25,7 +25,19 @@ public:
 
 /***************************************************************************/
 
+private:
+
+/***************************************************************************/
+
 	void onCaseStatement( VlogDM::CaseStatement const & _case );
+
+	bool isCheckableCase( VlogDM::CaseStatement const& _case ) const final;
+
+	void regenerateExpressionItems(
+			std::string const & _caseExpression
+		,	std::stringstream & _ostream
+		,	VlogDM::CaseItem const & _item
+	);
 
 /***************************************************************************/
 

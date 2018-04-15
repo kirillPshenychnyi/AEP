@@ -1,14 +1,22 @@
 #include "stdafx.h"
 
 #include "aep\api\aep_iaccessor.hpp"
+
 #include "aep_model\api\aep_model_iaccessor.hpp"
 #include "aep_model\api\checkers\aep_model_ovl_checkers_factory.hpp"
 #include "aep_model\api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp"
 
 #include "aep\checkers\aep_full_case_syn_directive_checker.hpp"
+#include "aep\checkers\resources\aep_checker_resources.hpp"
 
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
+#include "vlog_data_model\api\vlog_dm_case_item_cast.hpp"
+#include "vlog_data_model\api\vlog_dm_case_item.hpp"
+
 #include "vlog_data_model\api\vlog_dm_location.hpp"
+
+#include <boost\format.hpp>
+#include <sstream>
 
 /***************************************************************************/
 
@@ -26,16 +34,85 @@ FullCaseSynDirectiveChecker::FullCaseSynDirectiveChecker( IAccessor & _aep )
 void 
 FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _case )
 {
+	using namespace VlogDM;
 	using namespace AepModel;
-
-	int i = 0;
+	using namespace Resources::FullCaseSynDirecriveChecker;
 
 	std::unique_ptr< OvlAlwaysCheckerBuilder > checker 
 		=	m_accessor.getAepModel().getCheckersFactory().newOvlAlwaysChecker(
-				"check_full_case_1"
-			,	_case.getLocation().m_file
-			,	_case.getLocation().m_beginLine
-		);
+				( boost::format( CheckerInstanceName ) % m_detectedSuspects ).str()
+				,	_case.getLocation().m_file
+				,	_case.getLocation().m_beginLine
+			);
+
+	std::string caseExpression = regenerateExpression( _case.getCaseExpression() );
+
+	const int nCaseItems = _case.getItemsCount();
+
+	CaseItemCast< CaseItem > itemCast;
+	
+	std::stringstream checkTerms;
+
+	bool isLast = false;
+	for( int i = 0; i < nCaseItems; ++i )
+	{
+		isLast = i == nCaseItems - 1;
+
+		auto castResult = itemCast.cast( _case.getItem( i ) );
+
+		regenerateExpressionItems( caseExpression, checkTerms, *castResult );
+		 
+		if( !isLast )
+			checkTerms << OrItem;
+	}
+
+	checker->setTestExpression(
+			( boost::format( CheckExpressionWire ) % m_detectedSuspects ).str()
+		,	( boost::format( CheckExpression ) % checkTerms ).str()
+		,	1
+	);
+
+	int i = 0;
+}
+
+/***************************************************************************/
+
+void
+FullCaseSynDirectiveChecker::regenerateExpressionItems( 
+		std::string const & _caseExpression
+	,	std::stringstream & _ostream
+	,	VlogDM::CaseItem const & _item 
+)
+{
+	using namespace Resources::FullCaseSynDirecriveChecker;
+	
+	const int nExpressions = _item.getExpressionsCount();
+	bool isLast = false;
+	for( int i = 0; i < nExpressions; ++i )
+	{
+		isLast = i == nExpressions - 1;
+
+		if( !isLast )
+			_ostream << OrItem;
+
+		 _ostream << 
+				boost::format( CheckTerm ) 
+				%	_caseExpression
+				%	regenerateExpression( _item.getExpression( i ) );
+	}
+}
+
+/***************************************************************************/
+
+bool 
+FullCaseSynDirectiveChecker::isCheckableCase( 
+	VlogDM::CaseStatement const & _case 
+) const
+{
+	return 
+		_case.isFullCase() 
+	&&	!_case.isParallelCase()
+	&&	_case.getDefaultCaseItem() == boost::none;
 }
 
 /***************************************************************************/

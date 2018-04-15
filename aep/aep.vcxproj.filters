@@ -45,6 +45,9 @@
     <ClInclude Include="api\aep_iaccessor.hpp">
       <Filter>Header Files\api</Filter>
     </ClInclude>
+    <ClInclude Include="checkers\resources\aep_checker_resources.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\accessor\aep_accessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="checkers\resources\aep_checker_resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

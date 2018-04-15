@@ -23,6 +23,14 @@ BaseAepChecker::BaseAepChecker( IAccessor & _accessor )
 
 /***************************************************************************/
 
+std::string 
+BaseAepChecker::regenerateExpression( VlogDM::Expression const & _expression ) const
+{
+	return m_accessor.getVlogDm().regenerateExpression( _expression );
+}
+
+/***************************************************************************/
+
 template< typename _ProcessKind >
 void 
 BaseAepChecker::browseProcesses( ProcessCallback< _ProcessKind > _callBack )

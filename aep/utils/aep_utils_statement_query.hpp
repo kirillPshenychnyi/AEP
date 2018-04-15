@@ -25,6 +25,7 @@ class StatementQuery
 
 	using StatementCallback = std::function< void( _TTarget const & ) >;
 	using StatementRetriever = std::function< VlogDM::Statement const & ( int ) >;
+	using StatementPredicate = std::function< bool( _TTarget const & ) >;
 
 /***************************************************************************/
 
@@ -35,6 +36,7 @@ public:
 	StatementQuery( 
 			VlogDM::BehavioralProcess const & _process
 		,	StatementCallback && _callback
+		,	StatementPredicate && _predicate = [ ]( _TTarget const & ) { return true;  }
 	);
 
 /***************************************************************************/
@@ -76,6 +78,8 @@ private:
 	VlogDM::BehavioralProcess const & m_process;
 
 	StatementCallback m_callback;
+
+	StatementPredicate m_predicate;
 
 /***************************************************************************/
 

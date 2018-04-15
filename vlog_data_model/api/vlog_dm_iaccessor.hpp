@@ -43,6 +43,8 @@ struct IAccessor
 		,	Process const & _process 
 	) const = 0;
 
+	virtual std::string regenerateExpression( Expression const & _process ) const = 0;
+
 	virtual Writable::ObjectFactory const& getObjectFactory() const = 0;
 
 	virtual void forEachDesignUnit( DesignUnitCallback _callBack ) const = 0;

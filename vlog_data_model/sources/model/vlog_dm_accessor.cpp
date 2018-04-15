@@ -3,10 +3,14 @@
 #include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_process.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
 
 #include "vlog_data_model\sources\model\factory\vlog_dm_object_factory_impl.hpp"
 
 #include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
+#include "vlog_data_model\sources\regenerators\vlog_dm_expression_regenerator.hpp"
+
+#include <sstream>
 
 /***************************************************************************/
 
@@ -74,6 +78,20 @@ Accessor::regenerateProcess( std::ostream & _stream, Process const & _process ) 
 	Regenerators::ProcessRegenerator regenerator( _stream );
 
 	_process.accept( regenerator );
+}
+
+/***************************************************************************/
+
+std::string 
+Accessor::regenerateExpression( Expression const & _expression ) const
+{
+	std::stringstream output;
+
+	Regenerators::ExpressionRegenerator regenerator( output );
+
+	_expression.accept( regenerator );
+
+	return output.str();
 }
 
 /***************************************************************************/

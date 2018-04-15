@@ -42,6 +42,8 @@ protected:
 	
 	virtual void analyze() = 0;
 
+	std::string regenerateExpression( VlogDM::Expression const & _expression ) const;
+
 /***************************************************************************/
 
 protected:
