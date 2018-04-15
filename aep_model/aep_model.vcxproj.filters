@@ -24,9 +24,6 @@
     <ClInclude Include="api\contexsts\aep_model_assertion_context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\contexsts\aep_model_instance_based_context.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\aep_model_referenced_signal_info.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -126,6 +123,9 @@
     <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_always_checker_builder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="model\contexts\aep_model_assertion_context_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -138,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="model\accessor\aep_model_accessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\contexts\aep_model_assertion_context_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

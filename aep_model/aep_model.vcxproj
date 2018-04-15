@@ -168,12 +168,12 @@
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_generic_parameter.hpp" />
     <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp" />
     <ClInclude Include="api\contexsts\aep_model_assertion_context.hpp" />
-    <ClInclude Include="api\contexsts\aep_model_instance_based_context.hpp" />
     <ClInclude Include="ih\visitors\aep_model_checker_generic_non_const_visitor.hpp" />
     <ClInclude Include="ih\visitors\aep_model_checker_generic_visitor.hpp" />
     <ClInclude Include="ih\writable\aep_model_assertion_context.hpp" />
     <ClInclude Include="model\accessor\aep_model_accessor.hpp" />
     <ClInclude Include="model\checkers\checkers_builders\aep_model_base_checker_builder_impl.hpp" />
+    <ClInclude Include="model\contexts\aep_model_assertion_context_impl.hpp" />
     <ClInclude Include="model\parameters\aep_model_base_checker_parameter_impl.hpp" />
     <ClInclude Include="model\checkers\aep_model_define_ovl_checkers.hpp" />
     <ClInclude Include="model\checkers\aep_model_ovl_checkers_factory_impl.hpp" />
@@ -189,6 +189,7 @@
     <ClCompile Include="model\accessor\aep_model_accessor.cpp" />
     <ClCompile Include="model\checkers\aep_model_ovl_checkers_factory_impl.cpp" />
     <ClCompile Include="model\checkers\aep_model_ovl_checker_base_impl.cpp" />
+    <ClCompile Include="model\contexts\aep_model_assertion_context_impl.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

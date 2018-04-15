@@ -3,15 +3,13 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include <boost\noncopyable.hpp>
+
+#include <functional>
 
 /***************************************************************************/
 
 namespace AepModel {
-
-/***************************************************************************/
-
-struct ContextVisitor;
 
 /***************************************************************************/
 
@@ -21,9 +19,17 @@ struct AssertionContext
 
 /***************************************************************************/
 
-	virtual void accept( ContextVisitor & _visitor ) const = 0;
+	typedef
+		std::function< void( std::string const & ) >
+		InstanceCallback;
+
+/***************************************************************************/
 
 	virtual std::string const & getDUTName() const = 0;
+
+	virtual void addInstanceName ( std::string const & _name ) = 0;
+
+	virtual void forEachInstance( InstanceCallback _callBack ) = 0;
 
 /***************************************************************************/
 
