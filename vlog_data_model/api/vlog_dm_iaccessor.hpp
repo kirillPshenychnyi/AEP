@@ -49,6 +49,8 @@ struct IAccessor
 
 	virtual void forEachDesignUnit( DesignUnitCallback _callBack ) const = 0;
 
+	virtual int calculateBitwidth( Expression const & _expression ) const = 0;
+
 /***************************************************************************/
 
 };

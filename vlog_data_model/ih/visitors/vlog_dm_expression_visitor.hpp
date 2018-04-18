@@ -11,6 +11,7 @@ namespace VlogDM {
 
 /***************************************************************************/
 
+struct Expression;
 struct PrimaryLiteral;
 struct PrimaryIdentifier;
 struct BinaryOperator;

@@ -1,53 +1,50 @@
-#ifndef __VLOG_DM_RANGE_VISITOR_HPP__
-#define __VLOG_DM_RANGE_VISITOR_HPP__
+#ifndef __VLOD_DM_RANGE_BITWIDTH_PROCESSOR_HPP__
+#define __VLOD_DM_RANGE_BITWIDTH_PROCESSOR_HPP__
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_range_visitor.hpp"
 
 /***************************************************************************/
 
-namespace VlogDM
-{
+namespace VlogDM {
+namespace VlogEngines {
 
 /***************************************************************************/
 
-	struct Range;
-	struct ExpressionRange;
-	struct PartSelectRange;
-	struct MultidimensionalRange;
-
-/***************************************************************************/
-
-struct RangeVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( ExpressionRange const & _range ) = 0;
-
-	virtual void visit( PartSelectRange const & _range ) = 0;
-
-	virtual void visit( MultidimensionalRange const & _range ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct RangeDefaultVisitor
+class RangeBitwidthProcessor
 	:	public RangeVisitor
 {
 
 /***************************************************************************/
 
-	void visit( ExpressionRange const & _range ) override {}
+public:
 
-	void visit( PartSelectRange const & _range ) override {}
+/***************************************************************************/
 
-	void visit( MultidimensionalRange const & _range ) override {}
+	RangeBitwidthProcessor();
+
+	int calculate( Range const & _range );
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	void visit( ExpressionRange const & _range ) final;
+
+	void visit( PartSelectRange const & _range ) final;
+	
+	void visit( MultidimensionalRange const & _range ) final;
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	int m_result;
 
 /***************************************************************************/
 
@@ -56,7 +53,8 @@ struct RangeDefaultVisitor
 /***************************************************************************/
 
 }
+}
 
 /***************************************************************************/
 
-#endif // !__VLOG_DM_RANGE_VISITOR_HPP__
+#endif // !__VLOD_DM_RANGE_BITWIDTH_PROCESSOR_HPP__

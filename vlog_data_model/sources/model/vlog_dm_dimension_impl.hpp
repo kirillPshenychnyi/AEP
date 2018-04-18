@@ -46,9 +46,10 @@ public:
 		,	m_range( _range.release() )
 	{}
 
-	boost::optional< Range const & > getRange() const final
+	Range const & getRange() const final
 	{
-		return Tools::Convertors::convertPointerToOptional( m_range.get() );
+		assert( m_range.get() );
+		return *m_range;
 	}
 
 /***************************************************************************/

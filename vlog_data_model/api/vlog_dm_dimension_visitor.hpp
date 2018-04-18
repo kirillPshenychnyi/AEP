@@ -14,11 +14,10 @@ namespace VlogDM
 /***************************************************************************/
 
 struct DimensionVisitor
+	:	public boost::noncopyable
 {
 
 /***************************************************************************/
-
-	virtual ~DimensionVisitor() {}
 	
 	virtual void visit( PackedDimension const & _dimension ) const = 0;
 

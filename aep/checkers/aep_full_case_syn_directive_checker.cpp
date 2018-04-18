@@ -66,11 +66,11 @@ FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _cas
 			checkTerms << OrItem;
 	}
 
-	checker->setTestExpression(
+	/*checker->setTestExpression(
 			( boost::format( CheckExpressionWire ) % m_detectedSuspects ).str()
 		,	( boost::format( CheckExpression ) % checkTerms ).str()
 		,	1
-	);
+	);*/
 
 	int i = 0;
 }
@@ -96,9 +96,11 @@ FullCaseSynDirectiveChecker::regenerateExpressionItems(
 			_ostream << OrItem;
 
 		 _ostream << 
-				boost::format( CheckTerm ) 
-				%	_caseExpression
-				%	regenerateExpression( _item.getExpression( i ) );
+				( 
+					boost::format( CheckTerm ) 
+					%	_caseExpression
+					%	regenerateExpression( _item.getExpression( i ) ) 
+				).str();
 	}
 }
 
