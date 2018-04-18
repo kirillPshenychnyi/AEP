@@ -23,11 +23,9 @@ struct Dimension
 		
 /***************************************************************************/
 
-	virtual ~Dimension() {}
-
 	virtual void accept( DimensionVisitor & _visitor ) const = 0;
 
-	virtual boost::optional< Range const & > getRange() const = 0;
+	virtual Range const & getRange() const = 0;
 
 /***************************************************************************/
 

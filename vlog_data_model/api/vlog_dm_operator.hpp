@@ -123,7 +123,6 @@ struct Operator
 			case Kind::ReductionOr:
 			case Kind::ReductionNor:
 			case Kind::ReductionXor:
-			case Kind::LogicAnd:
 				return true;
 			default: 
 				return false;

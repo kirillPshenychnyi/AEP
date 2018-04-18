@@ -71,6 +71,8 @@ public:
 
 	void forEachDesignUnit( DesignUnitCallback _callBack ) const final;
 
+	int calculateBitwidth( Expression const & _expression ) const final;
+
 /***************************************************************************/
 
 	Writable::ObjectFactory const& getObjectFactory() const final;

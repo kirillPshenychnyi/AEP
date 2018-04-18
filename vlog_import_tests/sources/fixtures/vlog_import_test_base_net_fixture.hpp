@@ -73,15 +73,14 @@ class BaseNetFixture
 			auto dimension = m_declared.getDimension();
 			REQUIRE( dimension.is_initialized() );
 
-			auto simpleRange = dimension->getRange();
-			REQUIRE( simpleRange.is_initialized() );
-
+			VlogDM::Range const & simpleRange = dimension->getRange();
+			
 			MultidimensionalRange const & multidimRange
 				=	BaseFixture::checkCast< 
 							VlogDM::Range
 						,	MultidimensionalRange
 						,	RangeCast
-					>( *simpleRange );
+					>( simpleRange );
 
 			const int dimensionsCount = multidimRange.getRangesCount();
 
@@ -145,10 +144,9 @@ class BaseNetFixture
 			auto dimension = _dimensional.getDimension();
 			REQUIRE( dimension.is_initialized() );
 
-			auto actualRange = dimension->getRange();
-			REQUIRE( actualRange.is_initialized() );
+			VlogDM::Range const & actualRange = dimension->getRange();
 	
-			return checkRange( *actualRange, _range );	
+			return checkRange( actualRange, _range );	
 		}
 
 		NetHelper & checkRange( VlogDM::Range const & _range, Range const & _expected )

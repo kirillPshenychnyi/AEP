@@ -10,6 +10,8 @@
 #include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
 #include "vlog_data_model\sources\regenerators\vlog_dm_expression_regenerator.hpp"
 
+#include "vlog_data_model\sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp"
+
 #include <sstream>
 
 /***************************************************************************/
@@ -101,6 +103,16 @@ Accessor::forEachDesignUnit( DesignUnitCallback _callBack ) const
 {
 	for( auto const & unit : m_unitsSet )
 		_callBack( *unit );
+}
+
+/***************************************************************************/
+
+int 
+Accessor::calculateBitwidth( Expression const & _expression ) const
+{
+	VlogEngines::ExpressionBitwidthCalculator calculator;
+
+	return calculator.calculate( _expression );
 }
 
 /***************************************************************************/
