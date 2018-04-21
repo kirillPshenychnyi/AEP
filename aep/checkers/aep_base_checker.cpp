@@ -1,7 +1,8 @@
 #include "stdafx.h"
 
-#include "aep\checkers\aep_base_checker.hpp"
 #include "aep\api\aep_iaccessor.hpp"
+
+#include "aep\checkers\aep_base_checker.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
@@ -9,6 +10,9 @@
 #include "vlog_data_model\api\vlog_dm_process_cast.hpp"
 
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"
+
+#include "aep_model\api\aep_model_iaccessor.hpp"
+#include "aep_model\api\contexsts\aep_model_assertion_context.hpp"
 
 /***************************************************************************/
 
@@ -18,6 +22,7 @@ namespace Aep {
 
 BaseAepChecker::BaseAepChecker( IAccessor & _accessor )
 	:	m_accessor( _accessor )
+	,	m_currentUnit( nullptr )
 {
 }
 
@@ -27,6 +32,31 @@ std::string
 BaseAepChecker::regenerateExpression( VlogDM::Expression const & _expression ) const
 {
 	return m_accessor.getVlogDm().regenerateExpression( _expression );
+}
+
+/***************************************************************************/
+
+int 
+BaseAepChecker::calculateBitwidth( VlogDM::Expression const & _expression )
+{
+	return m_accessor.getVlogDm().calculateBitwidth( _expression );
+}
+
+/***************************************************************************/
+
+AepModel::AssertionContext & 
+BaseAepChecker::retrieveAssertionContext()
+{
+	using namespace AepModel;
+
+	AepModel::IAccessor & aepAccessor = m_accessor.getAepModel();
+
+	auto context = aepAccessor.takeAssertionContext( m_currentUnit->getName() );
+
+	return 
+		context != boost::none 
+		?	*context
+		:	aepAccessor.addContext( m_currentUnit->getName() );
 }
 
 /***************************************************************************/
@@ -42,6 +72,8 @@ BaseAepChecker::browseProcesses( ProcessCallback< _ProcessKind > _callBack )
 	m_accessor.getVlogDm().forEachDesignUnit(
 		[ & ]( DesignUnit const & _unit )
 		{
+			m_currentUnit = &_unit;
+
 			const int nProcesses = _unit.getProcessesCount();
 
 			for( int i = 0; i < nProcesses; ++i )

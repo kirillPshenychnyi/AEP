@@ -9,6 +9,12 @@ namespace AepModel {
 
 struct IAccessor;
 
+struct OvlChecker;
+
+typedef
+	std::unique_ptr< OvlChecker >
+	OvlCheckerPtr;
+
 struct OvlIntegerParameter;
 struct OvlStringParameter;
 struct OvlSeverityLevelParameter;
@@ -17,6 +23,13 @@ struct OvlClockEdgeParameter;
 
 struct OvlCheckersFactory;
 struct OvlAlwaysCheckerBuilder;
+
+struct AssertionContext;
+typedef
+	std::unique_ptr< AssertionContext >
+	AssertionContextPtr;
+
+struct AssertionContextSet;
 
 /***************************************************************************/
 

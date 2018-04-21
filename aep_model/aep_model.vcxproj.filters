@@ -126,6 +126,12 @@
     <ClInclude Include="model\contexts\aep_model_assertion_context_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api\contexsts\aep_model_assertion_contexts_set.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\contexts\aep_model_assertion_context_set_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -141,6 +147,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="model\contexts\aep_model_assertion_context_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\contexts\aep_model_assertion_context_set_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

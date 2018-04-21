@@ -5,6 +5,7 @@
 
 #include "aep_model\api\aep_model_iaccessor.hpp"
 
+#include "aep_model\api\contexsts\aep_model_assertion_contexts_set.hpp"
 #include "aep_model\api\checkers\aep_model_ovl_checkers_factory.hpp"
 
 /***************************************************************************/
@@ -27,6 +28,12 @@ public:
 
 	OvlCheckersFactory const& getCheckersFactory() const final;
 
+	boost::optional< AssertionContext & > takeAssertionContext( 
+		std::string const & _dutName 
+	) final;
+ 
+	AssertionContext & addContext( std::string const & _dutName ) final;
+
 /***************************************************************************/
 
 private:
@@ -34,6 +41,8 @@ private:
 /***************************************************************************/
 
 	std::unique_ptr< OvlCheckersFactory > m_checkersFactory;
+
+	std::unique_ptr< AssertionContextSet > m_contextSet;
 
 /***************************************************************************/
 

@@ -3,8 +3,10 @@
 #include "aep\api\aep_iaccessor.hpp"
 
 #include "aep_model\api\aep_model_iaccessor.hpp"
+#include "aep_model\api\checkers\ovl\aep_model_ovl_checker.hpp"
 #include "aep_model\api\checkers\aep_model_ovl_checkers_factory.hpp"
 #include "aep_model\api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp"
+#include "aep_model\api\contexsts\aep_model_assertion_context.hpp"
 
 #include "aep\checkers\aep_full_case_syn_directive_checker.hpp"
 #include "aep\checkers\resources\aep_checker_resources.hpp"
@@ -38,8 +40,10 @@ FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _cas
 	using namespace AepModel;
 	using namespace Resources::FullCaseSynDirecriveChecker;
 
+	AepModel::IAccessor const & aepAccessor = m_accessor.getAepModel();
+
 	std::unique_ptr< OvlAlwaysCheckerBuilder > checker 
-		=	m_accessor.getAepModel().getCheckersFactory().newOvlAlwaysChecker(
+		=	aepAccessor.getCheckersFactory().newOvlAlwaysChecker(
 				( boost::format( CheckerInstanceName ) % m_detectedSuspects ).str()
 				,	_case.getLocation().m_file
 				,	_case.getLocation().m_beginLine
@@ -66,13 +70,15 @@ FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _cas
 			checkTerms << OrItem;
 	}
 
-	/*checker->setTestExpression(
+	checker->setTestExpression(
 			( boost::format( CheckExpressionWire ) % m_detectedSuspects ).str()
-		,	( boost::format( CheckExpression ) % checkTerms ).str()
-		,	1
-	);*/
+		,	( boost::format( CheckExpression ) % checkTerms.str() ).str()
+		,	calculateBitwidth( _case.getCaseExpression() )
+	);
 
-	int i = 0;
+	retrieveAssertionContext().addChecker( checker->releaseChecker() );
+
+	m_detectedSuspects++;
 }
 
 /***************************************************************************/

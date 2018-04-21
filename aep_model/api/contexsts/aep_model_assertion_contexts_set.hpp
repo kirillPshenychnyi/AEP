@@ -1,11 +1,11 @@
-#ifndef __AEP_MODEL_ACCESSOR_HPP__
-#define __AEP_MODEL_ACCESSOR_HPP__
+#ifndef __AEP_MODEL_ASSERTION_CONTEXT_SET_HPP__
+#define __AEP_MODEL_ASSERTION_CONTEXT_SET_HPP__
 
 /***************************************************************************/
 
-#include "aep_model\api\aep_model_fwd.hpp"
-
 #include <boost\noncopyable.hpp>
+
+#include "aep_model\api\aep_model_fwd.hpp"
 
 /***************************************************************************/
 
@@ -13,19 +13,27 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct IAccessor
+struct AssertionContextSet
 	:	public boost::noncopyable
-{ 
+{
 
 /***************************************************************************/
 
-	virtual OvlCheckersFactory const& getCheckersFactory() const = 0;
+	typedef
+		std::function< void( AssertionContext const & ) >
+		AssertionContextCallback;
 
-	virtual boost::optional< AssertionContext& > takeAssertionContext( 
+/***************************************************************************/
+
+	virtual void addContext( AssertionContextPtr _context ) = 0;
+
+	virtual bool hasAssertionContext( std::string const & _dutName ) const = 0;
+
+	virtual void forEachAssertionContext( AssertionContextCallback _callBack ) const = 0;
+
+	virtual boost::optional< AssertionContext & > takeContext( 
 		std::string const & _dutName 
 	) = 0;
- 
-	virtual AssertionContext & addContext( std::string const & _dutName ) = 0;
 
 /***************************************************************************/
 
@@ -37,4 +45,4 @@ struct IAccessor
 
 /***************************************************************************/
 
-#endif // !__AEP_MODEL_ACCESSOR_HPP__
+#endif // !__AEP_MODEL_ASSERTION_CONTEXT_SET_HPP__

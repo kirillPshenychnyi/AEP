@@ -3,11 +3,13 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "aep_model\api\aep_model_fwd.hpp"
 
 #include "aep_model\api\checkers\checker_values\aep_model_reset_polarity.hpp"
 #include "aep_model\api\checkers\checker_values\aep_model_clock_edge.hpp"
 #include "aep_model\api\checkers\checker_values\aep_model_severity_level.hpp"
+
+#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
@@ -31,6 +33,8 @@ struct OvlCheckerBuilder
 {
 
 /***************************************************************************/
+
+	virtual OvlCheckerPtr releaseChecker() = 0;
 
 	AEP_DECLARE_PORT_SETTER( Clock )
 	AEP_DECLARE_PORT_SETTER( Reset )

@@ -35,7 +35,11 @@ public:
 	BaseOvlCheckerBuilderImpl( std::unique_ptr< OvlChecker > _checker )
 		:	m_checker( std::move( _checker ) )
 	{
+	}
 
+	OvlCheckerPtr releaseChecker() final
+	{
+		return std::move( m_checker );
 	}
 
 	AEP_DEFINE_ENUM_PARAM_SETTER( ResetPolarity )

@@ -32,7 +32,7 @@ public:
 
 	VlogDM::IAccessor const & getVlogDm() const final;
 	
-	AepModel::IAccessor const & getAepModel() const final;
+	AepModel::IAccessor & getAepModel() final;
 
 /***************************************************************************/
 
@@ -42,7 +42,7 @@ private:
 
 	VlogDM::IAccessor const & m_vlogDm;
 
-	AepModel::IAccessor const & m_aepModel;
+	AepModel::IAccessor & m_aepModel;
 
 /***************************************************************************/
 
@@ -60,8 +60,8 @@ Accessor::getVlogDm() const
 /***************************************************************************/
 
 inline 
-AepModel::IAccessor const & 
-Accessor::getAepModel() const
+AepModel::IAccessor & 
+Accessor::getAepModel()
 {
 	return m_aepModel;
 }

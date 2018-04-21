@@ -24,7 +24,7 @@ struct IAccessor
 
 	virtual VlogDM::IAccessor const & getVlogDm() const = 0;
 
-	virtual AepModel::IAccessor const & getAepModel() const = 0;
+	virtual AepModel::IAccessor & getAepModel() = 0;
 
 /***************************************************************************/
 

@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "aep_model\api\contexsts\aep_model_assertion_context.hpp"
+#include "aep_model\api\checkers\ovl\aep_model_ovl_checker.hpp"
 
 #include <vector>
 
@@ -23,6 +24,10 @@ class AssertionContextImpl
 		std::vector< std::string >
 		Instances;
 
+	typedef
+		std::vector< OvlCheckerPtr >
+		Checkers;
+
 /***************************************************************************/
 
 public:
@@ -35,13 +40,17 @@ public:
 
 	void addInstanceName( std::string const & _name ) final;
 	
-	void forEachInstance( InstanceCallback _callback ) final;
+	void addChecker( OvlCheckerPtr _checker );
+
+	void forEachInstance( InstanceCallback _callback ) const final;
 
 /***************************************************************************/
 
-	std::string const m_dutName;
-
 	Instances m_instances;
+
+	Checkers m_checkers;
+
+	std::string const m_dutName;
 
 /***************************************************************************/
 
@@ -49,6 +58,7 @@ public:
 
 /***************************************************************************/
 
+inline
 std::string const & 
 AssertionContextImpl::getDUTName() const
 {

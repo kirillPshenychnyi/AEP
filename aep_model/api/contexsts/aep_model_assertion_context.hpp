@@ -3,6 +3,8 @@
 
 /***************************************************************************/
 
+#include "aep_model\api\aep_model_fwd.hpp"
+
 #include <boost\noncopyable.hpp>
 
 #include <functional>
@@ -27,10 +29,12 @@ struct AssertionContext
 
 	virtual std::string const & getDUTName() const = 0;
 
-	virtual void addInstanceName ( std::string const & _name ) = 0;
+	virtual void addInstanceName( std::string const & _name ) = 0;
 
-	virtual void forEachInstance( InstanceCallback _callBack ) = 0;
+	virtual void addChecker( OvlCheckerPtr _checker ) = 0;
 
+	virtual void forEachInstance( InstanceCallback _callBack ) const = 0;
+	
 /***************************************************************************/
 
 };

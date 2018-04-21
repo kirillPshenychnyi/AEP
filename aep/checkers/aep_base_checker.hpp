@@ -5,6 +5,8 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
+#include "aep_model\api\aep_model_fwd.hpp"
+
 #include <boost\noncopyable.hpp>
 #include <functional>
 
@@ -44,6 +46,10 @@ protected:
 
 	std::string regenerateExpression( VlogDM::Expression const & _expression ) const;
 
+	int calculateBitwidth( VlogDM::Expression const & _expression );
+
+	AepModel::AssertionContext & retrieveAssertionContext();
+
 /***************************************************************************/
 
 protected:
@@ -51,6 +57,8 @@ protected:
 /***************************************************************************/
 
 	IAccessor & m_accessor;
+
+	const VlogDM::DesignUnit * m_currentUnit;
 
 /***************************************************************************/
 

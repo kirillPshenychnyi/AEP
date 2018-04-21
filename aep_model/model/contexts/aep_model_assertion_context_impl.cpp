@@ -24,7 +24,15 @@ AssertionContextImpl::addInstanceName( std::string const & _name )
 /***************************************************************************/
 
 void 
-AssertionContextImpl::forEachInstance( InstanceCallback _callback ) 
+AssertionContextImpl::addChecker( OvlCheckerPtr _checker )
+{
+	m_checkers.push_back( std::move( _checker ) );
+}
+
+/***************************************************************************/
+
+void 
+AssertionContextImpl::forEachInstance( InstanceCallback _callback ) const
 {
 	std::for_each( m_instances.begin(), m_instances.end(), _callback );
 }
