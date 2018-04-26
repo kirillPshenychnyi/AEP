@@ -19,17 +19,13 @@ struct AssertionContextSet
 
 /***************************************************************************/
 
-	typedef
-		std::function< void( AssertionContext const & ) >
-		AssertionContextCallback;
-
-/***************************************************************************/
-
 	virtual void addContext( AssertionContextPtr _context ) = 0;
 
 	virtual bool hasAssertionContext( std::string const & _dutName ) const = 0;
 
 	virtual void forEachAssertionContext( AssertionContextCallback _callBack ) const = 0;
+
+	virtual void forEachAssertionContext( ConstAssertionContextCallback _callBack ) = 0;
 
 	virtual boost::optional< AssertionContext & > takeContext( 
 		std::string const & _dutName 

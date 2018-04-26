@@ -41,7 +41,7 @@ struct OvlCheckerBuilder
 	AEP_DECLARE_PORT_SETTER( Enable )
 	AEP_DECLARE_PORT_SETTER( Fire )
 
-/*----------------------------------------------------------------------------*/
+/***************************************************************************/
 
 	AEP_DECLARE_GENERIC_SETTER( SeverityLevel, SeverityLevel::Kind )
 	AEP_DECLARE_GENERIC_SETTER( ClockEdge, ClockEdge::Kind )

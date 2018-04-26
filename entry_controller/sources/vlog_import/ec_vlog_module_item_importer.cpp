@@ -7,6 +7,9 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_dataflow_process_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_behavioral_process_importer.hpp"
 
+#include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
+#include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
+
 /***************************************************************************/
 
 namespace EntryController {
@@ -83,6 +86,26 @@ ModuleItemImporter::visitAlways_construct(
 	BehavioralProcessImporter processImporter( getVlogDataModel() );
 
 	processImporter.importProcess( *ctx );
+
+	RETURN_ANY
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
+ModuleItemImporter::visitModule_instantiation( 
+	Verilog2001Parser::Module_instantiationContext * ctx 
+)
+{
+	std::string const moduleId = ctx->module_identifier()->getText();
+
+	for( auto const instance : ctx->module_instance() )
+	{ 
+		getVlogDataModel().getCurrentImportedUnit().addChildInstance( 
+				moduleId
+			,	instance->name_of_instance()->getText()
+		);
+	}
 
 	RETURN_ANY
 }

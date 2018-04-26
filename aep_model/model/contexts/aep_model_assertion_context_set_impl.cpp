@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "aep_model_assertion_context_set_impl.hpp"
+
+#include "aep_model\model\contexts\aep_model_assertion_context_set_impl.hpp"
 
 /***************************************************************************/
 
@@ -31,6 +32,17 @@ AssertionContextSetImpl::forEachAssertionContext(
 ) const
 {
 	for( auto const & context : m_contexts )
+		_callBack( *context );
+}
+
+/***************************************************************************/
+
+void 
+AssertionContextSetImpl::forEachAssertionContext( 
+	ConstAssertionContextCallback _callBack 
+)
+{
+	for( auto & context : m_contexts )
 		_callBack( *context );
 }
 

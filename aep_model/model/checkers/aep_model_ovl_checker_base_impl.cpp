@@ -54,6 +54,11 @@ OvlCheckerImpl::setPort(
 	,	std::string const & _value 
 )
 {
+	auto value = getPort( _type );
+
+	assert( value );
+
+	value->setValue( _value );
 }
 
 /***************************************************************************/
@@ -62,12 +67,26 @@ boost::optional< OvlCheckerPort& >
 OvlCheckerImpl::getPort( OvlCheckerPortKind::Kind _type ) const
 {
 	auto value = m_ports.find( _type, CheckerPortHasher(), CheckerPortComparator() );
-	return boost::optional< OvlCheckerPort & >();
 	
 	return
 			value == m_ports.end()
 		?	boost::optional< OvlCheckerPort & >()
 		:	**value;
+}
+
+/***************************************************************************/
+
+void 
+OvlCheckerImpl::setPortAsWire( 
+		OvlCheckerPortKind::Kind _type
+	,	std::string const & _lhs
+	,	std::string const & _rhs
+	,	int _width 
+)
+{
+	m_innerWires.emplace_back( _lhs, _rhs, _width );
+
+	setPort( _type, _lhs );
 }
 
 /***************************************************************************/
@@ -85,6 +104,24 @@ OvlCheckerImpl::foreachGeneric( GenericParameterCallback const & _functor ) cons
 {
 	for( auto const & item : m_generics )
 		_functor( *item );
+}
+
+/***************************************************************************/
+
+void 
+OvlCheckerImpl::foreachPort( PortCallback const & _functor ) const
+{
+	for( auto const & port : m_ports )
+		_functor( *port );
+}
+
+/***************************************************************************/
+
+void 
+OvlCheckerImpl::foreachInnerWire( InnerWireCallback const & _functor ) const
+{
+	for( auto const & item : m_innerWires )
+		_functor( item );
 }
 
 /***************************************************************************/

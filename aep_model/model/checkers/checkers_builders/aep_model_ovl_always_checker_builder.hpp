@@ -40,7 +40,12 @@ public:
 		,	int _width
 	) final
 	{
-
+		m_checker->setPortAsWire( 
+				OvlCheckerPortKind::Kind::TestExpression
+			,	_lhs
+			,	_rhs
+			,	_width 
+		);
 	}
 
 /***************************************************************************/

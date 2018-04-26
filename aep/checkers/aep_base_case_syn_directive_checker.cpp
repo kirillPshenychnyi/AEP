@@ -17,7 +17,7 @@ BaseCaseSynDirectiveChecker::BaseCaseSynDirectiveChecker(
 		IAccessor & _accessor 
 )
 	:	BaseAepChecker( _accessor )
-	,	m_detectedSuspects( 0 )
+	,	m_currentSuspectNumber( 1 )
 {
 }
 
@@ -34,6 +34,15 @@ BaseCaseSynDirectiveChecker::analyze()
 		)
 	);
 }
+
+/***************************************************************************/
+
+void 
+BaseCaseSynDirectiveChecker::postUnit()
+{
+	m_currentSuspectNumber = 1;
+}
+
 
 /***************************************************************************/
 

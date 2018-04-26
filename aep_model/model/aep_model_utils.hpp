@@ -7,9 +7,11 @@ namespace AepModel {
 
 /*----------------------------------------------------------------------------*/
 
-#define AEP_DEFINE_PORT_SETTER( PORT_NAME )					\
-	void set##PORT_NAME( std::string const & _port ) final	\
-	{}
+#define AEP_DEFINE_PORT_SETTER( PORT_NAME )									\
+	void set##PORT_NAME( std::string const & _port ) final					\
+	{																		\
+		m_checker->setPort( OvlCheckerPortKind::Kind::PORT_NAME, _port );	\
+	}
 
 #define AEP_DEFINE_GENERIC_SETTER( KIND, GENERIC_NAME, VALUE )	\
 	void set##GENERIC_NAME( VALUE _value ) final				\

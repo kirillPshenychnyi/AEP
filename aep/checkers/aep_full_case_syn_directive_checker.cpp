@@ -17,6 +17,8 @@
 
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
+#include "common_tools\utils\string_utils.hpp"
+
 #include <boost\format.hpp>
 #include <sstream>
 
@@ -40,16 +42,22 @@ FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _cas
 	using namespace AepModel;
 	using namespace Resources::FullCaseSynDirecriveChecker;
 
+	static const int checkWireWidth = 1;
+
 	AepModel::IAccessor const & aepAccessor = m_accessor.getAepModel();
 
 	std::unique_ptr< OvlAlwaysCheckerBuilder > checker 
 		=	aepAccessor.getCheckersFactory().newOvlAlwaysChecker(
-				( boost::format( CheckerInstanceName ) % m_detectedSuspects ).str()
+					Tools::fillTemplate( CheckerInstanceName, m_currentSuspectNumber )
 				,	_case.getLocation().m_file
 				,	_case.getLocation().m_beginLine
 			);
 
-	std::string caseExpression = regenerateExpression( _case.getCaseExpression() );
+	std::string caseExpressionWire 
+		=	Tools::fillTemplate( 
+					Resources::FullCaseSynDirecriveChecker::CaseSelWire
+				,	_case.getLocation().m_beginLine 
+			);
 
 	const int nCaseItems = _case.getItemsCount();
 
@@ -64,21 +72,42 @@ FullCaseSynDirectiveChecker::onCaseStatement( VlogDM::CaseStatement const & _cas
 
 		auto castResult = itemCast.cast( _case.getItem( i ) );
 
-		regenerateExpressionItems( caseExpression, checkTerms, *castResult );
+		regenerateExpressionItems( caseExpressionWire, checkTerms, *castResult );
 		 
 		if( !isLast )
 			checkTerms << OrItem;
 	}
 
+	AssertionContext & context = retrieveAssertionContext();
+
+	int caseExpressionWidth = calculateBitwidth( _case.getCaseExpression() );
+
 	checker->setTestExpression(
-			( boost::format( CheckExpressionWire ) % m_detectedSuspects ).str()
-		,	( boost::format( CheckExpression ) % checkTerms.str() ).str()
-		,	calculateBitwidth( _case.getCaseExpression() )
+			Tools::fillTemplate( CheckExpressionWire, m_currentSuspectNumber )
+		,	Tools::fillTemplate( CheckExpression, checkTerms.str() )
+		,	checkWireWidth
+	);
+	
+	context.addInputPort( 
+			caseExpressionWire
+		,	regenerateExpression( _case.getCaseExpression() )
+		,	caseExpressionWidth 
 	);
 
-	retrieveAssertionContext().addChecker( checker->releaseChecker() );
+	setControls( *checker );
+	
+	checker->setMessage( Resources::FullCaseSynDirecriveChecker::Message );
 
-	m_detectedSuspects++;
+	checker->setFire( 
+		Tools::fillTemplate( 
+				Resources::FullCaseSynDirecriveChecker::FireWire
+			,	m_currentSuspectNumber 
+		) 
+	);
+
+	context.addChecker( checker->releaseChecker() );
+
+	m_currentSuspectNumber++;
 }
 
 /***************************************************************************/
@@ -101,12 +130,11 @@ FullCaseSynDirectiveChecker::regenerateExpressionItems(
 		if( !isLast )
 			_ostream << OrItem;
 
-		 _ostream << 
-				( 
-					boost::format( CheckTerm ) 
-					%	_caseExpression
-					%	regenerateExpression( _item.getExpression( i ) ) 
-				).str();
+		 _ostream << Tools::fillTemplate( 
+							CheckTerm
+						,	_caseExpression
+						,	regenerateExpression( _item.getExpression( i ) ) 
+					);
 	}
 }
 

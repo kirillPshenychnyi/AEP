@@ -21,6 +21,10 @@ class AssertionContextImpl
 /***************************************************************************/
 
 	typedef
+		std::vector< PortInfo >
+		PortInfos;
+
+	typedef
 		std::vector< std::string >
 		Instances;
 
@@ -38,13 +42,27 @@ public:
 
 	std::string const & getDUTName() const final;
 
+	void addInputPort( 
+			std::string const&  _portName 
+		,	std::string const& _portValue
+		,	int _width 
+	) final;
+
 	void addInstanceName( std::string const & _name ) final;
 	
 	void addChecker( OvlCheckerPtr _checker );
 
 	void forEachInstance( InstanceCallback _callback ) const final;
+	
+	void forEachInputPort( InputPortCallback _callback ) const final;
+
+	void forEachChecker( CheckerCallback _callback ) const final;
+
+	int getInputsCount() const final;
 
 /***************************************************************************/
+
+	PortInfos m_additioanalInputs;
 
 	Instances m_instances;
 
@@ -63,6 +81,15 @@ std::string const &
 AssertionContextImpl::getDUTName() const
 {
 	return m_dutName;
+}
+
+/***************************************************************************/
+
+inline
+int 
+AssertionContextImpl::getInputsCount() const
+{
+	return m_additioanalInputs.size();
 }
 
 /***************************************************************************/

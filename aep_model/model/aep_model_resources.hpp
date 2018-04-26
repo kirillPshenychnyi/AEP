@@ -1,21 +1,20 @@
-#include "stdafx.h"
-
-#include "aep\checkers\resources\aep_checker_resources.hpp"
-
-/***************************************************************************/
-
-namespace Aep {
-namespace Resources {
+#ifndef __AEP_MODEL_RESOURCES_HPP__
+#define __AEP_MODEL_RESOURCES_HPP__
 
 /***************************************************************************/
 
-namespace CommonValues {
+namespace AepModel {
+namespace Resources { 
 
 /***************************************************************************/
 
-	const char Enable[] = "1'b1";
+namespace Strings {
 
-	const char Reset[] = "1'b1";
+/***************************************************************************/
+
+	extern const char Header[];
+	extern const char AepModuleName[];
+	extern const char TopAepModuleName[];
 
 /***************************************************************************/
 
@@ -27,37 +26,13 @@ namespace Separators {
 
 /***************************************************************************/
 
-	const char ParenthesesOpen[] = "( ";
+	extern const char Coma[];
 
-	const char ParenthesesClose[] = " )";
+	extern const char OpenParentheses[];
+	extern const char CloseParentheses[];
+	extern const char Semicolon;
 
-	const char Space = ' ';
-
-/***************************************************************************/
-
-}
-
-/***************************************************************************/
-
-namespace FullCaseSynDirecriveChecker {
-
-/***************************************************************************/
-
-	const char CheckerInstanceName[] = "check_full_case_%1%";
-
-	const char CheckTerm[] = "%1% == %2%";
-
-	const char OrItem[] = " | ";
-
-	const char CheckExpression[] = "(%1%) !== 1'b0";
-
-	const char CheckExpressionWire[] = "test_full_case_%1%";
-	
-	const char FireWire[] = "fire_full_case_%1%";
-
-	const char Message[] = "case is not full while synthesis full_case directive used";
-
-	const char CaseSelWire[] = "case_sel_wire_line_%1%";
+	extern const char Tab;
 
 /***************************************************************************/
 
@@ -65,7 +40,37 @@ namespace FullCaseSynDirecriveChecker {
 
 /***************************************************************************/
 
+namespace HdlPatterns {
+
+/***************************************************************************/
+
+	extern const char ModuleDeclaration[];
+
+	extern const char WireDeclaration[];
+
+	extern const char VectorDeclaration[];
+
+	extern const char AssignedWireDeclaration[];
+
+	extern const char AssignedVectorDeclaration[];
+
+	extern const char AssignmentPattern[];
+
+	extern const char BeginInstantiation[];
+
+	extern const char Endmodule[];
+
+	extern const char InnerSignalRefererence[];
+
+/***************************************************************************/
+
+}
+
+/***************************************************************************/
+
 }
 }
 
 /***************************************************************************/
+
+#endif // !__AEP_MODEL_RESOURCES_HPP__

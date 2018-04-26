@@ -29,9 +29,35 @@ struct OvlChecker
 
 /***************************************************************************/
 
+	struct InnerWireInfo
+	{
+		InnerWireInfo( 
+				std::string const & _lhs
+			,	std::string const & _rhs
+			,	int _width
+		)
+			:	m_lhs( _lhs )
+			,	m_rhs( _rhs )
+			,	m_width( _width )
+		{
+		}
+
+		std::string const m_lhs;
+		std::string const m_rhs;
+		int m_width; 
+	};
+
 	typedef
 		std::function< void( OvlCheckerGenericParameter const& ) >
 		GenericParameterCallback;
+
+	typedef
+		std::function< void( InnerWireInfo const& ) >
+		InnerWireCallback;
+
+	typedef
+		std::function< void( OvlCheckerPort const& ) >
+		PortCallback;
 
 /***************************************************************************/
 
@@ -54,6 +80,13 @@ struct OvlChecker
 
 	virtual std::string const & getInstanceName() const = 0;
 
+	virtual void setPortAsWire(
+			OvlCheckerPortKind::Kind _type
+		,	std::string const & _lhs
+		,	std::string const & _rhs
+		,	int _width
+	) = 0;
+
 	virtual boost::optional< OvlCheckerGenericParameter& >
 	getParameter( GenericType::Kind _type ) const = 0;
 
@@ -61,9 +94,11 @@ struct OvlChecker
 		OvlCheckerPortKind::Kind _type
 	) const = 0;
 
-	virtual void foreachGeneric( 
-		GenericParameterCallback const & _functor 
-	) const = 0;
+	virtual void foreachGeneric( GenericParameterCallback const & _functor  ) const = 0;
+
+	virtual void foreachInnerWire( InnerWireCallback const & _functor ) const = 0;
+
+	virtual void foreachPort( PortCallback const & _functor ) const = 0;
 
 /***************************************************************************/
 

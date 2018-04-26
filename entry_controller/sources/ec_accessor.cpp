@@ -52,9 +52,12 @@ Accessor::importVerilog( std::string const & _code )
 /***************************************************************************/
 
 void 
-Accessor::runAepAnalysis()
+Accessor::runAepAnalysis(
+		Aep::IAccessor::GlobalClockParameters & _clockParams
+	,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
+)
 {
-	m_aepAccessor.runEngine();
+	m_aepAccessor.runEngine( _clockParams, _resetParams );
 }
 
 /***************************************************************************/

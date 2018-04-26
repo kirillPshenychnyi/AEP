@@ -26,6 +26,10 @@ class OvlCheckerImpl
 /***************************************************************************/
 
 	typedef
+		std::vector< InnerWireInfo >
+		InnerWires;
+
+	typedef
 		boost::unordered_set<
 				OvlCheckerGenericParameter::Ptr
 			,	GenericParamHasher
@@ -40,10 +44,6 @@ class OvlCheckerImpl
 		,	CheckerPortComparator
 		>
 		PortsSet;
-
-	/*typedef
-		Containers::Vector< CheckerDeclaredWire >
-		WiresList;*/
 
 /***************************************************************************/
 
@@ -78,26 +78,20 @@ public:
 		OvlCheckerPortKind::Kind _type
 	) const final;
 
-	/*void setPortAsWire(
+	void setPortAsWire(
 			OvlCheckerPortKind::Kind _type
 		,	std::string const & _lhs
 		,	std::string const & _rhs
 		,	int _width
-	) final;*/
+	) final;
 
 	void addPort( std::unique_ptr< OvlCheckerPort > _port );
 
 	void foreachGeneric( GenericParameterCallback const & _functor ) const final;
 
-	//void foreachPort( ForEachPort const & _functor ) const final;
+	void foreachPort( PortCallback const & _functor ) const;
 
-	//void foreachWire( ForEachWire const & _functor ) const final;
-
-	//OvlGenericIteratorPtr browseGenerics () const final;
-
-	//PortIteratorPtr browsePorts() const final;
-
-	//OvlChecker::WireIteratorPtr browseWiresToDeclare() const final;
+	void foreachInnerWire( InnerWireCallback const & _functor ) const final;
 
 	int getWiresCount() const final;
 
@@ -117,11 +111,11 @@ private:
 
 /***************************************************************************/
 
+	InnerWires m_innerWires;
+
 	GenericSet m_generics;
 
 	PortsSet m_ports;
-
-	//WiresList m_wires;
 
 	std::string const m_instanceName;
 
@@ -149,8 +143,8 @@ OvlCheckerImpl::getId() const
 inline
 int 
 OvlCheckerImpl::getWiresCount() const
-{
-	return 0;
+{	
+	return m_innerWires.size();
 }
 
 /***************************************************************************/
@@ -168,7 +162,7 @@ inline
 int 
 OvlCheckerImpl::getPortsCount() const
 {
-	return 0;
+	return m_ports.size();
 }
 
 /***************************************************************************/

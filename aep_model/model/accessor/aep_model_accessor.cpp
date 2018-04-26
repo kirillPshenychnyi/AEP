@@ -6,6 +6,10 @@
 #include "aep_model\model\contexts\aep_model_assertion_context_set_impl.hpp"
 #include "aep_model\model\contexts\aep_model_assertion_context_impl.hpp"
 
+#include "aep_model\model\contexts\regeneration\aep_model_context_set_regenerator.hpp"
+
+#include <fstream>
+
 /***************************************************************************/
 
 namespace AepModel {
@@ -38,6 +42,38 @@ Accessor::addContext( std::string const & _dutName )
 	m_contextSet->addContext( std::move( context ) );
 
 	return ref;
+}
+
+/***************************************************************************/
+
+void 
+Accessor::forEachContext( AssertionContextCallback _callback )
+{
+	m_contextSet->forEachAssertionContext( _callback );
+}
+
+/***************************************************************************/
+
+void
+Accessor::forEachContext( ConstAssertionContextCallback _callback ) const
+{
+	m_contextSet->forEachAssertionContext( _callback );
+}
+
+/***************************************************************************/
+
+void 
+Accessor::regenerateAssertions( std::string const & _path ) const
+{
+	std::fstream stream;
+
+	stream.open( "e:\\Education\\aep_generated\\aep.sv", std::ios::out );
+
+	ContextSetRegenerator regenerator( *m_contextSet, stream );	
+
+	regenerator.run();
+
+	stream.close();
 }
 
 /***************************************************************************/

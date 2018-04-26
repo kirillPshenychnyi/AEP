@@ -8,6 +8,20 @@ namespace Resources {
 
 /***************************************************************************/
 
+namespace CommonValues {
+
+/***************************************************************************/
+
+	extern const char Enable[];
+
+	extern const char Reset[];
+
+/***************************************************************************/
+
+}
+
+/***************************************************************************/
+
 namespace Separators {
 
 /***************************************************************************/
@@ -37,6 +51,12 @@ namespace FullCaseSynDirecriveChecker {
 	extern const char CheckExpression[];
 	
 	extern const char CheckExpressionWire[];
+
+	extern const char FireWire[];
+
+	extern const char Message[];
+
+	extern const char CaseSelWire[];
 
 /***************************************************************************/
 

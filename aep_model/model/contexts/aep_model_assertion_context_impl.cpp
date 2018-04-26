@@ -39,4 +39,34 @@ AssertionContextImpl::forEachInstance( InstanceCallback _callback ) const
 
 /***************************************************************************/
 
+void 
+AssertionContextImpl::forEachInputPort( InputPortCallback _callback ) const
+{
+	for( PortInfo const & info : m_additioanalInputs )
+		_callback( info );
+}
+
+/***************************************************************************/
+
+void 
+AssertionContextImpl::forEachChecker( CheckerCallback _callback ) const
+{
+	for( auto const & checker : m_checkers )
+		_callback( *checker );
+}
+
+/***************************************************************************/
+
+void 
+AssertionContextImpl::addInputPort( 
+		std::string const&  _portName 
+	,	std::string const& _portValue
+	,	int _width  
+)
+{
+	m_additioanalInputs.emplace_back( _portName, _portValue, _width );
+}
+
+/***************************************************************************/
+
 }

@@ -48,7 +48,10 @@ public:
 
 	void importVerilog( std::string const & _code ) final;
 
-	void runAepAnalysis() final;
+	void runAepAnalysis(
+			Aep::IAccessor::GlobalClockParameters & _clockParams
+		,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
+	) final;
 
 /***************************************************************************/
 

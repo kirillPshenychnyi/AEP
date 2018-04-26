@@ -27,9 +27,6 @@
     <ClInclude Include="api\aep_model_referenced_signal_info.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\aep_model_inner_signal_info.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\checkers\checker_values\aep_model_generic_type.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -132,6 +129,12 @@
     <ClInclude Include="model\contexts\aep_model_assertion_context_set_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="model\contexts\regeneration\aep_model_context_set_regenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\aep_model_resources.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -150,6 +153,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="model\contexts\aep_model_assertion_context_set_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\contexts\regeneration\aep_model_context_set_regenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\aep_model_resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

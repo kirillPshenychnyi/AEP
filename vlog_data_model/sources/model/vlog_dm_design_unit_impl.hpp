@@ -12,6 +12,7 @@
 #include "vlog_data_model\sources\model\vlog_dm_declarations_container_impl.hpp"
 
 #include <vector>
+#include <unordered_map>
 
 /***************************************************************************/
 
@@ -34,6 +35,14 @@ class DesignUnitImpl
 		std::vector< ProcessPtr >
 		Processes;
 
+	typedef
+		std::vector< std::string >
+		InstancesNames;
+
+	typedef
+		std::unordered_map< std::string, InstancesNames >
+		InstantiationTable;
+
 /***************************************************************************/
 
 public:
@@ -50,11 +59,23 @@ public:
 
 	void addProcess( ProcessPtr _process ) final;
 
+	void addChildInstance( 
+			std::string const & _moduleName
+		,	std::string const & _instanceName
+	) final;
+
+	void forEachChildInstance( 
+			std::string const & _moduleName
+		,	InstanceCallback _callback 
+	) const final;
+
 /***************************************************************************/
 
 private:
 
 /***************************************************************************/
+
+	InstantiationTable m_instantiationTable;
 
 	Processes m_processes;
 
@@ -97,6 +118,38 @@ void
 DesignUnitImpl::addProcess( ProcessPtr _process )
 {
 	m_processes.push_back( std::move( _process ) );
+}
+
+/***************************************************************************/
+
+inline 
+void 
+DesignUnitImpl::addChildInstance( 
+		std::string const & _moduleName
+	,	std::string const & _instanceName 
+)
+{
+	auto findIt = m_instantiationTable.find( _moduleName );
+
+	if( findIt == m_instantiationTable.end() )
+		findIt = m_instantiationTable.emplace( _moduleName, InstancesNames() ).first;
+
+	findIt->second.push_back( _instanceName );
+}
+
+/***************************************************************************/
+
+inline 
+void
+DesignUnitImpl::forEachChildInstance( 
+		std::string const & _moduleName
+	,	InstanceCallback _callback 
+) const
+{
+	auto it = m_instantiationTable.find( _moduleName );
+
+	if( it != m_instantiationTable.end() )
+		std::for_each( it->second.begin(), it->second.end(), _callback );
 }
 
 /***************************************************************************/

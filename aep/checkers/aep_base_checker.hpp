@@ -44,11 +44,15 @@ protected:
 	
 	virtual void analyze() = 0;
 
+	virtual void postUnit() = 0;
+
 	std::string regenerateExpression( VlogDM::Expression const & _expression ) const;
 
 	int calculateBitwidth( VlogDM::Expression const & _expression );
 
 	AepModel::AssertionContext & retrieveAssertionContext();
+
+	void setControls( AepModel::OvlCheckerBuilder & _builder ) const;
 
 /***************************************************************************/
 

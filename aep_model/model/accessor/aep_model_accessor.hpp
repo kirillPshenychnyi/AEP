@@ -34,6 +34,12 @@ public:
  
 	AssertionContext & addContext( std::string const & _dutName ) final;
 
+	void forEachContext( AssertionContextCallback _callback );
+
+	void forEachContext( ConstAssertionContextCallback _callback ) const;
+
+	void regenerateAssertions( std::string const & _path ) const; 
+
 /***************************************************************************/
 
 private:

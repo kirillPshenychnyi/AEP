@@ -5,6 +5,8 @@
 
 #include <boost\noncopyable.hpp>
 
+#include "aep\api\aep_iaccessor.hpp"
+
 /***************************************************************************/
 
 namespace EntryController {
@@ -19,7 +21,10 @@ struct IAccessor
 
 	virtual void importVerilog( std::string const& _code ) = 0;
 
-	virtual void runAepAnalysis() = 0;
+	virtual void runAepAnalysis(
+			Aep::IAccessor::GlobalClockParameters & _clockParams
+		,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
+	) = 0;
 
 /***************************************************************************/
 

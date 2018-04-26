@@ -1,21 +1,23 @@
 #include "stdafx.h"
 
-#include "aep\checkers\resources\aep_checker_resources.hpp"
+#include "aep_model\model\aep_model_resources.hpp"
 
 /***************************************************************************/
 
-namespace Aep {
-namespace Resources {
+namespace AepModel {
+namespace Resources { 
 
 /***************************************************************************/
 
-namespace CommonValues {
+namespace Strings {
 
 /***************************************************************************/
 
-	const char Enable[] = "1'b1";
+	const char Header[] = "`include \"std_ovl_defines.h\"";
 
-	const char Reset[] = "1'b1";
+	const char AepModuleName[] = "%1%_%2%_aep";
+
+	const char TopAepModuleName[] = "top_aep";
 
 /***************************************************************************/
 
@@ -27,37 +29,41 @@ namespace Separators {
 
 /***************************************************************************/
 
-	const char ParenthesesOpen[] = "( ";
+	const char Coma[] = ", ";
 
-	const char ParenthesesClose[] = " )";
+	const char Tab = '\t';
 
-	const char Space = ' ';
-
-/***************************************************************************/
-
-}
-
-/***************************************************************************/
-
-namespace FullCaseSynDirecriveChecker {
-
-/***************************************************************************/
-
-	const char CheckerInstanceName[] = "check_full_case_%1%";
-
-	const char CheckTerm[] = "%1% == %2%";
-
-	const char OrItem[] = " | ";
-
-	const char CheckExpression[] = "(%1%) !== 1'b0";
-
-	const char CheckExpressionWire[] = "test_full_case_%1%";
+	const char OpenParentheses[] = "( ";
+	const char CloseParentheses[] = " )";
+	const char Semicolon = ';';
 	
-	const char FireWire[] = "fire_full_case_%1%";
+/***************************************************************************/
 
-	const char Message[] = "case is not full while synthesis full_case directive used";
+}
 
-	const char CaseSelWire[] = "case_sel_wire_line_%1%";
+/***************************************************************************/
+
+namespace HdlPatterns {
+
+/***************************************************************************/
+
+	const char ModuleDeclaration[] = "module %1%";
+
+	const char WireDeclaration[] = "input wire %1%;";
+
+	const char VectorDeclaration[] = "input wire [%1%:%2%] %3%;";
+
+	const char AssignedWireDeclaration[] = "wire %1% = %2%;";
+
+	const char AssignedVectorDeclaration[] = "wire [%1%:%2%] %3% = %4%;";
+
+	const char AssignmentPattern[] = ".%1%( %2% )";
+
+	const char Endmodule[] = "endmodule // %1%";
+
+	const char BeginInstantiation[] = "%1% %2%(";
+
+	const char InnerSignalRefererence[] = "`DUT.%1%.%2%";
 
 /***************************************************************************/
 
@@ -67,5 +73,3 @@ namespace FullCaseSynDirecriveChecker {
 
 }
 }
-
-/***************************************************************************/

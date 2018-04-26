@@ -20,7 +20,7 @@ namespace AepModel {
 
 template< typename _BaseParam, typename _Val, typename _RVal >
 class BaseCheckerParameterImpl
-	: public _BaseParam
+	:	public _BaseParam
 {
 
 /***************************************************************************/
@@ -76,7 +76,7 @@ public:
 	template<>
 	std::string valueToString< std::string >() const
 	{
-		return m_value;
+		return "\"" + m_value + "\"";
 	}
 
 	_RVal getValue() const final
