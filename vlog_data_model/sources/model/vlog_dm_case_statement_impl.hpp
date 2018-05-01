@@ -9,6 +9,8 @@
 
 #include "vlog_data_model\api\vlog_dm_expression.hpp"
 #include "vlog_data_model\api\vlog_dm_base_case_item.hpp"
+#include "vlog_data_model\api\vlog_dm_case_item_cast.hpp"
+
 #include "vlog_data_model\ih\visitors\vlog_dm_statement_visitor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
@@ -57,6 +59,8 @@ public:
 
 	BaseCaseItem const & getItem( int _idx ) const final;
 
+	boost::optional< DefaultCaseItem const& > getDefaultCaseItem() const final;
+
 	void accept( StatementVisitor & _visitor ) const final;
 
 	void addBranch( BaseCaseItemPtr _item ) final;
@@ -76,6 +80,8 @@ private:
 	CaseItems m_items;
 
 	ExpressionPtr m_caseExpression;
+
+	mutable boost::optional< DefaultCaseItem const& > m_defaultItem;
 
 	const CaseKind::Kind m_kind;
 
@@ -134,6 +140,29 @@ CaseStatementImpl::getItem( int _idx ) const
 
 /***************************************************************************/
 
+inline 
+boost::optional< DefaultCaseItem const& > 
+CaseStatementImpl::getDefaultCaseItem() const
+{
+	if( m_defaultItem )
+		return m_defaultItem;
+
+	VlogDM::CaseItemCast< DefaultCaseItem > caster;
+
+	for( auto const & item : m_items )
+	{
+		if( auto castResult = caster.cast( *item ) )
+		{
+			m_defaultItem = castResult;
+			break;
+		}
+	}
+
+	return m_defaultItem;
+}
+
+/***************************************************************************/
+
 inline
 void 
 CaseStatementImpl::accept( StatementVisitor & _visitor ) const
@@ -146,7 +175,7 @@ CaseStatementImpl::accept( StatementVisitor & _visitor ) const
 inline 
 void 
 CaseStatementImpl::addBranch( BaseCaseItemPtr _item )
-{
+{	
 	m_items.push_back( std::move( _item ) );
 }
 
@@ -167,6 +196,8 @@ CaseStatementImpl::isFullCase() const
 {
 	return m_isFullCase;
 }
+
+/***************************************************************************/
 
 inline
 CaseKind::Kind 

@@ -223,6 +223,9 @@
     <ProjectReference Include="..\..\..\parsers\antlr\Cpp\runtime\antlr4cpp-vs2015.vcxproj">
       <Project>{a9762991-1b57-4dce-90c0-ee42b96947be}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\aep\aep.vcxproj">
+      <Project>{35b1529c-c173-428e-995b-29f43d8ce46c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\vlog_data_model\vlog_data_model.vcxproj">
       <Project>{3151e104-ceb5-40fa-b40c-6a1c9ab6ed03}</Project>
     </ProjectReference>

@@ -54,6 +54,11 @@ private:
 		Verilog2001Parser::Always_constructContext * ctx
 	) override;
 
+	antlrcpp::Any visitModule_instantiation(
+		Verilog2001Parser::Module_instantiationContext * ctx
+	) override;
+
+
 /***************************************************************************/
 
 	template< typename _Context >

@@ -12,6 +12,7 @@ namespace VlogDM
 
 /***************************************************************************/
 
+	struct Range;
 	struct ExpressionRange;
 	struct PartSelectRange;
 	struct MultidimensionalRange;

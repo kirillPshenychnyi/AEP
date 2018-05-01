@@ -5,6 +5,7 @@
 
 #include "entry_controller\sources\ec_accessor.hpp"
 #include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
+#include "aep\api\aep_iaccessor.hpp"
 
 /***************************************************************************/
 
@@ -22,9 +23,16 @@ ContainerBootstrapper::ContainerBootstrapper()
 
 	builder.registerType< EntryController::Accessor >()
 		.with< VlogDM::IAccessor>(
-			[ ]( Hypodermic::ComponentContext & _context )
+			[ & ]( Hypodermic::ComponentContext & _context )
 			{
 				return _context.resolve< VlogDM::IAccessor >();
+			}
+		)
+		.with< Aep::IAccessor >(
+			[ & ]( Hypodermic::ComponentContext & _context )
+			{
+				// Not used in dm tests
+				return std::shared_ptr< Aep::IAccessor >();
 			}
 		)
 		.as< EntryController::IAccessor >()

@@ -145,7 +145,10 @@
   <ItemGroup>
     <ClInclude Include="api\vlog_dm_base_case_item.hpp" />
     <ClInclude Include="api\vlog_dm_blocking_assignment.hpp" />
+    <ClInclude Include="api\vlog_dm_case_item_cast.hpp" />
     <ClInclude Include="api\vlog_dm_case_kind.hpp" />
+    <ClInclude Include="api\vlog_dm_process_cast.hpp" />
+    <ClInclude Include="api\vlog_dm_statement_cast.hpp" />
     <ClInclude Include="ih\visitors\vlog_dm_case_item_visitor.hpp" />
     <ClInclude Include="sources\model\vlog_dm_case_item_impl.hpp" />
     <ClInclude Include="api\vlog_dm_case_statement.hpp" />
@@ -193,7 +196,6 @@
     <ClInclude Include="api\vlog_dm_type.hpp" />
     <ClInclude Include="api\vlog_dm_type_cast.hpp" />
     <ClInclude Include="api\vlog_dm_unary_operator.hpp" />
-    <ClInclude Include="api\vlog_dm_unpacked_dimension_impl.hpp" />
     <ClInclude Include="api\vlog_dm_variable.hpp" />
     <ClInclude Include="api\vlog_dm_variable_kind.hpp" />
     <ClInclude Include="api\vlog_dm_variable_type.hpp" />
@@ -212,6 +214,7 @@
     <ClInclude Include="sources\model\vlog_dm_conditional_branch_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_conditional_expression_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_default_case_item_impl.hpp" />
+    <ClInclude Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp" />
     <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_behavioral_process_impl.hpp" />
@@ -277,6 +280,7 @@
     <ClInclude Include="sources\model\vlog_dm_variable_type_impl.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_range_regenerator.hpp" />
     <ClInclude Include="sources\regenerators\vlog_dm_statement_regenerator.hpp" />
+    <ClInclude Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="sources\model\vlog_dm_declared_impl.hpp" />
@@ -293,12 +297,14 @@
     <ClCompile Include="sources\model\factory\vlog_dm_object_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_statement_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp" />
+    <ClCompile Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_expression_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_process_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_range_regenerator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_statement_regenerator.cpp" />
+    <ClCompile Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

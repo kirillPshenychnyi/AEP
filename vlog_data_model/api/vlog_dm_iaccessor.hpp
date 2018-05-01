@@ -7,6 +7,8 @@
 
 #include <boost\noncopyable.hpp>
 
+#include <functional>
+
 /***************************************************************************/
 
 namespace VlogDM
@@ -17,6 +19,12 @@ namespace VlogDM
 struct IAccessor
 	:	public boost::noncopyable
 {
+
+/***************************************************************************/
+
+	typedef
+		std::function< void( DesignUnit const & ) >
+		DesignUnitCallback;
 
 /***************************************************************************/
 
@@ -35,7 +43,13 @@ struct IAccessor
 		,	Process const & _process 
 	) const = 0;
 
+	virtual std::string regenerateExpression( Expression const & _process ) const = 0;
+
 	virtual Writable::ObjectFactory const& getObjectFactory() const = 0;
+
+	virtual void forEachDesignUnit( DesignUnitCallback _callBack ) const = 0;
+
+	virtual int calculateBitwidth( Expression const & _expression ) const = 0;
 
 /***************************************************************************/
 

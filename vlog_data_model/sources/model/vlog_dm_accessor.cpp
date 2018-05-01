@@ -3,10 +3,16 @@
 #include "vlog_data_model\sources\model\vlog_dm_accessor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_process.hpp"
+#include "vlog_data_model\api\vlog_dm_expression.hpp"
 
 #include "vlog_data_model\sources\model\factory\vlog_dm_object_factory_impl.hpp"
 
 #include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
+#include "vlog_data_model\sources\regenerators\vlog_dm_expression_regenerator.hpp"
+
+#include "vlog_data_model\sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp"
+
+#include <sstream>
 
 /***************************************************************************/
 
@@ -74,6 +80,39 @@ Accessor::regenerateProcess( std::ostream & _stream, Process const & _process ) 
 	Regenerators::ProcessRegenerator regenerator( _stream );
 
 	_process.accept( regenerator );
+}
+
+/***************************************************************************/
+
+std::string 
+Accessor::regenerateExpression( Expression const & _expression ) const
+{
+	std::stringstream output;
+
+	Regenerators::ExpressionRegenerator regenerator( output );
+
+	_expression.accept( regenerator );
+
+	return output.str();
+}
+
+/***************************************************************************/
+
+void
+Accessor::forEachDesignUnit( DesignUnitCallback _callBack ) const
+{
+	for( auto const & unit : m_unitsSet )
+		_callBack( *unit );
+}
+
+/***************************************************************************/
+
+int 
+Accessor::calculateBitwidth( Expression const & _expression ) const
+{
+	VlogEngines::ExpressionBitwidthCalculator calculator;
+
+	return calculator.calculate( _expression );
 }
 
 /***************************************************************************/

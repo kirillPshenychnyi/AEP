@@ -52,24 +52,30 @@ public:
 
 	Accessor();
 
-	void addUnit( Writable::DesignUnitPtr _unit ) override;
+	void addUnit( Writable::DesignUnitPtr _unit ) final;
 
 	boost::optional< DesignUnit const & > findUnit( 
 		std::string const& _unitName 
-	) const override;
+	) const final;
 
-	Writable::DesignUnit & getCurrentImportedUnit() override;
+	Writable::DesignUnit & getCurrentImportedUnit() final;
 
-	void reset() override;
+	void reset() final;
 		
 	void regenerateProcess( 
 			std::ostream & _stream
 		,	Process const & _process 
-	) const override;
+	) const final;
+
+	std::string regenerateExpression( Expression const & _process ) const final;
+
+	void forEachDesignUnit( DesignUnitCallback _callBack ) const final;
+
+	int calculateBitwidth( Expression const & _expression ) const final;
 
 /***************************************************************************/
 
-	Writable::ObjectFactory const& getObjectFactory() const override;
+	Writable::ObjectFactory const& getObjectFactory() const final;
 
 /***************************************************************************/
 

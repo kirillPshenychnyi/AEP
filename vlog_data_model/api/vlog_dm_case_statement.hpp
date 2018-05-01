@@ -14,6 +14,7 @@ namespace VlogDM {
 
 struct Expression;
 struct BaseCaseItem;
+struct DefaultCaseItem;
 
 /***************************************************************************/
 
@@ -28,6 +29,8 @@ struct CaseStatement
 	virtual int getItemsCount() const = 0;
 
 	virtual BaseCaseItem const & getItem( int _idx ) const = 0;
+
+	virtual boost::optional< DefaultCaseItem const& > getDefaultCaseItem() const = 0;
 
 	virtual bool isParallelCase() const = 0;
 

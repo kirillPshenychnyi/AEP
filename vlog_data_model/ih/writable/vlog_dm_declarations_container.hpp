@@ -38,6 +38,11 @@ struct DesignUnit
 
 	virtual void addProcess( ProcessPtr _process ) = 0;
 
+	virtual void addChildInstance( 
+			std::string const & _moduleName
+		,	std::string const & _instanceName
+	) = 0;
+
 /***************************************************************************/
 
 };
