@@ -24,6 +24,8 @@ struct IAccessor
 
 /***************************************************************************/
 
+	virtual ~IAccessor() = default;
+
 	virtual boost::optional< DesignUnit const & > findUnit(
 		std::string const& _unitName
 	) const = 0;

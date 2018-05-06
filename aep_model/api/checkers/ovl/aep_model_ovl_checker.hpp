@@ -61,6 +61,8 @@ struct OvlChecker
 
 /***************************************************************************/
 
+	virtual ~OvlChecker() = default;
+
 	virtual OvlCheckerIds::Kind getId() const = 0;
 
 	virtual void setPort(

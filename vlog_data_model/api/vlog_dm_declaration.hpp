@@ -28,7 +28,9 @@ struct Declaration
 public:
 
 /***************************************************************************/
-
+	
+	virtual ~Declaration() = default;
+	
 	virtual boost::optional< Declared const & > 
 		findDeclared( std::string const & _declared ) const = 0;
 

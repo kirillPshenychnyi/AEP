@@ -28,6 +28,8 @@ public:
 		,	std::shared_ptr< AepModel::IAccessor > _aepModel
 	);
 
+	~Accessor() = default;
+	
 	void runEngine( 
 			GlobalClockParameters const & _clock
 		,	boost::optional< GlobalResetParameters const & > _reset

@@ -20,6 +20,8 @@ struct ItemsFactory
 
 /***************************************************************************/
 
+	virtual ~ItemsFactory() = default;
+
 	virtual DimensionPtr newUnackedDimension( 
 			Location const& _location
 		,	std::unique_ptr< Range > _range

@@ -26,6 +26,8 @@ struct OvlCheckerPort
 
 /***************************************************************************/
 
+	virtual ~OvlCheckerPort() = default;
+
 	virtual OvlCheckerPortKind::Kind getKind() const = 0;
 
 	virtual std::string kindToString() const = 0;

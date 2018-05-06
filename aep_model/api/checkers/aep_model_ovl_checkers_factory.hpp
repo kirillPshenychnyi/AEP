@@ -19,6 +19,8 @@ struct OvlCheckersFactory
 
 /***************************************************************************/
 
+	virtual ~OvlCheckersFactory() = default;
+
 	virtual std::unique_ptr< OvlAlwaysCheckerBuilder > newOvlAlwaysChecker(
 			std::string const & _instanceName
 		,	std::string const & _fileName

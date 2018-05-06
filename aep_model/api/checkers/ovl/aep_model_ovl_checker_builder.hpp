@@ -34,6 +34,8 @@ struct OvlCheckerBuilder
 
 /***************************************************************************/
 
+	virtual ~OvlCheckerBuilder() = default;
+
 	virtual OvlCheckerPtr releaseChecker() = 0;
 
 	AEP_DECLARE_PORT_SETTER( Clock )

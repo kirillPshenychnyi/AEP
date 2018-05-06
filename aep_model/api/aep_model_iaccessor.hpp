@@ -19,6 +19,8 @@ struct IAccessor
 
 /***************************************************************************/
 
+	virtual ~IAccessor() = default;
+
 	virtual OvlCheckersFactory const& getCheckersFactory() const = 0;
 
 	virtual boost::optional< AssertionContext& > takeAssertionContext( 

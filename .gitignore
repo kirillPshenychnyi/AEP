@@ -56,3 +56,13 @@ bin/
 obj/
 
 vlog_import_tests/Release/
+
+*.log
+
+*.pdb
+
+*.lastbuildstate
+
+*.tlog
+
+*.user

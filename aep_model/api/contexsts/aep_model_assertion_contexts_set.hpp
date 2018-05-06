@@ -19,6 +19,8 @@ struct AssertionContextSet
 
 /***************************************************************************/
 
+	virtual ~AssertionContextSet() = default;
+
 	virtual void addContext( AssertionContextPtr _context ) = 0;
 
 	virtual bool hasAssertionContext( std::string const & _dutName ) const = 0;

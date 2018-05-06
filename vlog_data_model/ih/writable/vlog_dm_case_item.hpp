@@ -22,6 +22,8 @@ struct BaseCaseItem
 
 /***************************************************************************/
 
+	virtual ~BaseCaseItem() = default;
+
 	virtual void setStatement( StatementPtr _statement ) = 0;
 
 /***************************************************************************/

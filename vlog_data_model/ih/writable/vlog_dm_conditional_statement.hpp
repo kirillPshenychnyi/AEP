@@ -26,6 +26,8 @@ struct BaseBranchStatement
 
 /***************************************************************************/
 
+	virtual ~BaseBranchStatement() = default;
+
 	virtual void addBranch( Branch _branch ) = 0;
 
 /***************************************************************************/

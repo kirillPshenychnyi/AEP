@@ -56,6 +56,8 @@ struct AssertionContext
 
 /***************************************************************************/
 
+	virtual ~AssertionContext() = default;
+
 	virtual std::string const & getDUTName() const = 0;
 
 	virtual void addInputPort( 

@@ -20,6 +20,8 @@ struct DeclarationFactory
 
 /***************************************************************************/
 
+	virtual ~DeclarationFactory() = default;
+
 	virtual Writable::PortDeclarationPtr newPortDeclaration( 
 			Location const & _location 
 		,	TypePtr _type

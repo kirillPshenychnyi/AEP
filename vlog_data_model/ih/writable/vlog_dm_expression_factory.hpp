@@ -22,6 +22,8 @@ struct ExpressionFactory
 
 /***************************************************************************/
 
+	virtual ~ExpressionFactory() = default;
+
 	virtual std::unique_ptr< PrimaryLiteral > newPrimaryLiteral(
 			Location const& _location 
 		,	std::string const& _value

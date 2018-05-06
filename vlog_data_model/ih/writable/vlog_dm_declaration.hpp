@@ -20,6 +20,8 @@ struct Declaration
 
 /***************************************************************************/
 	
+	virtual ~Declaration() = default;
+
 	virtual void addDeclared( std::unique_ptr< Declared > _declared ) = 0;
 
 /***************************************************************************/

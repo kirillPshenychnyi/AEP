@@ -23,6 +23,8 @@ struct DeclaredFactory
 
 /***************************************************************************/
 
+	virtual ~DeclaredFactory() = default;
+
 	virtual PortPtr newPort ( 
 			VlogDM::Declaration const & _declaration
 		,	std::string const & _name

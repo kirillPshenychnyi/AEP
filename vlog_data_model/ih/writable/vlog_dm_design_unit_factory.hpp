@@ -20,6 +20,8 @@ struct DesignUnitFactory
 
 /***************************************************************************/
 
+	virtual ~DesignUnitFactory() = default;
+
 	virtual DesignUnitPtr newDesignUnit( 
 			std::string const & _name
 		,	Location const & _location 

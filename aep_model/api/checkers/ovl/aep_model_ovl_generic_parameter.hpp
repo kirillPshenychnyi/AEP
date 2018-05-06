@@ -31,6 +31,8 @@ struct OvlCheckerGenericParameter
 
 /***************************************************************************/
 
+	virtual ~OvlCheckerGenericParameter() = default;
+
 	virtual GenericType::Kind getKind () const = 0;
 
 	virtual std::string kindToString () const = 0;

@@ -35,6 +35,8 @@ struct TypeFactory
 
 /***************************************************************************/
 
+	virtual ~TypeFactory() = default;
+
 	virtual std::unique_ptr< NetType > newNetType(
 			NetKind::Kind _netKind
 		,	std::unique_ptr< Dimension > _dimension

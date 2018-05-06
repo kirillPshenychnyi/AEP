@@ -30,6 +30,8 @@ struct IAccessor
 	
 /***************************************************************************/
 
+	virtual ~IAccessor() = default;
+
 	virtual void runEngine( 
 			GlobalClockParameters const & _clock
 		,	boost::optional< GlobalResetParameters const& > _reset
