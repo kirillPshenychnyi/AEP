@@ -20,13 +20,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-VariableImporter::VariableImporter( VlogDM::IAccessor & _accessor )
-	:	BaseClass( _accessor )
-{
-}
-
-/***************************************************************************/
-
 void
 VariableImporter::importVars( Verilog2001Parser::Net_declarationContext & _ctx )
 {
@@ -54,7 +47,7 @@ VariableImporter::importVar( _Context & _ctx )
 	using namespace VlogDM;
 
 	Writable::DeclaredFactory const& declaredFactory 
-		=	getVlogDataModel().getObjectFactory().getDeclaredFactory();
+		=	takeVlogDataModel().getObjectFactory().getDeclaredFactory();
 
 	addDeclareds(
 			_ctx
@@ -85,7 +78,7 @@ VariableImporter::createDeclaration(
 	)
 {
 	VlogDM::Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	return 
 		objectFactory.getDeclarationFactory().newVariableDeclaration( 

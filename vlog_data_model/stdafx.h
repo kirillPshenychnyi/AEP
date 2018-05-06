@@ -15,3 +15,4 @@
 #include <string>
 #include <memory>
 #include <boost\optional.hpp>
+#include <boost\noncopyable.hpp>

@@ -12,6 +12,13 @@
 
 /***************************************************************************/
 
+namespace EntryController 
+{
+	struct IAccessor;
+}
+
+/***************************************************************************/
+
 namespace VlogModelImportTests {
 
 /***************************************************************************/
@@ -49,6 +56,8 @@ public:
 	static _TTarget const & checkCast( _TSource const& _source );
 
 	VlogDM::IAccessor const & getVlogDm() const;
+
+	EntryController::IAccessor const & getEntryController() const;
 
 /***************************************************************************/
 

@@ -32,7 +32,7 @@
 // COMPILER DIRECTIVES: I converted them to C preproc and preprocessed with gcc -E.
 
 grammar Verilog2001;
-
+options {defaultErrorHandler=false;}
 // 1 Source text
 // 1.1 Library source text
 /* -- Some of this grammar removed as I didn't care about it

@@ -26,7 +26,7 @@ public:
 
 /***************************************************************************/
 
-	DataflowProcessImporter( VlogDM::IAccessor & _accessor );
+	using BaseImporter::BaseImporter;
 
 /***************************************************************************/
 

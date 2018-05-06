@@ -5,10 +5,6 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-#include <boost\noncopyable.hpp>
-
-#include <functional>
-
 /***************************************************************************/
 
 namespace VlogDM

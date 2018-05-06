@@ -26,8 +26,6 @@
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace VlogModelImportTests {

@@ -8,8 +8,6 @@
 #include "vlog_data_model\api\vlog_dm_base_identifier.hpp"
 #include "vlog_data_model\api\vlog_dm_range.hpp"
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace EntryController {
@@ -37,7 +35,7 @@ public:
 
 /***************************************************************************/
 
-	IdentifierImporter( VlogDM::IAccessor & _accessor );
+	using BaseImporter::BaseImporter;
 
 	void importIds( Verilog2001Parser::Net_assignmentContext const & _ctx );
 

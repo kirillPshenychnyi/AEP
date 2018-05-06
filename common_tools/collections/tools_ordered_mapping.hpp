@@ -160,7 +160,6 @@ template <
 	,	typename _Hasher = std::hash< _Key >
 	,	typename _Comparator = std::equal_to< _Key >
 	,	typename _KeyKiller = std::identity< _Key >
-	,	typename _ValueKiller = std::identity< _Value >
 	>
 	class OrderedSet
 {
@@ -172,7 +171,7 @@ template <
 		Vector;
 
 	typedef
-		boost::unordered_set< _Key, _Value, _Hasher, _Comparator >
+		boost::unordered_set< _Key, _Hasher, _Comparator >
 		Set;
 
 	typedef
@@ -182,6 +181,13 @@ template <
 /***************************************************************************/
 
 public:
+
+/***************************************************************************/
+
+	~OrderedSet()
+	{
+		clear();
+	}
 
 /***************************************************************************/
 
@@ -209,32 +215,37 @@ public:
 
 /***************************************************************************/
 
-	_Value const & operator [] ( int _idx ) const
+	_Key const & operator [] ( int _idx ) const
 	{
 		assert( _idx >= 0 && _idx < m_vector.size() );
 
-		return m_vector[ _idx ].second();
+		return m_vector[ _idx ];
 	}
 
 /***************************************************************************/
 
 	bool hasKey( _Key const & _key ) const
 	{
-		return m_set.find( _key, _Hasher(), _Comparator() ) != m_set.end();
+		return findByKey( _key ) != m_set.end();
 	}
 
 /***************************************************************************/
 
 	iterator findByKey( _Key const & _key ) const
 	{
-		return m_set.find( _key );
+		return m_set.find( _key, _Hasher(), _Comparator() );
 	}
 
 /***************************************************************************/
 
 	bool add( _Key const & _key )
 	{
-		return m_set.insert( _key );
+		const bool insertResult = m_set.insert( _key ).second;
+
+		if( insertResult )
+			m_vector.push_back( _key );
+
+		return insertResult;
 	}
 
 /***************************************************************************/
@@ -244,9 +255,7 @@ public:
 		_KeyKiller keyKiller;
 
 		for( _Key key : m_vector )
-		{
-			keyKiller( value );
-		}
+			keyKiller( key );
 
 		m_set.clear();
 		m_vector.clear();
@@ -257,6 +266,11 @@ public:
 	int size() const
 	{
 		return m_vector.size();
+	}
+
+	bool empty() const
+	{
+		return m_vector.empty();
 	}
 
 /***************************************************************************/
@@ -272,6 +286,9 @@ private:
 /***************************************************************************/
 
 };
+
+/***************************************************************************/
+
 }
 }
 

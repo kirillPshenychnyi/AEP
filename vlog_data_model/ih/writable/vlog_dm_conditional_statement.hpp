@@ -34,14 +34,14 @@ struct BaseBranchStatement
 
 /***************************************************************************/
 
-class ConditionalStatement
+struct ConditionalStatement
 	:	public BaseBranchStatement< VlogDM::ConditionalStatement, ConditionalBranch > 
 {
 };
 
 /***************************************************************************/
 
-class CaseStatement
+struct CaseStatement
 	:	public BaseBranchStatement< VlogDM::CaseStatement, VlogDM::BaseCaseItem > 
 {
 };

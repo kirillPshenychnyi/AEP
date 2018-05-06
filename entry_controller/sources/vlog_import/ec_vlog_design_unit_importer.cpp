@@ -17,14 +17,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-DesingUnitImporter::DesingUnitImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-
-}
-
-/***************************************************************************/
-
 antlrcpp::Any
 DesingUnitImporter::visitModule_declaration(
 	Verilog2001Parser::Module_declarationContext * ctx 
@@ -33,9 +25,9 @@ DesingUnitImporter::visitModule_declaration(
 	using namespace VlogDM;
 	
 	Writable::DesignUnitFactory const& unitsFactory 
-		= getVlogDataModel().getObjectFactory().getDesignUnitFactory();
+		= takeVlogDataModel().getObjectFactory().getDesignUnitFactory();
 
-	IAccessor & vlogDm = getVlogDataModel();
+	IAccessor & vlogDm = takeVlogDataModel();
 
 	vlogDm.addUnit( 
 		unitsFactory.newDesignUnit( 
@@ -55,7 +47,7 @@ antlrcpp::Any DesingUnitImporter::visitPort_declaration(
 	Verilog2001Parser::Port_declarationContext * ctx 
 )
 {
-	PortImporter portImporter( getVlogDataModel() );
+	PortImporter portImporter( takeVlogDataModel(), takeErrorsSet() );
 	portImporter.importPorts( *ctx );
 
 	RETURN_ANY
@@ -68,7 +60,7 @@ DesingUnitImporter::visitList_of_port_declarations(
 	Verilog2001Parser::List_of_port_declarationsContext * ctx 
 )
 {	
-	PortImporter portImporter( getVlogDataModel() );
+	PortImporter portImporter( takeVlogDataModel(), takeErrorsSet() );
 	portImporter.importPorts( *ctx );
 
 	RETURN_ANY
@@ -100,7 +92,7 @@ template< typename _Context >
 antlrcpp::Any 
 DesingUnitImporter::importItem( _Context & _ctx )
 {
-	ModuleItemImporter itemImporter( getVlogDataModel() );
+	ModuleItemImporter itemImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	itemImporter.importItems( _ctx );
 

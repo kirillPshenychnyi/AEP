@@ -5,8 +5,6 @@
 
 #include "vlog_import_tests\sources\fixtures\vlog_import_base_fixture.hpp"
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace VlogModelImportTests {

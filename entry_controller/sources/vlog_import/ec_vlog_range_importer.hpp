@@ -26,8 +26,8 @@ public:
 
 /***************************************************************************/
 
-	RangeImporter( VlogDM::IAccessor & _accessor );
-
+	using BaseImporter::BaseImporter;
+	
 /***************************************************************************/
 
 	VlogDM::RangePtr importRange( 

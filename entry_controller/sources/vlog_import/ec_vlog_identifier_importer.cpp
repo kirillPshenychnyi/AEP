@@ -3,6 +3,8 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_identifier_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_expression_importer.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_range_importer.hpp"
+#include "entry_controller\sources\errors\ec_errors_factory.hpp"
+#include "entry_controller\api\errors\ec_iundeclared_identifier_error.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
@@ -19,13 +21,6 @@
 
 namespace EntryController { 
 namespace VlogImport { 
-
-/***************************************************************************/
-
-IdentifierImporter::IdentifierImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-}
 
 /***************************************************************************/
 
@@ -73,7 +68,7 @@ IdentifierImporter::visitSimple_hierarchical_branch(
 antlrcpp::Any 
 IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext * ctx )
 {
-	RangeImporter rangeImporter( getVlogDataModel() );
+	RangeImporter rangeImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	m_currentRanges.push_back( rangeImporter.importRange( *ctx ) );
 
@@ -85,15 +80,24 @@ IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionCo
 antlrcpp::Any 
 IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 {
+	if( _ctx.children.empty() )
+		RETURN_ANY
+
+	std::string const identifier = _ctx.children.front()->getText();
+	
 	auto declared 
-		=	getVlogDataModel().getCurrentImportedUnit().findDeclared( 
-				_ctx.children.front()->getText() 
+		=	takeVlogDataModel().getCurrentImportedUnit().findDeclared( 
+				identifier
 			);
 
-	assert( declared );
+	if( !declared )
+	{
+		addError( Errors::ErrorsFactory::newUndeclaredIdentifierError( _ctx ) );
+		RETURN_ANY;
+	}
 
 	VlogDM::Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	m_extractedIds.push_back(
 		objectFactory.getItemsFactory().newIdentifier( 
@@ -122,7 +126,7 @@ IdentifierImporter::createRange()
 		return std::move( m_currentRanges.front() );
 
 	VlogDM::Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	auto multidimRange = 
 		objectFactory.getItemsFactory().newMultidimensionalRange( 

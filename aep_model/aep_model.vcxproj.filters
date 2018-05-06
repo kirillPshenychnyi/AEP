@@ -24,9 +24,6 @@
     <ClInclude Include="api\contexsts\aep_model_assertion_context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api\aep_model_referenced_signal_info.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\checkers\checker_values\aep_model_generic_type.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

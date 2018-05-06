@@ -40,7 +40,7 @@ public:
 
 /***************************************************************************/
 
-	StatementImporter( VlogDM::IAccessor & _accessor );
+	StatementImporter( VlogDM::IAccessor & _accessor, Errors::IImportErrorsSet & _errorsSet );
 
 /***************************************************************************/
 

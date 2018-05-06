@@ -15,8 +15,6 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace EntryController{
@@ -24,14 +22,7 @@ namespace VlogImport{
 
 /***************************************************************************/
 
-PortImporter::PortImporter( VlogDM::IAccessor & _accessor )
-	:	BaseClass( _accessor )
-{
-}
-
-/***************************************************************************/
-
-void 
+void
 PortImporter::importPorts( Verilog2001Parser::Port_declarationContext & _ctx )
 {	
 	_ctx.accept( this );
@@ -91,7 +82,7 @@ PortImporter::importPorts(
 	using namespace VlogDM;
 
 	Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	Writable::DeclaredFactory const& declaredFactory 
 		=	objectFactory.getDeclaredFactory();
@@ -125,7 +116,7 @@ PortImporter::createDeclaration(
 	) 
 {
 	VlogDM::Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 	
 	return 
 		objectFactory.getDeclarationFactory().newPortDeclaration( 

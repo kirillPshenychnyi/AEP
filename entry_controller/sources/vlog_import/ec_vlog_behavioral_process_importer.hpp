@@ -28,7 +28,7 @@ public:
 
 /***************************************************************************/
 
-	BehavioralProcessImporter( VlogDM::IAccessor & _accessor );
+	using BaseImporter::BaseImporter;
 
 /***************************************************************************/
 

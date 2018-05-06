@@ -7,6 +7,9 @@
 
 #include "entry_controller\sources\ec_accessor.hpp"
 #include "entry_controller\sources\vlog_import\ec_vlog_design_unit_importer.hpp"
+#include "entry_controller\sources\errors\ec_parse_error_listener.hpp"
+#include "entry_controller\sources\errors\ec_errors_set.hpp"
+#include "entry_controller\sources\errors\ec_dump_error_visitor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "aep\api\aep_iaccessor.hpp"
@@ -23,13 +26,14 @@ Accessor::Accessor(
 	)
 	:	m_vlogDm( *_vlogDm )
 	,	m_aepAccessor( *_aepAccessor )
+	,	m_importErrors( new Errors::ErrorsSet() )
 {
 
 }
 
 /***************************************************************************/
 
-void 
+bool 
 Accessor::importVerilog( std::string const & _code )
 {
 	m_vlogDm.reset();
@@ -42,11 +46,17 @@ Accessor::importVerilog( std::string const & _code )
 
 	Verilog2001Parser parser( &tokens );
 
+	Errors::ParseErrorListener errorListener( *m_importErrors );
+	parser.removeErrorListeners();
+	parser.addErrorListener( &errorListener );
+
 	antlr4::tree::ParseTree * tree = parser.source_text();
 
-	EntryController::VlogImport::DesingUnitImporter importer( m_vlogDm );
+	VlogImport::DesingUnitImporter importer( m_vlogDm, *m_importErrors );
 
 	tree->accept( &importer );
+
+	return !m_importErrors->hasErrors();
 }
 
 /***************************************************************************/
@@ -58,6 +68,21 @@ Accessor::runAepAnalysis(
 )
 {
 	m_aepAccessor.runEngine( _clockParams, _resetParams );
+}
+
+/***************************************************************************/
+
+void 
+Accessor::dumpErrors( std::ostream & _output ) const
+{
+	Errors::DumpErrorVisitor dumpErrors ( _output );
+
+	m_importErrors->forEachError(
+		[ & ]( Errors::ImportError const & _error )
+		{
+			_error.accept( dumpErrors );
+		}
+	);
 }
 
 /***************************************************************************/

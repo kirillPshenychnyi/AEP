@@ -18,13 +18,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-RangeImporter::RangeImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-}
-
-/***************************************************************************/
-
 VlogDM::RangePtr 
 RangeImporter::importRange( 
 	Verilog2001Parser::Range_expressionContext & _rangeExpression 
@@ -35,7 +28,7 @@ RangeImporter::importRange(
 	assert( m_lsbExpression );
 
 	VlogDM::Writable::ItemsFactory const & itemsFactory
-		=	getVlogDataModel().getObjectFactory().getItemsFactory();
+		=	takeVlogDataModel().getObjectFactory().getItemsFactory();
 
 	return 
 		m_msbExpression 
@@ -54,7 +47,7 @@ RangeImporter::importRange(
 antlrcpp::Any 
 RangeImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx )
 {
-	ExpressionImporter expressionImporter ( getVlogDataModel() );
+	ExpressionImporter expressionImporter ( takeVlogDataModel(), takeErrorsSet() );
 	
 	auto bitSelect = expressionImporter.importExpression( *ctx );
 

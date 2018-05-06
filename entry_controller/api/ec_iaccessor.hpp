@@ -3,9 +3,17 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "aep\api\aep_iaccessor.hpp"
+
+/***************************************************************************/
+
+namespace EntryController 
+{
+	namespace Errors 
+	{
+		struct IImportErrorsSet;
+	}
+}
 
 /***************************************************************************/
 
@@ -19,12 +27,18 @@ struct IAccessor
 
 /***************************************************************************/
 
-	virtual void importVerilog( std::string const& _code ) = 0;
+	virtual ~IAccessor() = default;
+
+	virtual bool importVerilog( std::string const& _code ) = 0;
 
 	virtual void runAepAnalysis(
 			Aep::IAccessor::GlobalClockParameters & _clockParams
 		,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
 	) = 0;
+
+	virtual Errors::IImportErrorsSet const& getImportErrors() const = 0;
+
+	virtual void dumpErrors( std::ostream & _output ) const = 0;
 
 /***************************************************************************/
 
