@@ -3,6 +3,10 @@
 
 /***************************************************************************/
 
+#include "common_tools\utils\declare_visitors.hpp"
+
+/***************************************************************************/
+
 namespace VlogDM {
 
 /***************************************************************************/
@@ -14,43 +18,13 @@ struct CaseStatement;
 
 /***************************************************************************/
 
-struct StatementVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( ConditionalStatement const & _statement ) = 0;
-
-	virtual void visit( BlockingAssignment const & _assignment ) = 0;
-	
-	virtual void visit( SequentialBlock const & _assignment ) = 0;
-
-	virtual void visit( CaseStatement const & _case ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-class StatementDefaultVisitor
-	:	public StatementVisitor
-{
-
-/***************************************************************************/
-
-	void visit( ConditionalStatement const & _statement ) override {}
-
-	void visit( BlockingAssignment const & _assignment ) override {}
-	
-	void visit( SequentialBlock const & _assignment ) override {}
-
-	void visit( CaseStatement const & _case ) override {}
-
-/***************************************************************************/
-
-};
+DECLARE_VISITORS( 
+		Statement
+	,	ConditionalStatement
+	,	BlockingAssignment
+	,	SequentialBlock
+	,	CaseStatement 
+)
 
 /***************************************************************************/
 

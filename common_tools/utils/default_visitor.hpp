@@ -47,10 +47,10 @@ struct DefaultVisitor< _BaseVisitor, _Type, _Other... >
 
 /***************************************************************************/
 
-#define DECLARE_DEFAULT_VISITOR( Name, ... )				\
-	typedef													\
-		Tools::DefaultVisitor< Name##Visitor, __VA_ARGS__ > \
-		Name##DefaultVisitor;
+#define DECLARE_DEFAULT_VISITOR( Name, ... )							\
+	struct Name##DefaultVisitor											\
+		:	public Tools::DefaultVisitor< Name##Visitor, __VA_ARGS__ >	\
+	{};
 
 
 /***************************************************************************/

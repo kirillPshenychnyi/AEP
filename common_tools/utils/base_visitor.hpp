@@ -23,6 +23,8 @@ public:
 
 /***************************************************************************/
 	
+	virtual ~Visitor() = default;
+
 	virtual void visit( T const & _visitable ) = 0;
 
 /***************************************************************************/
@@ -53,10 +55,10 @@ public:
 
 /***************************************************************************/
 
-#define DECLARE_VISITOR( Name, ... )	\
-	typedef								\
-		Tools::Visitor< __VA_ARGS__ >	\
-		Name##Visitor;
+#define DECLARE_VISITOR( Name, ... )				\
+	struct Name##Visitor							\
+		:	public Tools::Visitor< __VA_ARGS__ >	\
+	{};
 
 /***************************************************************************/
 

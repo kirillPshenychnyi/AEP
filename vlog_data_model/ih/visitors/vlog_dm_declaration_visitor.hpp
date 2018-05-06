@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "common_tools\utils\visitor_cast.hpp"
+#include "common_tools\utils\declare_visitors.hpp"
 
 /***************************************************************************/
 
@@ -16,35 +16,7 @@ struct VariableDeclaration;
 
 /***************************************************************************/
 
-struct DeclarationVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( PortDeclaration const& _port ) = 0;
-
-	virtual void visit( VariableDeclaration const& _var ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct DeclarationDefaultVisitor
-	:	public DeclarationVisitor
-{
-
-/***************************************************************************/
-
-	void visit( PortDeclaration const& _port ) override {}
-
-	void visit( VariableDeclaration const& _var ) override {}
-
-/***************************************************************************/
-
-};
+DECLARE_VISITORS( Declaration, PortDeclaration, VariableDeclaration )
 
 /***************************************************************************/
 

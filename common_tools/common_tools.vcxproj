@@ -156,6 +156,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="utils\base_visitor.hpp" />
+    <ClInclude Include="utils\declare_visitors.hpp" />
     <ClInclude Include="utils\default_visitor.hpp" />
     <ClInclude Include="utils\string_utils.hpp" />
     <ClInclude Include="utils\visitor_cast.hpp" />

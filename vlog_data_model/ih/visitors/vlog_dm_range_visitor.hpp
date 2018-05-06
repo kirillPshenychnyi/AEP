@@ -3,6 +3,10 @@
 
 /***************************************************************************/
 
+#include "common_tools\utils\declare_visitors.hpp"
+
+/***************************************************************************/
+
 namespace VlogDM
 {
 
@@ -15,39 +19,7 @@ namespace VlogDM
 
 /***************************************************************************/
 
-struct RangeVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( ExpressionRange const & _range ) = 0;
-
-	virtual void visit( PartSelectRange const & _range ) = 0;
-
-	virtual void visit( MultidimensionalRange const & _range ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct RangeDefaultVisitor
-	:	public RangeVisitor
-{
-
-/***************************************************************************/
-
-	void visit( ExpressionRange const & _range ) override {}
-
-	void visit( PartSelectRange const & _range ) override {}
-
-	void visit( MultidimensionalRange const & _range ) override {}
-
-/***************************************************************************/
-
-};
+DECLARE_VISITORS( Range, ExpressionRange, PartSelectRange, MultidimensionalRange )
 
 /***************************************************************************/
 

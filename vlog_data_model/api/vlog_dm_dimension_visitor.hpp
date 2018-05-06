@@ -3,6 +3,11 @@
 
 /***************************************************************************/
 
+#include "common_tools\utils\default_visitor.hpp"
+#include "common_tools\utils\base_visitor.hpp"
+
+/***************************************************************************/
+
 namespace VlogDM
 {
 
@@ -13,19 +18,9 @@ namespace VlogDM
 
 /***************************************************************************/
 
-struct DimensionVisitor
-	:	public boost::noncopyable
-{
+DECLARE_VISITOR( Dimension, PackedDimension, UnpackedDimension )
 
-/***************************************************************************/
-	
-	virtual void visit( PackedDimension const & _dimension ) const = 0;
-
-	virtual void visit( UnpackedDimension const & _dimension ) const = 0;
-
-/***************************************************************************/
-
-};
+DECLARE_DEFAULT_VISITOR( Dimension, PackedDimension, UnpackedDimension )
 
 /***************************************************************************/
 
