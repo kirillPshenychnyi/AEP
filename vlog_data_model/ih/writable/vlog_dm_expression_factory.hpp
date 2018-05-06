@@ -7,8 +7,6 @@
 
 #include "vlog_data_model\api\vlog_dm_operator.hpp"
 
-#include <boost\noncopyable.hpp>
-
 /***************************************************************************/
 
 namespace VlogDM {

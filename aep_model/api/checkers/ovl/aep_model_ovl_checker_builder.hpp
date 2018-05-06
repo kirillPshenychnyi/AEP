@@ -9,8 +9,6 @@
 #include "aep_model\api\checkers\checker_values\aep_model_clock_edge.hpp"
 #include "aep_model\api\checkers\checker_values\aep_model_severity_level.hpp"
 
-#include <boost\noncopyable.hpp>
-
 /***************************************************************************/
 
 #define AEP_DECLARE_PORT_SETTER( NAME ) \

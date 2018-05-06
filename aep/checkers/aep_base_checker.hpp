@@ -7,7 +7,6 @@
 
 #include "aep_model\api\aep_model_fwd.hpp"
 
-#include <boost\noncopyable.hpp>
 #include <functional>
 
 /***************************************************************************/

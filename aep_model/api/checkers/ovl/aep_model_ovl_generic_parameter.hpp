@@ -5,7 +5,6 @@
 
 #include "aep_model\api\checkers\checker_values\aep_model_generic_type.hpp"
 
-#include <boost\noncopyable.hpp>
 #include <boost\functional\hash.hpp>
 
 /***************************************************************************/
