@@ -67,6 +67,8 @@ public:
 
 	ImportError const & getError ( int _idx ) const;
 
+	void reset();
+
 /***************************************************************************/
 
 private:
@@ -95,6 +97,15 @@ ImportError const &
 ErrorsSet::getError( int _idx ) const
 {
 	return *m_errors[ _idx ];
+}
+
+/***************************************************************************/
+
+inline 
+void 
+ErrorsSet::reset() 
+{
+	m_errors.clear();
 }
 
 /***************************************************************************/

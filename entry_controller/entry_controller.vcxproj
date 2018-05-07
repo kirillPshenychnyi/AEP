@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_67_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
@@ -109,7 +109,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_67_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
@@ -131,7 +131,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_67_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
@@ -155,7 +155,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\parsers\antlr\Cpp\runtime\src;E:\Education\programming\c++ projects\boost_1_67_0;E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\VerilogFormalVerification\entry_controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>

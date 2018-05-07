@@ -38,7 +38,9 @@ struct IImportErrorsSet
 
 	virtual int getErrorsCount() const = 0;
 
-	virtual ImportError const & getError ( int _idx ) const = 0;
+	virtual ImportError const & getError( int _idx ) const = 0;
+
+	virtual void reset() = 0;
 
 /***************************************************************************/
 

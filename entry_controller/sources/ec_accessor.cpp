@@ -36,7 +36,7 @@ Accessor::Accessor(
 bool 
 Accessor::importVerilog( std::string const & _code )
 {
-	m_vlogDm.reset();
+	reset();
 
 	antlr4::ANTLRInputStream stream( _code );
 
@@ -83,6 +83,15 @@ Accessor::dumpErrors( std::ostream & _output ) const
 			_error.accept( dumpErrors );
 		}
 	);
+}
+
+/***************************************************************************/
+
+void 
+Accessor::reset()
+{
+	m_vlogDm.reset();
+	m_importErrors->reset();
 }
 
 /***************************************************************************/

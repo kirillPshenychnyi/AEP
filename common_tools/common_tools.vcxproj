@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
