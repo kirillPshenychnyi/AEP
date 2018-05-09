@@ -3,9 +3,8 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "aep_model\api\aep_model_fwd.hpp"
+#include "common_tools\utils\declare_visitors.hpp"
 
 /***************************************************************************/
 

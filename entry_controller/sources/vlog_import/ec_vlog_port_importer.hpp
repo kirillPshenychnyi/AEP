@@ -32,7 +32,7 @@ public:
 
 /***************************************************************************/
 
-	PortImporter( VlogDM::IAccessor & _accessor );
+	using BaseClass::BaseNetImporter;
 
 	void importPorts( Verilog2001Parser::Port_declarationContext & _ctx );
 	

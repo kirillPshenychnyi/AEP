@@ -3,8 +3,6 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
-
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 #include "vlog_data_model\api\vlog_dm_port_directrion.hpp"
@@ -22,6 +20,8 @@ struct DeclaredFactory
 {
 
 /***************************************************************************/
+
+	virtual ~DeclaredFactory() = default;
 
 	virtual PortPtr newPort ( 
 			VlogDM::Declaration const & _declaration

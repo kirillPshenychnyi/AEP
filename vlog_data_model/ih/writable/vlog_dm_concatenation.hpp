@@ -20,6 +20,8 @@ struct Concatenation
 
 /***************************************************************************/
 
+	virtual ~Concatenation() = default;
+
 	virtual void addExpression( ExpressionPtr _expression ) = 0;
 
 /***************************************************************************/

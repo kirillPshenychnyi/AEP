@@ -22,10 +22,10 @@ namespace VlogDM
 /***************************************************************************/
 
 class DesignUnitImpl
-	:	public NamedLocatedImpl< DeclarationsContainerImpl< Writable::DesignUnit > >
+	: public NamedLocatedImpl< DeclarationsContainerImpl< Writable::DesignUnit > >
 {
 
-/***************************************************************************/
+	/***************************************************************************/
 
 	typedef
 		NamedLocatedImpl< DeclarationsContainerImpl< Writable::DesignUnit > >
@@ -43,11 +43,11 @@ class DesignUnitImpl
 		std::unordered_map< std::string, InstancesNames >
 		InstantiationTable;
 
-/***************************************************************************/
+	/***************************************************************************/
 
 public:
 
-/***************************************************************************/
+	/***************************************************************************/
 
 	DesignUnitImpl( std::string const & _name, Location const & _location );
 

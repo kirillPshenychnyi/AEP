@@ -20,12 +20,6 @@
 namespace EntryController {
 namespace VlogImport {
 
-/***************************************************************************/
-
-CaseItemImporter::CaseItemImporter( VlogDM::IAccessor & _vlogDm )
-	:	BaseImporter( _vlogDm )
-{
-}
 
 /***************************************************************************/
 
@@ -34,14 +28,14 @@ CaseItemImporter::importCaseItem( Verilog2001Parser::Case_itemContext & _caseIte
 {
 	using namespace VlogDM;
 
-	StatementImporter statementImporter( getVlogDataModel() );
+	StatementImporter statementImporter( takeVlogDataModel(), takeErrorsSet() );
 	
 	if( auto defaultItem = _caseItem.default_case_item() )
 	{
 		statementImporter.importStatement( *defaultItem->statement_or_null() );
 
 		Writable::DefaultCaseItemPtr defaultCaseItem
-			=	getVlogDataModel().getObjectFactory().getItemsFactory().newDefaultCaseItem( 
+			=	takeVlogDataModel().getObjectFactory().getItemsFactory().newDefaultCaseItem( 
 					createLocation( _caseItem ) 
 				);
 
@@ -53,12 +47,12 @@ CaseItemImporter::importCaseItem( Verilog2001Parser::Case_itemContext & _caseIte
 	auto const & expressions = _caseItem.expression();
 	
 	Writable::CaseItemPtr caseItem
-		=	getVlogDataModel().getObjectFactory().getItemsFactory().newCaseItem( 
+		=	takeVlogDataModel().getObjectFactory().getItemsFactory().newCaseItem( 
 				createLocation( _caseItem ) 
 			);
 
 
-	ExpressionImporter exprImporter( getVlogDataModel() );
+	ExpressionImporter exprImporter( takeVlogDataModel(), takeErrorsSet() );
 	
 	const int nExpressions = expressions.size();
 	for( int i = 0; i < nExpressions; ++i )

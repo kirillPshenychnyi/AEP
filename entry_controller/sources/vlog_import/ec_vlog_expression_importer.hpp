@@ -92,7 +92,10 @@ public:
 
 /***************************************************************************/
 
-	ExpressionImporter( VlogDM::IAccessor & _vlogDm );
+	ExpressionImporter( 
+			VlogDM::IAccessor & _vlogDm 
+		,	Errors::IImportErrorsSet & _errorsSet 
+	);
 
 	VlogDM::ExpressionPtr importExpression( 
 		Verilog2001Parser::ExpressionContext const & _expression

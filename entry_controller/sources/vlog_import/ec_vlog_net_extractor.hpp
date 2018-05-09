@@ -51,7 +51,7 @@ public:
 
 /***************************************************************************/
 
-	NetExtractor( VlogDM::IAccessor & _accessor );
+	NetExtractor( VlogDM::IAccessor & _accessor, Errors::IImportErrorsSet & _errorsSet );
 
 /***************************************************************************/
 

@@ -6,7 +6,6 @@
 #include "aep_model\api\checkers\checker_values\aep_model_port_kind.hpp"
 
 #include <boost\functional\hash.hpp>
-#include <boost\noncopyable.hpp>
 
 /***************************************************************************/
 
@@ -25,6 +24,8 @@ struct OvlCheckerPort
 		Ptr;
 
 /***************************************************************************/
+
+	virtual ~OvlCheckerPort() = default;
 
 	virtual OvlCheckerPortKind::Kind getKind() const = 0;
 

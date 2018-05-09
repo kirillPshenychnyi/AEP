@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_62_0\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\boost_1_67_0</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -155,6 +155,9 @@
     <ClInclude Include="collections\tools_ordered_mapping.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="utils\base_visitor.hpp" />
+    <ClInclude Include="utils\declare_visitors.hpp" />
+    <ClInclude Include="utils\default_visitor.hpp" />
     <ClInclude Include="utils\string_utils.hpp" />
     <ClInclude Include="utils\visitor_cast.hpp" />
     <ClInclude Include="utils\convertors.hpp" />

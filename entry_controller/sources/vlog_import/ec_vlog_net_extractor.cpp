@@ -26,10 +26,10 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-NetExtractor::NetExtractor( VlogDM::IAccessor & _accessor )
-	: BaseImporter( _accessor )
-	, m_netType( VlogDM::NetKind::Kind::wire )
-	, m_isReg( false )
+NetExtractor::NetExtractor( VlogDM::IAccessor & _accessor, Errors::IImportErrorsSet & _errorsSet )
+	:	BaseImporter( _accessor, _errorsSet )
+	,	m_netType( VlogDM::NetKind::Kind::wire )
+	,	m_isReg( false )
 {
 }
 
@@ -153,7 +153,7 @@ NetExtractor::initType()
 {
 	using namespace VlogDM;
 
-	IAccessor & vlogDm = getVlogDataModel();
+	IAccessor & vlogDm = takeVlogDataModel();
 
 	Writable::TypeFactory const & typeFactory 
 		= vlogDm.getObjectFactory().getTypeFactory();
@@ -186,7 +186,7 @@ NetExtractor::createRange( Range const & _dimension )
 	using namespace VlogDM;
 
 	Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	Writable::ExpressionFactory const& expressionFactory
 		=	objectFactory.getExpressionFactory();
@@ -225,7 +225,7 @@ NetExtractor::initDimension(
 	using namespace VlogDM;
 	
 	Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	m_typeDimension.reset(
 		objectFactory.getItemsFactory().newPackedDimension( 
@@ -249,7 +249,7 @@ NetExtractor::pushDimension()
 	}
 
 	Writable::ObjectFactory const & objectFactory
-		= getVlogDataModel().getObjectFactory();
+		= takeVlogDataModel().getObjectFactory();
 
 	Writable::ItemsFactory const & itemsFactory
 		=	objectFactory.getItemsFactory();

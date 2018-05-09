@@ -3,8 +3,6 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "vlog_data_model\api\vlog_dm_net_kind.hpp"
 #include "vlog_data_model\api\vlog_dm_variable_kind.hpp"
 
@@ -34,6 +32,8 @@ struct TypeFactory
 {
 
 /***************************************************************************/
+
+	virtual ~TypeFactory() = default;
 
 	virtual std::unique_ptr< NetType > newNetType(
 			NetKind::Kind _netKind

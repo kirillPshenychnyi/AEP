@@ -3,8 +3,6 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 #include "aep_model\api\aep_model_fwd.hpp"
 
@@ -29,6 +27,8 @@ struct IAccessor
 		GlobalClockParameters;
 	
 /***************************************************************************/
+
+	virtual ~IAccessor() = default;
 
 	virtual void runEngine( 
 			GlobalClockParameters const & _clock

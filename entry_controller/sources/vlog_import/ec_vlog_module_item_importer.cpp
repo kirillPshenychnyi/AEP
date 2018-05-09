@@ -17,13 +17,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-ModuleItemImporter::ModuleItemImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-}
-
-/***************************************************************************/
-
 void 
 ModuleItemImporter::importItems( 
 		Verilog2001Parser::Non_port_module_itemContext & _ctx 
@@ -69,7 +62,7 @@ ModuleItemImporter::visitContinuous_assign(
 		Verilog2001Parser::Continuous_assignContext * ctx
 	)
 {
-	DataflowProcessImporter dataflowImporter( getVlogDataModel() );
+	DataflowProcessImporter dataflowImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	dataflowImporter.importProcess( *ctx );
 
@@ -83,7 +76,7 @@ ModuleItemImporter::visitAlways_construct(
 	Verilog2001Parser::Always_constructContext * ctx
 )
 {
-	BehavioralProcessImporter processImporter( getVlogDataModel() );
+	BehavioralProcessImporter processImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	processImporter.importProcess( *ctx );
 
@@ -101,7 +94,7 @@ ModuleItemImporter::visitModule_instantiation(
 
 	for( auto const instance : ctx->module_instance() )
 	{ 
-		getVlogDataModel().getCurrentImportedUnit().addChildInstance( 
+		takeVlogDataModel().getCurrentImportedUnit().addChildInstance( 
 				moduleId
 			,	instance->name_of_instance()->getText()
 		);
@@ -116,7 +109,7 @@ template< typename _Context >
 antlrcpp::Any
 ModuleItemImporter::importVar( _Context & _ctx )
 {
-	VariableImporter varImporter( getVlogDataModel() );
+	VariableImporter varImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	varImporter.importVars( _ctx );
 

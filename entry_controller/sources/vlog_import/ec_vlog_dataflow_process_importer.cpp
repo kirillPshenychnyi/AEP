@@ -25,13 +25,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-DataflowProcessImporter::DataflowProcessImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-}
-
-/***************************************************************************/
-
 void 
 DataflowProcessImporter::importProcess( 
 		Verilog2001Parser::Continuous_assignContext & _ctx 
@@ -50,7 +43,7 @@ DataflowProcessImporter::visitNet_assignment(
 {
 	using namespace VlogDM;
 
-	IdentifierImporter idImporter( getVlogDataModel() );
+	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	// lhs is first child
 	ctx->children.front()->accept( &idImporter );
@@ -58,7 +51,7 @@ DataflowProcessImporter::visitNet_assignment(
 	m_targetExpression 
 		=	ExpressionImporter::createExpressionFromIds(
 					idImporter
-				,	getVlogDataModel().getObjectFactory().getExpressionFactory()
+				,	takeVlogDataModel().getObjectFactory().getExpressionFactory()
 				,	createLocation( *ctx )
 			);
 
@@ -75,11 +68,11 @@ DataflowProcessImporter::visitExpression( Verilog2001Parser::ExpressionContext *
 {
 	using namespace VlogDM;
 
-	IAccessor & vlogDm = getVlogDataModel();
+	IAccessor & vlogDm = takeVlogDataModel();
 
 	Writable::ObjectFactory const & objectFactory = vlogDm.getObjectFactory();
 
-	ExpressionImporter expressionImporter( getVlogDataModel() );
+	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	auto process = objectFactory.getItemsFactory().newContinuousAssignment( 
 							m_processLocation 

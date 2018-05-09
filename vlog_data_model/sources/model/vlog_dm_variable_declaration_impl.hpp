@@ -34,7 +34,7 @@ public:
 		:	BaseClass( _location, std::move( _type ) )
 	{
 	}
-	
+
 	void accept( DeclarationVisitor & _visitor ) const final
 	{
 		_visitor.visit( *this );

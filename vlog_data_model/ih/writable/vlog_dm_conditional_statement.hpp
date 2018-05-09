@@ -26,6 +26,8 @@ struct BaseBranchStatement
 
 /***************************************************************************/
 
+	virtual ~BaseBranchStatement() = default;
+
 	virtual void addBranch( Branch _branch ) = 0;
 
 /***************************************************************************/
@@ -34,14 +36,14 @@ struct BaseBranchStatement
 
 /***************************************************************************/
 
-class ConditionalStatement
+struct ConditionalStatement
 	:	public BaseBranchStatement< VlogDM::ConditionalStatement, ConditionalBranch > 
 {
 };
 
 /***************************************************************************/
 
-class CaseStatement
+struct CaseStatement
 	:	public BaseBranchStatement< VlogDM::CaseStatement, VlogDM::BaseCaseItem > 
 {
 };

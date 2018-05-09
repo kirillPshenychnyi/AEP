@@ -3,12 +3,17 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 #include "vlog_import_tests\catch.hpp"
 #include "hypodermic\Hypodermic.h"
+
+/***************************************************************************/
+
+namespace EntryController 
+{
+	struct IAccessor;
+}
 
 /***************************************************************************/
 
@@ -49,6 +54,8 @@ public:
 	static _TTarget const & checkCast( _TSource const& _source );
 
 	VlogDM::IAccessor const & getVlogDm() const;
+
+	EntryController::IAccessor const & getEntryController() const;
 
 /***************************************************************************/
 

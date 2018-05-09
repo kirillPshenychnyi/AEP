@@ -5,16 +5,16 @@
 
 #include "entry_controller\ANTLRGenerated\Verilog2001BaseVisitor.h"
 
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+
 /***************************************************************************/
 
-namespace VlogDM
-{
-	struct Location;
-	struct IAccessor;
-
-	namespace Writable 
+namespace EntryController 
+{ 
+	namespace Errors 
 	{
-		struct DesignUnit;
+		struct ImportError;
+		struct IImportErrorsSet;
 	}
 }
 
@@ -42,17 +42,22 @@ class BaseImporter
 
 /***************************************************************************/
 
-protected:
+public:
 
 /***************************************************************************/
 
-	BaseImporter( VlogDM::IAccessor & _accessor );
+	BaseImporter(
+			VlogDM::IAccessor & _accessor 
+		,	Errors::IImportErrorsSet & _errorsSet
+	);
 
 /***************************************************************************/
 
 	const VlogDM::Location createLocation( antlr4::ParserRuleContext & _ctx ) const;
 
 	void visitEachChildContext( antlr4::ParserRuleContext const& _ctx );
+
+	void addError( std::unique_ptr< Errors::ImportError > _error );
 
 	void forEachChildContext( 
 			antlr4::ParserRuleContext const& _ctx
@@ -61,7 +66,8 @@ protected:
 
 /***************************************************************************/
 
-	VlogDM::IAccessor & getVlogDataModel();
+	VlogDM::IAccessor & takeVlogDataModel();
+	Errors::IImportErrorsSet & takeErrorsSet();
 
 /***************************************************************************/
 
@@ -70,6 +76,7 @@ private:
 /***************************************************************************/
 
 	VlogDM::IAccessor &	m_vlogDataModel;
+	Errors::IImportErrorsSet & m_errorsSet;
 
 /***************************************************************************/
 
@@ -79,9 +86,18 @@ private:
 
 inline 
 VlogDM::IAccessor &
-BaseImporter::getVlogDataModel()
+BaseImporter::takeVlogDataModel()
 {
 	return m_vlogDataModel;
+}
+
+/***************************************************************************/
+
+inline 
+Errors::IImportErrorsSet & 
+BaseImporter::takeErrorsSet()
+{
+	return m_errorsSet;
 }
 
 /***************************************************************************/

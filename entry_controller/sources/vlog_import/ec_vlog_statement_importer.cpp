@@ -29,8 +29,11 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-StatementImporter::StatementImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
+StatementImporter::StatementImporter( 
+		VlogDM::IAccessor & _accessor 
+	,	Errors::IImportErrorsSet & _errorsSet
+	)
+	:	BaseImporter( _accessor, _errorsSet )
 	,	m_statementFactory( _accessor.getObjectFactory().getStatementFactory() )
 {
 }
@@ -131,7 +134,7 @@ StatementImporter::visitDelay_or_event_control(
 	const int expressionsInTimingControl = extractor.m_extracted.size();
 	for( int i = 0; i < expressionsInTimingControl; ++i )
 	{ 
-		ExpressionImporter expressionImporter( getVlogDataModel() );
+		ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
 
 		m_controls.push_back( 
 			expressionImporter.importExpression( *extractor.m_extracted[ i ] ) 
@@ -153,9 +156,12 @@ StatementImporter::visitConditional_statement(
 	struct ConditionalStatementItemsExtractor
 		:	public Verilog2001BaseVisitor
 	{
-		ConditionalStatementItemsExtractor( VlogDM::IAccessor & _vlogDm )
-			:	m_expressionImporter( _vlogDm )
-			,	m_statementImporter( _vlogDm )
+		ConditionalStatementItemsExtractor( 
+				VlogDM::IAccessor & _vlogDm 
+			,	Errors::IImportErrorsSet & _errorsSet 
+		)
+			:	m_expressionImporter( _vlogDm, _errorsSet )
+			,	m_statementImporter( _vlogDm, _errorsSet )
 		{
 		}
 
@@ -191,7 +197,7 @@ StatementImporter::visitConditional_statement(
 		StatementsVector m_statements;
 	};
 
-	ConditionalStatementItemsExtractor extractor( getVlogDataModel() );
+	ConditionalStatementItemsExtractor extractor( takeVlogDataModel(), takeErrorsSet() );
 
 	extractor.extract( *ctx );
 
@@ -239,14 +245,14 @@ StatementImporter::visitBlocking_assignment(
 	using namespace VlogDM;
 
 	Writable::ExpressionFactory const & expressionFactory 
-		= getVlogDataModel().getObjectFactory().getExpressionFactory();
+		= takeVlogDataModel().getObjectFactory().getExpressionFactory();
 
-	IdentifierImporter idImporter( getVlogDataModel() );
+	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	// first child is always var assign context
 	idImporter.importIds( *ctx->variable_lvalue() );
 
-	ExpressionImporter expressionImporter( getVlogDataModel() );
+	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	m_resultStatement
 		=	m_statementFactory.newBlockingAssignment(
@@ -271,7 +277,7 @@ StatementImporter::visitSeq_block(
 	Verilog2001Parser::Seq_blockContext * ctx
 )
 {
-	StatementImporter importer( getVlogDataModel() );
+	StatementImporter importer( takeVlogDataModel(), takeErrorsSet() );
 
 	auto seqBlock = m_statementFactory.newSequentialBlock( createLocation( *ctx ) );
 
@@ -304,9 +310,9 @@ StatementImporter::visitCase_statement(
 	static const char * parallelCaseAttr = "parallel_case";
 	static const char * fullCaseAttr = "full_case";
 
-	IAccessor & accessor = getVlogDataModel();
+	IAccessor & accessor = takeVlogDataModel();
 
-	ExpressionImporter expressionImporter( getVlogDataModel() );
+	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	auto caseStmt
 		=	m_statementFactory.newCaseStatement( 
@@ -318,7 +324,7 @@ StatementImporter::visitCase_statement(
 			
 		);
 
-	CaseItemImporter itemImporter( getVlogDataModel() );
+	CaseItemImporter itemImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	for( auto item : ctx->case_item() )
 		caseStmt->addBranch( itemImporter.importCaseItem( *item ) );

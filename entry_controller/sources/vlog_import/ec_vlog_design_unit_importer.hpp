@@ -6,8 +6,6 @@
 #include "entry_controller\sources\vlog_import\ec_vlog_base_importer.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_declarations_container.hpp"
 
-#include <vector>
-
 /***************************************************************************/
 
 namespace EntryController {
@@ -25,7 +23,7 @@ public:
 
 /***************************************************************************/
 
-	DesingUnitImporter( VlogDM::IAccessor & _accessor );
+	using BaseImporter::BaseImporter;
 
 /***************************************************************************/
 

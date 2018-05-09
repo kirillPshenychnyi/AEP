@@ -19,15 +19,6 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-BehavioralProcessImporter::BehavioralProcessImporter( 
-		VlogDM::IAccessor & _accessor 
-	)
-	:	BaseImporter( _accessor )
-{
-}
-
-/***************************************************************************/
-
 void
 BehavioralProcessImporter::importProcess( 
 	Verilog2001Parser::Always_constructContext & _always 
@@ -35,7 +26,7 @@ BehavioralProcessImporter::importProcess(
 {
 	using namespace VlogDM;
 
-	IAccessor & vlogDM = getVlogDataModel();
+	IAccessor & vlogDM = takeVlogDataModel();
 
 	VlogDM::Writable::ItemsFactory const & itemsFactory 
 		=	vlogDM.getObjectFactory().getItemsFactory();
@@ -60,7 +51,7 @@ BehavioralProcessImporter::importStatement(
 	Verilog2001Parser::StatementContext & _statement 
 )
 {
-	StatementImporter statementImporter( getVlogDataModel() );
+	StatementImporter statementImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	statementImporter.importStatement( _statement );
 	
@@ -72,7 +63,7 @@ BehavioralProcessImporter::importStatement(
 		return;
 		
 	VlogDM::Writable::SensitivityListPtr sensList
-		=	getVlogDataModel().getObjectFactory().getItemsFactory().newSensitivityList(
+		=	takeVlogDataModel().getObjectFactory().getItemsFactory().newSensitivityList(
 				createLocation( _statement )
 			);
 

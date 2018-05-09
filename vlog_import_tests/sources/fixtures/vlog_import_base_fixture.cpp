@@ -51,6 +51,14 @@ BaseFixture::getVlogDm() const
 
 /***************************************************************************/
 
+EntryController::IAccessor const & 
+BaseFixture::getEntryController() const
+{
+	return *m_bootstrapper.m_container->resolve< EntryController::IAccessor >();
+}
+
+/***************************************************************************/
+
 void 
 BaseFixture::runImport( std::string const & _code )
 {

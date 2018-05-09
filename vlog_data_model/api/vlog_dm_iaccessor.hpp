@@ -5,10 +5,6 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-#include <boost\noncopyable.hpp>
-
-#include <functional>
-
 /***************************************************************************/
 
 namespace VlogDM
@@ -27,6 +23,8 @@ struct IAccessor
 		DesignUnitCallback;
 
 /***************************************************************************/
+
+	virtual ~IAccessor() = default;
 
 	virtual boost::optional< DesignUnit const & > findUnit(
 		std::string const& _unitName

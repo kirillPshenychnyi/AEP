@@ -45,6 +45,9 @@
     <ClInclude Include="sources\fixtures\vlog_import_expression_bitwidth_engine_fixture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\fixtures\vlog_import_errors_fixture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -82,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="sources\tests\engines_test\vlog_expression_bitwidth_test.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\fixtures\vlog_import_errors_fixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\tests\vlog_import_errors_test.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

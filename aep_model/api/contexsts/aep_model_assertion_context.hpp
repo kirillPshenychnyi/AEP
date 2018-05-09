@@ -5,8 +5,6 @@
 
 #include "aep_model\api\aep_model_fwd.hpp"
 
-#include <boost\noncopyable.hpp>
-
 #include <functional>
 
 /***************************************************************************/
@@ -55,6 +53,8 @@ struct AssertionContext
 		CheckerCallback;
 
 /***************************************************************************/
+
+	virtual ~AssertionContext() = default;
 
 	virtual std::string const & getDUTName() const = 0;
 

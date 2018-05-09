@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "common_tools\utils\declare_visitors.hpp"
 
 /***************************************************************************/
 
@@ -16,35 +16,7 @@ struct VariableType;
 
 /***************************************************************************/
 
-struct TypeVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( NetType const & _netType ) = 0;
-
-	virtual void visit( VariableType const & _varType ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct TypeDefaultVisitor
-	:	public TypeVisitor
-{
-
-/***************************************************************************/
-
-	void visit( NetType const& _port ) override {}
-	
-	void visit( VariableType const & _varType ) override {}
-
-/***************************************************************************/
-
-};
+DECLARE_VISITORS( Type, NetType, VariableType )
 
 /***************************************************************************/
 

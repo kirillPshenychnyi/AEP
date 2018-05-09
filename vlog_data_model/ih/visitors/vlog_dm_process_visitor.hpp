@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
+#include "common_tools\utils\declare_visitors.hpp"
 
 /***************************************************************************/
 
@@ -16,35 +16,9 @@ struct BehavioralProcess;
 
 /***************************************************************************/
 
-struct ProcessVisitor
-	:	boost::noncopyable
-{
+DECLARE_VISITORS( Process, ContinuousAssignment, BehavioralProcess )
 
 /***************************************************************************/
-
-	virtual void visit( ContinuousAssignment const & _assign ) = 0;
-
-	virtual void visit( BehavioralProcess const & _assign ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct ProcessDefaultVisitor
-	:	public ProcessVisitor
-{
-
-/***************************************************************************/
-
-	void visit( ContinuousAssignment const & _assign ) override {}
-
-	void visit( BehavioralProcess const & _assign ) override {}
-
-/***************************************************************************/
-
-};
 
 /***************************************************************************/
 

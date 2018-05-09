@@ -17,6 +17,8 @@ struct ObjectFactory
 
 /***************************************************************************/
 
+	virtual ~ObjectFactory() = default;
+
 	virtual Writable::DesignUnitFactory const& getDesignUnitFactory() const = 0;
 
 	virtual Writable::DeclarationFactory const& getDeclarationFactory() const = 0;

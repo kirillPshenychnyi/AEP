@@ -27,8 +27,11 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-ExpressionImporter::ExpressionImporter( VlogDM::IAccessor & _vlogDm )
-	:	BaseImporter( _vlogDm )
+ExpressionImporter::ExpressionImporter( 
+		VlogDM::IAccessor & _vlogDm 
+	,	Errors::IImportErrorsSet & _errorsSet 
+)
+	:	BaseImporter( _vlogDm, _errorsSet )
 	,	m_expressionFactory( _vlogDm.getObjectFactory().getExpressionFactory() )
 {
 }
@@ -226,7 +229,7 @@ ExpressionImporter::createConcat(
 				createLocation( _concateContext ) 
 			);
 
-	ExpressionImporter importer( getVlogDataModel() );
+	ExpressionImporter importer( takeVlogDataModel(), takeErrorsSet() );
 	for( auto expression : _concateContext.expression() )
 		concat->addExpression( importer.importExpression( *expression ) );
 
@@ -310,7 +313,7 @@ ExpressionImporter::visitExpression( Verilog2001Parser::ExpressionContext * ctx 
 		visitEachChildContext( *ctx );
 	else 
 	{
-		ExpressionImporter expressionImporter( getVlogDataModel() );
+		ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
 		
 		lastContext.addOperand( expressionImporter.importExpression( *ctx ) );
 	}
@@ -374,15 +377,18 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 {
 	using namespace VlogDM;
 
-	IdentifierImporter idImporter( getVlogDataModel() );
+	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	idImporter.importId( *ctx );
 
-	getLastContext().addOperand( 
-		m_expressionFactory.newPrimaryIdentifier( 
+	if( idImporter.getIdsCount() != 0 )
+	{
+		getLastContext().addOperand(
+			m_expressionFactory.newPrimaryIdentifier(
 				idImporter.takeId( 0 )
-		)
-	);
+			)
+		);
+	}
 
 	RETURN_ANY
 }
@@ -408,7 +414,7 @@ ExpressionImporter::visitMultiple_concatenation(
 {
 	using namespace VlogDM;
 
-	ExpressionImporter importer( getVlogDataModel() );
+	ExpressionImporter importer( takeVlogDataModel(), takeErrorsSet() );
 
 	m_result = 
 		m_expressionFactory.newMultipleConcatenation(

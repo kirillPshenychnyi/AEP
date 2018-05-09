@@ -3,8 +3,6 @@
 
 /***************************************************************************/
 
-#include <boost\noncopyable.hpp>
-
 #include "aep_model\api\aep_model_fwd.hpp"
 
 /***************************************************************************/
@@ -18,6 +16,8 @@ struct AssertionContextSet
 {
 
 /***************************************************************************/
+
+	virtual ~AssertionContextSet() = default;
 
 	virtual void addContext( AssertionContextPtr _context ) = 0;
 

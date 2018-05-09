@@ -20,14 +20,6 @@ namespace VlogImport {
 /***************************************************************************/
 
 template< typename _Declaration >
-BaseNetImporter< _Declaration >::BaseNetImporter( VlogDM::IAccessor & _accessor )
-	:	BaseImporter( _accessor )
-{
-}
-
-/***************************************************************************/
-
-template< typename _Declaration >
 void 
 BaseNetImporter< _Declaration >::addDeclareds( 
 		antlr4::ParserRuleContext & _context
@@ -36,7 +28,7 @@ BaseNetImporter< _Declaration >::addDeclareds(
 {
 	using namespace VlogDM;
 
-	NetExtractor extractor( getVlogDataModel() );
+	NetExtractor extractor( takeVlogDataModel(), takeErrorsSet() );
 	extractor.extract( _context );
 	
 	DeclarationPtr declaration 
@@ -68,7 +60,7 @@ BaseNetImporter< _Declaration >::addDeclarations()
 {
 	for( auto & value : m_extractedDeclarations )
 	{
-		getVlogDataModel().getCurrentImportedUnit().addDeclaration(
+		takeVlogDataModel().getCurrentImportedUnit().addDeclaration(
 			std::move( value )
 		);
 	}

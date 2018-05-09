@@ -29,7 +29,11 @@ DeclarationsFactoryImpl::newVariableDeclaration(
 	,	TypePtr _type
 	) const
 {
-	return std::make_unique< VariableDeclarationImpl >( _location, std::move( _type ) );
+	return
+		std::make_unique< VariableDeclarationImpl >( 
+				_location
+			,	std::move( _type ) 
+		);
 }
 
 /***************************************************************************/

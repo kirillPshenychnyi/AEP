@@ -41,11 +41,11 @@ public:
     T__149 = 150, T__150 = 151, T__151 = 152, T__152 = 153, T__153 = 154, 
     T__154 = 155, T__155 = 156, T__156 = 157, T__157 = 158, T__158 = 159, 
     T__159 = 160, T__160 = 161, T__161 = 162, T__162 = 163, T__163 = 164, 
-    T__164 = 165, T__165 = 166, T__166 = 167, T__167 = 168, Real_number = 169, 
-    Decimal_number = 170, Binary_number = 171, Octal_number = 172, Hex_number = 173, 
-    String = 174, One_line_comment = 175, Block_comment = 176, Escaped_identifier = 177, 
-    Simple_identifier = 178, Dollar_Identifier = 179, Time_Identifier = 180, 
-    White_space = 181
+    T__164 = 165, T__165 = 166, T__166 = 167, T__167 = 168, T__168 = 169, 
+    Real_number = 170, Decimal_number = 171, Binary_number = 172, Octal_number = 173, 
+    Hex_number = 174, String = 175, One_line_comment = 176, Block_comment = 177, 
+    Escaped_identifier = 178, Simple_identifier = 179, Dollar_Identifier = 180, 
+    Time_Identifier = 181, White_space = 182
   };
 
   Verilog2001Lexer(antlr4::CharStream *input);

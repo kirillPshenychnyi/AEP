@@ -7,8 +7,6 @@
 #include "aep_model\api\checkers\checker_values\aep_model_port_kind.hpp"
 #include "aep_model\api\checkers\checker_values\aep_model_generic_type.hpp"
 
-#include <boost\noncopyable.hpp>
-
 #include <functional>
 
 /***************************************************************************/
@@ -60,6 +58,8 @@ struct OvlChecker
 		PortCallback;
 
 /***************************************************************************/
+
+	virtual ~OvlChecker() = default;
 
 	virtual OvlCheckerIds::Kind getId() const = 0;
 

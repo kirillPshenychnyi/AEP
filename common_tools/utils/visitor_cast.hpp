@@ -58,7 +58,7 @@ private:
 
 /*----------------------------------------------------------------------------*/
 
-	void visit ( TargetType _targetObject ) override
+	void visit ( TargetType _targetObject ) final
 	{
 		m_castResult = _targetObject;
 	}

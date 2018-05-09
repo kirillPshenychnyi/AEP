@@ -22,7 +22,7 @@ struct Dimensional
 
 /***************************************************************************/
 
-	virtual ~Dimensional() {}
+	virtual ~Dimensional() = default;
 
 	virtual boost::optional< Dimension const & > getDimension() const = 0;
 

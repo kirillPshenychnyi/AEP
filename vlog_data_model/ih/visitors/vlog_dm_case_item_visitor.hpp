@@ -3,7 +3,7 @@
 
 /***************************************************************************/
 
-#include "boost\noncopyable.hpp"
+#include "common_tools\utils\declare_visitors.hpp"
 
 /***************************************************************************/
 
@@ -16,35 +16,7 @@ struct DefaultCaseItem;
 
 /***************************************************************************/
 
-struct CaseItemVisitor
-	:	public boost::noncopyable
-{
-
-/***************************************************************************/
-
-	virtual void visit( CaseItem const & _caseItem ) = 0;
-
-	virtual void visit( DefaultCaseItem const & _caseItem ) = 0;
-
-/***************************************************************************/
-
-};
-
-/***************************************************************************/
-
-struct CaseItemDefaultVisitor
-	:	public CaseItemVisitor
-{
-
-/***************************************************************************/
-
-	void visit( CaseItem const & _caseItem ) override {}
-
-	void visit( DefaultCaseItem const & _caseItem ) override {}
-
-/***************************************************************************/
-
-};
+DECLARE_VISITORS( CaseItem, CaseItem, DefaultCaseItem )
 
 /***************************************************************************/
 
