@@ -10,9 +10,12 @@
 #include "entry_controller\sources\errors\ec_parse_error_listener.hpp"
 #include "entry_controller\sources\errors\ec_errors_set.hpp"
 #include "entry_controller\sources\errors\ec_dump_error_visitor.hpp"
+#include "entry_controller\sources\ec_resources.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "aep\api\aep_iaccessor.hpp"
+
+#include <iostream>
 
 /***************************************************************************/
 
@@ -38,7 +41,60 @@ Accessor::importVerilog( std::string const & _code )
 {
 	reset();
 
-	antlr4::ANTLRInputStream stream( _code );
+	return runImport( _code, "sample.sv" );
+}
+
+/***************************************************************************/
+
+void 
+Accessor::addFile( std::string const & _path )
+{
+	m_designFiles.insert( _path );
+}
+
+/***************************************************************************/
+
+bool 
+Accessor::runVerilogImport()
+{
+	std::cout << Resources::LogMessages::StartVerilogImport << std::endl;
+
+	bool importResult = true;
+
+	for( const auto & designFile : m_designFiles )
+	{
+		std::ifstream stream;
+		stream.open( designFile );
+
+		bool isOpen = stream.is_open();
+
+		if( !isOpen )
+			throw std::logic_error( "Could not open file " + designFile );
+
+		importResult = runImport( stream, designFile );
+	}
+
+	std::cout << 
+		( 
+			importResult 
+			?	Resources::LogMessages::VerilogImportSuccess
+			:	Resources::LogMessages::VerilogImportSuccess 
+		);
+
+	std::cout << std::endl;
+
+	return importResult;
+}
+
+/***************************************************************************/
+
+template< typename _TStream >
+bool 
+Accessor::runImport( _TStream  & _sourceStream, std::string const & _name )
+{
+	antlr4::ANTLRInputStream stream( _sourceStream );
+	
+	stream.name = _name;
 
 	Verilog2001Lexer lexer( &stream );
 
@@ -92,6 +148,7 @@ Accessor::reset()
 {
 	m_vlogDm.reset();
 	m_importErrors->reset();
+	m_designFiles.clear();
 }
 
 /***************************************************************************/

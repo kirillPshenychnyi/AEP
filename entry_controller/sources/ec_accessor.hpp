@@ -6,6 +6,8 @@
 #include "entry_controller\api\ec_iaccessor.hpp"
 #include "entry_controller\api\errors\ec_iimport_errors_set.hpp"
 
+#include <boost\unordered_set.hpp>
+
 /***************************************************************************/
 
 namespace VlogDM 
@@ -48,6 +50,10 @@ public:
 /***************************************************************************/
 
 	bool importVerilog( std::string const & _code ) final;
+	
+	void addFile( std::string const & _path ) final;
+
+	bool runVerilogImport();
 
 	void runAepAnalysis(
 			Aep::IAccessor::GlobalClockParameters & _clockParams
@@ -65,6 +71,9 @@ private:
 /***************************************************************************/
 
 	void reset();
+	
+	template< typename _TStream >
+	bool runImport( _TStream & _stream, std::string const & _name );
 
 /***************************************************************************/
 
@@ -73,9 +82,12 @@ private:
 /***************************************************************************/
 
 	VlogDM::IAccessor & m_vlogDm;
+
 	Aep::IAccessor & m_aepAccessor;
 
 	std::unique_ptr< Errors::IImportErrorsSet > m_importErrors;
+
+	boost::unordered_set< std::string > m_designFiles;
 
 /***************************************************************************/
 

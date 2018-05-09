@@ -24,9 +24,6 @@
     <ClInclude Include="aep_main_container_bootstrapper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aep_main_runner.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,9 +33,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="aep_main_container_bootstrapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="aep_main_runner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -30,6 +30,10 @@ struct IAccessor
 	virtual ~IAccessor() = default;
 
 	virtual bool importVerilog( std::string const& _code ) = 0;
+	
+	virtual void addFile( std::string const & _path ) = 0;
+
+	virtual bool runVerilogImport() = 0;
 
 	virtual void runAepAnalysis(
 			Aep::IAccessor::GlobalClockParameters & _clockParams

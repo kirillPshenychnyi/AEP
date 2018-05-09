@@ -164,14 +164,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="aep_main_container_bootstrapper.hpp" />
-    <ClInclude Include="aep_main_runner.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aep_main.cpp" />
     <ClCompile Include="aep_main_container_bootstrapper.cpp" />
-    <ClCompile Include="aep_main_runner.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

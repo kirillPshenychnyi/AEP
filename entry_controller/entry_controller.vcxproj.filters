@@ -123,6 +123,9 @@
     <ClInclude Include="api\errors\ec_import_error_visitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sources\ec_resources.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -189,6 +192,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\errors\ec_dump_error_visitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ec_resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
