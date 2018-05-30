@@ -259,7 +259,7 @@ TEST_CASE_METHOD( PortsFixture, "simple reg output", "[ports]" )
 	expectUnit( "unit" )
 		.expectNet( "a" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end();
 }
 
@@ -278,15 +278,15 @@ TEST_CASE_METHOD( PortsFixture, "couple reg outputs", "[ports]" )
 	expectUnit( "unit" )
 		.expectNet( "a" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end()
 		.expectNet( "c" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end();
 }
 
@@ -305,7 +305,7 @@ TEST_CASE_METHOD( PortsFixture, "different outputs", "[ports]" )
 	expectUnit( "unit" )
 		.expectNet( "a" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
@@ -313,7 +313,7 @@ TEST_CASE_METHOD( PortsFixture, "different outputs", "[ports]" )
 	.end()
 		.expectNet( "c" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end();
 }
 
@@ -336,7 +336,7 @@ TEST_CASE_METHOD( PortsFixture, "simple module interface", "[ports]" )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 	.end();
 }
 
@@ -360,7 +360,7 @@ TEST_CASE_METHOD( PortsFixture, "multibit module interface", "[ports]" )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end();
 }
@@ -389,7 +389,7 @@ TEST_CASE_METHOD( PortsFixture, "different modules same interface", "[ports]" )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end();
 
@@ -401,7 +401,7 @@ TEST_CASE_METHOD( PortsFixture, "different modules same interface", "[ports]" )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end();
 }
@@ -474,7 +474,7 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface", "[ports]" )
 	.end()
 		.expectNet( "b" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end();
 }
@@ -505,12 +505,12 @@ TEST_CASE_METHOD( PortsFixture, "non-ansi multibit interface couple ports", "[po
 	.end()
 	.expectNet( "c" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end()
 	.expectNet( "d" )
 		.expectDirection( VlogDM::PortDirection::Direction::Output )
-		.expectRegType()
+		.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.expectBounds( RANGE( 7, 0 ) )
 	.end();
 }

@@ -44,6 +44,31 @@ struct StatementFactory
 		,	bool _isFullCase
 	) const = 0;
 
+	virtual ForLoopPtr newForLoop(
+			Location const & _location
+		,	BinaryOperatorPtr _initialization
+		,	ExpressionPtr _condition
+		,	BinaryOperatorPtr _iteration
+		,	StatementPtr _loopStmt
+	) const = 0;
+
+	virtual WhileLoopPtr newWhileLoop(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	StatementPtr _loopStmt
+	) const = 0;
+
+	virtual RepeatLoopPtr newRepeatLoop(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	StatementPtr _loopStmt
+	) const = 0;
+
+	virtual ForeverLoopPtr newForeverLoop(
+			Location const & _location
+		,	StatementPtr _loopStmt
+	) const = 0;
+
 /***************************************************************************/
 
 };

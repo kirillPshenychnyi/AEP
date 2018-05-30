@@ -57,6 +57,16 @@ ModuleItemImporter::visitReg_declaration(
 
 /***************************************************************************/
 
+antlrcpp::Any
+ModuleItemImporter::visitInteger_declaration( 
+	Verilog2001Parser::Integer_declarationContext * ctx 
+)
+{
+	return importVar( *ctx );
+}
+
+/***************************************************************************/
+
 antlrcpp::Any 
 ModuleItemImporter::visitContinuous_assign(
 		Verilog2001Parser::Continuous_assignContext * ctx

@@ -41,6 +41,11 @@ struct Operator
 		,	LogicAnd	// &&
 		,	LogicOr		// ||
 		,	LogicNot	// !
+	
+		,	Less			// <
+		,	LessEq			// <=
+		,	Greater			// >
+		,	GreaterEq		// >=
 
 		,	Equal			// ==
 		,	WildcardEqual	// ===
@@ -87,6 +92,18 @@ struct Operator
 				return "~";
 			case Kind::Xor:
 				return "^";
+
+			case Kind::Less:
+				return "<";
+
+			case Kind::LessEq:
+				return "<=";
+
+			case Kind::Greater:
+				return ">";
+			
+			case Kind::GreaterEq:
+				return ">=";
 
 			case Kind::LogicAnd:
 				return "&&";

@@ -7,6 +7,7 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 #include "vlog_data_model\api\vlog_dm_net_type.hpp"
+#include "vlog_data_model\api\vlog_dm_variable_type.hpp"
 #include "vlog_data_model\api\vlog_dm_dimension.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
 
@@ -124,7 +125,7 @@ public:
 
 	VlogDM::NetKind::Kind m_netType;
 
-	bool m_isReg;
+	VlogDM::VariableKind::Kind m_varType;
 
 /***************************************************************************/
 

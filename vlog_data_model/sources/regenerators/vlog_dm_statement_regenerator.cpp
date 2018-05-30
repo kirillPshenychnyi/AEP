@@ -8,6 +8,10 @@
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
 #include "vlog_data_model\api\vlog_dm_case_item.hpp"
 #include "vlog_data_model\api\vlog_dm_default_case_item.hpp"
+#include "vlog_data_model\api\vlog_dm_for_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_while_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_repeat_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_forever_loop.hpp"
 
 #include "vlog_data_model\ih\visitors\vlog_dm_case_item_visitor.hpp"
 
@@ -147,6 +151,74 @@ StatementRegenerator::visit( CaseStatement const & _case )
 	}
 
 	m_targetStream << "endcase";
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::visit( ForLoop const & _forLoop )
+{
+	m_targetStream << "for( ";
+
+	ExpressionRegenerator expressionRegenerator( m_targetStream, true );
+	
+	_forLoop.getInitialization().accept( expressionRegenerator );
+	m_targetStream << "; ";
+	
+	_forLoop.getCondition().accept( expressionRegenerator );
+	m_targetStream << "; ";
+	
+	_forLoop.getIteration().accept( expressionRegenerator );
+	m_targetStream << " )";
+	
+	m_targetStream << std::endl;
+
+	_forLoop.getLoopStatement().accept( *this );
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::visit( RepeatLoop const & _repeatLoop )
+{
+	regenerateConditionalLoop( _repeatLoop, "repeat" );
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::visit( WhileLoop const & _whileLoop )
+{
+	regenerateConditionalLoop( _whileLoop, "while" );
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::visit( ForeverLoop const & _foreverLoop )
+{
+	m_targetStream << "forever" << std::endl;
+
+	_foreverLoop.getLoopStatement().accept( *this );
+}
+
+/***************************************************************************/
+
+void 
+StatementRegenerator::regenerateConditionalLoop( 
+		ConditionalLoop const & _loop
+	,	std::string const & _kind
+)
+{
+	ExpressionRegenerator expressionRegenerator( m_targetStream, true );
+
+	m_targetStream << _kind << " ( ";
+
+	_loop.getCondition().accept( expressionRegenerator );
+
+	m_targetStream << " ) " << std::endl;
+
+	_loop.getLoopStatement().accept( *this );
 }
 
 /***************************************************************************/

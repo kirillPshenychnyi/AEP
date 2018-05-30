@@ -17,14 +17,15 @@ struct VariableKind
 /***************************************************************************/
 
 	enum class Kind
-	{
-			reg
+	{	
+			Invalid
+		,	reg
 		,	time
 		,	integer
 		,	real
 		,	realTime
 
-		,	First = reg
+		,	First = Invalid
 		,	Last = realTime
 	};
 	
@@ -37,6 +38,9 @@ struct VariableKind
 	{
 		switch( _kind )
 		{
+			case Kind::Invalid:
+				return "invalid";
+
 			case Kind::reg:
 				return "reg";
 			

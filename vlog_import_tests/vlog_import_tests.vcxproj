@@ -169,6 +169,7 @@
     <ClCompile Include="sources\tests\engines_test\vlog_expression_bitwidth_test.cpp" />
     <ClCompile Include="sources\tests\sequential_process_test\vlog_case_statement_test.cpp" />
     <ClCompile Include="sources\tests\sequential_process_test\vlog_conditional_statement_test.cpp" />
+    <ClCompile Include="sources\tests\sequential_process_test\vlog_loops_test.cpp" />
     <ClCompile Include="sources\tests\vlog_import_errors_test.cpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

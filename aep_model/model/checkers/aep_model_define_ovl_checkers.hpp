@@ -90,6 +90,16 @@ AEP_DEFINE_OVL_CHECKER( Always, BOOST_PP_SEQ_NIL, OVL_ALWAYS_PORTS )
 
 /***************************************************************************/
 
+#define OVL_ONE_HOT_PORTS 		\
+	( TestExpression )		
+
+#define OVL_ONE_HOT_GENERICS	\
+	( Width )		
+
+AEP_DEFINE_OVL_CHECKER( OneHot, OVL_ONE_HOT_GENERICS, OVL_ALWAYS_PORTS )
+
+/***************************************************************************/
+
 }
 
 /***************************************************************************/

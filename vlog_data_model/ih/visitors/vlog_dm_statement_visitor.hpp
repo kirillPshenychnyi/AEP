@@ -15,6 +15,11 @@ struct ConditionalStatement;
 struct BlockingAssignment;
 struct SequentialBlock;
 struct CaseStatement;
+struct ForLoop;
+struct WhileLoop;
+struct RepeatLoop;
+struct ForeverLoop;
+struct ConditionalLoop;
 
 /***************************************************************************/
 
@@ -24,6 +29,10 @@ DECLARE_VISITORS(
 	,	BlockingAssignment
 	,	SequentialBlock
 	,	CaseStatement 
+	,	ForLoop
+	,	WhileLoop
+	,	RepeatLoop
+	,	ForeverLoop
 )
 
 /***************************************************************************/

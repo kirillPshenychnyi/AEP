@@ -92,5 +92,8 @@
     <ClCompile Include="sources\tests\vlog_import_errors_test.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\tests\sequential_process_test\vlog_loops_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

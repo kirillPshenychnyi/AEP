@@ -39,7 +39,7 @@ TEST_CASE_METHOD( VariablesFixture, "simple reg var", "[vars]" )
 
 	expectUnit( "top" )
 		.expectNet( "c" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end();
 }
 
@@ -81,13 +81,13 @@ TEST_CASE_METHOD( VariablesFixture, "one declaration couple regs", "[vars]" )
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "c" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end();
 }
 
@@ -106,10 +106,10 @@ TEST_CASE_METHOD( VariablesFixture, "two declaration couple vars", "[vars]" )
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "c" )
 			.expectNetType( VlogDM::NetKind::Kind::wire )
@@ -133,10 +133,10 @@ TEST_CASE_METHOD( VariablesFixture, "separate declarations for each var", "[vars
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "c" )
 			.expectNetType( VlogDM::NetKind::Kind::wire )
@@ -221,7 +221,7 @@ TEST_CASE_METHOD( VariablesFixture, "simple memory", "[vars]" )
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectBounds( RANGE( 7, 0 ) )
 			.expectArrayBounds( RANGE( 3, 0 ) )
 		.end();
@@ -260,7 +260,7 @@ TEST_CASE_METHOD( VariablesFixture, "multidimensional memory", "[vars]" )
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectBounds( RANGE( 7, 0 ) )
 			.expectArrayBounds( { RANGE( 7, 0 ), RANGE( 0, 3 ) } )
 		.end();
@@ -280,10 +280,10 @@ TEST_CASE_METHOD( VariablesFixture, "simple reg and array wihin one declaration"
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectArrayBounds( RANGE( 0, 7 ) )
 		.end();
 }
@@ -302,11 +302,11 @@ TEST_CASE_METHOD( VariablesFixture, "different arrays wihin one declaration", "[
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectArrayBounds( { RANGE( 7, 0 ), RANGE( 0, 3 ) } )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectArrayBounds( RANGE( 0, 10 ) )
 		.end();
 }
@@ -325,15 +325,57 @@ TEST_CASE_METHOD( VariablesFixture, "arrays and scalar wihin one declaration", "
 
 	expectUnit( "top" )
 		.expectNet( "a" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 		.end()
 		.expectNet( "b" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectArrayBounds( { RANGE( 7, 0 ), RANGE( 0, 3 ) } )
 		.end()
 		.expectNet( "c" )
-			.expectRegType()
+			.expectRegType( VlogDM::VariableKind::Kind::reg )
 			.expectArrayBounds( RANGE( 0, 10 ) )
+		.end();
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( VariablesFixture, "integer var", "[vars]" )
+{
+	std::string code =
+		"module top ();				\n"
+		"	integer  a;				\n"
+		"endmodule					\n"
+		;
+
+	runImport( code );
+
+	expectUnit( "top" )
+		.expectNet( "a" )
+			.expectRegType( VlogDM::VariableKind::Kind::integer )
+		.end();
+}
+
+/***************************************************************************/
+
+TEST_CASE_METHOD( VariablesFixture, "integer vars", "[vars]" )
+{
+	std::string code =
+		"module top ();				\n"
+		"	integer a, b, c;		\n"
+		"endmodule					\n"
+		;
+
+	runImport( code );
+
+	expectUnit( "top" )
+		.expectNet( "a" )
+			.expectRegType( VlogDM::VariableKind::Kind::integer )
+		.end()
+		.expectNet( "b" )
+			.expectRegType( VlogDM::VariableKind::Kind::integer )
+		.end()
+		.expectNet( "c" )
+			.expectRegType( VlogDM::VariableKind::Kind::integer )
 		.end();
 }
 

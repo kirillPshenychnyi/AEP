@@ -453,6 +453,42 @@
     <ClInclude Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api\vlog_dm_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_for_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_conditional_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_repeat_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_while_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_for_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_conditional_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_repeat_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_while_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vlog_dm_forever_loop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\model\vlog_dm_forever_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

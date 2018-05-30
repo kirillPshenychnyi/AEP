@@ -20,18 +20,9 @@ namespace VlogImport {
 
 /***************************************************************************/
 
+template< typename _DataType >
 void
-VariableImporter::importVars( Verilog2001Parser::Net_declarationContext & _ctx )
-{
-	importVar( _ctx );
-
-	addDeclarations();
-}
-
-/***************************************************************************/
-
-void 
-VariableImporter::importVars( Verilog2001Parser::Reg_declarationContext & _ctx )
+VariableImporter::importVars( _DataType & _ctx )
 {
 	importVar( _ctx );
 
@@ -86,6 +77,23 @@ VariableImporter::createDeclaration(
 			,	std::move( _type )
 		);
 }
+
+/***************************************************************************/
+
+template
+void
+VariableImporter::importVars< Verilog2001Parser::Reg_declarationContext >
+( Verilog2001Parser::Reg_declarationContext & _ctx );
+
+template
+void
+VariableImporter::importVars< Verilog2001Parser::Integer_declarationContext >
+( Verilog2001Parser::Integer_declarationContext & _ctx );
+
+template
+void
+VariableImporter::importVars< Verilog2001Parser::Net_declarationContext >
+( Verilog2001Parser::Net_declarationContext & _ctx );
 
 /***************************************************************************/
 

@@ -33,11 +33,10 @@ public:
 	using BaseClass::BaseNetImporter;
 
 /***************************************************************************/
-
-	void importVars( Verilog2001Parser::Net_declarationContext & _ctx );
-
-	void importVars( Verilog2001Parser::Reg_declarationContext & _ctx );
 	
+	template< typename _DataType >
+	void importVars( _DataType & _ctx );
+
 /***************************************************************************/
 
 private:

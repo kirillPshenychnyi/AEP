@@ -46,6 +46,10 @@ private:
 		Verilog2001Parser::Reg_declarationContext * ctx 
 	) override;
 
+	antlrcpp::Any visitInteger_declaration(
+		Verilog2001Parser::Integer_declarationContext * ctx 
+	) override;
+
 	antlrcpp::Any visitContinuous_assign( 
 		Verilog2001Parser::Continuous_assignContext * ctx 
 	) override;

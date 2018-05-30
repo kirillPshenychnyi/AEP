@@ -83,6 +83,11 @@ namespace VlogDM
 	struct CaseStatement;
 	struct ConditionalBranch;
 	struct BlockingAssignment;
+	
+	struct ForLoop;
+	struct WhileLoop;
+	struct RepeatLoop;
+	struct ForeverLoop;
 
 	struct ContinuousAssignment;
 	struct BehavioralProcess;
@@ -180,7 +185,32 @@ namespace VlogDM
 	typedef
 		std::unique_ptr< DefaultCaseItem >
 		DefaultCaseItemPtr;
+
+	typedef
+		std::unique_ptr< ForLoop >
+		ForLoopPtr;
+
+	typedef
+		std::unique_ptr< BinaryOperator >
+		BinaryOperatorPtr;
+
+	typedef
+		std::unique_ptr< WhileLoop >
+		WhileLoopPtr;
+
+	typedef
+		std::unique_ptr< RepeatLoop >
+		RepeatLoopPtr;
+
+	typedef
+		std::unique_ptr< ForeverLoop >
+		ForeverLoopPtr;
+
+/***************************************************************************/
+
 }
+
+/***************************************************************************/
 
 #endif // !__VLOG_DM_FWD_HPP__
 

@@ -29,7 +29,7 @@ namespace VlogImport {
 NetExtractor::NetExtractor( VlogDM::IAccessor & _accessor, Errors::IImportErrorsSet & _errorsSet )
 	:	BaseImporter( _accessor, _errorsSet )
 	,	m_netType( VlogDM::NetKind::Kind::wire )
-	,	m_isReg( false )
+	,	m_varType( VlogDM::VariableKind::Kind::Invalid )
 {
 }
 
@@ -44,8 +44,11 @@ NetExtractor::extract( antlr4::ParserRuleContext & _context )
 			_context
 		,	[ & ]( antlr4::tree::ParseTree & _tree )
 			{
-				if( _tree.getText() == regKeyWord )
-					m_isReg = true;
+				if( m_varType == VlogDM::VariableKind::Kind::Invalid )
+				{ 
+					m_varType 
+						= VlogDM::VariableKind::fromString( _tree.getText().c_str() );
+				}
 
 				_tree.accept( this );
 			}
@@ -158,11 +161,11 @@ NetExtractor::initType()
 	Writable::TypeFactory const & typeFactory 
 		= vlogDm.getObjectFactory().getTypeFactory();
 
-	if( m_isReg )
+	if( m_varType != VlogDM::VariableKind::Kind::Invalid )
 	{
 		m_type.reset(
 			typeFactory.newVariableType( 
-					VariableKind::Kind::reg
+					m_varType
 				,	std::move( m_typeDimension ) 
 			).release()
 		);

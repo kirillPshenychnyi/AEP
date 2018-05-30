@@ -72,6 +72,10 @@ private:
 		Verilog2001Parser::Conditional_statementContext * ctx 
 	) override;
 
+	antlrcpp::Any visitLoop_statement( 
+		Verilog2001Parser::Loop_statementContext * ctx 
+	) override;
+
 	antlrcpp::Any visitBlocking_assignment(
 	 	Verilog2001Parser::Blocking_assignmentContext * ctx 
 	) override;
@@ -87,6 +91,13 @@ private:
 	antlrcpp::Any visitAttribute_instance(
 		Verilog2001Parser::Attribute_instanceContext * ctx
 	) override;
+
+/***************************************************************************/
+
+	template< typename _TContext >
+	VlogDM::BinaryOperatorPtr importAssignment(
+		_TContext & _context
+	);
 
 /***************************************************************************/
 

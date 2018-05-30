@@ -104,11 +104,11 @@ class BaseNetFixture
 			return *this;
 		}
 
-		NetHelper & expectRegType()
+		NetHelper & expectRegType( VlogDM::VariableKind::Kind _kind )
 		{
 			using namespace VlogDM;
 	
-			checkType< VariableType, VariableKind >( VariableKind::Kind::reg );
+			checkType< VariableType, VariableKind >( _kind );
 
 			return *this;
 		}

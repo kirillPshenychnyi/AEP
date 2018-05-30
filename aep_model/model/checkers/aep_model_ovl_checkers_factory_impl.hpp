@@ -23,6 +23,12 @@ class OvlCheckersFactoryImpl
 		,	int _suspectLine
 	) const final;
 
+	std::unique_ptr< OvlOneHotCheckerBuilder > newOvlOneHotChecker(
+				std::string const & _instanceName
+			,	std::string const & _fileName
+			,	int _suspectLine
+	) const final;
+
 /***************************************************************************/
 
 };

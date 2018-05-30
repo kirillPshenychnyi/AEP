@@ -45,8 +45,7 @@ DataflowProcessImporter::visitNet_assignment(
 
 	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
 
-	// lhs is first child
-	ctx->children.front()->accept( &idImporter );
+	ctx->net_lvalue()->accept( &idImporter );
 	
 	m_targetExpression 
 		=	ExpressionImporter::createExpressionFromIds(
@@ -55,9 +54,8 @@ DataflowProcessImporter::visitNet_assignment(
 				,	createLocation( *ctx )
 			);
 
-	// rhs expression is last child
-	ctx->children.back()->accept( this );
-
+	ctx->expression()->accept( this );
+	
 	RETURN_ANY
 }
 

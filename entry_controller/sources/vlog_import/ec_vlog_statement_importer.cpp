@@ -11,6 +11,10 @@
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
 #include "vlog_data_model\api\vlog_dm_case_item.hpp"
+#include "vlog_data_model\api\vlog_dm_for_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_while_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_repeat_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_forever_loop.hpp"
 
 #include "vlog_data_model\ih\writable\vlog_dm_object_factory.hpp"
 #include "vlog_data_model\ih\writable\vlog_dm_expression_factory.hpp"
@@ -238,34 +242,82 @@ StatementImporter::visitConditional_statement(
 /***************************************************************************/
 
 antlrcpp::Any 
+StatementImporter::visitLoop_statement( 
+	Verilog2001Parser::Loop_statementContext * ctx 
+)
+{
+	static const char * s_forLoop = "for";
+	static const char * s_whileLoop = "while";
+	static const char * s_repeatLoop = "repeat";
+	static const char * s_foreverLoop = "forever";
+
+	std::string const & loopKind = ctx->children.front()->toString();
+
+	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
+	StatementImporter stmtImporter( takeVlogDataModel(), takeErrorsSet() );
+	stmtImporter.importStatement( *ctx->statement() );
+
+	VlogDM::Writable::StatementFactory const & stmtFactory
+		=	takeVlogDataModel().getObjectFactory().getStatementFactory();
+
+	if( loopKind == s_forLoop )
+	{
+		m_resultStatement 
+			=	stmtFactory.newForLoop( 
+						createLocation( *ctx )
+					,	importAssignment( *ctx->variable_assignment().front() )
+					,	expressionImporter.importExpression( *ctx->expression() )
+					,	importAssignment( *ctx->variable_assignment().back() )
+					,	stmtImporter.takeStatement()
+				);
+
+		RETURN_ANY
+	}
+
+	if( loopKind == s_whileLoop )
+	{
+		m_resultStatement 
+			=	stmtFactory.newWhileLoop( 
+						createLocation( *ctx )
+					,	expressionImporter.importExpression( *ctx->expression() )
+					,	stmtImporter.takeStatement()
+				);
+
+		RETURN_ANY
+	}
+
+	if( loopKind == s_repeatLoop )
+	{
+		m_resultStatement 
+			=	stmtFactory.newRepeatLoop( 
+						createLocation( *ctx )
+					,	expressionImporter.importExpression( *ctx->expression() )
+					,	stmtImporter.takeStatement()
+				);
+
+		RETURN_ANY
+	}
+
+	m_resultStatement 
+		=	stmtFactory.newForeverLoop( 
+					createLocation( *ctx )
+				,	stmtImporter.takeStatement()
+			);
+
+	RETURN_ANY
+}
+
+/***************************************************************************/
+
+antlrcpp::Any 
 StatementImporter::visitBlocking_assignment(
 	Verilog2001Parser::Blocking_assignmentContext * ctx
 )
 {
 	using namespace VlogDM;
-
-	Writable::ExpressionFactory const & expressionFactory 
-		= takeVlogDataModel().getObjectFactory().getExpressionFactory();
-
-	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
-
-	// first child is always var assign context
-	idImporter.importIds( *ctx->variable_lvalue() );
-
-	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
-
-	m_resultStatement
-		=	m_statementFactory.newBlockingAssignment(
-				expressionFactory.newBinaryOperator(
-						ExpressionImporter::createExpressionFromIds( 
-								idImporter
-							,	expressionFactory
-							,	createLocation( *ctx )
-						)
-					,	expressionImporter.importExpression( *ctx->expression() )
-					,	Operator::Kind::Assign
-				)
-			);
+	
+	m_resultStatement 
+		=	m_statementFactory.newBlockingAssignment( importAssignment( *ctx ) );
 
 	RETURN_ANY
 }
@@ -345,6 +397,34 @@ StatementImporter::visitAttribute_instance(
 		m_statementAttributes.insert( attrSpec->attr_name()->getText() );
 
 	RETURN_ANY
+}
+
+/***************************************************************************/
+
+template< typename _TContext >
+VlogDM::BinaryOperatorPtr 
+StatementImporter::importAssignment( _TContext & _context )
+{
+	using namespace VlogDM;
+
+	Writable::ExpressionFactory const & expressionFactory 
+		= takeVlogDataModel().getObjectFactory().getExpressionFactory();
+
+	ExpressionImporter expressionImporter( takeVlogDataModel(), takeErrorsSet() );
+
+	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
+	idImporter.importIds( *_context.variable_lvalue() );
+	
+	return 
+		expressionFactory.newBinaryOperator(
+				ExpressionImporter::createExpressionFromIds( 
+						idImporter
+					,	expressionFactory
+					,	createLocation( _context )
+				)
+			,	expressionImporter.importExpression( *_context.expression() )
+			,	Operator::Kind::Assign
+		);
 }
 
 /***************************************************************************/

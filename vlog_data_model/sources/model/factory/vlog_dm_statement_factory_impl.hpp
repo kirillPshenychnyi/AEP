@@ -19,11 +19,11 @@ class StatementFactoryImpl
 
 	std::unique_ptr< BlockingAssignment > newBlockingAssignment(
 		std::unique_ptr< BinaryOperator > _assignment
-	) const override;
+	) const final;
 
 	Writable::ConditionalStatementPtr newConditionalStatement(
 		Location const & _location 
-	) const override;
+	) const final;
 
 	ConditionalBranchPtr newConditionalBranch(
 			ExpressionPtr _expression
@@ -32,7 +32,7 @@ class StatementFactoryImpl
 
 	std::unique_ptr< Writable::SequentialBlock > newSequentialBlock(
 		Location const & _location
-	) const override;
+	) const final;
 
 	Writable::CaseStatementPtr newCaseStatement(
 			Location const & _location 
@@ -40,7 +40,32 @@ class StatementFactoryImpl
 		,	CaseKind::Kind _kind
 		,	bool _isParallelCase
 		,	bool _isFullCase
-	) const override;
+	) const final;
+
+	WhileLoopPtr newWhileLoop(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	StatementPtr _loopStmt
+	) const final;
+
+	RepeatLoopPtr newRepeatLoop(
+			Location const & _location
+		,	ExpressionPtr _condition
+		,	StatementPtr _loopStmt
+	) const final;
+
+	ForLoopPtr newForLoop(
+			Location const & _location
+		,	BinaryOperatorPtr _initialization
+		,	ExpressionPtr _condition
+		,	BinaryOperatorPtr _iteration
+		,	StatementPtr _loopStmt
+	) const final;
+
+	ForeverLoopPtr newForeverLoop(
+			Location const & _location
+		,	StatementPtr _loopStmt
+	) const final;
 
 /***************************************************************************/
 

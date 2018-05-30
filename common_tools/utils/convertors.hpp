@@ -37,7 +37,7 @@ toEnumFromString( const char * const _value )
 			return toCompare;
 	}
 
-	return typename _EnumType::Kind::First;;
+	return typename _EnumType::Kind::First;
 }
 
 /***************************************************************************/
