@@ -35,6 +35,8 @@ public:
 
 	LoopImpl( Location const & _location, StatementPtr _loopStmt );
 
+	virtual ~LoopImpl() = default;
+
 /***************************************************************************/
 
 public:

@@ -34,6 +34,8 @@ public:
 		,	ExpressionPtr _condition
 	);
 
+	virtual ~ConditionalLoopImpl() = default;
+
 	Expression const & getCondition() const;
 
 /***************************************************************************/
