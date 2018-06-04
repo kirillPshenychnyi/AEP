@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "vlog_data_model\sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp"
+#include "vlog_data_model\sources\vlog_engines\vlog_dm_bitwidth_calculator.hpp"
 #include "vlog_data_model\sources\vlog_engines\vlog_dm_range_bitwidth_processor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_base_identifier.hpp"
@@ -27,11 +27,11 @@ namespace VlogEngines {
 
 /***************************************************************************/
 
-const int ExpressionBitwidthCalculator::m_sSingleBitWidth = 1;
+const int BitwidthCalculator::m_sSingleBitWidth = 1;
 
 /***************************************************************************/
 
-ExpressionBitwidthCalculator::ExpressionBitwidthCalculator()
+BitwidthCalculator::BitwidthCalculator()
 	:	m_result( 0 )
 {
 }
@@ -39,7 +39,7 @@ ExpressionBitwidthCalculator::ExpressionBitwidthCalculator()
 /***************************************************************************/
 
 int 
-ExpressionBitwidthCalculator::calculate( Expression const & _expression )
+BitwidthCalculator::calculate( Expression const & _expression )
 {
 	_expression.accept( *this );
 
@@ -49,7 +49,7 @@ ExpressionBitwidthCalculator::calculate( Expression const & _expression )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( PrimaryLiteral const & _literal )
+BitwidthCalculator::visit( PrimaryLiteral const & _literal )
 {
 	try
 	{
@@ -73,7 +73,7 @@ ExpressionBitwidthCalculator::visit( PrimaryLiteral const & _literal )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( BinaryOperator const & _operator )
+BitwidthCalculator::visit( BinaryOperator const & _operator )
 {
 	switch( _operator.getOperator() )
 	{
@@ -95,7 +95,7 @@ ExpressionBitwidthCalculator::visit( BinaryOperator const & _operator )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( UnaryOperator const & _operator )
+BitwidthCalculator::visit( UnaryOperator const & _operator )
 {
 	switch( _operator.getOperator() )
 	{
@@ -114,7 +114,7 @@ ExpressionBitwidthCalculator::visit( UnaryOperator const & _operator )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( PrimaryIdentifier const & _id )
+BitwidthCalculator::visit( PrimaryIdentifier const & _id )
 {	
 	if( auto range = _id.getIdentifier().getRange() )
 	{
@@ -123,17 +123,17 @@ ExpressionBitwidthCalculator::visit( PrimaryIdentifier const & _id )
 		return;
 	}
 	
-	m_result = calculateDeclared( _id.getIdentifier().getDeclared() );
+	m_result = calculate( _id.getIdentifier().getDeclared() );
 }
 
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( Concatenation const & _concat )
+BitwidthCalculator::visit( Concatenation const & _concat )
 {
 	const int nExpressions = _concat.getExpressionsCount();
 
-	ExpressionBitwidthCalculator calc;
+	BitwidthCalculator calc;
 
 	for( int i = 0; i < nExpressions; ++i )
 		m_result += calc.calculate( _concat.getExpression( i ) );
@@ -142,7 +142,7 @@ ExpressionBitwidthCalculator::visit( Concatenation const & _concat )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( MultipleConcatenation const & _concat )
+BitwidthCalculator::visit( MultipleConcatenation const & _concat )
 {
 	_concat.getConcatenation().accept( *this );
 }
@@ -150,7 +150,7 @@ ExpressionBitwidthCalculator::visit( MultipleConcatenation const & _concat )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::visit( ConditionalExpression const & _conditional )
+BitwidthCalculator::visit( ConditionalExpression const & _conditional )
 {
 	_conditional.getFalseBranch().accept( *this );
 	int falseBranchWidth = m_result;
@@ -167,7 +167,7 @@ ExpressionBitwidthCalculator::visit( ConditionalExpression const & _conditional 
 /***************************************************************************/
 
 int 
-ExpressionBitwidthCalculator::calculateDeclared( Declared const & _declared )
+BitwidthCalculator::calculate( Declared const & _declared )
 {
 	struct DeclaredDimensionExctactor
 		:	public DeclaredVisitor
@@ -213,7 +213,7 @@ ExpressionBitwidthCalculator::calculateDeclared( Declared const & _declared )
 /***************************************************************************/
 
 void
-ExpressionBitwidthCalculator::calculateMaxOfBinary( BinaryOperator const & _binary )
+BitwidthCalculator::calculateMaxOfBinary( BinaryOperator const & _binary )
 {
 	 _binary.getLeftOperand().accept( *this );
 
@@ -231,7 +231,7 @@ ExpressionBitwidthCalculator::calculateMaxOfBinary( BinaryOperator const & _bina
 /***************************************************************************/
 
 void 
-ExpressionBitwidthCalculator::reset()
+BitwidthCalculator::reset()
 {
 	m_result = 0;
 }

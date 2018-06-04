@@ -28,7 +28,7 @@ struct Expression
 
 /***************************************************************************/
 
-	virtual ~Expression() {}
+	virtual ~Expression() = default;
 
 	virtual void accept( ExpressionVisitor & _visitor ) const = 0;
 

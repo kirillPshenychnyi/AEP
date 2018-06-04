@@ -14,7 +14,7 @@ namespace VlogEngines {
 
 /***************************************************************************/
 
-class ExpressionBitwidthCalculator
+class BitwidthCalculator
 	:	public ExpressionVisitor
 { 
 
@@ -24,9 +24,11 @@ public:
 
 /***************************************************************************/
 
-	ExpressionBitwidthCalculator();
+	BitwidthCalculator();
 
 	int calculate( Expression const & _expression );
+
+	int calculate( Declared const & _declared );
 
 /***************************************************************************/
 
@@ -49,8 +51,6 @@ private:
 	void visit( ConditionalExpression const & _conditional );
 
 /***************************************************************************/
-
-	int calculateDeclared( Declared const & _declared );
 
 	void calculateMaxOfBinary( BinaryOperator const & _binary );
 

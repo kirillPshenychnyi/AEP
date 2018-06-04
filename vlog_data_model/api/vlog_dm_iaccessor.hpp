@@ -49,6 +49,8 @@ struct IAccessor
 
 	virtual int calculateBitwidth( Expression const & _expression ) const = 0;
 
+	virtual int calculateBitwidth( BaseIdentifier const & _id ) const = 0;
+
 /***************************************************************************/
 
 };

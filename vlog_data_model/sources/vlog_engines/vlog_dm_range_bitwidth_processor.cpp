@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "vlog_data_model\sources\vlog_engines\vlog_dm_range_bitwidth_processor.hpp"
-#include "vlog_data_model\sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp"
+#include "vlog_data_model\sources\vlog_engines\vlog_dm_bitwidth_calculator.hpp"
 
 #include "vlog_data_model\sources\model\vlog_dm_primary_literal_impl.hpp"
 
@@ -39,7 +39,7 @@ RangeBitwidthProcessor::calculate( Range const & _range )
 void
 RangeBitwidthProcessor::visit( ExpressionRange const & _range )
 {
-	ExpressionBitwidthCalculator expressionBitwidth;
+	BitwidthCalculator expressionBitwidth;
 
 	m_result = expressionBitwidth.calculate( _range.getExpression() );
 }

@@ -37,11 +37,12 @@ public:
 
 	using BaseImporter::BaseImporter;
 
-	void importIds( Verilog2001Parser::Net_assignmentContext const & _ctx );
+	template< typename _IdContext >
+	void importIds( _IdContext & _ctx );
 
-	void importIds( Verilog2001Parser::Variable_lvalueContext const & _ctx );
-
-	void importId( Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx );
+	void importId(
+		Verilog2001Parser::Simple_hierarchical_identifierContext const & _ctx 
+	);
 
 	VlogDM::BaseIdentifierPtr takeId( int _idx );
 

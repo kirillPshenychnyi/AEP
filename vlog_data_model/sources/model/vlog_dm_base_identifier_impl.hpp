@@ -27,7 +27,7 @@ class BaseIdentifierImplBase
 
 /***************************************************************************/
 
-protected:
+public:
 
 /***************************************************************************/
 
@@ -35,6 +35,8 @@ protected:
 			Location const & _location
 		,	Declared const & _declared
 	);
+
+	virtual ~BaseIdentifierImplBase() = default;
 
 /***************************************************************************/
 
@@ -113,12 +115,7 @@ public:
 
 /***************************************************************************/
 
-	BaseIdentifierImpl(
-			Location const & _location
-		,	Declared const & _declared
-	)
-	:	BaseIdentifierImplBase( _location, _declared )
-	{}
+	using BaseIdentifierImplBase::BaseIdentifierImplBase;
 
 /***************************************************************************/
 
@@ -148,7 +145,7 @@ public:
 
 /***************************************************************************/
 
-	boost::optional< Range const & > getRange() const
+	boost::optional< Range const & > getRange() const override
 	{
 		return *m_range;
 	}

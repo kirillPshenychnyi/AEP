@@ -155,7 +155,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="catch.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_base_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_base_module_items_fixture.hpp" />
     <ClInclude Include="sources\fixtures\vlog_import_expression_bitwidth_engine_fixture.hpp" />
@@ -190,6 +189,9 @@
     <ClCompile Include="vlog_import_tests_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\common_tools\common_tools.vcxproj">
+      <Project>{d64563ed-ce38-43f6-bc7e-99d5118e2357}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\entry_controller\entry_controller.vcxproj">
       <Project>{40869de9-1a69-4837-ac6e-c5ba1e1c31db}</Project>
     </ProjectReference>

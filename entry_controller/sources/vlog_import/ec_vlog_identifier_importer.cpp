@@ -24,20 +24,9 @@ namespace VlogImport {
 
 /***************************************************************************/
 
-void 
-IdentifierImporter::importIds( 
-	Verilog2001Parser::Net_assignmentContext const & _ctx 
-)
-{
-	visitEachChildContext( _ctx );
-}
-
-/***************************************************************************/
-
-void 
-IdentifierImporter::importIds( 
-	Verilog2001Parser::Variable_lvalueContext const & _ctx 
-)
+template< typename _IdContext >
+void
+IdentifierImporter::importIds( _IdContext & _ctx )
 {
 	visitEachChildContext( _ctx );
 }
@@ -66,7 +55,9 @@ IdentifierImporter::visitSimple_hierarchical_branch(
 /***************************************************************************/
 
 antlrcpp::Any 
-IdentifierImporter::visitRange_expression( Verilog2001Parser::Range_expressionContext * ctx )
+IdentifierImporter::visitRange_expression( 
+	Verilog2001Parser::Range_expressionContext * ctx 
+)
 {
 	RangeImporter rangeImporter( takeVlogDataModel(), takeErrorsSet() );
 
@@ -117,8 +108,6 @@ IdentifierImporter::createSimpleId( antlr4::ParserRuleContext & _ctx )
 VlogDM::RangePtr 
 IdentifierImporter::createRange()
 {
-	const int rangesCount = m_currentRanges.size();
-
 	if( m_currentRanges.empty() )
 		return VlogDM::RangePtr();
 
@@ -156,6 +145,21 @@ IdentifierImporter::getIdsCount() const
 {
 	return m_extractedIds.size();
 }
+
+/***************************************************************************/
+
+
+template
+void
+IdentifierImporter::importIds< Verilog2001Parser::Net_assignmentContext >
+( Verilog2001Parser::Net_assignmentContext & _ctx );
+
+/***************************************************************************/
+
+template
+void
+IdentifierImporter::importIds< Verilog2001Parser::Variable_lvalueContext >
+( Verilog2001Parser::Variable_lvalueContext & _ctx );
 
 /***************************************************************************/
 

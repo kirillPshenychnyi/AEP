@@ -73,6 +73,8 @@ public:
 
 	int calculateBitwidth( Expression const & _expression ) const final;
 
+	int calculateBitwidth( BaseIdentifier const & _id ) const final;
+
 /***************************************************************************/
 
 	Writable::ObjectFactory const& getObjectFactory() const final;

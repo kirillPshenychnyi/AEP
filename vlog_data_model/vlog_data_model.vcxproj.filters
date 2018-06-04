@@ -447,9 +447,6 @@
     <ClInclude Include="api\vlog_dm_case_item_cast.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -487,6 +484,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sources\model\vlog_dm_forever_loop_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\vlog_engines\vlog_dm_bitwidth_calculator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -536,10 +536,10 @@
     <ClCompile Include="sources\regenerators\vlog_dm_statement_regenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.cpp">
+    <ClCompile Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\vlog_engines\vlog_dm_range_bitwidth_processor.cpp">
+    <ClCompile Include="sources\vlog_engines\vlog_dm_bitwidth_calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

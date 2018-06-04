@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
-#include "vlog_import_tests\catch.hpp"
+#include "common_tools\catch.hpp"
+
 #include "vlog_import_tests\sources\fixtures\vlog_import_expression_bitwidth_engine_fixture.hpp"
 
 #include "vlog_data_model\api\vlog_dm_binary_operator.hpp"

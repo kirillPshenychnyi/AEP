@@ -375,8 +375,6 @@ ExpressionImporter::visitSimple_hierarchical_identifier(
 	Verilog2001Parser::Simple_hierarchical_identifierContext * ctx 
 )
 {
-	using namespace VlogDM;
-
 	IdentifierImporter idImporter( takeVlogDataModel(), takeErrorsSet() );
 
 	idImporter.importId( *ctx );

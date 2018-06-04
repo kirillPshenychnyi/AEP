@@ -5,7 +5,7 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
-#include "vlog_import_tests\catch.hpp"
+#include "common_tools\catch.hpp"
 #include "hypodermic\Hypodermic.h"
 
 /***************************************************************************/

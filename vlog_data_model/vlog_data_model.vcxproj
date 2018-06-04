@@ -226,7 +226,7 @@
     <ClInclude Include="sources\model\vlog_dm_loop_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_repeat_loop_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_while_loop_impl.hpp" />
-    <ClInclude Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp" />
+    <ClInclude Include="sources\vlog_engines\vlog_dm_bitwidth_calculator.hpp" />
     <ClInclude Include="sources\model\vlog_dm_expression_range_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_multiple_concatenation_impl.hpp" />
     <ClInclude Include="sources\model\vlog_dm_behavioral_process_impl.hpp" />
@@ -309,7 +309,7 @@
     <ClCompile Include="sources\model\factory\vlog_dm_object_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_statement_factory_impl.cpp" />
     <ClCompile Include="sources\model\factory\vlog_dm_type_factory_impl.cpp" />
-    <ClCompile Include="sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.cpp" />
+    <ClCompile Include="sources\vlog_engines\vlog_dm_bitwidth_calculator.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_base_regenerator.cpp" />
     <ClCompile Include="sources\model\vlog_dm_accessor.cpp" />
     <ClCompile Include="sources\regenerators\vlog_dm_expression_regenerator.cpp" />

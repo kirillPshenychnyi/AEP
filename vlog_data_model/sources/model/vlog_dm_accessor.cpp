@@ -4,13 +4,14 @@
 
 #include "vlog_data_model\api\vlog_dm_process.hpp"
 #include "vlog_data_model\api\vlog_dm_expression.hpp"
+#include "vlog_data_model\api\vlog_dm_base_identifier.hpp"
 
 #include "vlog_data_model\sources\model\factory\vlog_dm_object_factory_impl.hpp"
 
 #include "vlog_data_model\sources\regenerators\vlog_dm_process_regenerator.hpp"
 #include "vlog_data_model\sources\regenerators\vlog_dm_expression_regenerator.hpp"
 
-#include "vlog_data_model\sources\vlog_engines\vlog_dm_expression_bitwidth_calculator.hpp"
+#include "vlog_data_model\sources\vlog_engines\vlog_dm_bitwidth_calculator.hpp"
 
 #include <sstream>
 
@@ -110,9 +111,19 @@ Accessor::forEachDesignUnit( DesignUnitCallback _callBack ) const
 int 
 Accessor::calculateBitwidth( Expression const & _expression ) const
 {
-	VlogEngines::ExpressionBitwidthCalculator calculator;
+	VlogEngines::BitwidthCalculator calculator;
 
 	return calculator.calculate( _expression );
+}
+
+/***************************************************************************/
+
+int
+Accessor::calculateBitwidth( BaseIdentifier const & _id ) const
+{
+	VlogEngines::BitwidthCalculator calculator;
+
+	return calculator.calculate( _id.getDeclared() );
 }
 
 /***************************************************************************/

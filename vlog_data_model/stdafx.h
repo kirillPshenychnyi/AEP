@@ -14,5 +14,6 @@
 // TODO: reference additional headers your program requires here
 #include <string>
 #include <memory>
+#include <vector>
 #include <boost\optional.hpp>
 #include <boost\noncopyable.hpp>
