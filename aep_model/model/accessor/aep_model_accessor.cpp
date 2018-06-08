@@ -32,6 +32,14 @@ Accessor::takeAssertionContext( std::string const & _dutName )
 
 /***************************************************************************/
 
+boost::optional< AssertionContext const& >
+Accessor::getAssertionContext( std::string const & _dutName )
+{
+	return m_contextSet->getContext( _dutName );
+}
+
+/***************************************************************************/
+
 AssertionContext & 
 Accessor::addContext( std::string const & _dutName )
 {

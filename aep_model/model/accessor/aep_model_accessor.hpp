@@ -32,6 +32,10 @@ public:
 		std::string const & _dutName 
 	) final;
  
+	boost::optional< AssertionContext const & > getAssertionContext( 
+		std::string const & _dutName 
+	) final;
+
 	AssertionContext & addContext( std::string const & _dutName ) final;
 
 	void forEachContext( AssertionContextCallback _callback );
@@ -39,6 +43,8 @@ public:
 	void forEachContext( ConstAssertionContextCallback _callback ) const;
 
 	void regenerateAssertions( std::string const & _path ) const; 
+
+	void reset();
 
 /***************************************************************************/
 
@@ -63,6 +69,15 @@ Accessor::getCheckersFactory() const
 	assert( m_checkersFactory );
 
 	return *m_checkersFactory;
+}
+
+/***************************************************************************/
+
+inline
+void 
+Accessor::reset()
+{
+	m_contextSet->clear();
 }
 
 /***************************************************************************/

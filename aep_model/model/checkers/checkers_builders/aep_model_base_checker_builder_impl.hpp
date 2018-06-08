@@ -71,7 +71,7 @@ public:
 		,	_Value _value
 	)
 	{
-		auto paramOpt = m_checker->getParameter( _type );
+		auto paramOpt = m_checker->getGeneric( _type );
 		
 		OvlCheckerGenericParameterCast< _TargetGeneric > caster;
 		auto castResult = caster.cast( *paramOpt );

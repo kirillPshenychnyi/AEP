@@ -28,6 +28,7 @@ struct OvlClockEdgeParameter;
 
 struct OvlCheckersFactory;
 struct OvlAlwaysCheckerBuilder;
+struct OvlOneHotCheckerBuilder;
 
 struct AssertionContext;
 typedef

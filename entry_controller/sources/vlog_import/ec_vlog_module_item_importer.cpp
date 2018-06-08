@@ -103,7 +103,7 @@ ModuleItemImporter::visitModule_instantiation(
 	std::string const moduleId = ctx->module_identifier()->getText();
 
 	for( auto const instance : ctx->module_instance() )
-	{ 
+	{
 		takeVlogDataModel().getCurrentImportedUnit().addChildInstance( 
 				moduleId
 			,	instance->name_of_instance()->getText()

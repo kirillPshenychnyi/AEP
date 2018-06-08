@@ -1,5 +1,5 @@
-#ifndef __AEP_ALWAYS_CHECKER_BUILDER_HPP__
-#define __AEP_ALWAYS_CHECKER_BUILDER_HPP__
+#ifndef __AEP_MODEL_OVL_ONE_HOT_CHECKER_BUILDER_HPP__
+#define __AEP_MODEL_OVL_ONE_HOT_CHECKER_BUILDER_HPP__
 
 /***************************************************************************/
 
@@ -11,7 +11,7 @@ namespace AepModel {
 
 /***************************************************************************/
 
-struct OvlAlwaysCheckerBuilder
+struct OvlOneHotCheckerBuilder
 	:	public OvlCheckerBuilder
 {
 
@@ -23,6 +23,8 @@ struct OvlAlwaysCheckerBuilder
 		,	int _width = 1
 	) = 0;
 
+	virtual void setWidth( int _width ) = 0;
+
 /***************************************************************************/
 
 };
@@ -33,4 +35,4 @@ struct OvlAlwaysCheckerBuilder
 
 /***************************************************************************/
 
-#endif // !__AEP_ALWAYS_CHECKER_BUILDER_HPP__
+#endif // !__AEP_MODEL_OVL_ONE_HOT_CHECKER_BUILDER_HPP__

@@ -38,20 +38,35 @@ protected:
 
 /***************************************************************************/
 
-	template< typename _ProcessKind >
-	void browseProcesses( ProcessCallback< _ProcessKind > _callback );
-	
+public:
+
+/***************************************************************************/
+
 	virtual void analyze() = 0;
 
-	virtual void postUnit() = 0;
+/***************************************************************************/
+
+protected:
+
+/***************************************************************************/
+
+	template< typename _ProcessKind >
+	void browseProcesses( ProcessCallback< _ProcessKind > _callback );
 
 	std::string regenerateExpression( VlogDM::Expression const & _expression ) const;
 
 	int calculateBitwidth( VlogDM::Expression const & _expression );
 
+	int calculateBitwidth( VlogDM::BaseIdentifier const & _id );
+
 	AepModel::AssertionContext & retrieveAssertionContext();
 
 	void setControls( AepModel::OvlCheckerBuilder & _builder ) const;
+
+	void addInputPorts( 
+			VlogDM::Expression const & _expression
+		,	AepModel::AssertionContext & _context 
+	);
 
 /***************************************************************************/
 
@@ -62,6 +77,8 @@ protected:
 	IAccessor & m_accessor;
 
 	const VlogDM::DesignUnit * m_currentUnit;
+
+	int m_currentSuspectNumber;
 
 /***************************************************************************/
 

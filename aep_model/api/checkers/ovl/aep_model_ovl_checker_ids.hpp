@@ -27,7 +27,7 @@ struct OvlCheckerIds
 			case Kind::OvlAlways:
 				return "ovl_always";
 			case Kind::OvlOneHot:
-				return "ovl_one_hot";
+				return "ovl_zero_one_hot";
 
 			default:
 				return "";

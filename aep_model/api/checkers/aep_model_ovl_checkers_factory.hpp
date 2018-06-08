@@ -20,9 +20,15 @@ struct OvlCheckersFactory
 	virtual ~OvlCheckersFactory() = default;
 
 	virtual std::unique_ptr< OvlAlwaysCheckerBuilder > newOvlAlwaysChecker(
-			std::string const & _instanceName
-		,	std::string const & _fileName
-		,	int _suspectLine
+				std::string const & _instanceName
+			,	std::string const & _fileName
+			,	int _suspectLine
+	) const = 0;
+
+	virtual std::unique_ptr< OvlOneHotCheckerBuilder > newOvlOneHotChecker(
+				std::string const & _instanceName
+			,	std::string const & _fileName
+			,	int _suspectLine
 	) const = 0;
 
 /***************************************************************************/

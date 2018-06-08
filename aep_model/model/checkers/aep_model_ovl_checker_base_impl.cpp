@@ -26,7 +26,7 @@ OvlCheckerImpl::OvlCheckerImpl(
 /***************************************************************************/
 
 boost::optional< OvlCheckerGenericParameter& > 
-OvlCheckerImpl::getParameter( GenericType::Kind _type ) const
+OvlCheckerImpl::getGeneric( GenericType::Kind _type ) const
 {
 	auto value = m_generics.find( _type, GenericParamHasher(), GenericParamComparator() );
 	

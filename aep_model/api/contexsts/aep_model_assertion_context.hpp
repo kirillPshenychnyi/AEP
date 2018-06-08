@@ -6,7 +6,7 @@
 #include "aep_model\api\aep_model_fwd.hpp"
 
 #include <functional>
-
+#include <boost\functional\hash.hpp>
 /***************************************************************************/
 
 namespace AepModel {
@@ -32,10 +32,31 @@ struct AssertionContext
 		{
 		}
 
+		bool operator == ( PortInfo const & _other ) const 
+		{
+			return 
+					m_width == _other.m_width
+				&&	m_portName == _other.m_portName
+				&&	m_portValue == _other.m_portValue;
+		}
+
 		const std::string m_portName;
 		const std::string m_portValue;
-
 		int m_width;
+	};
+
+	struct PortInfoHasher
+	{	
+		std::size_t operator() ( PortInfo const & _info ) const 
+		{
+			std::size_t seed;
+
+			boost::hash_combine( seed, _info.m_portName );
+			boost::hash_combine( seed, _info.m_portValue );
+			boost::hash_combine( seed, _info.m_width );
+
+			return seed;
+		}
 	};
 
 /***************************************************************************/
@@ -67,6 +88,10 @@ struct AssertionContext
 	virtual void addInstanceName( std::string const & _name ) = 0;
 
 	virtual void addChecker( OvlCheckerPtr _checker ) = 0;
+
+	virtual int getCheckerCount() const = 0;
+
+	virtual OvlChecker const & getChecker( int _idx ) const = 0;
 
 	virtual void forEachInstance( InstanceCallback _callBack ) const = 0;
 	

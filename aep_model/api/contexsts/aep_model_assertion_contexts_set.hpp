@@ -31,6 +31,12 @@ struct AssertionContextSet
 		std::string const & _dutName 
 	) = 0;
 
+	virtual boost::optional< AssertionContext const & > getContext(
+		std::string const & _dutName
+	) const = 0;
+
+	virtual void clear() = 0;
+
 /***************************************************************************/
 
 };

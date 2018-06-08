@@ -119,11 +119,12 @@ Accessor::runImport( _TStream  & _sourceStream, std::string const & _name )
 
 void 
 Accessor::runAepAnalysis(
-		Aep::IAccessor::GlobalClockParameters & _clockParams
+		Aep::CheckerIds _checkers
+	,	Aep::IAccessor::GlobalClockParameters & _clockParams
 	,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
 )
 {
-	m_aepAccessor.runEngine( _clockParams, _resetParams );
+	m_aepAccessor.runEngine( _checkers, _clockParams, _resetParams );
 }
 
 /***************************************************************************/

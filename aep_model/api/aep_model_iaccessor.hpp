@@ -25,6 +25,10 @@ struct IAccessor
 		std::string const & _dutName 
 	) = 0;
  
+	virtual boost::optional< AssertionContext const & > getAssertionContext( 
+		std::string const & _dutName 
+	) = 0;
+ 
 	virtual AssertionContext & addContext( std::string const & _dutName ) = 0;
 
 	virtual void forEachContext( AssertionContextCallback _callback ) = 0;
@@ -32,6 +36,8 @@ struct IAccessor
 	virtual void forEachContext( ConstAssertionContextCallback _callback ) const = 0;
 
 	virtual void regenerateAssertions( std::string const & _path ) const = 0;
+
+	virtual void reset() = 0;
 
 /***************************************************************************/
 

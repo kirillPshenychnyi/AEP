@@ -1,11 +1,10 @@
-#ifndef __AEP_UTILS_STATEMENT_QUERY_HPP__
-#define __AEP_UTILS_STATEMENT_QUERY_HPP__
+#ifndef __AEP_UTILS_EXPRESSION_EXTRACTOR_HPP__
+#define __AEP_UTILS_EXPRESSION_EXTRACTOR_HPP__
 
 /***************************************************************************/
 
-#include "aep\utils\aep_utils_base_query.hpp"
-
-#include "vlog_data_model\api\vlog_dm_statement_cast.hpp"
+#include "vlog_data_model\api\vlog_dm_fwd.hpp"
+#include "vlog_data_model\ih\visitors\vlog_dm_statement_visitor.hpp"
 
 /***************************************************************************/
 
@@ -14,16 +13,9 @@ namespace Utils {
 
 /***************************************************************************/
 
-template< typename _TTarget >
-class StatementQuery
-	:	public BaseQuery< _TTarget, VlogDM::StatementCast >
-	,	public VlogDM::StatementVisitor
+class ExpressionExtractor
+	:	public VlogDM::StatementVisitor
 {
-
-/***************************************************************************/
-
-	using BaseClass = BaseQuery< _TTarget, VlogDM::StatementCast >;
-	using Query = StatementQuery< _TTarget >;
 
 /***************************************************************************/
 
@@ -31,15 +23,9 @@ public:
 
 /***************************************************************************/
 
-	StatementQuery( 
-			VlogDM::BehavioralProcess const & _process
-		,	ConstructCallback && _callback
-		,	ConstructPredicate && _predicate
-	);
-
-/***************************************************************************/
-
-	void query();
+	void forEachExpression(
+		std::function< void ( VlogDM::Expression const & ) > _callback 
+	) const;
 
 /***************************************************************************/
 
@@ -59,14 +45,9 @@ private:
 
 	void visit( VlogDM::RepeatLoop const & _repeat ) final;
 
-	void visit( VlogDM::ConditionalStatement const & _statement ) final;
+	void visit( VlogDM::ConditionalStatement const & _condition ) final;
 
 	void visit( VlogDM::BlockingAssignment const & _assignment ) final;
-
-/***************************************************************************/
-
-	template< typename _TLoop >
-	void processLoop( const _TLoop& _loop );
 
 /***************************************************************************/
 
@@ -74,7 +55,7 @@ private:
 
 /***************************************************************************/
 
-	VlogDM::BehavioralProcess const & m_process;
+	std::vector< const VlogDM::Expression * > m_expressions;
 
 /***************************************************************************/
 
@@ -87,4 +68,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__AEP_UTILS_STATEMENT_QUERY_HPP__
+#endif // !__AEP_UTILS_EXPRESSION_EXTRACTOR_HPP__

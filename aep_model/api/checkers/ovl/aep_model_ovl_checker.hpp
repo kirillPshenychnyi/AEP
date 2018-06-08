@@ -40,6 +40,14 @@ struct OvlChecker
 		{
 		}
 
+		bool operator == ( InnerWireInfo const & _other ) const
+		{
+			return 
+				m_lhs == _other.m_lhs
+			&&	m_rhs == _other.m_rhs
+			&&	m_width == _other.m_width;
+		}
+
 		std::string const m_lhs;
 		std::string const m_rhs;
 		int m_width; 
@@ -88,7 +96,7 @@ struct OvlChecker
 	) = 0;
 
 	virtual boost::optional< OvlCheckerGenericParameter& >
-	getParameter( GenericType::Kind _type ) const = 0;
+	getGeneric( GenericType::Kind _type ) const = 0;
 
 	virtual boost::optional < OvlCheckerPort & > getPort(
 		OvlCheckerPortKind::Kind _type

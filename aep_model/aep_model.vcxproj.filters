@@ -39,9 +39,6 @@
     <ClInclude Include="api\checkers\checker_values\aep_model_severity_level.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ih\writable\aep_model_assertion_context.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_ids.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -130,6 +127,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="model\aep_model_resources.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_one_hot_checker_builder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_one_hot_checker_builder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

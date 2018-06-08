@@ -62,7 +62,7 @@ public:
 
 	OvlCheckerIds::Kind getId() const final;
 
-	boost::optional < OvlCheckerGenericParameter & > getParameter(
+	boost::optional < OvlCheckerGenericParameter & > getGeneric(
 			GenericType::Kind _type
 	) const final;
 

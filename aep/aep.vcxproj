@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="checkers\aep_parallel_case_syn_directive_checker.hpp" />
+    <ClInclude Include="checkers\aep_range_bound_checker.hpp" />
     <ClInclude Include="checkers\resources\aep_checker_resources.hpp" />
     <ClInclude Include="sources\accessor\aep_accessor.hpp" />
     <ClInclude Include="api\aep_checker_ids.hpp" />
@@ -156,9 +158,14 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="api\aep_iaccessor.hpp" />
+    <ClInclude Include="utils\aep_utils_base_query.hpp" />
+    <ClInclude Include="utils\aep_utils_expression_query.hpp" />
+    <ClInclude Include="utils\aep_utils_expression_extractor.hpp" />
     <ClInclude Include="utils\aep_utils_statement_query.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="checkers\aep_parallel_case_syn_directive_checker.cpp" />
+    <ClCompile Include="checkers\aep_range_bound_checker.cpp" />
     <ClCompile Include="checkers\resources\aep_checker_resources.cpp" />
     <ClCompile Include="sources\accessor\aep_accessor.cpp" />
     <ClCompile Include="checkers\aep_base_case_syn_directive_checker.cpp" />
@@ -170,6 +177,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="utils\aep_utils_expression_query.cpp" />
+    <ClCompile Include="utils\aep_utils_expression_extractor.cpp" />
     <ClCompile Include="utils\aep_utils_statement_query.cpp" />
   </ItemGroup>
   <ItemGroup>

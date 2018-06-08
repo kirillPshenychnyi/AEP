@@ -31,7 +31,8 @@ public:
 	~Accessor() = default;
 	
 	void runEngine( 
-			GlobalClockParameters const & _clock
+			Aep::CheckerIds _checkers
+		,	GlobalClockParameters const & _clock
 		,	boost::optional< GlobalResetParameters const & > _reset
 	) final;
 
@@ -54,6 +55,9 @@ private:
 	void addInstancesToContexts();
 
 	void addInstancesToContext( AepModel::AssertionContext & _context );
+
+	template< typename _TChecker >
+	void runChecker( CheckerIds _toRun, CheckerIds _ids );
 
 /***************************************************************************/
 

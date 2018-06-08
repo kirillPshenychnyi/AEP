@@ -52,6 +52,10 @@ public:
 	
 	void addChecker( OvlCheckerPtr _checker );
 
+	int getCheckerCount() const final;
+
+	OvlChecker const & getChecker( int _idx ) const final;
+
 	void forEachInstance( InstanceCallback _callback ) const final;
 	
 	void forEachInputPort( InputPortCallback _callback ) const final;
@@ -90,6 +94,15 @@ int
 AssertionContextImpl::getInputsCount() const
 {
 	return m_additioanalInputs.size();
+}
+
+/***************************************************************************/
+
+inline
+int 
+AssertionContextImpl::getCheckerCount() const
+{
+	return m_checkers.size();
 }
 
 /***************************************************************************/

@@ -9,7 +9,6 @@
 #include "common_tools\collections\tools_collection_utils.hpp"
 
 #include <boost\unordered_set.hpp>
-#include <boost\functional\hash\hash.hpp>
 
 /***************************************************************************/
 
@@ -79,7 +78,13 @@ class AssertionContextSetImpl
 
 	boost::optional< AssertionContext & > takeContext( 
 		std::string const & _dutName 
-	);
+	) final;
+
+	boost::optional< AssertionContext const & > getContext( 
+		std::string const & _dutName 
+	) const final;
+
+	void clear() final;
 
 /***************************************************************************/
 

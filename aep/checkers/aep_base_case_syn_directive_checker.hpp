@@ -25,27 +25,34 @@ public:
 
 	void analyze() final;
 
-	void postUnit() final;
-
 /***************************************************************************/
 
 private:
 
 /***************************************************************************/
 
-	void onProcess( VlogDM::BehavioralProcess const & _process );
+	virtual std::string getSelWireName() const = 0;
 
-	virtual void onCaseStatement( VlogDM::CaseStatement const & _case ) = 0;
+	virtual std::string getSeparator() const = 0;
+
+	virtual std::string getCheckTerm() const = 0;
+
+	virtual std::unique_ptr< AepModel::OvlChecker > getOvlChecker(
+				VlogDM::CaseStatement const & _case
+			,	std::string const & _caseItems
+	) = 0;
+
+	void onProcess( VlogDM::BehavioralProcess const & _process );
 
 	virtual bool isCheckableCase( VlogDM::CaseStatement const& _case ) const = 0;
 
-/***************************************************************************/
+	void onCaseStatement( VlogDM::CaseStatement const & _case );
 
-protected:
-
-/***************************************************************************/
-
-	int m_currentSuspectNumber;
+	void regenerateExpressionItems(
+			std::string const & _caseExpression
+		,	std::stringstream & _ostream
+		,	VlogDM::CaseItem const & _item
+	);
 
 /***************************************************************************/
 

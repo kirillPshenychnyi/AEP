@@ -61,4 +61,25 @@ AssertionContextSetImpl::takeContext( std::string const & _dutName )
 
 /***************************************************************************/
 
+boost::optional< AssertionContext const & > 
+AssertionContextSetImpl::getContext( std::string const & _dutName ) const
+{
+	auto it = m_contexts.find( _dutName, ContextHasher(), ContextComparator() );
+
+	return 
+		it != m_contexts.end()
+		?	**it
+		:	boost::optional< AssertionContext const & >();
+}
+
+/***************************************************************************/
+
+void 
+AssertionContextSetImpl::clear()
+{
+	m_contexts.clear();
+}
+
+/***************************************************************************/
+
 }

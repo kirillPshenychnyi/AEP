@@ -181,13 +181,14 @@
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_checker_port.hpp" />
     <ClInclude Include="api\checkers\ovl\aep_model_ovl_generic_parameter.hpp" />
     <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp" />
+    <ClInclude Include="api\checkers\ovl\checker_builders\aep_model_one_hot_checker_builder.hpp" />
     <ClInclude Include="api\contexsts\aep_model_assertion_context.hpp" />
     <ClInclude Include="api\contexsts\aep_model_assertion_contexts_set.hpp" />
     <ClInclude Include="ih\visitors\aep_model_checker_generic_non_const_visitor.hpp" />
     <ClInclude Include="ih\visitors\aep_model_checker_generic_visitor.hpp" />
-    <ClInclude Include="ih\writable\aep_model_assertion_context.hpp" />
     <ClInclude Include="model\accessor\aep_model_accessor.hpp" />
     <ClInclude Include="model\checkers\checkers_builders\aep_model_base_checker_builder_impl.hpp" />
+    <ClInclude Include="model\checkers\checkers_builders\aep_model_ovl_one_hot_checker_builder.hpp" />
     <ClInclude Include="model\contexts\aep_model_assertion_context_impl.hpp" />
     <ClInclude Include="model\contexts\aep_model_assertion_context_set_impl.hpp" />
     <ClInclude Include="model\contexts\regeneration\aep_model_context_set_regenerator.hpp" />

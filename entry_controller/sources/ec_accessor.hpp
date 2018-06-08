@@ -56,7 +56,8 @@ public:
 	bool runVerilogImport();
 
 	void runAepAnalysis(
-			Aep::IAccessor::GlobalClockParameters & _clockParams
+			Aep::CheckerIds _checkers
+		,	Aep::IAccessor::GlobalClockParameters & _clockParams
 		,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
 	) final;
 

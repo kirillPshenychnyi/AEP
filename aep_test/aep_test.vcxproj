@@ -88,7 +88,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,7 +102,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,7 +118,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +136,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Education\programming\c++ projects\VerilogFormalVerification;E:\Education\programming\c++ projects\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,17 +147,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="fixtures\aep_test_assertion_context_helper.hpp" />
+    <ClInclude Include="fixtures\aep_test_generic_object_helper.hpp" />
+    <ClInclude Include="fixtures\aep_test_ovl_checker_helper.hpp" />
+    <ClInclude Include="fixtures\aep_test_checkers_fixture.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="aep_test.cpp" />
+    <ClCompile Include="aep_test_main.cpp" />
+    <ClCompile Include="fixtures\aep_test_assertion_context_helper.cpp" />
+    <ClCompile Include="fixtures\aep_test_ovl_checker_helper.cpp" />
+    <ClCompile Include="checkers_test\aep_test_range_bound.cpp" />
+    <ClCompile Include="fixtures\aep_test_checkers_fixture.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\aep_model\aep_model.vcxproj">
+      <Project>{85c2fb1c-0882-429d-8843-ee9601446349}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\common_tools\common_tools.vcxproj">
+      <Project>{d64563ed-ce38-43f6-bc7e-99d5118e2357}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\entry_controller\entry_controller.vcxproj">
+      <Project>{40869de9-1a69-4837-ac6e-c5ba1e1c31db}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Hypodermic\Hypodermic.vcxproj">
+      <Project>{a87df3ac-9a2b-4762-84aa-bf20cae4591c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\vlog_data_model\vlog_data_model.vcxproj">
+      <Project>{3151e104-ceb5-40fa-b40c-6a1c9ab6ed03}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

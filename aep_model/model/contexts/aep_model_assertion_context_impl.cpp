@@ -31,7 +31,13 @@ AssertionContextImpl::addChecker( OvlCheckerPtr _checker )
 
 /***************************************************************************/
 
-void 
+OvlChecker const & 
+AssertionContextImpl::getChecker( int _idx ) const
+{
+	return *m_checkers.at( _idx );
+}
+
+void
 AssertionContextImpl::forEachInstance( InstanceCallback _callback ) const
 {
 	std::for_each( m_instances.begin(), m_instances.end(), _callback );

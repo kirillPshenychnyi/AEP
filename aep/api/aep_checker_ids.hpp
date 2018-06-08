@@ -12,14 +12,19 @@ enum class CheckerIds
 
 /***************************************************************************/
 
-		ParallelCaseSynDirectiveChecker
-	,	FullCaseSynDirectiveChecker
+		ParallelCaseSynDirectiveChecker = 1 << 0
+	,	FullCaseSynDirectiveChecker = 1 << 1
+	,	RangeBoundChecker = 1 << 2
+
+	,	All = 
+				ParallelCaseSynDirectiveChecker 
+			|	FullCaseSynDirectiveChecker
+			|	RangeBoundChecker
 
 /***************************************************************************/
 
 };
-
-
+	
 /***************************************************************************/
 
 }

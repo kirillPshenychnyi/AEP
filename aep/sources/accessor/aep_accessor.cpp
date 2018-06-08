@@ -2,6 +2,8 @@
 
 #include "aep\sources\accessor\aep_accessor.hpp"
 #include "aep\checkers\aep_full_case_syn_directive_checker.hpp"
+#include "aep\checkers\aep_parallel_case_syn_directive_checker.hpp"
+#include "aep\checkers\aep_range_bound_checker.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"
@@ -31,7 +33,8 @@ Accessor::Accessor(
 
 void
 Accessor::runEngine(
-		GlobalClockParameters const & _clock
+		Aep::CheckerIds _checkers
+	,	GlobalClockParameters const & _clock
 	,	boost::optional< GlobalResetParameters const & > _reset
 )
 {
@@ -40,12 +43,40 @@ Accessor::runEngine(
 	if( _reset )
 		m_resetParams = *_reset;
 
-	FullCaseSynDirectiveChecker c1( *this );
+	FullCaseSynDirectiveChecker fullCaseChecker( *this );
+	fullCaseChecker.analyze();
 
-	c1.analyze();
+	runChecker< FullCaseSynDirectiveChecker >( 
+			_checkers
+		,	CheckerIds::FullCaseSynDirectiveChecker 
+	);
+
+	runChecker< ParallelCaseSynDirectiveChecker >(
+			_checkers
+		,	CheckerIds::ParallelCaseSynDirectiveChecker
+	);
+
+	runChecker< RangeBoundChecker  >(
+			_checkers
+		,	CheckerIds::RangeBoundChecker
+	);
 
 	addInstancesToContexts();
 	addContolPorts();
+}
+
+/***************************************************************************/
+
+template< typename _TChecker >
+void 
+Accessor::runChecker( CheckerIds _toRun, CheckerIds _ids )
+{
+	if( static_cast< int >( _toRun ) & static_cast< int >( _ids ) )
+	{
+		_TChecker checker( *this );
+
+		checker.analyze();
+	}
 }
 
 /***************************************************************************/

@@ -7,6 +7,10 @@
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_statement.hpp"
 #include "vlog_data_model\api\vlog_dm_conditional_branch.hpp"
+#include "vlog_data_model\api\vlog_dm_for_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_forever_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_while_loop.hpp"
+#include "vlog_data_model\api\vlog_dm_repeat_loop.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_case_item.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
@@ -21,12 +25,14 @@ namespace Utils {
 template< typename _TTarget >
 StatementQuery< _TTarget >::StatementQuery( 
 		VlogDM::BehavioralProcess const & _process 
-	,	StatementCallback && _callback
-	,	StatementPredicate && _predicate
+	,	ConstructCallback && _callback
+	,	ConstructPredicate && _predicate
 	)
-	:	m_process( _process )
-	,	m_callback( _callback )
-	,	m_predicate( _predicate )
+	:	BaseClass( 
+				std::forward< ConstructCallback >( _callback )
+			,	std::forward< ConstructPredicate >( _predicate ) 
+		)
+	,	m_process( _process )
 {
 }
 
@@ -45,7 +51,14 @@ template< typename _TTarget >
 void 
 StatementQuery< _TTarget >::visit( VlogDM::SequentialBlock const & _block )
 {	
-	_block.accept( *this );
+	processAsConstructsContainer< Query, VlogDM::Statement >( 
+			_block.getStatementsCount()
+		,	[ & ]( int _idx ) -> VlogDM::Statement const &
+			{
+				return _block.getStatement( _idx );
+			}
+		,	*this
+	);
 }
 
 /***************************************************************************/
@@ -54,16 +67,52 @@ template< typename _TTarget >
 void 
 StatementQuery< _TTarget >::visit( VlogDM::CaseStatement const & _case )
 {
-	processAsTopStatement( _case );
+	processAsTargetConstruct( _case );
 
-	processAsStatementsContainer( 
-			_case
-		,	_case.getItemsCount()
+	processAsConstructsContainer< Query, VlogDM::Statement >( 
+			_case.getItemsCount()
 		,	[ & ]( int _idx ) -> VlogDM::Statement const &
-			{
+			{	
 				return _case.getItem( _idx ).getStatement();
 			}
+		,	*this
 	);
+}
+
+/***************************************************************************/
+
+template<typename _TTarget>
+void 
+StatementQuery< _TTarget >::visit( VlogDM::ForLoop const & _for )
+{
+	processLoop( _for );
+}
+
+/***************************************************************************/
+
+template< typename _TTarget >
+void 
+StatementQuery< _TTarget >::visit( VlogDM::WhileLoop const & _while )
+{
+	processLoop( _while );
+}
+
+/***************************************************************************/
+
+template< typename _TTarget >
+void 
+StatementQuery< _TTarget >::visit( VlogDM::ForeverLoop const & _forever )
+{
+	processLoop( _forever );
+}
+
+/***************************************************************************/
+
+template< typename _TTarget >
+void 
+StatementQuery< _TTarget >::visit( VlogDM::RepeatLoop const & _repeat )
+{
+	processLoop( _repeat );
 }
 
 /***************************************************************************/
@@ -72,15 +121,15 @@ template< typename _TTarget >
 void
 StatementQuery< _TTarget >::visit( VlogDM::ConditionalStatement const & _statement )
 {
-	processAsTopStatement( _statement );
+	processAsTargetConstruct( _statement );
 
-	processAsStatementsContainer( 
-			_statement
-		,	_statement.getBranchesCount()
+	processAsConstructsContainer< Query, VlogDM::Statement >( 
+			_statement.getBranchesCount()
 		,	[ & ]( int _idx ) -> VlogDM::Statement const &
 			{
 				return _statement.getBranch( _idx ).getStatement();
 			}
+		,	*this
 	);
 }
 
@@ -90,42 +139,18 @@ template< typename _TTarget >
 void 
 StatementQuery< _TTarget >::visit( VlogDM::BlockingAssignment const & _assignment )
 {
-	processAsTopStatement( _assignment );
+	processAsTargetConstruct( _assignment );
 }
 
 /***************************************************************************/
 
 template< typename _TTarget >
-template< typename _TSeqStatement >
+template< typename _TLoop >
 void 
-StatementQuery< _TTarget >::processAsTopStatement( 
-		_TSeqStatement const & _statement 
-)
+StatementQuery< _TTarget >::processLoop( const _TLoop & _loop )
 {
-	using namespace VlogDM;
-
-	StatementCast< _TTarget > caster;
-
-	if( auto castRes = caster.cast( _statement ) )
-	{
-		if( m_predicate( *castRes ) )
-			m_callback( *castRes );
-	}
-}
-
-/***************************************************************************/
-
-template< typename _TTarget >
-template< typename _TSeqStatement >
-void 
-StatementQuery< _TTarget >::processAsStatementsContainer(
-		_TSeqStatement const & _statement
-	,	int _statements
-	,	StatementRetriever _retriever
-)
-{
-	for( int i = 0; i < _statements; ++i )
-		_retriever( i ).accept( *this );
+	processAsTargetConstruct( _loop );
+	_loop.getLoopStatement().accept( *this );
 }
 
 /***************************************************************************/

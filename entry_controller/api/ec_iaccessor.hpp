@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "aep\api\aep_iaccessor.hpp"
+#include "aep\api\aep_checker_ids.hpp"
 
 /***************************************************************************/
 
@@ -36,7 +37,8 @@ struct IAccessor
 	virtual bool runVerilogImport() = 0;
 
 	virtual void runAepAnalysis(
-			Aep::IAccessor::GlobalClockParameters & _clockParams
+			Aep::CheckerIds _checkers
+		,	Aep::IAccessor::GlobalClockParameters & _clockParams
 		,	boost::optional< Aep::IAccessor::GlobalResetParameters const & > _resetParams
 	) = 0;
 

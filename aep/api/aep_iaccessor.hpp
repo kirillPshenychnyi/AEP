@@ -5,6 +5,7 @@
 
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 #include "aep_model\api\aep_model_fwd.hpp"
+#include "aep\api\aep_checker_ids.hpp"
 
 /***************************************************************************/
 
@@ -31,7 +32,8 @@ struct IAccessor
 	virtual ~IAccessor() = default;
 
 	virtual void runEngine( 
-			GlobalClockParameters const & _clock
+			CheckerIds _checkers
+		,	GlobalClockParameters const & _clock
 		,	boost::optional< GlobalResetParameters const& > _reset
 	) = 0; 
 
