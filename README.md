@@ -1,1 +1,1 @@
-VerilogFormalVerification
+Verilog Assertion Verification Engine
