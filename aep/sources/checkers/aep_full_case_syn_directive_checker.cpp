@@ -8,8 +8,8 @@
 #include "aep_model\api\checkers\ovl\checker_builders\aep_model_always_checker_builder.hpp"
 #include "aep_model\api\contexsts\aep_model_assertion_context.hpp"
 
-#include "aep\checkers\aep_full_case_syn_directive_checker.hpp"
-#include "aep\checkers\resources\aep_checker_resources.hpp"
+#include "aep\sources\checkers\aep_full_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\resources\aep_checker_resources.hpp"
 
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"

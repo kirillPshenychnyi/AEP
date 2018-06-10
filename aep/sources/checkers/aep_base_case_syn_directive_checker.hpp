@@ -3,8 +3,8 @@
 
 /***************************************************************************/
 
-#include "aep\checkers\aep_base_checker.hpp"
-#include "aep\utils\aep_utils_statement_query.hpp"
+#include "aep\sources\checkers\aep_base_checker.hpp"
+#include "aep\sources\utils\aep_utils_statement_query.hpp"
 
 /***************************************************************************/
 

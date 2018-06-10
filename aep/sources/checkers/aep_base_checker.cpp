@@ -2,12 +2,12 @@
 
 #include "aep\api\aep_iaccessor.hpp"
 
-#include "aep\checkers\aep_base_checker.hpp"
-#include "aep\checkers\resources\aep_checker_resources.hpp"
+#include "aep\sources\checkers\aep_base_checker.hpp"
+#include "aep\sources\checkers\resources\aep_checker_resources.hpp"
 
-#include "aep\utils\aep_utils_expression_query.hpp"
-#include "aep\utils\aep_utils_condition_holder.hpp"
-#include "aep\utils\aep_utils_condition_regenerator.hpp"
+#include "aep\sources\utils\aep_utils_expression_query.hpp"
+#include "aep\sources\utils\aep_utils_condition_holder.hpp"
+#include "aep\sources\utils\aep_utils_condition_regenerator.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"

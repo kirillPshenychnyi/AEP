@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "aep\checkers\resources\aep_checker_resources.hpp"
+#include "aep\sources\checkers\resources\aep_checker_resources.hpp"
 
 /***************************************************************************/
 

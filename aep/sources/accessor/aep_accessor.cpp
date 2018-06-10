@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
 #include "aep\sources\accessor\aep_accessor.hpp"
-#include "aep\checkers\aep_full_case_syn_directive_checker.hpp"
-#include "aep\checkers\aep_parallel_case_syn_directive_checker.hpp"
-#include "aep\checkers\aep_range_bound_checker.hpp"
+#include "aep\sources\checkers\aep_full_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\aep_parallel_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\aep_range_bound_checker.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_design_unit.hpp"

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-#include "aep\utils\aep_utils_expression_extractor.hpp"
-#include "aep\utils\aep_utils_condition_holder.hpp"
+#include "aep\sources\utils\aep_utils_expression_extractor.hpp"
+#include "aep\sources\utils\aep_utils_condition_holder.hpp"
 
 #include "vlog_data_model\api\vlog_dm_statement_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_sequential_block.hpp"

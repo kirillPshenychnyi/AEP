@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-#include "aep\utils\aep_utils_expression_query.hpp"
-#include "aep\utils\aep_utils_expression_extractor.hpp"
+#include "aep\sources\utils\aep_utils_expression_query.hpp"
+#include "aep\sources\utils\aep_utils_expression_extractor.hpp"
 
 #include "vlog_data_model\api\vlog_dm_expression_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"

@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
-#include "aep\checkers\aep_range_bound_checker.hpp"
+#include "aep\sources\checkers\aep_range_bound_checker.hpp"
+#include "aep\sources\checkers\resources\aep_checker_resources.hpp"
 
 #include "aep\api\aep_iaccessor.hpp"
-#include "aep\checkers\resources\aep_checker_resources.hpp"
 
 #include "vlog_data_model\api\vlog_dm_continuous_assignment.hpp"
 #include "vlog_data_model\api\vlog_dm_blocking_assignment.hpp"

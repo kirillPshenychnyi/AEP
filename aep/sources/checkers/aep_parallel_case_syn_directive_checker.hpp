@@ -1,9 +1,9 @@
-#ifndef __AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
-#define __AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#ifndef __AEP_PARALLEL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#define __AEP_PARALLEL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
 
 /***************************************************************************/
 
-#include "aep\checkers\aep_base_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\aep_base_case_syn_directive_checker.hpp"
 
 /***************************************************************************/
 
@@ -11,7 +11,7 @@ namespace Aep {
 
 /***************************************************************************/
 
-class FullCaseSynDirectiveChecker
+class ParallelCaseSynDirectiveChecker
 	:	public BaseCaseSynDirectiveChecker
 {
 
@@ -21,7 +21,7 @@ public:
 
 /***************************************************************************/
 
-	FullCaseSynDirectiveChecker( IAccessor & _aep );
+	ParallelCaseSynDirectiveChecker( IAccessor & _aep );
 
 /***************************************************************************/
 
@@ -53,4 +53,4 @@ private:
 
 /***************************************************************************/
 
-#endif // !__AEP_FULL_CASE_SYN_DIRECTIVE_CHECKER_HPP__
+#endif // !__AEP_PARALLEL_CASE_SYN_DIRECTIVE_CHECKER_HPP__

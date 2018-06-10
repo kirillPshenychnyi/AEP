@@ -24,18 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="checkers\aep_base_checker.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="checkers\aep_base_case_syn_directive_checker.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils\aep_utils_statement_query.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="checkers\aep_full_case_syn_directive_checker.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sources\accessor\aep_accessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,28 +33,40 @@
     <ClInclude Include="api\aep_iaccessor.hpp">
       <Filter>Header Files\api</Filter>
     </ClInclude>
-    <ClInclude Include="checkers\resources\aep_checker_resources.hpp">
+    <ClInclude Include="sources\utils\aep_utils_base_query.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="checkers\aep_parallel_case_syn_directive_checker.hpp">
+    <ClInclude Include="sources\utils\aep_utils_condition_holder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="checkers\aep_range_bound_checker.hpp">
+    <ClInclude Include="sources\utils\aep_utils_condition_regenerator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\aep_utils_expression_query.hpp">
+    <ClInclude Include="sources\utils\aep_utils_expression_extractor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\aep_utils_base_query.hpp">
+    <ClInclude Include="sources\utils\aep_utils_expression_query.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\aep_utils_expression_extractor.hpp">
+    <ClInclude Include="sources\utils\aep_utils_statement_query.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\aep_utils_condition_holder.hpp">
+    <ClInclude Include="sources\checkers\resources\aep_checker_resources.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\aep_utils_condition_regenerator.hpp">
+    <ClInclude Include="sources\checkers\aep_base_case_syn_directive_checker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\checkers\aep_base_checker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\checkers\aep_full_case_syn_directive_checker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\checkers\aep_parallel_case_syn_directive_checker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\checkers\aep_range_bound_checker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,37 +74,37 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="checkers\aep_base_checker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="checkers\aep_base_case_syn_directive_checker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils\aep_utils_statement_query.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="checkers\aep_full_case_syn_directive_checker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sources\accessor\aep_accessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="checkers\resources\aep_checker_resources.cpp">
+    <ClCompile Include="sources\utils\aep_utils_condition_regenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="checkers\aep_parallel_case_syn_directive_checker.cpp">
+    <ClCompile Include="sources\utils\aep_utils_expression_extractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="checkers\aep_range_bound_checker.cpp">
+    <ClCompile Include="sources\utils\aep_utils_expression_query.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\aep_utils_expression_query.cpp">
+    <ClCompile Include="sources\utils\aep_utils_statement_query.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\aep_utils_expression_extractor.cpp">
+    <ClCompile Include="sources\checkers\resources\aep_checker_resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\aep_utils_condition_regenerator.cpp">
+    <ClCompile Include="sources\checkers\aep_base_case_syn_directive_checker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\checkers\aep_base_checker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\checkers\aep_full_case_syn_directive_checker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\checkers\aep_parallel_case_syn_directive_checker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\checkers\aep_range_bound_checker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

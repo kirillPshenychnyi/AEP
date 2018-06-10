@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-#include "aep\checkers\aep_parallel_case_syn_directive_checker.hpp"
-#include "aep\checkers\resources\aep_checker_resources.hpp"
+#include "aep\sources\checkers\aep_parallel_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\resources\aep_checker_resources.hpp"
 #include "aep\api\aep_iaccessor.hpp"
 
 #include "aep_model\api\aep_model_iaccessor.hpp"

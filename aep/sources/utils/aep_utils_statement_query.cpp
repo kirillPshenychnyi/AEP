@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "aep\utils\aep_utils_statement_query.hpp"
+#include "aep\sources\utils\aep_utils_statement_query.hpp"
 
 #include "vlog_data_model\api\vlog_dm_statement_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_sequential_block.hpp"

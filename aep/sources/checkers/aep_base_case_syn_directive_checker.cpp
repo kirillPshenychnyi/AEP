@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "aep\checkers\aep_base_case_syn_directive_checker.hpp"
+#include "aep\sources\checkers\aep_base_case_syn_directive_checker.hpp"
 #include "aep\api\aep_iaccessor.hpp"
 
 #include "aep_model\api\aep_model_iaccessor.hpp"
