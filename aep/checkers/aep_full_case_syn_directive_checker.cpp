@@ -53,10 +53,11 @@ FullCaseSynDirectiveChecker::getCheckTerm() const
 
 /***************************************************************************/
 
-std::unique_ptr< AepModel::OvlChecker > 
+std::unique_ptr< AepModel::OvlCheckerBuilder > 
 FullCaseSynDirectiveChecker::getOvlChecker( 
 		VlogDM::CaseStatement const & _case
 	,	std::string const & _caseItems
+	,	std::string const & _caseExpressionWire
 )
 {
 	using namespace AepModel;
@@ -73,6 +74,12 @@ FullCaseSynDirectiveChecker::getOvlChecker(
 				,	_case.getLocation().m_beginLine
 			);
 
+	checker->addInnerDeclaration( 
+			_caseExpressionWire
+		,	regenerateExpression( _case.getCaseExpression() )
+		,	calculateBitwidth( _case.getCaseExpression() )
+	);
+
 	checker->setTestExpression(
 			Tools::fillTemplate( CheckExpressionWire, m_currentSuspectNumber )
 		,	Tools::fillTemplate( CheckExpression, _caseItems )
@@ -82,7 +89,7 @@ FullCaseSynDirectiveChecker::getOvlChecker(
 	checker->setMessage( Message );
 	setControls( *checker );
 
-	return std::move( checker->releaseChecker() );
+	return checker;
 }
 
 /***************************************************************************/

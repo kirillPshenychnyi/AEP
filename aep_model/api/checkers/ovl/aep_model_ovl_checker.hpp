@@ -95,6 +95,12 @@ struct OvlChecker
 		,	int _width
 	) = 0;
 
+	virtual void addInnerDeclaration(
+			std::string const & _lhs
+		,	std::string const & _rhs
+		,	int _width
+	) = 0;
+
 	virtual boost::optional< OvlCheckerGenericParameter& >
 	getGeneric( GenericType::Kind _type ) const = 0;
 

@@ -85,6 +85,12 @@ public:
 		,	int _width
 	) final;
 
+	virtual void addInnerDeclaration(
+			std::string const & _lhs
+		,	std::string const & _rhs
+		,	int _width
+	) final;
+
 	void addPort( std::unique_ptr< OvlCheckerPort > _port );
 
 	void foreachGeneric( GenericParameterCallback const & _functor ) const final;

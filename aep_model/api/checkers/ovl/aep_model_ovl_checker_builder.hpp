@@ -36,6 +36,12 @@ struct OvlCheckerBuilder
 
 	virtual OvlCheckerPtr releaseChecker() = 0;
 
+	virtual void addInnerDeclaration(
+				std::string const & _lhs
+			,	std::string const & _rhs
+			,	int _width
+	) = 0;
+
 	AEP_DECLARE_PORT_SETTER( Clock )
 	AEP_DECLARE_PORT_SETTER( Reset )
 	AEP_DECLARE_PORT_SETTER( Enable )

@@ -37,9 +37,10 @@ private:
 
 	std::string getCheckTerm() const final;
 
-	std::unique_ptr< AepModel::OvlChecker > getOvlChecker(
+	std::unique_ptr< AepModel::OvlCheckerBuilder > getOvlChecker(
 			VlogDM::CaseStatement const & _case
 		,	std::string const & _caseItems
+		,	std::string const & _caseExpressionWire
 	) final;
 
 /***************************************************************************/

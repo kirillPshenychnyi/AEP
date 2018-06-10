@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aep_test_main.cpp" />
+    <ClCompile Include="checkers_test\aep_test_full_case_directive.cpp" />
     <ClCompile Include="fixtures\aep_test_assertion_context_helper.cpp" />
     <ClCompile Include="fixtures\aep_test_ovl_checker_helper.cpp" />
     <ClCompile Include="checkers_test\aep_test_range_bound.cpp" />

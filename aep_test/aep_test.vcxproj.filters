@@ -53,5 +53,8 @@
     <ClCompile Include="fixtures\aep_test_checkers_fixture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="checkers_test\aep_test_full_case_directive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

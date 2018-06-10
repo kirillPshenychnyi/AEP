@@ -2,11 +2,11 @@
 
 #include "aep\checkers\aep_base_case_syn_directive_checker.hpp"
 #include "aep\api\aep_iaccessor.hpp"
-#include "aep\utils\aep_utils_statement_query.hpp"
 
 #include "aep_model\api\aep_model_iaccessor.hpp"
 #include "aep_model\api\contexsts\aep_model_assertion_context.hpp"
 #include "aep_model\api\checkers\ovl\aep_model_ovl_checker.hpp"
+#include "aep_model\api\checkers\ovl\aep_model_ovl_checker_builder.hpp"
 
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
 #include "vlog_data_model\api\vlog_dm_case_statement.hpp"
@@ -27,6 +27,18 @@ BaseCaseSynDirectiveChecker::BaseCaseSynDirectiveChecker(
 		IAccessor & _accessor 
 )
 	:	BaseAepChecker( _accessor )
+	,	m_caseStmtQuery(
+				std::bind( 
+						&BaseCaseSynDirectiveChecker::onCaseStatement
+					,	this
+					,	std::placeholders::_1 
+				)
+			,	std::bind( 
+						&BaseCaseSynDirectiveChecker::isCheckableCase
+					,	this
+					,	std::placeholders::_1 
+				)
+		)
 {
 }
 
@@ -49,21 +61,7 @@ BaseCaseSynDirectiveChecker::analyze()
 void
 BaseCaseSynDirectiveChecker::onProcess( VlogDM::BehavioralProcess const & _process )
 {
-	Utils::StatementQuery< VlogDM::CaseStatement > caseStmtQuery(
-			_process
-		,	std::bind( 
-					&BaseCaseSynDirectiveChecker::onCaseStatement
-				,	this
-				,	std::placeholders::_1 
-			)
-		,	std::bind( 
-					&BaseCaseSynDirectiveChecker::isCheckableCase
-				,	this
-				,	std::placeholders::_1 
-			)
-	);
-
-	caseStmtQuery.query();
+	m_caseStmtQuery.query( _process );
 }
 
 /***************************************************************************/
@@ -88,6 +86,8 @@ BaseCaseSynDirectiveChecker::onCaseStatement(
 	
 	std::stringstream checkTerms;
 
+	AssertionContext & context = retrieveAssertionContext();
+
 	bool isLast = false;
 	for( int i = 0; i < nCaseItems; ++i )
 	{
@@ -95,23 +95,19 @@ BaseCaseSynDirectiveChecker::onCaseStatement(
 		
 		auto castResult = itemCast.cast( _case.getItem( i ) );
 
-		regenerateExpressionItems( caseExpressionWire, checkTerms, *castResult );
+		processExpressionItems( caseExpressionWire, checkTerms, *castResult, context );
 
 		if( !isLast )
 			checkTerms << getSeparator();
 	}
 
-	AssertionContext & context = retrieveAssertionContext();
+	auto checker = getOvlChecker( _case, checkTerms.str(), caseExpressionWire );
 
-	int caseExpressionWidth = calculateBitwidth( _case.getCaseExpression() );
+	setEnable( context, m_caseStmtQuery, *checker );
 
-	context.addInputPort( 
-			caseExpressionWire
-		,	regenerateExpression( _case.getCaseExpression() )
-		,	caseExpressionWidth 
-	);
+	addInputPorts( _case.getCaseExpression(), context );
 
-	context.addChecker( getOvlChecker( _case, checkTerms.str() ) );
+	context.addChecker( checker->releaseChecker() );
 
 	m_currentSuspectNumber++;
 }
@@ -119,16 +115,21 @@ BaseCaseSynDirectiveChecker::onCaseStatement(
 /***************************************************************************/
 
 void 
-BaseCaseSynDirectiveChecker::regenerateExpressionItems( 
+BaseCaseSynDirectiveChecker::processExpressionItems( 
 		std::string const & _caseExpression
 	,	std::stringstream & _ostream
 	,	VlogDM::CaseItem const & _item 
+	,	AepModel::AssertionContext & _context
 )
 {	
 	const int nExpressions = _item.getExpressionsCount();
 	bool isLast = false;
 	for( int i = 0; i < nExpressions; ++i )
 	{
+		VlogDM::Expression const & expression = _item.getExpression( i );
+
+		addInputPorts( expression, _context );
+
 		isLast = i == nExpressions - 1;
 
 		if( !isLast )
@@ -137,7 +138,7 @@ BaseCaseSynDirectiveChecker::regenerateExpressionItems(
 		 _ostream << Tools::fillTemplate( 
 							getCheckTerm()
 						,	_caseExpression
-						,	regenerateExpression( _item.getExpression( i ) ) 
+						,	regenerateExpression( expression ) 
 					);
 	}
 }

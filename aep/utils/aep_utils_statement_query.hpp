@@ -32,14 +32,13 @@ public:
 /***************************************************************************/
 
 	StatementQuery( 
-			VlogDM::BehavioralProcess const & _process
-		,	ConstructCallback && _callback
+			ConstructCallback && _callback
 		,	ConstructPredicate && _predicate
 	);
 
 /***************************************************************************/
 
-	void query();
+	void query( VlogDM::BehavioralProcess const & _process );
 
 /***************************************************************************/
 
@@ -67,14 +66,6 @@ private:
 
 	template< typename _TLoop >
 	void processLoop( const _TLoop& _loop );
-
-/***************************************************************************/
-
-private:
-
-/***************************************************************************/
-
-	VlogDM::BehavioralProcess const & m_process;
 
 /***************************************************************************/
 

@@ -44,6 +44,15 @@ public:
 		return std::move( m_checker );
 	}
 
+	void addInnerDeclaration(
+				std::string const & _lhs
+			,	std::string const & _rhs
+			,	int _width
+	) final
+	{
+		m_checker->addInnerDeclaration( _lhs, _rhs, _width );
+	}
+
 	AEP_DEFINE_ENUM_PARAM_SETTER( ResetPolarity )
 	AEP_DEFINE_ENUM_PARAM_SETTER( SeverityLevel )
 	AEP_DEFINE_ENUM_PARAM_SETTER( ClockEdge )

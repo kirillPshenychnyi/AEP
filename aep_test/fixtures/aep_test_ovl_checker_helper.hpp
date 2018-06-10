@@ -127,6 +127,24 @@ public:
 			);
 	}
 	
+	template < typename _TGeneric >
+	OvlCheckerHelper & genericParameter( 
+			AepModel::GenericType::Kind _kind 
+		,	_TGeneric _value
+	)
+	{
+		auto paramOpt = m_checker.getGeneric( _kind );
+	
+		REQUIRE( paramOpt.is_initialized() );
+	
+		return 
+			check( 
+					paramOpt->valueToString()
+				,	std::to_string( _value )
+				,	"generic"
+			);
+	}
+
 	InnerWireInfoHelper & innerWires();
 
 	AssertionContextHelper & end();

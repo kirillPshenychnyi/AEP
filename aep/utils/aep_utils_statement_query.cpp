@@ -24,15 +24,13 @@ namespace Utils {
 
 template< typename _TTarget >
 StatementQuery< _TTarget >::StatementQuery( 
-		VlogDM::BehavioralProcess const & _process 
-	,	ConstructCallback && _callback
+		ConstructCallback && _callback
 	,	ConstructPredicate && _predicate
 	)
 	:	BaseClass( 
 				std::forward< ConstructCallback >( _callback )
 			,	std::forward< ConstructPredicate >( _predicate ) 
 		)
-	,	m_process( _process )
 {
 }
 
@@ -40,9 +38,9 @@ StatementQuery< _TTarget >::StatementQuery(
 
 template< typename _TTarget >
 void
-StatementQuery< _TTarget >::query()
+StatementQuery< _TTarget >::query( VlogDM::BehavioralProcess const & _process )
 {
-	m_process.getStatement().accept( *this );
+	_process.getStatement().accept( *this );
 }
 
 /***************************************************************************/
@@ -73,10 +71,16 @@ StatementQuery< _TTarget >::visit( VlogDM::CaseStatement const & _case )
 			_case.getItemsCount()
 		,	[ & ]( int _idx ) -> VlogDM::Statement const &
 			{
+				if( hasConditions() )
+					popCondition();
+				
+				pushCondition( _case, _idx );
 				return _case.getItem( _idx ).getStatement();
 			}
 		,	*this
 	);
+
+	popCondition();
 }
 
 /***************************************************************************/
@@ -127,10 +131,17 @@ StatementQuery< _TTarget >::visit( VlogDM::ConditionalStatement const & _stateme
 			_statement.getBranchesCount()
 		,	[ & ]( int _idx ) -> VlogDM::Statement const &
 			{
+				if( hasConditions() )
+					popCondition();
+				
+				pushCondition( _statement, _idx );
+
 				return _statement.getBranch( _idx ).getStatement();
 			}
 		,	*this
 	);
+
+	popCondition();
 }
 
 /***************************************************************************/

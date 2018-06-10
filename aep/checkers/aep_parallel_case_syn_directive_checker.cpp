@@ -64,10 +64,11 @@ ParallelCaseSynDirectiveChecker::getCheckTerm() const
 
 /***************************************************************************/
 
-std::unique_ptr< AepModel::OvlChecker > 
+std::unique_ptr< AepModel::OvlCheckerBuilder > 
 ParallelCaseSynDirectiveChecker::getOvlChecker( 
 		VlogDM::CaseStatement const & _case
 	,	std::string const & _caseItems 
+	,	std::string const & _caseExpressionWire
 )
 {
 	using namespace AepModel;
@@ -82,6 +83,12 @@ ParallelCaseSynDirectiveChecker::getOvlChecker(
 				,	_case.getLocation().m_beginLine
 			);
 
+	checker->addInnerDeclaration( 
+			_caseExpressionWire
+		,	regenerateExpression( _case.getCaseExpression() )
+		,	calculateBitwidth( _case.getCaseExpression() )
+	);
+
 	checker->setTestExpression(
 			Tools::fillTemplate( CheckExpressionWire, m_currentSuspectNumber )
 		,	Tools::fillTemplate( CheckExpression, _caseItems )
@@ -90,9 +97,10 @@ ParallelCaseSynDirectiveChecker::getOvlChecker(
 	checker->setFire( Tools::fillTemplate( FireWire, m_currentSuspectNumber ) );
 	checker->setWidth( _case.getItemsCount() );
 	checker->setMessage( Message );
+
 	setControls( *checker );
 
-	return std::move( checker->releaseChecker() );
+	return checker;
 }
 
 /***************************************************************************/

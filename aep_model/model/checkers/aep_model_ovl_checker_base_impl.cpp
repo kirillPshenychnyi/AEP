@@ -92,6 +92,18 @@ OvlCheckerImpl::setPortAsWire(
 /***************************************************************************/
 
 void
+OvlCheckerImpl::addInnerDeclaration( 
+		std::string const & _lhs
+	,	std::string const & _rhs
+	,	int _width 
+)
+{
+	m_innerWires.emplace_back( _lhs, _rhs, _width );
+}
+
+/***************************************************************************/
+
+void
 OvlCheckerImpl::addPort( std::unique_ptr< OvlCheckerPort > _port )
 {
 	m_ports.insert( std::move( _port ) );
