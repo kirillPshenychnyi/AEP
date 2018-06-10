@@ -3,8 +3,11 @@
 #include "aep\api\aep_iaccessor.hpp"
 
 #include "aep\checkers\aep_base_checker.hpp"
-#include "aep\utils\aep_utils_expression_query.hpp"
 #include "aep\checkers\resources\aep_checker_resources.hpp"
+
+#include "aep\utils\aep_utils_expression_query.hpp"
+#include "aep\utils\aep_utils_condition_holder.hpp"
+#include "aep\utils\aep_utils_condition_regenerator.hpp"
 
 #include "vlog_data_model\api\vlog_dm_iaccessor.hpp"
 #include "vlog_data_model\api\vlog_dm_behavioral_process.hpp"
@@ -41,8 +44,47 @@ BaseAepChecker::regenerateExpression( VlogDM::Expression const & _expression ) c
 
 /***************************************************************************/
 
+void 
+BaseAepChecker::setEnable(
+		AepModel::AssertionContext & _context
+	,	Utils::ConditionHolder const & _holder
+	,	AepModel::OvlCheckerBuilder & _builder 
+)
+{
+	_builder.setEnable( processCondtions( _context, _holder ) );
+}
+
+/***************************************************************************/
+
+std::string 
+BaseAepChecker::processCondtions( 
+		AepModel::AssertionContext & _context
+	,	Utils::ConditionHolder const & _holder 
+) const
+{
+	if( !_holder.hasConditions() )
+		return Resources::CommonValues::Enable;
+
+	static const char * s_logicAnd = "&&";
+	std::string result;
+
+	_holder.forEachCondition(
+		[ & ]( VlogDM::Statement const & _stmt, int _branchIdx )
+		{
+			if( !result.empty() )
+				result.append( s_logicAnd );
+
+			result.append( processCondition( _context, _stmt, _branchIdx ) );
+		}
+	);
+
+	return result;
+}
+
+/***************************************************************************/
+
 int 
-BaseAepChecker::calculateBitwidth( VlogDM::Expression const & _expression )
+BaseAepChecker::calculateBitwidth( VlogDM::Expression const & _expression ) const
 {
 	return m_accessor.getVlogDm().calculateBitwidth( _expression );
 }
@@ -50,7 +92,7 @@ BaseAepChecker::calculateBitwidth( VlogDM::Expression const & _expression )
 /***************************************************************************/
 
 int 
-BaseAepChecker::calculateBitwidth( VlogDM::BaseIdentifier const & _id )
+BaseAepChecker::calculateBitwidth( VlogDM::BaseIdentifier const & _id ) const
 {
 	return m_accessor.getVlogDm().calculateBitwidth( _id );
 }
@@ -87,8 +129,6 @@ BaseAepChecker::setControls( AepModel::OvlCheckerBuilder & _builder ) const
 	
 	_builder.setReset( reset ? reset->first : Resources::CommonValues::Reset );
 	_builder.setResetPolarity( reset ? reset->second : AepModel::ResetPolarity::Kind::Default );
-
-	_builder.setEnable( Resources::CommonValues::Enable );
 }
 
 /***************************************************************************/
@@ -97,7 +137,7 @@ void
 BaseAepChecker::addInputPorts( 
 		VlogDM::Expression const & _expression
 	,	AepModel::AssertionContext & _context 
-)
+) const
 {
 	Utils::ExpressionQuery< VlogDM::PrimaryIdentifier > idsQuery(
 		[ & ]( VlogDM::PrimaryIdentifier const & _id )
@@ -111,6 +151,35 @@ BaseAepChecker::addInputPorts(
 	);
 
 	idsQuery.query( _expression );
+}
+
+/***************************************************************************/
+
+std::string 
+BaseAepChecker::processCondition( 
+		AepModel::AssertionContext & _context
+	,	VlogDM::Statement const & _statement
+	,	int _branchIdx 
+) const
+{
+	Utils::ConditionRegenerator regenerator( 
+			m_accessor.getVlogDm()
+		,	_statement
+		,	_branchIdx
+	);
+
+	regenerator.run();
+
+	regenerator.forEachExpression(
+		std::bind( 
+				&BaseAepChecker::addInputPorts
+			,	std::ref( *this )
+			,	std::placeholders::_1
+			,	std::ref( _context )
+		)
+	);
+
+	return regenerator.getResult();
 }
 
 /***************************************************************************/

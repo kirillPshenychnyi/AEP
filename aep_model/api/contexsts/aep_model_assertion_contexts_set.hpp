@@ -25,7 +25,9 @@ struct AssertionContextSet
 
 	virtual void forEachAssertionContext( AssertionContextCallback _callBack ) const = 0;
 
-	virtual void forEachAssertionContext( ConstAssertionContextCallback _callBack ) = 0;
+	virtual void forEachConstAssertionContext( ConstAssertionContextCallback _callBack ) const = 0;
+
+	virtual int getContextsCount() const = 0;
 
 	virtual boost::optional< AssertionContext & > takeContext( 
 		std::string const & _dutName 

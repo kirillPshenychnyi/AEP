@@ -123,6 +123,7 @@ public:
 			check( 
 					paramOpt->valueToString()
 				,	std::string( _TGeneric::toString( _value ) )
+				,	AepModel::GenericType::toString( _kind )
 			);
 	}
 	
@@ -140,6 +141,7 @@ private:
 	OvlCheckerHelper & check( 
 			_TParameter const & _actual
 		,	_TParameter const & _expected
+		,	std::string const & _paramName
 	);
 
 /***************************************************************************/

@@ -65,7 +65,7 @@ Accessor::forEachContext( AssertionContextCallback _callback )
 void
 Accessor::forEachContext( ConstAssertionContextCallback _callback ) const
 {
-	m_contextSet->forEachAssertionContext( _callback );
+	m_contextSet->forEachConstAssertionContext( _callback );
 }
 
 /***************************************************************************/
@@ -82,6 +82,14 @@ Accessor::regenerateAssertions( std::string const & _path ) const
 	regenerator.run();
 
 	stream.close();
+}
+
+/***************************************************************************/
+
+int 
+Accessor::getContextsCount() const
+{
+	return m_contextSet->getContextsCount();
 }
 
 /***************************************************************************/

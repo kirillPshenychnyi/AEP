@@ -103,7 +103,7 @@ namespace RangeBoundChecker {
 
 	const char FireWire[] = "fire_range_overflow_%1%";
 	
-	const char Message[] = "boundary overflow of an \"%1%\" bus at %2%, %3%" ;
+	const char Message[] = "boundary overflow of an \\\"%1%\\\" bus at %2%, %3%" ;
 
 /***************************************************************************/
 

@@ -51,6 +51,8 @@ public:
 				=	boost::none
 	);
 
+	void contextsCount( int _expected );
+
 	AssertionContextHelper & expectContext( std::string const & _module );
 
 /***************************************************************************/

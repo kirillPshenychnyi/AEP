@@ -27,7 +27,7 @@ OvlCheckerHelper::OvlCheckerHelper(
 OvlCheckerHelper & 
 OvlCheckerHelper::id( AepModel::OvlCheckerIds::Kind _id )
 {
-	return check( m_checker.getId(), _id );	
+	return check( m_checker.getId(), _id, "checker id" );	
 }
 
 /***************************************************************************/
@@ -35,7 +35,7 @@ OvlCheckerHelper::id( AepModel::OvlCheckerIds::Kind _id )
 OvlCheckerHelper &
 OvlCheckerHelper::instanceName( std::string const & _instName )
 {
-	return check( m_checker.getInstanceName(), _instName );
+	return check( m_checker.getInstanceName(), _instName, "instance name" );
 }
 
 /***************************************************************************/
@@ -43,7 +43,7 @@ OvlCheckerHelper::instanceName( std::string const & _instName )
 OvlCheckerHelper & 
 OvlCheckerHelper::suspectLine( int _line )
 {	
-	return check( m_checker.getSuspectCodeLine(), _line );
+	return check( m_checker.getSuspectCodeLine(), _line, "suspect line"  );
 }
 
 /***************************************************************************/
@@ -51,7 +51,7 @@ OvlCheckerHelper::suspectLine( int _line )
 OvlCheckerHelper & 
 OvlCheckerHelper::ports( int _portsCount )
 {
-	return check( m_checker.getPortsCount(), _portsCount );
+	return check( m_checker.getPortsCount(), _portsCount, "ports count" );
 }
 
 /***************************************************************************/
@@ -66,7 +66,12 @@ OvlCheckerHelper::port(
 
 	REQUIRE( portOpt.is_initialized() );
 
-	return check( portOpt->getValue(), _value );
+	return 
+		check( 
+				portOpt->getValue()
+			,	_value
+			,	"port value"
+		);
 }
 
 /***************************************************************************/
@@ -74,7 +79,7 @@ OvlCheckerHelper::port(
 OvlCheckerHelper &
 OvlCheckerHelper::genericsParameters( int _genericsCount )
 {
-	return check( m_checker.getGenericsCount(), _genericsCount );
+	return check( m_checker.getGenericsCount(), _genericsCount, "generics count" );
 }
 
 /***************************************************************************/
@@ -100,9 +105,11 @@ OvlCheckerHelper &
 OvlCheckerHelper::check( 
 		_TParameter const & _actual
 	,	_TParameter const & _expected
+	,	std::string const & _paramName
 )
 {
-	REQUIRE( _actual == _expected );
+	if( _actual != _expected )
+		FAIL( _paramName + " mistmatch" );
 
 	return *this;
 }

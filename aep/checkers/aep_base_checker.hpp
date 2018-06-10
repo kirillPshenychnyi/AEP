@@ -11,6 +11,16 @@
 
 /***************************************************************************/
 
+namespace Aep 
+{
+	namespace Utils 
+	{
+		class ConditionHolder;
+	}
+}
+
+/***************************************************************************/
+
 namespace Aep {
 
 /***************************************************************************/
@@ -55,9 +65,15 @@ protected:
 
 	std::string regenerateExpression( VlogDM::Expression const & _expression ) const;
 
-	int calculateBitwidth( VlogDM::Expression const & _expression );
+	void setEnable( 
+			AepModel::AssertionContext & _context 
+		,	Utils::ConditionHolder const & _holder
+		,	AepModel::OvlCheckerBuilder & _builder
+	);
+	
+	int calculateBitwidth( VlogDM::Expression const & _expression ) const;
 
-	int calculateBitwidth( VlogDM::BaseIdentifier const & _id );
+	int calculateBitwidth( VlogDM::BaseIdentifier const & _id ) const;
 
 	AepModel::AssertionContext & retrieveAssertionContext();
 
@@ -66,7 +82,24 @@ protected:
 	void addInputPorts( 
 			VlogDM::Expression const & _expression
 		,	AepModel::AssertionContext & _context 
-	);
+	) const;
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	std::string processCondtions( 
+			AepModel::AssertionContext & _context
+		,	Utils::ConditionHolder const & _holder 
+	) const;
+
+	std::string processCondition( 
+			AepModel::AssertionContext & _context
+		,	VlogDM::Statement const & _stmt
+		,	int _branchIdx
+	) const;
 
 /***************************************************************************/
 

@@ -37,6 +37,8 @@ struct IAccessor
 
 	virtual void regenerateAssertions( std::string const & _path ) const = 0;
 
+	virtual int getContextsCount() const = 0;
+
 	virtual void reset() = 0;
 
 /***************************************************************************/

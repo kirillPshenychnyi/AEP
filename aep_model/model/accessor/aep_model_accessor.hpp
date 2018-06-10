@@ -44,6 +44,8 @@ public:
 
 	void regenerateAssertions( std::string const & _path ) const; 
 
+	int getContextsCount() const final;
+
 	void reset();
 
 /***************************************************************************/

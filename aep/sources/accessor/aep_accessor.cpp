@@ -43,9 +43,6 @@ Accessor::runEngine(
 	if( _reset )
 		m_resetParams = *_reset;
 
-	FullCaseSynDirectiveChecker fullCaseChecker( *this );
-	fullCaseChecker.analyze();
-
 	runChecker< FullCaseSynDirectiveChecker >( 
 			_checkers
 		,	CheckerIds::FullCaseSynDirectiveChecker 

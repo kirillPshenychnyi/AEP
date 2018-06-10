@@ -38,7 +38,7 @@ ContextSetRegenerator::run()
 		<< Resources::Strings::Header
 		<< std::endl;
 	
-	m_contextSet.forEachAssertionContext(
+	m_contextSet.forEachConstAssertionContext(
 		[ & ]( AssertionContext const & _context )
 		{
 			_context.forEachInstance(
@@ -309,7 +309,7 @@ ContextSetRegenerator::regenerateTopLevel()
 		<< Resources::Separators::Semicolon
 		<< std::endl;
 
-	m_contextSet.forEachAssertionContext(
+	m_contextSet.forEachConstAssertionContext(
 		std::bind(	
 				&ContextSetRegenerator::regenerateInstances
 			,	this

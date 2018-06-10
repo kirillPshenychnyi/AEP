@@ -48,7 +48,7 @@ AssertionContextImpl::forEachInstance( InstanceCallback _callback ) const
 void 
 AssertionContextImpl::forEachInputPort( InputPortCallback _callback ) const
 {
-	for( PortInfo const & info : m_additioanalInputs )
+	for( PortInfo const & info : m_additionaInputs )
 		_callback( info );
 }
 
@@ -70,7 +70,7 @@ AssertionContextImpl::addInputPort(
 	,	int _width  
 )
 {
-	m_additioanalInputs.emplace_back( _portName, _portValue, _width );
+	m_additionaInputs.emplace( _portName, _portValue, _width );
 }
 
 /***************************************************************************/

@@ -7,6 +7,7 @@
 #include "aep_model\api\checkers\ovl\aep_model_ovl_checker.hpp"
 
 #include <vector>
+#include <unordered_set>
 
 /***************************************************************************/
 
@@ -21,7 +22,7 @@ class AssertionContextImpl
 /***************************************************************************/
 
 	typedef
-		std::vector< PortInfo >
+		std::unordered_set< PortInfo, PortInfoHasher >
 		PortInfos;
 
 	typedef
@@ -66,7 +67,7 @@ public:
 
 /***************************************************************************/
 
-	PortInfos m_additioanalInputs;
+	PortInfos m_additionaInputs;
 
 	Instances m_instances;
 
@@ -93,7 +94,7 @@ inline
 int 
 AssertionContextImpl::getInputsCount() const
 {
-	return m_additioanalInputs.size();
+	return m_additionaInputs.size();
 }
 
 /***************************************************************************/

@@ -42,6 +42,14 @@ CheckersFixture::run(
 
 /***************************************************************************/
 
+void 
+CheckersFixture::contextsCount( int _expected )
+{
+	REQUIRE( m_aepModel->getContextsCount() == _expected );
+}
+
+/***************************************************************************/
+
 AssertionContextHelper & 
 CheckersFixture::expectContext( std::string const & _module )
 {

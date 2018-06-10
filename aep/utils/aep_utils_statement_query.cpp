@@ -72,7 +72,7 @@ StatementQuery< _TTarget >::visit( VlogDM::CaseStatement const & _case )
 	processAsConstructsContainer< Query, VlogDM::Statement >( 
 			_case.getItemsCount()
 		,	[ & ]( int _idx ) -> VlogDM::Statement const &
-			{	
+			{
 				return _case.getItem( _idx ).getStatement();
 			}
 		,	*this

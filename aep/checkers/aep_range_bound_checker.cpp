@@ -3,7 +3,6 @@
 #include "aep\checkers\aep_range_bound_checker.hpp"
 
 #include "aep\api\aep_iaccessor.hpp"
-#include "aep\utils\aep_utils_expression_query.hpp"
 #include "aep\checkers\resources\aep_checker_resources.hpp"
 
 #include "vlog_data_model\api\vlog_dm_continuous_assignment.hpp"
@@ -25,6 +24,7 @@
 #include "vlog_data_model\api\vlog_dm_range_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_expression_cast.hpp"
 #include "vlog_data_model\api\vlog_dm_location.hpp"
+#include "vlog_data_model\api\vlog_dm_type.hpp"
 #include "vlog_data_model\ih\visitors\vlog_dm_range_visitor.hpp"
 #include "vlog_data_model\ih\visitors\vlog_dm_declared_visitor.hpp"
 
@@ -46,6 +46,13 @@ namespace Aep {
 
 RangeBoundChecker::RangeBoundChecker( IAccessor & _aep )
 	:	BaseAepChecker( _aep )
+	,	m_idsQuery(
+			std::bind( 
+					&RangeBoundChecker::checkId
+				,	this
+				,	std::placeholders::_1 
+			)
+		)
 {
 }
 
@@ -59,7 +66,6 @@ RangeBoundChecker::analyze()
 
 	browseProcesses< VlogDM::ContinuousAssignment >( processCallback );
 	browseProcesses< VlogDM::BehavioralProcess >( processCallback );
-
 }
 
 /***************************************************************************/
@@ -68,15 +74,7 @@ template< typename _TProcess >
 void 
 RangeBoundChecker::onProcess( _TProcess const & _process )
 {
-	Utils::ExpressionQuery< VlogDM::PrimaryIdentifier > idsQuery(
-		std::bind( 
-				&RangeBoundChecker::checkId
-			,	this
-			,	std::placeholders::_1 
-		)
-	);
-
-	idsQuery.query( _process );
+	m_idsQuery.query( _process );
 }
 
 /***************************************************************************/
@@ -169,7 +167,48 @@ RangeBoundChecker::getMaxBoundOfDimension(
 
 		void visit( Variable const & _var ) final
 		{
+			int nArrayDimensions{ 0 };
 
+			RangeCast< MultidimensionalRange > rangeCaster;
+
+			// array dimension
+			if( auto dimension = _var.getDimension() )
+			{
+				Range const & range = dimension->getRange();
+
+				nArrayDimensions = 1;
+
+				if( auto castRes = rangeCaster.cast( range ) )
+				{
+					nArrayDimensions = castRes->getRangesCount();
+					if( m_dimension < nArrayDimensions )
+					{
+						processRange( castRes->getRange( m_dimension ) );
+						return;
+					}
+				}
+				else if( m_dimension == 0 )
+				{
+					processRange( static_cast< PartSelectRange const& >( range ) );
+					return;
+				}
+			}
+
+			Type const & varType = _var.getDeclaration().getType();
+
+			auto declDimension = varType.getDimension();
+			assert( declDimension );
+
+			Range const & typeRange = declDimension->getRange();
+
+			if( auto castRes = rangeCaster.cast( typeRange ) )
+			{
+				processRange( castRes->getRange( m_dimension - nArrayDimensions ) );
+			}
+			else
+			{
+				processRange( static_cast< PartSelectRange const& >( typeRange ) );
+			}
 		}
 
 		void processRange( Range const & _range )
@@ -181,7 +220,7 @@ RangeBoundChecker::getMaxBoundOfDimension(
 			assert( partSelRange );
 
 			auto lhsLiteral = literalCaster.cast( partSelRange->getLeftBound() );
-			auto rhsLiteral = literalCaster.cast( partSelRange->getLeftBound() );
+			auto rhsLiteral = literalCaster.cast( partSelRange->getRightBound() );
 
 			assert( lhsLiteral && rhsLiteral );
 
@@ -217,7 +256,7 @@ RangeBoundChecker::registerAssertion(
 
 	AssertionContext & context = retrieveAssertionContext();
 
-	context.addChecker( createChecker( _selExpression, _id, _maxBound ) );
+	context.addChecker( createChecker( context, _selExpression, _id, _maxBound ) );
 
 	addInputPorts( _selExpression, context );
 
@@ -228,7 +267,8 @@ RangeBoundChecker::registerAssertion(
 
 std::unique_ptr< AepModel::OvlChecker >
 RangeBoundChecker::createChecker(
-		VlogDM::Expression const & _selExpression
+		AepModel::AssertionContext & _context
+	,	VlogDM::Expression const & _selExpression
 	,	VlogDM::PrimaryIdentifier const & _id 
 	,	int _maxBound
 )
@@ -250,7 +290,7 @@ RangeBoundChecker::createChecker(
 		,	Tools::fillTemplate(
 					CheckExpression
 				,	regenerateExpression( _selExpression )
-				,	calculateBitwidth( _id )
+				,	_maxBound + 1
 			)
 	);
 	checker->setFire( Tools::fillTemplate( FireWire, m_currentSuspectNumber ) );
@@ -265,6 +305,7 @@ RangeBoundChecker::createChecker(
 	);
 
 	setControls( *checker );
+	setEnable( _context, m_idsQuery, *checker );
 
 	return checker->releaseChecker();
 }

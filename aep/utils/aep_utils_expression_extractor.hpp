@@ -13,9 +13,17 @@ namespace Utils {
 
 /***************************************************************************/
 
+class ConditionHolder;
+
+/***************************************************************************/
+
 class ExpressionExtractor
 	:	public VlogDM::StatementVisitor
 {
+
+/***************************************************************************/
+
+	using CallBack = std::function< void( VlogDM::Expression const& ) >;
 
 /***************************************************************************/
 
@@ -23,9 +31,10 @@ public:
 
 /***************************************************************************/
 
-	void forEachExpression(
-		std::function< void ( VlogDM::Expression const & ) > _callback 
-	) const;
+	ExpressionExtractor( 
+			CallBack && _callback
+		,	ConditionHolder & _collector
+	);
 
 /***************************************************************************/
 
@@ -55,7 +64,9 @@ private:
 
 /***************************************************************************/
 
-	std::vector< const VlogDM::Expression * > m_expressions;
+	CallBack m_callback;
+
+	ConditionHolder & m_collector;
 
 /***************************************************************************/
 

@@ -38,12 +38,22 @@ AssertionContextSetImpl::forEachAssertionContext(
 /***************************************************************************/
 
 void 
-AssertionContextSetImpl::forEachAssertionContext( 
+AssertionContextSetImpl::forEachConstAssertionContext( 
 	ConstAssertionContextCallback _callBack 
-)
+) const
 {
 	for( auto & context : m_contexts )
 		_callBack( *context );
+}
+
+/***************************************************************************/
+
+/***************************************************************************/
+
+int 
+AssertionContextSetImpl::getContextsCount() const
+{
+	return m_contexts.size();
 }
 
 /***************************************************************************/

@@ -43,17 +43,16 @@ template< typename _TTarget >
 void
 ExpressionQuery< _TTarget >::query( VlogDM::BehavioralProcess const & _process )
 {
-	ExpressionExtractor extractor;
-
-	_process.getStatement().accept( extractor );
-
-	extractor.forEachExpression(
-		std::bind(
-				&VlogDM::Expression::accept
-			,	std::placeholders::_1
-			,	std::ref( *this )
-		)
+	ExpressionExtractor expressionExtractor( 
+			std::bind(
+					&VlogDM::Expression::accept
+				,	std::placeholders::_1
+				,	std::ref( *this )
+			)
+		,	*this
 	);
+
+	_process.getStatement().accept( expressionExtractor );
 }
 
 /***************************************************************************/
@@ -143,9 +142,20 @@ ExpressionQuery< _TTarget >::visit(
 	const VlogDM::ConditionalExpression & _condExpression 
 )
 {
+	auto processBranch
+		=	[ & ]( VlogDM::Expression const & _branch, int _branchIdx )
+			{
+				//pushCondition( _condExpression, _branchIdx );
+				processAsTargetConstruct( _branch );
+				//popCondition();
+			};
+	
 	processAsTargetConstruct( _condExpression );
 
 	_condExpression.getCondition().accept( *this );
+	
+	processBranch( _condExpression.getTrueBranch(), 0 );
+	processBranch( _condExpression.getFalseBranch(), 1 );
 }
 
 /***************************************************************************/

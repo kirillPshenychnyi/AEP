@@ -6,6 +6,7 @@
 #include "vlog_data_model\api\vlog_dm_fwd.hpp"
 
 #include "vlog_data_model\ih\visitors\vlog_dm_statement_visitor.hpp"
+#include "aep\utils\aep_utils_condition_holder.hpp"
 
 /***************************************************************************/
 
@@ -16,6 +17,7 @@ namespace Utils {
 
 template< typename _TTarget, template < typename > typename _Caster >
 class BaseQuery
+	:	public ConditionHolder
 {
 
 /***************************************************************************/

@@ -4,6 +4,7 @@
 /***************************************************************************/
 
 #include "aep\checkers\aep_base_checker.hpp"
+#include "aep\utils\aep_utils_expression_query.hpp"
 
 /***************************************************************************/
 
@@ -50,10 +51,19 @@ public:
 	);
 
 	std::unique_ptr< AepModel::OvlChecker > createChecker(
-			VlogDM::Expression const & _selExpression
+			AepModel::AssertionContext & _context
+		,	VlogDM::Expression const & _selExpression
 		,	VlogDM::PrimaryIdentifier const & _id 
 		,	int _maxBound
 	);
+
+/***************************************************************************/
+
+private:
+
+/***************************************************************************/
+
+	Utils::ExpressionQuery< VlogDM::PrimaryIdentifier > m_idsQuery;
 
 /***************************************************************************/
 

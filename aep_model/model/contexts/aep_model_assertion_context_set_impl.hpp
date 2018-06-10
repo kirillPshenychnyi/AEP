@@ -74,7 +74,9 @@ class AssertionContextSetImpl
 
 	void forEachAssertionContext( AssertionContextCallback _callBack ) const final;
 
-	void forEachAssertionContext( ConstAssertionContextCallback _callBack ) final;
+	void forEachConstAssertionContext( ConstAssertionContextCallback _callBack ) const final;
+
+	int getContextsCount() const final;
 
 	boost::optional< AssertionContext & > takeContext( 
 		std::string const & _dutName 
